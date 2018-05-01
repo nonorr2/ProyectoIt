@@ -26,3 +26,14 @@ footer .glyphicon {
     margin-bottom: 20px;
     color: #f4511e;
 }
+
+.estapacio-cabecera{
+    position: relative; 
+    top: 75px; 
+    clear: both;
+}
+
+.h1-registro{
+    text-align: center;
+    margin-bottom: 40px;
+}
