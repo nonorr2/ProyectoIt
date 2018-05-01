@@ -26,3 +26,27 @@ footer .glyphicon {
     margin-bottom: 20px;
     color: #f4511e;
 }
+
+.banner-index{
+    width: 100%;
+    height: 650px;
+    margin: 0px;
+    background: url(../images/banner_index.png) no-repeat center top;
+}
+
+.div-icono{
+    width: 100%;
+    margin: 0px;
+    height: 150px;
+    background: no-repeat center center;
+}
+
+.text-banner{
+    font-size: 30px;
+    color: white;
+    z-index: 1;
+    float: top;
+    text-align: center;
+    position: relative;
+    top: 30%;
+}
