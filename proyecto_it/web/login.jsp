@@ -1,13 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<s:set name="theme" value="'simple'" scope="page"/>
 
 <s:div id="id01" cssClass="modal">
-    <s:form cssClass="modal-content animate" action="" theme="simple" >
-        <s:div cssClass="imgcontainer">
+    <s:form cssClass="modal-content animate" action="" >
+        <s:div cssClass="imgcontainer" >
             <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">&times;</span>
             <img src="img_avatar2.png" alt="Avatar" class="login">
         </s:div>
-        <s:div cssClass="container-login">
+        <s:div cssClass="container-login" >
             <s:label for="uname">Usuario</s:label>
             <s:textfield name="user"/>
 
