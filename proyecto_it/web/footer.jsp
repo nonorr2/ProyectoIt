@@ -1,5 +1,5 @@
 
-<footer class="container-fluid text-center">
+<footer class="container-fluid text-center" style="clear: both;">
     <a href="#myPage" title="To Top">
         <span class="glyphicon glyphicon-chevron-up"></span>
     </a>
