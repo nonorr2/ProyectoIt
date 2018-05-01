@@ -1,9 +1,3 @@
-<%-- 
-    Document   : cabecera
-    Created on : 01-may-2018, 12:41:02
-    Author     : Lydia
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,16 +23,11 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#about">ABOUT</a></li>
-                        <li><a href="#services">SERVICES</a></li>
-                        <li><a href="#portfolio">PORTFOLIO</a></li>
-                        <li><a href="#pricing">PRICING</a></li>
-                        <li><a href="#contact">CONTACT</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a href="#about">TEMAS</a></li>
+                        <li><a href="#services">PUBLICACIONES</a></li>
+                        <li><a href="#portfolio">REGISTRARSE</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-
