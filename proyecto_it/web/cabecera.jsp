@@ -286,6 +286,7 @@
                 }
             }
         </style>
+        <link rel="stylesheet" href="css/estilo.css">        
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
