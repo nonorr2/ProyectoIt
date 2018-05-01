@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-may-2018 18:31:58 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOs.Comentario" table="comentario" catalog="it_proyecto" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="publicacion" class="POJOs.Publicacion" fetch="select">
+            <column name="id_publicacion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="POJOs.Usuario" fetch="select">
+            <column name="id_usuario" not-null="true" />
+        </many-to-one>
+        <property name="fechaHora" type="timestamp">
+            <column name="fecha_hora" length="19" not-null="true" />
+        </property>
+        <property name="contenido" type="string">
+            <column name="contenido" length="5000" not-null="true" />
+        </property>
+        <set name="votoComentarios" table="voto_comentario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_comentario" not-null="true" />
+            </key>
+            <one-to-many class="POJOs.VotoComentario" />
+        </set>
+    </class>
+</hibernate-mapping>

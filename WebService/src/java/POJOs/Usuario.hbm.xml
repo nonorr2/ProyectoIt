@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-may-2018 18:31:58 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOs.Usuario" table="usuario" catalog="it_proyecto" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="apellidos" length="100" not-null="true" />
+        </property>
+        <property name="nickname" type="string">
+            <column name="nickname" length="50" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="500" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" not-null="true" />
+        </property>
+        <property name="tipo" type="boolean">
+            <column name="tipo" not-null="true" />
+        </property>
+        <property name="fechaNacimiento" type="date">
+            <column name="fecha_nacimiento" length="10" not-null="true" />
+        </property>
+        <set name="chats" table="usuario_chat" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" not-null="true" />
+            </key>
+            <many-to-many entity-name="POJOs.Chat">
+                <column name="id_chat" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="suscripcions" table="suscripcion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" not-null="true" />
+            </key>
+            <one-to-many class="POJOs.Suscripcion" />
+        </set>
+        <set name="votoPublicacions" table="voto_publicacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" not-null="true" />
+            </key>
+            <one-to-many class="POJOs.VotoPublicacion" />
+        </set>
+        <set name="comentarios" table="comentario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" not-null="true" />
+            </key>
+            <one-to-many class="POJOs.Comentario" />
+        </set>
+        <set name="mensajes" table="mensaje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" not-null="true" />
+            </key>
+            <one-to-many class="POJOs.Mensaje" />
+        </set>
+        <set name="votoComentarios" table="voto_comentario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" not-null="true" />
+            </key>
+            <one-to-many class="POJOs.VotoComentario" />
+        </set>
+        <set name="publicacions" table="publicacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" not-null="true" />
+            </key>
+            <one-to-many class="POJOs.Publicacion" />
+        </set>
+    </class>
+</hibernate-mapping>

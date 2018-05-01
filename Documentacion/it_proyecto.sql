@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-04-2018 a las 19:24:54
+-- Tiempo de generación: 01-05-2018 a las 18:35:04
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.1
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `it_proyecto`
 --
-CREATE DATABASE IF NOT EXISTS `it_proyecto` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `it_proyecto`;
 
 -- --------------------------------------------------------
 
@@ -30,7 +28,6 @@ USE `it_proyecto`;
 -- Estructura de tabla para la tabla `chat`
 --
 
-DROP TABLE IF EXISTS `chat`;
 CREATE TABLE `chat` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
@@ -43,7 +40,6 @@ CREATE TABLE `chat` (
 -- Estructura de tabla para la tabla `comentario`
 --
 
-DROP TABLE IF EXISTS `comentario`;
 CREATE TABLE `comentario` (
   `id` int(11) NOT NULL,
   `fecha_hora` datetime NOT NULL,
@@ -58,13 +54,13 @@ CREATE TABLE `comentario` (
 -- Estructura de tabla para la tabla `mensaje`
 --
 
-DROP TABLE IF EXISTS `mensaje`;
 CREATE TABLE `mensaje` (
   `id` int(11) NOT NULL,
   `contenido` varchar(5000) NOT NULL,
   `fecha_hora` datetime NOT NULL,
   `id_usuario` int(11) NOT NULL,
-  `id_chat` int(11) NOT NULL
+  `id_chat` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -73,7 +69,6 @@ CREATE TABLE `mensaje` (
 -- Estructura de tabla para la tabla `publicacion`
 --
 
-DROP TABLE IF EXISTS `publicacion`;
 CREATE TABLE `publicacion` (
   `id` int(11) NOT NULL,
   `titulo` varchar(500) NOT NULL,
@@ -91,7 +86,6 @@ CREATE TABLE `publicacion` (
 -- Estructura de tabla para la tabla `suscripcion`
 --
 
-DROP TABLE IF EXISTS `suscripcion`;
 CREATE TABLE `suscripcion` (
   `id` int(11) NOT NULL,
   `fecha_hora` datetime NOT NULL,
@@ -105,7 +99,6 @@ CREATE TABLE `suscripcion` (
 -- Estructura de tabla para la tabla `tematica`
 --
 
-DROP TABLE IF EXISTS `tematica`;
 CREATE TABLE `tematica` (
   `id` int(11) NOT NULL,
   `nombre` varchar(150) NOT NULL,
@@ -118,7 +111,6 @@ CREATE TABLE `tematica` (
 -- Estructura de tabla para la tabla `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
@@ -136,7 +128,6 @@ CREATE TABLE `usuario` (
 -- Estructura de tabla para la tabla `usuario_chat`
 --
 
-DROP TABLE IF EXISTS `usuario_chat`;
 CREATE TABLE `usuario_chat` (
   `id_usuario` int(11) NOT NULL,
   `id_chat` int(11) NOT NULL
@@ -148,8 +139,8 @@ CREATE TABLE `usuario_chat` (
 -- Estructura de tabla para la tabla `voto_comentario`
 --
 
-DROP TABLE IF EXISTS `voto_comentario`;
 CREATE TABLE `voto_comentario` (
+  `id` int(11) NOT NULL,
   `tipo` tinyint(1) NOT NULL,
   `fecha_hora` datetime NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -162,8 +153,8 @@ CREATE TABLE `voto_comentario` (
 -- Estructura de tabla para la tabla `voto_publicacion`
 --
 
-DROP TABLE IF EXISTS `voto_publicacion`;
 CREATE TABLE `voto_publicacion` (
+  `id` int(11) NOT NULL,
   `tipo` tinyint(1) NOT NULL,
   `fecha_hora` datetime NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -228,6 +219,7 @@ ALTER TABLE `usuario`
 -- Indices de la tabla `usuario_chat`
 --
 ALTER TABLE `usuario_chat`
+  ADD PRIMARY KEY (`id_usuario`,`id_chat`),
   ADD KEY `id_chat` (`id_chat`),
   ADD KEY `id_usuario` (`id_usuario`);
 
@@ -235,6 +227,7 @@ ALTER TABLE `usuario_chat`
 -- Indices de la tabla `voto_comentario`
 --
 ALTER TABLE `voto_comentario`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_usuario` (`id_usuario`),
   ADD KEY `id_comentario` (`id_comentario`);
 
@@ -242,6 +235,7 @@ ALTER TABLE `voto_comentario`
 -- Indices de la tabla `voto_publicacion`
 --
 ALTER TABLE `voto_publicacion`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_publicacion` (`id_publicacion`),
   ADD KEY `id_usuario` (`id_usuario`);
 
@@ -289,6 +283,18 @@ ALTER TABLE `tematica`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `voto_comentario`
+--
+ALTER TABLE `voto_comentario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `voto_publicacion`
+--
+ALTER TABLE `voto_publicacion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

@@ -28,7 +28,7 @@
                 cursor: pointer;
                 width: 100%;
             }
-         button:hover {
+            button:hover {
                 opacity: 0.8;
             }
 
@@ -54,7 +54,7 @@
             .container-login{
                 margin: 5%;
             }
-            
+
 
             span.psw {
                 float: right;
@@ -98,7 +98,7 @@
                 cursor: pointer;
             }
 
-             Add Zoom Animation 
+            Add Zoom Animation 
             .animate {
                 -webkit-animation: animatezoom 0.6s;
                 animation: animatezoom 0.6s
@@ -122,6 +122,9 @@
                         <li><a href="#about">TEMAS</a></li>
                         <li><a href="#services">PUBLICACIONES</a></li>
                         <li><a href="#portfolio">REGISTRARSE</a></li>
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
                         <li><a onclick="document.getElementById('id01').style.display = 'block'"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
                 </div>

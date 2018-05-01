@@ -6,7 +6,7 @@
             <p class="text-banner">SIN CENSURA</p>
         </div>
         <div class="container-fluid text-center">
-            <h2>TEMAS M�S ACTIVOS</h2>
+            <h2>TEMAS M&Aacute;S ACTIVOS</h2>
             <br>
             <div class="row">
                 <div class="col-sm-3">
