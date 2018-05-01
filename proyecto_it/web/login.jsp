@@ -1,10 +1,32 @@
-<div id="id01" class="modal">
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
 
-    <form class="modal-content animate" action="/action_page.php">
-        <div class="imgcontainer">
+<s:div id="id01" cssClass="modal">
+    <s:form cssClass="modal-content animate" action="" theme="simple" >
+        <s:div cssClass="imgcontainer">
             <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">&times;</span>
             <img src="img_avatar2.png" alt="Avatar" class="login">
-        </div>
+        </s:div>
+        <s:div cssClass="container-login">
+            <s:label for="uname">Usuario</s:label>
+            <s:textfield name="user"/>
+
+            <s:label for="psw">Contraseña</s:label>
+            <s:password name="psw"/>
+
+            <s:submit name="btoLogin" value="Login"/>
+        </s:div>
+    </s:form>
+</s:div>
+
+
+
+
+
+
+<!--<div id="id01" class="modal">
+    <form class="modal-content animate" action="/action_page.php">
+
 
         <div class="container-login">
             <label for="uname"><b>Username</b></label>
@@ -24,4 +46,4 @@
             <span class="psw">Forgot <a href="#">password?</a></span>
         </div>
     </form>
-</div>
+</div>-->
