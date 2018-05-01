@@ -14,7 +14,7 @@
     
     <package name="prueba" extends="struts-default">
         <action name="prueba">
-            <result>index.jsp</result>
+            <result>registro.jsp</result>
         </action>
     </package>
 </struts>
