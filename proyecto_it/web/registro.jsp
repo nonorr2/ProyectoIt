@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<s:set name="theme" value="'simple'" scope="page" />
 <%@include file="cabeceraNoLogado.jsp" %>
 
 <s:div cssClass="container-fluid text-center estapacio-cabecera">
@@ -8,7 +9,7 @@
 
         <h1 class="h1-registro">&Uacute;nete a nosotros</h1>
 
-        <s:form method="post" action="" theme="simple"> 
+        <s:form method="post" action=""> 
             <s:div cssClass="form-group col-sm-6">
                 <s:label><b>Nombre:</b></s:label>
                 <s:textfield name="nombre" placeholder="Introduzaca el nombre" cssClass="form-control" id="nombre"/>
@@ -22,13 +23,17 @@
                 <s:textfield name="nickname" placeholder="Introduzaca el nickname" cssClass="form-control" id="nickname"/>
             </s:div>
             <s:div cssClass="form-group col-sm-6">
+                <s:label><b>Email:</b></s:label>
+                <s:textfield name="email" placeholder="Introduzaca el email" cssClass="form-control" id="email"/>
+            </s:div>    
+            <s:div cssClass="form-group col-sm-6">
                 <s:label><b>Contraseña:</b></s:label>
                 <s:password name="password" placeholder="Introduzaca la contraseña" cssClass="form-control" id="password"/>
             </s:div>
             <s:div cssClass="form-group col-sm-6">
-                <s:label><b>Email:</b></s:label>
-                <s:textfield name="email" placeholder="Introduzaca el email" cssClass="form-control" id="email"/>
-            </s:div>
+                <s:label><b>Confirmar contraseña:</b></s:label>
+                <s:password name="confirmarPassword" placeholder="Introduzaca la contraseña" cssClass="form-control" id="confirmarPassword"/>
+            </s:div>             
             <s:div cssClass="form-group col-sm-6">
                 <s:label><b>Fecha de nacimiento:</b></s:label>
             </s:div>
