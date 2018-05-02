@@ -26,9 +26,6 @@
                         <li><a href="#about">TEMAS</a></li>
                         <li><a href="#services">PUBLICACIONES</a></li>
                         <li><a href="#portfolio">REGISTRARSE</a></li>
-
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
                         <li><a onclick="document.getElementById('id01').style.display = 'block'"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
                 </div>
