@@ -84,6 +84,18 @@ button:hover {
     opacity: 0.8;
 }
 
+.btn-primary{
+    color: #fff;
+    background-color: #ffa500;
+    border-color: #f4511e;
+    margin-left: 38%;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #f4511e;
+    border-color: #f4511e;
+}
 .cancelbtn {
     width: auto;
     padding: 10px 18px;
@@ -128,7 +140,7 @@ span.psw {
     background-color: #fefefe;
     margin: 5% auto 15% auto;
     border: 1px solid #888;
-    width: 40%;
+    width: 25%;
 }
 
 .close {
@@ -148,6 +160,17 @@ span.psw {
     animation: animatezoom 0.6s
 }
 
+@media (max-width: 800px){
+    .modal-content {
+    width: 50%;
+}  
+} 
+
+@media (max-width: 400px){
+    .modal-content {
+    width: 90%;
+}  
+} 
 
 
 .liNavBar{
