@@ -1,48 +1,18 @@
-<%--<%@page contentType="text/html" pageEncoding="UTF-8"%>--%>
-<%--<%@taglib prefix="s" uri="/struts-tags" %>--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
+<%--<%@taglib prefix="s" uri="/struts-bootstrap-tags" %>--%>
 
 
-<!--<div id="id01" class="modal">-->
-    <%--<s:form cssClass='modal-content animate' action="" theme="simple">--%>
-        <!--<div class="container-login">-->
-            <!--<span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">&times;</span>-->
-            <!--<img src="images/imgLogin.png" alt="Avatar" class="avatar">-->
-        <!--</div>-->
-        <!--<div class="container-login" style="background-color:#f1f1f1">-->
-            <%--<s:label for="uname">Usuario</s:label>--%>
-            <%--<s:textfield name="user"/>--%>
-
-            <%--<s:label for="psw">Contraseña</s:label>--%>
-            <%--<s:password name="psw"/>--%>
-
-            <%--<s:submit name="btoLogin" value="Login"/>--%>
-            
-        <!--</div>-->
-    <%--</s:form>--%>
-<!--</div>-->
-
-<div id="id01" class="modal">
-    <form class="modal-content animate" action="/action_page.php">
-        <div class="imgcontainer">
+<s:div id="id01" cssClass="modal">
+    <s:form theme="simple" cssClass="modal-content animate" action="">
+        <s:div cssClass="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">&times;</span>
             <img src="images/imgLogin.png" alt="Avatar" class="avatar">
-        </div>
-
-        <div class="container-login">
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
-
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-
-            <button type="submit">Login</button>
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-        </div>
-
-        <div class="container-login" style="background-color:#f1f1f1">
-            <button type="button" onclick="document.getElementById('id01').style.display = 'none'" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
-        </div>
-    </form>
-</div>
+        </s:div>
+        <s:div cssClass="container-login">
+            <s:textfield name="usuario"  placeholder="Nombre de Usuario"/>
+            <s:password name="password" placeholder="ContraseÃ±a"/>
+            <s:submit name="btoLogin" cssClass="btn btn-primary" value="LOGIN"/>
+        </s:div>
+    </s:form>
+</s:div>
