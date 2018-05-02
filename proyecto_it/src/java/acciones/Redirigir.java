@@ -1,0 +1,27 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package acciones;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+/**
+ *
+ * @author Lydia
+ */
+public class Redirigir extends ActionSupport {
+    
+    public Redirigir() {
+    }
+    
+    public String execute() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public String redirigirRegistrarse() throws Exception{
+        return SUCCESS;
+    }
+    
+}

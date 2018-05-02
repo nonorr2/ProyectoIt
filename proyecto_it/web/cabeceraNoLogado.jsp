@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
+<s:set name="theme" value="'simple'" scope="page" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,9 +25,16 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#about">TEMAS</a></li>
-                        <li><a href="#services">PUBLICACIONES</a></li>
-                        <li><a href="#portfolio">REGISTRARSE</a></li>
+                        <s:form action="" method="post">
+                            <li class="liNavBar"><a><s:submit  type="image" value="TEMAS" cssClass="submitBar" /></a></li>
+                        </s:form>
+                        <s:form action="" method="post">
+                            <li class="liNavBar"><a><s:submit type="image" value="PUBLICACIONES" cssClass="submitBar"/></a></li>
+                        </s:form>
+                        <s:form action="redirigirRegistrarse" method="post">
+                            <li class="liNavBar"><a><s:submit type="image" value="REGISTRARSE"  cssClass="submitBar"/></a></li>
+                        </s:form>
+
                         <li><a onclick="document.getElementById('id01').style.display = 'block'"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
                 </div>

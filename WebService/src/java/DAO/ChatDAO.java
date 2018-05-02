@@ -30,7 +30,7 @@ public class ChatDAO {
         tx.commit();
     }
 
-    public Chat getPublicacion(int id) {
+    public Chat getChat(int id) {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
         org.hibernate.Transaction tx = session.beginTransaction();
         Query q = session.createQuery("from Chat where id='" + id + "'");

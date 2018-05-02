@@ -17,4 +17,9 @@
             <result>index.jsp</result>
         </action>
     </package>
+    <package name="redirigir" extends="struts-default">
+        <action name="redirigirRegistrarse" class="acciones.Redirigir" method="redirigirRegistrarse">
+            <result name="success">registro.jsp</result>
+        </action>
+    </package>
 </struts>
