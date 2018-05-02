@@ -33,7 +33,7 @@ public class MensajeDAO {
         tx.commit();
     }
 
-    public Mensaje getPublicacion(int id) {
+    public Mensaje getMensaje(int id) {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
         org.hibernate.Transaction tx = session.beginTransaction();
         Query q = session.createQuery("from Mensaje where id='" + id + "'");
