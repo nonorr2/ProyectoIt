@@ -9,10 +9,10 @@
     border-radius: 0;
     font-family: Montserrat, sans-serif;
 }
-.navbar li a, .navbar .navbar-brand {
+.navbar form li a, .navbar .navbar-brand {
     color: #fff !important;
 }
-.navbar-nav li a:hover, .navbar-nav li.active a {
+.navbar-nav form li a:hover, .navbar-nav li.active a {
     color: #f4511e !important;
     background-color: #fff !important;
 }
@@ -146,4 +146,10 @@ span.psw {
 .animate {
     -webkit-animation: animatezoom 0.6s;
     animation: animatezoom 0.6s
+}
+
+
+
+.liNavBar{
+    display: inline;    
 }
