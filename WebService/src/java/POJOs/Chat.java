@@ -68,10 +68,6 @@ public class Chat  implements java.io.Serializable {
     public void setMensajes(Set mensajes) {
         this.mensajes = mensajes;
     }
-
-
-
-
 }
 
 

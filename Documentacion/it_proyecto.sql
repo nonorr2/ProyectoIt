@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-05-2018 a las 18:35:04
--- Versión del servidor: 10.1.30-MariaDB
--- Versión de PHP: 7.2.1
+-- Tiempo de generación: 02-05-2018 a las 18:43:59
+-- Versión del servidor: 10.1.26-MariaDB
+-- Versión de PHP: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `it_proyecto`
 --
+CREATE DATABASE IF NOT EXISTS `it_proyecto` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `it_proyecto`;
 
 -- --------------------------------------------------------
 
@@ -28,11 +30,20 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `chat`
 --
 
+DROP TABLE IF EXISTS `chat`;
 CREATE TABLE `chat` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `fecha_hora` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `chat`
+--
+
+INSERT INTO `chat` (`id`, `nombre`, `fecha_hora`) VALUES
+(1, 'Perrors Flauta', '2018-05-02 12:00:00'),
+(2, 'Cerveceros', '2018-05-01 13:00:00');
 
 -- --------------------------------------------------------
 
@@ -40,6 +51,7 @@ CREATE TABLE `chat` (
 -- Estructura de tabla para la tabla `comentario`
 --
 
+DROP TABLE IF EXISTS `comentario`;
 CREATE TABLE `comentario` (
   `id` int(11) NOT NULL,
   `fecha_hora` datetime NOT NULL,
@@ -48,20 +60,36 @@ CREATE TABLE `comentario` (
   `id_publicacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `comentario`
+--
+
+INSERT INTO `comentario` (`id`, `fecha_hora`, `contenido`, `id_usuario`, `id_publicacion`) VALUES
+(1, '2018-05-02 08:00:00', 'Como es Alemania???', 4, 3),
+(2, '2018-05-02 13:00:00', 'Hala Madrid!!', 3, 1);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `mensaje`
 --
 
+DROP TABLE IF EXISTS `mensaje`;
 CREATE TABLE `mensaje` (
   `id` int(11) NOT NULL,
   `contenido` varchar(5000) NOT NULL,
   `fecha_hora` datetime NOT NULL,
   `id_usuario` int(11) NOT NULL,
-  `id_chat` int(11) NOT NULL,
-  `estado` tinyint(1) NOT NULL DEFAULT '0'
+  `id_chat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `mensaje`
+--
+
+INSERT INTO `mensaje` (`id`, `contenido`, `fecha_hora`, `id_usuario`, `id_chat`) VALUES
+(1, 'Quedamos???', '2018-05-02 19:00:00', 3, 2),
+(2, 'Nono tonto', '2018-05-02 20:00:00', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -69,6 +97,7 @@ CREATE TABLE `mensaje` (
 -- Estructura de tabla para la tabla `publicacion`
 --
 
+DROP TABLE IF EXISTS `publicacion`;
 CREATE TABLE `publicacion` (
   `id` int(11) NOT NULL,
   `titulo` varchar(500) NOT NULL,
@@ -80,12 +109,23 @@ CREATE TABLE `publicacion` (
   `id_tematica` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `publicacion`
+--
+
+INSERT INTO `publicacion` (`id`, `titulo`, `contenido`, `fecha_hora_creacion`, `fecha_hora_modificacion`, `ruta`, `id_usuario`, `id_tematica`) VALUES
+(1, 'Fútbol', 'Descripción fútbol', '2018-05-02 11:00:00', '0000-00-00 00:00:00', 'https://as.com/', 2, 3),
+(2, 'Perros', 'Descripción perros', '2018-05-01 13:00:00', '0000-00-00 00:00:00', 'https://es.wikipedia.org/wiki/Canis_lupus_familiaris', 4, 1),
+(3, 'Viajar a Alemania', 'Descripción del viaje', '2018-05-03 15:00:00', '0000-00-00 00:00:00', 'https://www.touristforum.net/es/baviera-alemania-viajes-en-coche-de-alquiler?gclid=EAIaIQobChMIj4rNp7rn2gIV8jLTCh1PjgtDEAAYASAAEgIoG_D_BwE', 3, 4),
+(4, 'Informática', 'Descripción', '2018-04-04 17:00:00', '0000-00-00 00:00:00', 'https://es.wikipedia.org/wiki/Inform%C3%A1tica', 2, 2);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `suscripcion`
 --
 
+DROP TABLE IF EXISTS `suscripcion`;
 CREATE TABLE `suscripcion` (
   `id` int(11) NOT NULL,
   `fecha_hora` datetime NOT NULL,
@@ -93,17 +133,38 @@ CREATE TABLE `suscripcion` (
   `id_publicacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `suscripcion`
+--
+
+INSERT INTO `suscripcion` (`id`, `fecha_hora`, `id_usuario`, `id_publicacion`) VALUES
+(1, '2018-05-01 00:00:00', 3, 4),
+(2, '2018-05-04 17:00:00', 4, 2),
+(3, '2018-05-03 08:00:00', 2, 1),
+(4, '2018-05-02 20:00:00', 4, 1);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tematica`
 --
 
+DROP TABLE IF EXISTS `tematica`;
 CREATE TABLE `tematica` (
   `id` int(11) NOT NULL,
   `nombre` varchar(150) NOT NULL,
   `imagen` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tematica`
+--
+
+INSERT INTO `tematica` (`id`, `nombre`, `imagen`) VALUES
+(1, 'Animales', 'images/prueba1.jpg'),
+(2, 'Tecnologia', 'images/prueba2.jpg'),
+(3, 'Deportes', 'images/prueba3.jpg'),
+(4, 'Viajes', 'images/prueba4.jpg');
 
 -- --------------------------------------------------------
 
@@ -111,6 +172,7 @@ CREATE TABLE `tematica` (
 -- Estructura de tabla para la tabla `usuario`
 --
 
+DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
@@ -122,16 +184,37 @@ CREATE TABLE `usuario` (
   `fecha_nacimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `nickname`, `password`, `email`, `tipo`, `fecha_nacimiento`) VALUES
+(1, 'Admin', 'Admin', 'admin', '1234', 'admin@admin.com', 1, '2018-05-15'),
+(2, 'Nono', 'Rodriguez', 'nono', '1234', 'nono@nono.com', 0, '2018-05-23'),
+(3, 'David', 'Ruiz', 'david', '1234', 'david@david.com', 0, '2018-05-10'),
+(4, 'Lydia', 'Reina', 'lydia', '1234', 'lydia@lydia.com', 0, '2018-05-31');
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `usuario_chat`
 --
 
+DROP TABLE IF EXISTS `usuario_chat`;
 CREATE TABLE `usuario_chat` (
   `id_usuario` int(11) NOT NULL,
   `id_chat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario_chat`
+--
+
+INSERT INTO `usuario_chat` (`id_usuario`, `id_chat`) VALUES
+(4, 1),
+(2, 1),
+(3, 2),
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -139,13 +222,21 @@ CREATE TABLE `usuario_chat` (
 -- Estructura de tabla para la tabla `voto_comentario`
 --
 
+DROP TABLE IF EXISTS `voto_comentario`;
 CREATE TABLE `voto_comentario` (
-  `id` int(11) NOT NULL,
   `tipo` tinyint(1) NOT NULL,
   `fecha_hora` datetime NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `id_comentario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `voto_comentario`
+--
+
+INSERT INTO `voto_comentario` (`tipo`, `fecha_hora`, `id_usuario`, `id_comentario`) VALUES
+(0, '2018-05-03 00:00:00', 2, 2),
+(0, '2018-05-02 14:00:00', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -153,13 +244,20 @@ CREATE TABLE `voto_comentario` (
 -- Estructura de tabla para la tabla `voto_publicacion`
 --
 
+DROP TABLE IF EXISTS `voto_publicacion`;
 CREATE TABLE `voto_publicacion` (
-  `id` int(11) NOT NULL,
   `tipo` tinyint(1) NOT NULL,
   `fecha_hora` datetime NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `id_publicacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `voto_publicacion`
+--
+
+INSERT INTO `voto_publicacion` (`tipo`, `fecha_hora`, `id_usuario`, `id_publicacion`) VALUES
+(0, '2018-05-02 00:00:00', 3, 1);
 
 --
 -- Índices para tablas volcadas
@@ -219,7 +317,6 @@ ALTER TABLE `usuario`
 -- Indices de la tabla `usuario_chat`
 --
 ALTER TABLE `usuario_chat`
-  ADD PRIMARY KEY (`id_usuario`,`id_chat`),
   ADD KEY `id_chat` (`id_chat`),
   ADD KEY `id_usuario` (`id_usuario`);
 
@@ -227,7 +324,6 @@ ALTER TABLE `usuario_chat`
 -- Indices de la tabla `voto_comentario`
 --
 ALTER TABLE `voto_comentario`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `id_usuario` (`id_usuario`),
   ADD KEY `id_comentario` (`id_comentario`);
 
@@ -235,7 +331,6 @@ ALTER TABLE `voto_comentario`
 -- Indices de la tabla `voto_publicacion`
 --
 ALTER TABLE `voto_publicacion`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `id_publicacion` (`id_publicacion`),
   ADD KEY `id_usuario` (`id_usuario`);
 
@@ -247,55 +342,43 @@ ALTER TABLE `voto_publicacion`
 -- AUTO_INCREMENT de la tabla `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `mensaje`
 --
 ALTER TABLE `mensaje`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `suscripcion`
 --
 ALTER TABLE `suscripcion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tematica`
 --
 ALTER TABLE `tematica`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `voto_comentario`
---
-ALTER TABLE `voto_comentario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `voto_publicacion`
---
-ALTER TABLE `voto_publicacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
