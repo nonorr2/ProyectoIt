@@ -7,19 +7,23 @@
     <package name="default" extends="struts-default">
         <action name="">
             <result type="chain">
-                <param name="actionName">prueba</param>
+                <param name="actionName">inicio</param>
             </result>
         </action>
     </package>
     
-    <package name="prueba" extends="struts-default">
-        <action name="prueba">
+    <package name="top_menu" extends="struts-default">
+        <action name="inicio" class="acciones.menu_top" method="inicio">
             <result>index.jsp</result>
         </action>
-    </package>
-    <package name="redirigir" extends="struts-default">
-        <action name="redirigirRegistrarse" class="acciones.Redirigir" method="redirigirRegistrarse">
-            <result name="success">registro.jsp</result>
+        <action name="temas" class="acciones.menu_top" method="temas">
+            <result>categorias.jsp</result>
+        </action>
+        <action name="publicaciones" class="acciones.menu_top" method="publicaciones">
+            <result>publicaciones.jsp</result>
+        </action>
+        <action name="registro" class="acciones.menu_top" method="registro">
+            <result>registro.jsp</result>
         </action>
     </package>
 </struts>
