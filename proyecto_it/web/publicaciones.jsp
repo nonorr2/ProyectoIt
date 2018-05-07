@@ -5,7 +5,7 @@
     </div>
     <div class="container-fluid text-center">
         <div class="row">
-            <div class="contenedor-publi" onclick="document.getElementById('id01').style.display = 'block'">
+            <div class="contenedor-publi sombreado" onclick="document.getElementById('id01').style.display = 'block'">
                 <div class="publi-no-imagen">
                     <div class="letras-imagen">
                         <p class="iniciales-no-imagen">NR</p>
