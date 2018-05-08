@@ -1,5 +1,5 @@
 <%@include file="cabeceraNoLogado.jsp" %>
-<body id="myPage">
+
     <div class="banner-gen">
         <h1 class="text-banner">TEMAS</h1>
     </div>

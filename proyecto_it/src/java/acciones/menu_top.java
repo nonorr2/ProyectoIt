@@ -26,5 +26,9 @@ public class menu_top extends ActionSupport {
     public String registro() throws Exception {
         return SUCCESS;
     }
+    
+    public String perfil() throws Exception {
+        return SUCCESS;
+    } 
 
 }

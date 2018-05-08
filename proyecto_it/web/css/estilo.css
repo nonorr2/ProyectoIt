@@ -230,3 +230,9 @@ span.psw {
         width: 90%;
     }  
 } 
+
+.botonAceptarPerfil{
+    float:right !important;
+    clear:both !important;
+    padding-right:20px !important;
+}

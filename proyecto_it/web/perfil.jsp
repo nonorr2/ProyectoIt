@@ -1,15 +1,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <s:set name="theme" value="'simple'" scope="page" />
-<%@include file="cabeceraNoLogado.jsp" %>
+<%@include file="cabeceraLogado.jsp" %>
 
 <div class="banner-gen">
-        <h1 class="text-banner">&Uacute;NETE A NOSOTROS</h1>
+        <h1 class="text-banner">TU PERFIL</h1>
 </div>
 
 <s:div cssClass="container-fluid text-center">
     <s:div cssClass="col-sm-2"></s:div>
     <s:div cssClass="col-sm-8 text-left" >
+
         <s:form method="post" action=""> 
             <s:div cssClass="form-group col-sm-6">
                 <s:label><b>Nombre:</b></s:label>

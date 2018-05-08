@@ -25,5 +25,8 @@
         <action name="registro" class="acciones.menu_top" method="registro">
             <result>registro.jsp</result>
         </action>
+        <action name="perfil" class="acciones.menu_top" method="perfil">
+            <result>perfil.jsp</result>
+        </action>
     </package>
 </struts>
