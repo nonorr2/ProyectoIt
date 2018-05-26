@@ -1,0 +1,19 @@
+	@GET
+    @Path("/getChats")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Chat> getChats() {
+        String jpql = "SELECT a FROM Chat a WHERE a.nombre='Cerveceros'";
+        Query query = em.createQuery(jpql); 
+        List<Chat> resultados = query.getResultList(); 
+        return resultados;
+    }
+	
+	@GET
+    @Path("/getChats")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Chat> getChats() {
+        String jpql = "FROM Chat a WHERE a.nombre='Cerveceros'";
+        Query query = em.createQuery(jpql); 
+        List<Chat> resultados = query.getResultList(); 
+        return resultados;
+    }
