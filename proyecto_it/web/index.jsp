@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <%@include file="cabeceraNoLogado.jsp" %>
 <body id="myPage">
     <div class="banner-index">
