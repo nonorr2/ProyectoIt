@@ -34,7 +34,7 @@ public class TematicaDAO {
     public Tematica getTematica(int id) {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
         org.hibernate.Transaction tx = session.beginTransaction();
-        Query q = session.createQuery("from Usuario where id='" + id + "'");
+        Query q = session.createQuery("from Tematica where id='" + id + "'");
         Tematica tematica = (Tematica) q.uniqueResult();
         tx.commit();
         return tematica;
