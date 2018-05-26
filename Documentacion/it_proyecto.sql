@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-05-2018 a las 18:08:35
--- Versión del servidor: 10.1.30-MariaDB
--- Versión de PHP: 7.2.1
+-- Tiempo de generación: 26-05-2018 a las 19:28:17
+-- Versión del servidor: 10.1.26-MariaDB
+-- Versión de PHP: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -205,18 +205,19 @@ INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `nickname`, `password`, `ema
 DROP TABLE IF EXISTS `usuario_chat`;
 CREATE TABLE `usuario_chat` (
   `id_usuario` int(11) NOT NULL,
-  `id_chat` int(11) NOT NULL
+  `id_chat` int(11) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usuario_chat`
 --
 
-INSERT INTO `usuario_chat` (`id_usuario`, `id_chat`) VALUES
-(2, 1),
-(2, 2),
-(3, 2),
-(4, 1);
+INSERT INTO `usuario_chat` (`id_usuario`, `id_chat`, `fecha`) VALUES
+(2, 1, '2018-05-26 17:18:57'),
+(2, 2, '2018-05-26 17:18:57'),
+(3, 2, '2018-05-26 17:18:57'),
+(4, 1, '2018-05-26 17:18:57');
 
 -- --------------------------------------------------------
 
