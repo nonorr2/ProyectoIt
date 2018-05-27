@@ -20,6 +20,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import ws.Publicacion;
+import ws.Usuario;
 import ws.Tematica;
 
 /**
@@ -83,8 +84,8 @@ public class PublicacionFacadeREST extends AbstractFacade<Publicacion> {
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
         return String.valueOf(super.count());
-    }
-
+    }     
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -98,6 +99,37 @@ public class PublicacionFacadeREST extends AbstractFacade<Publicacion> {
         Query query = em.createQuery(jpql);
         List<Publicacion> result = query.getResultList();
         return result;
+    }
+    
+    /**
+     * Método auxiliar para obtener un usuario a partir del identificardor.
+     * @param idUsuario
+     * @return un objeto usario
+     */
+    private Usuario getUsuario(@PathParam("idUsuario") Integer idUsuario) {
+        String jpql = "SELECT u FROM Usuario u WHERE u.id = :idUsuario";        
+        Query query = em.createQuery(jpql); 
+        query.setParameter("idUsuario", idUsuario);
+        Usuario usuario = (Usuario) query.getSingleResult();
+        return usuario;
+    }    
+    
+    /**
+     * Método para obtener todas las publicaciones de un usuario,
+     * ordenandas de forma descendente.
+     * @param idUsuario
+     * @return una lista de publicaciones
+     */
+    @GET
+    @Path("/getMisPublicaciones/{idUsuario}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Publicacion> getMisPublicaciones(@PathParam("idUsuario") Integer idUsuario) {
+        Usuario usuario = this.getUsuario(idUsuario);
+        String jpql = "SELECT p FROM Publicacion p WHERE p.idUsuario = :usuario ORDER BY p.fechaHoraModificacion DESC";        
+        Query query = em.createQuery(jpql); 
+        query.setParameter("usuario", usuario);
+        List<Publicacion> publicaciones = query.getResultList(); 
+        return publicaciones;
     }
 
     /**

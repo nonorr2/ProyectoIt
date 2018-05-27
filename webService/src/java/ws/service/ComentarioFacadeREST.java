@@ -120,5 +120,26 @@ public class ComentarioFacadeREST extends AbstractFacade<Comentario> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    
+    /**
+     * Método que devuelve el último comentario de una publicación.
+     * @param idPublicacion
+     * @return último comentario
+     */
+    @GET
+    @Path("/getUltimoComentarioPublicacion/{idPublicacion}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Comentario getUltimoComentarioPublicacion(@PathParam("idPublicacion") Integer idPublicacion) {
+        Publicacion publicacion = this.getPublicacionById(idPublicacion);
+        String jpql = "SELECT c FROM Comentario c WHERE c.idPublicacion= :publicacion ORDER BY c.fechaHoraModificacion DESC";        
+        Query query = em.createQuery(jpql); 
+        query.setParameter("publicacion", publicacion);
+        List<Comentario> comentarios = query.getResultList();
+
+        Comentario ultimoComentario = comentarios.get(0);
+        
+        return ultimoComentario;
+    }
+    
 
 }
