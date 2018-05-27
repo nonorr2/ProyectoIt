@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -87,5 +88,15 @@ public class ChatFacadeREST extends AbstractFacade<Chat> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
+    @GET
+    @Path("/getChatPorNombre/{nombre}")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Chat> getChatPorNombre(@PathParam("nombre") String nombre) {
+        String jpql = "SELECT c FROM Chat c WHERE c.nombre LIKE '" + nombre + "%'";
+        Query query = em.createQuery(jpql);
+        List<Chat> result = query.getResultList();
+        return result;
+    }
+
 }

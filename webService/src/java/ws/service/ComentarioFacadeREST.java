@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,6 +20,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import ws.Comentario;
+import ws.Publicacion;
+import ws.Usuario;
 
 /**
  *
@@ -87,5 +90,17 @@ public class ComentarioFacadeREST extends AbstractFacade<Comentario> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    
+//    @GET
+//    @Path("/getUltimoComentarioPublicacion/{idPublicacion}")
+//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+//    public Comentario getUltimoComentarioPublicacion(@PathParam("idPublicacion") Integer idPublicacion) {
+//        Publicacion publicacion = 
+//        String jpql = "SELECT * FROM `comentario` WHERE id_publicacion='1' ORDER BY `fecha_hora_modificacion` DESC LIMIT 1";        
+//        Query query = em.createQuery(jpql); 
+//        query.setParameter("usuario", usuario);
+//        List<Publicacion> publicaciones = query.getResultList(); 
+//        return publicaciones;
+//    }
     
 }
