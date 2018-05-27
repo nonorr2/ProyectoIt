@@ -20,6 +20,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import ws.Publicacion;
+import ws.Tematica;
 
 /**
  *
@@ -97,5 +98,35 @@ public class PublicacionFacadeREST extends AbstractFacade<Publicacion> {
         Query query = em.createQuery(jpql);
         List<Publicacion> result = query.getResultList();
         return result;
+    }
+
+    /**
+     * Devuelve una listado de publicaciones perteneciente a la emática que
+     * coincide con el id pasado como parámetro
+     *
+     * @param id_tematica
+     * @return List<Publicacion>
+     */
+    @GET
+    @Path("/getPublicacionesByTematica/{id_tematica}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Publicacion> getPublicacionesByTema(@PathParam("id_tematica") Integer id_tematica) {
+        Tematica tematica = getTematicaById(id_tematica);
+        Query query = em.createQuery("SELECT p FROM Publicacion p WHERE p.idTematica = :tematica");
+        query.setParameter("tematica", tematica);
+        List<Publicacion> publicaciones = query.getResultList();
+        return publicaciones;
+    }
+
+    /**
+     * Devuelve una temática que coincide con el id pasado como parámetro
+     *
+     * @param id_tematica
+     * @return Tematica
+     */
+    private Tematica getTematicaById(Integer id_tematica) {
+        Query q = em.createQuery("Select t FROM Tematica t WHERE t.id = :tematica");
+        q.setParameter("tematica", id_tematica);
+        return (Tematica) q.getSingleResult();
     }
 }
