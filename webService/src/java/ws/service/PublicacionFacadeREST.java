@@ -81,11 +81,10 @@ public class PublicacionFacadeREST extends AbstractFacade<Publicacion> {
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
         return String.valueOf(super.count());
-    }
-
+    }     
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }
-    
+    }    
 }
