@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -86,6 +87,16 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+    
+    @GET
+    @Path("/getUsuariosPorNombre/{nombre}")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Usuario> getUsuariosPorNombre(@PathParam("nombre") String nombre){
+        String jpql = "SELECT u FROM Usuario u WHERE u.nombre LIKE '"+nombre+"%'";
+        Query query = em.createQuery(jpql);
+        List<Usuario> result = query.getResultList();
+        return result;
     }
     
 }

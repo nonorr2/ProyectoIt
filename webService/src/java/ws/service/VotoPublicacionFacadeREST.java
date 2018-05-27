@@ -112,5 +112,5 @@ public class VotoPublicacionFacadeREST extends AbstractFacade<VotoPublicacion> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

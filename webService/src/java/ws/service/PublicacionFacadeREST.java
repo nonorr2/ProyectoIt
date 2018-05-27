@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -87,5 +88,14 @@ public class PublicacionFacadeREST extends AbstractFacade<Publicacion> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
+    @GET
+    @Path("/getPublicacionPorTitulo/{titulo}")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Publicacion> getPublicacionPorTitulo(@PathParam("titulo") String titulo) {
+        String jpql = "SELECT p FROM Publicacion p WHERE p.titulo LIKE '" + titulo + "%'";
+        Query query = em.createQuery(jpql);
+        List<Publicacion> result = query.getResultList();
+        return result;
+    }
 }
