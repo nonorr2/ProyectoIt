@@ -17,3 +17,17 @@
         List<Chat> resultados = query.getResultList(); 
         return resultados;
     }
+
+
+
+    
+    
+    @GET
+    @Path("/getMisPublicaciones/{idUsuario}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Publicacion> getMisPublicaciones(@PathParam("idUsuario") String idUsuario) {
+        String jpql = "FROM Publicacion WHERE id_usuario = :idUsuario";
+        Query query = em.createQuery(jpql); 
+        List<Publicacion> publicaciones = query.getResultList(); 
+        return publicaciones;
+    }
