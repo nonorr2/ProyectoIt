@@ -106,4 +106,28 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         return result;
     }
 
+    @GET
+    @Path("/login/{usuario}/{password}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Boolean login(@PathParam("usuario") String usuario, @PathParam("password") String password) {
+        Boolean resultado = null;
+
+        try {
+            Usuario user = getUsuarioByUsername(usuario);
+            resultado = BCrypt.checkpw(password, user.getPassword());
+        } catch (Exception e) {
+            resultado = false;
+        }
+
+        //String as = BCrypt.hashpw(password, BCrypt.gensalt(12));
+        return resultado;
+    }
+
+    private Usuario getUsuarioByUsername(String username) throws Exception {
+        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.nickname= :username");
+        query.setParameter("username", username);
+        Usuario result = (Usuario) query.getSingleResult();
+        return result;
+    }
+
 }
