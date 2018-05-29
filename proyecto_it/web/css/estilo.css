@@ -173,6 +173,7 @@ span.psw {
 
 .publi-no-imagen{
     width: 15%;
+    height: 190px;
     background-color: #FFCF6E;
     float: left;
     overflow: hidden;
@@ -190,7 +191,7 @@ span.psw {
 
 .datos-publicacion{
     float: left;
-    width: 85%;
+    width: 70%;
     padding-left:15px;
 }
 
@@ -211,24 +212,66 @@ span.psw {
     color: white;
 }
 
+.textFileFiltrar{
+    width: 40%!important;
+}
+
+.filtro{
+    margin-left: 1%!important;
+}
+
+.icono{
+    border-radius:150px;
+    float: right;
+    width:30px;
+    height: 30px!important;
+    margin: 20px;
+    cursor: pointer;
+    z-index: 15;
+}
+
+.contenedor-iconos{
+    float: left;
+    width: 14%;
+    margin-top: 120px;
+}
+
 @media (max-width: 800px){
     .modal-content {
         width: 50%;
     }  
-    
+
     .publi-no-imagen{
-        width: 20%;
+        width: 30%;
+        height: 230px;
     }
-    
+
+    .contenedor-iconos{
+        float: left;
+        width: 4%;
+        margin-top: 160px;
+    }
+
     .datos-publicacion{
-        width: 80%;
+        width: 65%;
     }
 } 
 
 @media (max-width: 400px){
     .modal-content {
         width: 90%;
-    }  
+    }
+
+    .publi-no-imagen{
+        width: 30%;
+        height: 230px;
+    }
+
+    .contenedor-iconos{
+        float: left;
+        width: 4%;
+        margin-top: 160px;
+    }
 } 
 
 .botonAceptarPerfil{
