@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,6 +20,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.PathSegment;
+import ws.Publicacion;
 import ws.VotoPublicacion;
 import ws.VotoPublicacionPK;
 
@@ -111,6 +113,50 @@ public class VotoPublicacionFacadeREST extends AbstractFacade<VotoPublicacion> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+
+    /**
+     * Metodo para obtener el número de votos negativos de una publicación. tipo
+     * (0) --> Votos negativo
+     *
+     * @param id
+     * @return
+     */
+    @GET
+    @Path("/getVotoNegativoPublicacion/{id}")
+    @Produces({MediaType.TEXT_PLAIN})
+    public Long getVotoNegativoPublicacion(@PathParam("id") Integer id) {
+        Publicacion publicacion = getPublicacion(id);
+        Query query = em.createQuery("SELECT COUNT(v.publicacion) FROM VotoPublicacion v WHERE v.publicacion = :publicacion AND v.tipo = 0");
+        query.setParameter("publicacion", publicacion);
+        Long result = (Long) query.getSingleResult();
+        return result;
+    }
+
+    /**
+     * Metodo para obtener el número de votos positivos de una publicación. tipo
+     * (1) --> Votos positivos
+     *
+     * @param id
+     * @return
+     */
+    @GET
+    @Path("/getVotoPositivoPublicacion/{id}")
+    @Produces({MediaType.TEXT_PLAIN})
+    public Long getVotoPositivoPublicacion(@PathParam("id") Integer id) {
+        Publicacion publicacion = getPublicacion(id);
+        Query query = em.createQuery("SELECT COUNT(v.publicacion) FROM VotoPublicacion v WHERE v.publicacion = :publicacion AND v.tipo = 1");
+        query.setParameter("publicacion", publicacion);
+        Long result = (Long) query.getSingleResult();
+        return result;
+    }
+
+    private Publicacion getPublicacion(Integer id) {
+        String jpql = "SELECT p FROM Publicacion p WHERE p.id = :id";
+        Query query = em.createQuery(jpql);
+        query.setParameter("id", id);
+        Publicacion p = (Publicacion) query.getSingleResult();
+        return p;
     }
 
 }

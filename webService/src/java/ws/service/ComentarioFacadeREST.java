@@ -87,5 +87,4 @@ public class ComentarioFacadeREST extends AbstractFacade<Comentario> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
 }

@@ -88,6 +88,11 @@ public class PublicacionFacadeREST extends AbstractFacade<Publicacion> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    /**
+     * Metodo para obtener las publicaciones cuyo titulo corresponda con el titulo pasado como parametro
+     * @param titulo
+     * @return Lista de publicaciones
+     */
 
     @GET
     @Path("/getPublicacionPorTitulo/{titulo}")
