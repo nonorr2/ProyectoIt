@@ -5,6 +5,7 @@
  */
 package ws.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -20,6 +21,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import ws.Chat;
+import ws.Usuario;
+import ws.UsuarioChat;
 
 /**
  *
@@ -97,6 +100,43 @@ public class ChatFacadeREST extends AbstractFacade<Chat> {
         Query query = em.createQuery(jpql);
         List<Chat> result = query.getResultList();
         return result;
+    }
+
+    /**
+     * Devuelve los chats de los que es participante el usuario con id pasado
+     * como parámetro
+     *
+     * @param id_user
+     * @return List<Chat>
+     */
+    @GET
+    @Path("/getChatsUsuario/{id_user}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Chat> getChatsUsuario(@PathParam("id_user") Integer id_user) {
+        Usuario usu = getUserById(id_user);
+        Query query = em.createQuery("SELECT uc FROM UsuarioChat uc WHERE uc.usuario = :usuario");
+        query.setParameter("usuario", usu);
+        List<UsuarioChat> usuario_chat = query.getResultList();
+        List<Chat> chats = new ArrayList<Chat>();
+
+        for (UsuarioChat uc : usuario_chat) {
+            chats.add(uc.getChat());
+        }
+        
+        return chats;
+    }
+
+    /**
+     * Devuelve un usuario que coincide con el id pasado como parámetro
+     *
+     * @param id_user
+     * @return Usuario
+     */
+    private Usuario getUserById(Integer id_user) {
+        Query qUsuario = em.createQuery("SELECT u FROM Usuario u WHERE u.id= :id_usuario");
+        qUsuario.setParameter("id_usuario", id_user);
+        Usuario usu = (Usuario) qUsuario.getSingleResult();
+        return usu;
     }
 
 }

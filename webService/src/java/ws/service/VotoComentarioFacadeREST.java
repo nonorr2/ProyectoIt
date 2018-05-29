@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,6 +20,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.PathSegment;
+import ws.Comentario;
 import ws.VotoComentario;
 import ws.VotoComentarioPK;
 
@@ -112,5 +114,53 @@ public class VotoComentarioFacadeREST extends AbstractFacade<VotoComentario> {
     protected EntityManager getEntityManager() {
         return em;
     }
+
+    /**
+     * Devuelve el numero de votos positivos que tiene el comentario con el id
+     * pasado como parámetro
+     *
+     * @param id_comentario
+     * @return Long
+     */
+    @GET
+    @Path("/getVotosPositivos/{id_comentario}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Long getVotosPositivos(@PathParam("id_comentario") Integer id_comentario) {
+        Comentario comentario = getComentarioById(id_comentario);
+        Query query = em.createQuery("SELECT COUNT(vc.fechaHora) votos FROM VotoComentario vc WHERE vc.comentario= :comentario AND vc.tipo=1");
+        query.setParameter("comentario", comentario);
+        Long votos = (Long) query.getSingleResult();
+        return votos;
+    }
     
+        /**
+     * Devuelve el numero de votos positivos que tiene el comentario con el id
+     * pasado como parámetro
+     *
+     * @param id_comentario
+     * @return Long
+     */
+    @GET
+    @Path("/getVotosNegativos/{id_comentario}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Long getVotosNegativos(@PathParam("id_comentario") Integer id_comentario) {
+        Comentario comentario = getComentarioById(id_comentario);
+        Query query = em.createQuery("SELECT COUNT(vc.fechaHora) votos FROM VotoComentario vc WHERE vc.comentario= :comentario AND vc.tipo=0");
+        query.setParameter("comentario", comentario);
+        Long votos = (Long) query.getSingleResult();
+        return votos;
+    }
+    
+    /**
+     * Devuelve un Comentario que coincide con el id pasado como parámetro
+     *
+     * @param id_comentario
+     * @return Comentario
+     */
+    private Comentario getComentarioById(Integer id_comentario) {
+        Query q = em.createQuery("SELECT c FROM Comentario c WHERE c.id= :comentario");
+        q.setParameter("comentario", id_comentario);
+        return (Comentario) q.getSingleResult();
+    }
+
 }

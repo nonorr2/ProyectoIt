@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,6 +20,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import ws.Comentario;
+import ws.Publicacion;
 
 /**
  *
@@ -83,8 +85,61 @@ public class ComentarioFacadeREST extends AbstractFacade<Comentario> {
         return String.valueOf(super.count());
     }
 
+    /**
+     * Devuelve una lista de comentarios pertenecientes a una publicación que
+     * coincide con el id pasado como parámetro
+     *
+     * @param id_publicacion
+     * @return List<Comentario>
+     */
+    @GET
+    @Path("/getComentariosPublicacion/{id_publicacion}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Comentario> getComentariosPublicacion(@PathParam("id_publicacion") Integer id_publicacion) {
+        Publicacion publicacion = getPublicacionById(id_publicacion);
+        Query query = em.createQuery("SELECT c FROM Comentario c WHERE c.idPublicacion = :publicacion");
+        query.setParameter("publicacion", publicacion);
+        List<Comentario> comentarios = query.getResultList();
+        return comentarios;
+    }
+
+    /**
+     * Devuelve una publicación que coincide con el id pasado como parámetro
+     *
+     * @param id_publicacion
+     * @return Publicacion
+     */
+    private Publicacion getPublicacionById(Integer id_publicacion) {
+        Query q = em.createQuery("Select p FROM Publicacion p WHERE p.id= :publicacion");
+        q.setParameter("publicacion", id_publicacion);
+        Publicacion p = (Publicacion) q.getSingleResult();
+        return p;
+    }
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
+    
+    /**
+     * Método que devuelve el último comentario de una publicación.
+     * @param idPublicacion
+     * @return último comentario
+     */
+    @GET
+    @Path("/getUltimoComentarioPublicacion/{idPublicacion}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Comentario getUltimoComentarioPublicacion(@PathParam("idPublicacion") Integer idPublicacion) {
+        Publicacion publicacion = this.getPublicacionById(idPublicacion);
+        String jpql = "SELECT c FROM Comentario c WHERE c.idPublicacion= :publicacion ORDER BY c.fechaHoraModificacion DESC";        
+        Query query = em.createQuery(jpql); 
+        query.setParameter("publicacion", publicacion);
+        List<Comentario> comentarios = query.getResultList();
+
+        Comentario ultimoComentario = comentarios.get(0);
+        
+        return ultimoComentario;
+    }
+    
+
 }
