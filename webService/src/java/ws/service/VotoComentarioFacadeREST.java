@@ -132,8 +132,8 @@ public class VotoComentarioFacadeREST extends AbstractFacade<VotoComentario> {
         Long votos = (Long) query.getSingleResult();
         return votos;
     }
-    
-        /**
+
+    /**
      * Devuelve el numero de votos positivos que tiene el comentario con el id
      * pasado como parámetro
      *
@@ -150,7 +150,7 @@ public class VotoComentarioFacadeREST extends AbstractFacade<VotoComentario> {
         Long votos = (Long) query.getSingleResult();
         return votos;
     }
-    
+
     /**
      * Devuelve un Comentario que coincide con el id pasado como parámetro
      *

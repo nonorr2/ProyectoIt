@@ -85,7 +85,12 @@ public class ComentarioFacadeREST extends AbstractFacade<Comentario> {
         return String.valueOf(super.count());
     }
 
-    /**
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+    
+     /**
      * Devuelve una lista de comentarios pertenecientes a una publicación que
      * coincide con el id pasado como parámetro
      *
@@ -114,11 +119,6 @@ public class ComentarioFacadeREST extends AbstractFacade<Comentario> {
         q.setParameter("publicacion", id_publicacion);
         Publicacion p = (Publicacion) q.getSingleResult();
         return p;
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
     }
 
     /**
@@ -159,4 +159,5 @@ public class ComentarioFacadeREST extends AbstractFacade<Comentario> {
         Long result = (Long) query.getSingleResult();
         return result;
     }
+    
 }

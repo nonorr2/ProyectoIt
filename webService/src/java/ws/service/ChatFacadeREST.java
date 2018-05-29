@@ -91,17 +91,7 @@ public class ChatFacadeREST extends AbstractFacade<Chat> {
     protected EntityManager getEntityManager() {
         return em;
     }
-
-    @GET
-    @Path("/getChatPorNombre/{nombre}")
-    @Produces(MediaType.APPLICATION_XML)
-    public List<Chat> getChatPorNombre(@PathParam("nombre") String nombre) {
-        String jpql = "SELECT c FROM Chat c WHERE c.nombre LIKE '" + nombre + "%'";
-        Query query = em.createQuery(jpql);
-        List<Chat> result = query.getResultList();
-        return result;
-    }
-
+    
     /**
      * Devuelve los chats de los que es participante el usuario con id pasado
      * como parámetro
@@ -138,5 +128,5 @@ public class ChatFacadeREST extends AbstractFacade<Chat> {
         Usuario usu = (Usuario) qUsuario.getSingleResult();
         return usu;
     }
-
+    
 }

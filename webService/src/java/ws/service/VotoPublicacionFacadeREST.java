@@ -150,14 +150,13 @@ public class VotoPublicacionFacadeREST extends AbstractFacade<VotoPublicacion> {
         Long result = (Long) query.getSingleResult();
         return result;
     }
-    
-        /**
+
+    /**
      * Devuelve una publicacion que coincide con el id pasado como parámetro
      *
      * @param id
      * @return Publicacion
      */
-
     private Publicacion getPublicacion(Integer id) {
         String jpql = "SELECT p FROM Publicacion p WHERE p.id = :id";
         Query query = em.createQuery(jpql);

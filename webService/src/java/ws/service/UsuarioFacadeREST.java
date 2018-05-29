@@ -90,8 +90,8 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     }
 
     /**
-     * Metodo para obtener los usuarios cuyo nombre corresponda con el
-     * nombre pasado como parametro
+     * Metodo para obtener los usuarios cuyo nombre corresponda con el nombre
+     * pasado como parametro
      *
      * @param nombre
      * @return Lista de usuarios

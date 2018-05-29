@@ -88,10 +88,10 @@ public class TematicaFacadeREST extends AbstractFacade<Tematica> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
-        /**
-     * Metodo para obtener las tematicas cuyo nombre corresponda con el
-     * nombre pasado como parametro
+
+    /**
+     * Metodo para obtener las tematicas cuyo nombre corresponda con el nombre
+     * pasado como parametro
      *
      * @param nombre
      * @return Lista de tematicas
@@ -105,5 +105,5 @@ public class TematicaFacadeREST extends AbstractFacade<Tematica> {
         List<Tematica> result = query.getResultList();
         return result;
     }
-    
+
 }

@@ -144,4 +144,5 @@ public class SuscripcionFacadeREST extends AbstractFacade<Suscripcion> {
         Usuario usuario = (Usuario) query.getSingleResult();
         return usuario;
     } 
+    
 }

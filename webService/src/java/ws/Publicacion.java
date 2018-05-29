@@ -42,7 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Publicacion.findByContenido", query = "SELECT p FROM Publicacion p WHERE p.contenido = :contenido")
     , @NamedQuery(name = "Publicacion.findByFechaHoraCreacion", query = "SELECT p FROM Publicacion p WHERE p.fechaHoraCreacion = :fechaHoraCreacion")
     , @NamedQuery(name = "Publicacion.findByFechaHoraModificacion", query = "SELECT p FROM Publicacion p WHERE p.fechaHoraModificacion = :fechaHoraModificacion")
-    , @NamedQuery(name = "Publicacion.findByRuta", query = "SELECT p FROM Publicacion p WHERE p.ruta = :ruta")})
+    , @NamedQuery(name = "Publicacion.findByRuta", query = "SELECT p FROM Publicacion p WHERE p.ruta = :ruta")
+    , @NamedQuery(name = "Publicacion.findByFoto", query = "SELECT p FROM Publicacion p WHERE p.foto = :foto")})
 public class Publicacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -76,6 +77,11 @@ public class Publicacion implements Serializable {
     @Size(min = 1, max = 500)
     @Column(name = "ruta")
     private String ruta;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "foto")
+    private String foto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "publicacion")
     private Collection<Suscripcion> suscripcionCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPublicacion")
@@ -96,13 +102,14 @@ public class Publicacion implements Serializable {
         this.id = id;
     }
 
-    public Publicacion(Integer id, String titulo, String contenido, Date fechaHoraCreacion, Date fechaHoraModificacion, String ruta) {
+    public Publicacion(Integer id, String titulo, String contenido, Date fechaHoraCreacion, Date fechaHoraModificacion, String ruta, String foto) {
         this.id = id;
         this.titulo = titulo;
         this.contenido = contenido;
         this.fechaHoraCreacion = fechaHoraCreacion;
         this.fechaHoraModificacion = fechaHoraModificacion;
         this.ruta = ruta;
+        this.foto = foto;
     }
 
     public Integer getId() {
@@ -151,6 +158,14 @@ public class Publicacion implements Serializable {
 
     public void setRuta(String ruta) {
         this.ruta = ruta;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     @XmlTransient
