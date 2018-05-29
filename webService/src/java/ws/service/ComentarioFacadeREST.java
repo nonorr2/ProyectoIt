@@ -120,9 +120,10 @@ public class ComentarioFacadeREST extends AbstractFacade<Comentario> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
     /**
      * Método que devuelve el último comentario de una publicación.
+     *
      * @param idPublicacion
      * @return último comentario
      */
@@ -131,15 +132,31 @@ public class ComentarioFacadeREST extends AbstractFacade<Comentario> {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Comentario getUltimoComentarioPublicacion(@PathParam("idPublicacion") Integer idPublicacion) {
         Publicacion publicacion = this.getPublicacionById(idPublicacion);
-        String jpql = "SELECT c FROM Comentario c WHERE c.idPublicacion= :publicacion ORDER BY c.fechaHoraModificacion DESC";        
-        Query query = em.createQuery(jpql); 
+        String jpql = "SELECT c FROM Comentario c WHERE c.idPublicacion= :publicacion ORDER BY c.fechaHoraModificacion DESC";
+        Query query = em.createQuery(jpql);
         query.setParameter("publicacion", publicacion);
         List<Comentario> comentarios = query.getResultList();
 
         Comentario ultimoComentario = comentarios.get(0);
-        
+
         return ultimoComentario;
     }
-    
 
+    /**
+     * Metodo para obtener el número de comentarios de una publicación
+     *
+     * @param id
+     * @return número de comentarios
+     */
+    
+    @GET
+    @Path("/getNumComentarios/{id}")
+    @Produces({MediaType.TEXT_PLAIN})
+    public Long getNumComentarios(@PathParam("id") Integer id) {
+        Publicacion publicacion = getPublicacionById(id);
+        Query query = em.createQuery("SELECT COUNT(c.idPublicacion) FROM Comentario c WHERE c.idPublicacion = :publicacion");
+        query.setParameter("publicacion", publicacion);
+        Long result = (Long) query.getSingleResult();
+        return result;
+    }
 }

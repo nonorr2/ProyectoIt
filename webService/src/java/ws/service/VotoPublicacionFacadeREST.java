@@ -120,7 +120,7 @@ public class VotoPublicacionFacadeREST extends AbstractFacade<VotoPublicacion> {
      * (0) --> Votos negativo
      *
      * @param id
-     * @return
+     * @return número de votos
      */
     @GET
     @Path("/getVotoNegativoPublicacion/{id}")
@@ -138,7 +138,7 @@ public class VotoPublicacionFacadeREST extends AbstractFacade<VotoPublicacion> {
      * (1) --> Votos positivos
      *
      * @param id
-     * @return
+     * @return número de votos
      */
     @GET
     @Path("/getVotoPositivoPublicacion/{id}")
