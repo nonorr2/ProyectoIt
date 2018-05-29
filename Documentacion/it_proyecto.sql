@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-05-2018 a las 19:28:17
+-- Tiempo de generación: 29-05-2018 a las 17:55:50
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -67,7 +67,9 @@ CREATE TABLE `comentario` (
 
 INSERT INTO `comentario` (`id`, `fecha_hora_modificacion`, `contenido`, `id_usuario`, `id_publicacion`, `fecha_hora_creacion`) VALUES
 (1, '2018-05-02 08:00:00', 'Como es Alemania???', 4, 3, '0000-00-00 00:00:00'),
-(2, '2018-05-02 13:00:00', 'Hala Madrid!!', 3, 1, '0000-00-00 00:00:00');
+(2, '2018-05-02 13:00:00', 'Hala Madrid!!', 3, 1, '0000-00-00 00:00:00'),
+(3, '2018-05-15 00:00:00', 'Hala madrid', 5, 1, '2018-05-15 00:00:00'),
+(4, '2018-05-16 00:00:00', 'prueba', 2, 1, '2018-05-15 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -108,18 +110,19 @@ CREATE TABLE `publicacion` (
   `fecha_hora_modificacion` datetime NOT NULL,
   `ruta` varchar(500) CHARACTER SET latin1 NOT NULL,
   `id_usuario` int(11) NOT NULL,
-  `id_tematica` int(11) NOT NULL
+  `id_tematica` int(11) NOT NULL,
+  `foto` varchar(100) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `publicacion`
 --
 
-INSERT INTO `publicacion` (`id`, `titulo`, `contenido`, `fecha_hora_creacion`, `fecha_hora_modificacion`, `ruta`, `id_usuario`, `id_tematica`) VALUES
-(1, 'Fútbol', 'Descripción fútbol', '2018-05-02 11:00:00', '0000-00-00 00:00:00', 'https://as.com/', 2, 3),
-(2, 'Perros', 'Descripción perros', '2018-05-01 13:00:00', '0000-00-00 00:00:00', 'https://es.wikipedia.org/wiki/Canis_lupus_familiaris', 4, 1),
-(3, 'Viajar a Alemania', 'Descripción del viaje', '2018-05-03 15:00:00', '0000-00-00 00:00:00', 'https://www.touristforum.net/es/baviera-alemania-viajes-en-coche-de-alquiler?gclid=EAIaIQobChMIj4rNp7rn2gIV8jLTCh1PjgtDEAAYASAAEgIoG_D_BwE', 3, 4),
-(4, 'Informática', 'Descripción', '2018-04-04 17:00:00', '0000-00-00 00:00:00', 'https://es.wikipedia.org/wiki/Inform%C3%A1tica', 2, 2);
+INSERT INTO `publicacion` (`id`, `titulo`, `contenido`, `fecha_hora_creacion`, `fecha_hora_modificacion`, `ruta`, `id_usuario`, `id_tematica`, `foto`) VALUES
+(1, 'Fútbol', 'Descripción fútbol', '2018-05-02 11:00:00', '0000-00-00 00:00:00', 'https://as.com/', 2, 3, ''),
+(2, 'Perros', 'Descripción perros', '2018-05-01 13:00:00', '0000-00-00 00:00:00', 'https://es.wikipedia.org/wiki/Canis_lupus_familiaris', 4, 1, ''),
+(3, 'Viajar a Alemania', 'Descripción del viaje', '2018-05-03 15:00:00', '0000-00-00 00:00:00', 'https://www.touristforum.net/es/baviera-alemania-viajes-en-coche-de-alquiler?gclid=EAIaIQobChMIj4rNp7rn2gIV8jLTCh1PjgtDEAAYASAAEgIoG_D_BwE', 3, 4, ''),
+(4, 'Informática', 'Descripción', '2018-04-04 17:00:00', '0000-00-00 00:00:00', 'https://es.wikipedia.org/wiki/Inform%C3%A1tica', 2, 2, '');
 
 -- --------------------------------------------------------
 
@@ -194,7 +197,8 @@ INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `nickname`, `password`, `ema
 (1, 'Admin', 'Admin', 'admin', '1234', 'admin@admin.com', 1, '2018-05-15', ''),
 (2, 'Nono', 'Rodriguez', 'nono', '1234', 'nono@nono.com', 0, '2018-05-23', ''),
 (3, 'David', 'Ruiz', 'david', '1234', 'david@david.com', 0, '2018-05-10', ''),
-(4, 'Lydia', 'Reina', 'lydia', '1234', 'lydia@lydia.com', 0, '2018-05-31', '');
+(4, 'Lydia', 'Reina', 'lydia', '1234', 'lydia@lydia.com', 0, '2018-05-31', ''),
+(5, 'Alba', 'Carrasco', 'alba', '1234', 'alba@gmail.com', 0, '2000-05-15', '');
 
 -- --------------------------------------------------------
 
@@ -239,7 +243,9 @@ CREATE TABLE `voto_comentario` (
 
 INSERT INTO `voto_comentario` (`tipo`, `fecha_hora`, `id_usuario`, `id_comentario`) VALUES
 (0, '2018-05-02 14:00:00', 2, 1),
-(0, '2018-05-03 00:00:00', 2, 2);
+(0, '2018-05-03 00:00:00', 2, 2),
+(0, '2018-05-08 00:00:00', 3, 1),
+(0, '2018-05-16 00:00:00', 4, 4);
 
 -- --------------------------------------------------------
 
@@ -260,7 +266,12 @@ CREATE TABLE `voto_publicacion` (
 --
 
 INSERT INTO `voto_publicacion` (`tipo`, `fecha_hora`, `id_usuario`, `id_publicacion`) VALUES
-(0, '2018-05-02 00:00:00', 3, 1);
+(0, '2017-12-28 06:09:00', 2, 4),
+(0, '2018-05-02 00:00:00', 3, 1),
+(0, '2018-05-02 14:00:00', 3, 4),
+(0, '2017-12-28 05:00:00', 4, 1),
+(0, '2018-05-02 20:00:00', 5, 1),
+(0, '2017-12-29 10:00:00', 5, 4);
 
 --
 -- Índices para tablas volcadas
@@ -354,7 +365,7 @@ ALTER TABLE `chat`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `mensaje`
@@ -378,7 +389,7 @@ ALTER TABLE `tematica`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
