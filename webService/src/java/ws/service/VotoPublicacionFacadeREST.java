@@ -123,9 +123,9 @@ public class VotoPublicacionFacadeREST extends AbstractFacade<VotoPublicacion> {
      * @return número de votos
      */
     @GET
-    @Path("/getVotoNegativoPublicacion/{id}")
+    @Path("/getVotosNegativos/{idPublicacion}")
     @Produces({MediaType.TEXT_PLAIN})
-    public Long getVotoNegativoPublicacion(@PathParam("id") Integer id) {
+    public Long getVotosNegativos(@PathParam("idPublicacion") Integer id) {
         Publicacion publicacion = getPublicacion(id);
         Query query = em.createQuery("SELECT COUNT(v.publicacion) FROM VotoPublicacion v WHERE v.publicacion = :publicacion AND v.tipo = 0");
         query.setParameter("publicacion", publicacion);
@@ -141,15 +141,22 @@ public class VotoPublicacionFacadeREST extends AbstractFacade<VotoPublicacion> {
      * @return número de votos
      */
     @GET
-    @Path("/getVotoPositivoPublicacion/{id}")
+    @Path("/getVotosPositivos/{idPublicacion}")
     @Produces({MediaType.TEXT_PLAIN})
-    public Long getVotoPositivoPublicacion(@PathParam("id") Integer id) {
+    public Long getVotosPositivos(@PathParam("idPublicacion") Integer id) {
         Publicacion publicacion = getPublicacion(id);
         Query query = em.createQuery("SELECT COUNT(v.publicacion) FROM VotoPublicacion v WHERE v.publicacion = :publicacion AND v.tipo = 1");
         query.setParameter("publicacion", publicacion);
         Long result = (Long) query.getSingleResult();
         return result;
     }
+    
+        /**
+     * Devuelve una publicacion que coincide con el id pasado como parámetro
+     *
+     * @param id
+     * @return Publicacion
+     */
 
     private Publicacion getPublicacion(Integer id) {
         String jpql = "SELECT p FROM Publicacion p WHERE p.id = :id";

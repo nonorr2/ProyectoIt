@@ -93,12 +93,12 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
      * Metodo para obtener los usuarios cuyo nombre corresponda con el
      * nombre pasado como parametro
      *
-     * @param titulo
+     * @param nombre
      * @return Lista de usuarios
      */
     @GET
     @Path("/getUsuariosPorNombre/{nombre}")
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Usuario> getUsuariosPorNombre(@PathParam("nombre") String nombre) {
         String jpql = "SELECT u FROM Usuario u WHERE u.nombre LIKE '" + nombre + "%'";
         Query query = em.createQuery(jpql);

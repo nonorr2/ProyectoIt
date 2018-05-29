@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -86,6 +87,23 @@ public class TematicaFacadeREST extends AbstractFacade<Tematica> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+    
+        /**
+     * Metodo para obtener las tematicas cuyo nombre corresponda con el
+     * nombre pasado como parametro
+     *
+     * @param nombre
+     * @return Lista de tematicas
+     */
+    @GET
+    @Path("/getTematicasPorNombre/{nombre}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Tematica> getTematicasPorNombre(@PathParam("nombre") String nombre) {
+        String jpql = "SELECT t FROM Tematica t WHERE t.nombre LIKE '" + nombre + "%'";
+        Query query = em.createQuery(jpql);
+        List<Tematica> result = query.getResultList();
+        return result;
     }
     
 }

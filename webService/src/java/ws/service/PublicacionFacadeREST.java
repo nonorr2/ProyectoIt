@@ -98,7 +98,7 @@ public class PublicacionFacadeREST extends AbstractFacade<Publicacion> {
 
     @GET
     @Path("/getPublicacionPorTitulo/{titulo}")
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Publicacion> getPublicacionPorTitulo(@PathParam("titulo") String titulo) {
         String jpql = "SELECT p FROM Publicacion p WHERE p.titulo LIKE '" + titulo + "%'";
         Query query = em.createQuery(jpql);
