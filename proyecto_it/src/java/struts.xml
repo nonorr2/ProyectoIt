@@ -14,19 +14,19 @@
     
     <package name="top_menu" extends="struts-default">
         <action name="inicio" class="acciones.menu_top" method="inicio">
-            <result>index.jsp</result>
+            <result name="success">index.jsp</result>
         </action>
         <action name="temas" class="acciones.menu_top" method="temas">
-            <result>categorias.jsp</result>
+            <result name="success">categorias.jsp</result>
         </action>
         <action name="publicaciones" class="acciones.menu_top" method="publicaciones">
-            <result>publicaciones.jsp</result>
+            <result name="success">publicaciones.jsp</result>
         </action>
         <action name="registro" class="acciones.menu_top" method="registro">
-            <result>registro.jsp</result>
+            <result name="success">registro.jsp</result>
         </action>
         <action name="perfil" class="acciones.menu_top" method="perfil">
-            <result>perfil.jsp</result>
+            <result name="success">perfil.jsp</result>
         </action>
     </package>
 </struts>
