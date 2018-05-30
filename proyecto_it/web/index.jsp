@@ -10,11 +10,10 @@
     <div class="container-fluid text-center">
         <h2>TEMAS M&Aacute;S ACTIVOS</h2>
         <br>
-        <p><s:property value="pepe"></s:property></p>
         <s:div cssClass="row">
             <s:iterator var="tema" value="tematicas">
                 <s:div cssClass="col-sm-3 sombreado">
-                    <div class="div-icono" style=" background-image: <s:property value="imagen" />"></div>
+                    <div class="div-icono" style=" background-image: url('<s:property value="imagen" />')"></div>
                     <h4><s:property value="nombre" /></h4>
                 </s:div>
             </s:iterator>

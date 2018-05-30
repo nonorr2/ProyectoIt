@@ -9,11 +9,8 @@
         <s:iterator var="publicacion" value="publicaciones">
             <s:div cssClass="row">
                 <s:div cssClass="contenedor-publi sombreado" onclick="document.getElementById('id01').style.display = 'block'">
-                    <s:div cssClass="publi-no-imagen">
-                        <s:div cssClass="letras-imagen">
-                            <p class="iniciales-no-imagen">NR</p>
-                        </s:div>
-                    </s:div>
+                    <div class="publi-no-imagen" style=" background-image: url('<s:property value="foto" />')">
+                    </div>
                     <s:div cssClass="datos-publicacion">
                         <h1><s:property value="titulo" /></h1>
                         <!--                    LA FECHA NO SALE-->
