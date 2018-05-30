@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
-<%@include file="cabeceraNoLogado.jsp" %>
+<%@include file="cabeceraAdmin.jsp" %>
 <body id="myPage">
 
     <s:div cssClass="banner-gen">
@@ -19,11 +19,11 @@
                 <s:div cssClass="contenedor-publi sombreado">
                     <s:div cssClass="publi-no-imagen">
                         <s:div cssClass="letras-imagen">
-                            <p class="iniciales-no-imagen">TEM</p> <!-- o la imagen si tiene-->
+                            <p class="iniciales-no-imagen">TEM</p>
                         </s:div>
                     </s:div>
                     <s:div cssClass="datos-publicacion">
-                        <h1>Titulo del Tema</h1>
+                        <h1><s:property value=""/></h1>
                         <p>Numero de publicaciones asociada</p>
                     </s:div>
                     <s:div cssClass="contenedor-iconos">
