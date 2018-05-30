@@ -226,7 +226,7 @@ span.psw {
     float: right;
     width:30px;
     height: 30px!important;
-    margin: 20px;
+    margin: 5px;
     cursor: pointer;
     z-index: 15;
 }
@@ -234,7 +234,11 @@ span.psw {
 .contenedor-iconos{
     float: left;
     width: 14%;
-    margin-top: 120px;
+    margin-top: 145px;
+}
+
+.contenedor-icono-add{
+    margin-right: 4%;
 }
 
 @media (max-width: 800px){
@@ -250,7 +254,7 @@ span.psw {
     .contenedor-iconos{
         float: left;
         width: 4%;
-        margin-top: 160px;
+        margin-top: 150px;
     }
 
     .datos-publicacion{
@@ -271,7 +275,7 @@ span.psw {
     .contenedor-iconos{
         float: left;
         width: 4%;
-        margin-top: 160px;
+        margin-top: 150px;
     }
 } 
 
