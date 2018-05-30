@@ -27,7 +27,7 @@
                 <s:form action="temas" method="post">
                     <a><s:submit value="TEMAS" cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" /></a>
                 </s:form>
-                <s:form action="publicaciones" method="post">
+                <s:form action="misPublicaciones" method="post">
                     <a><s:submit value="PUBLICACIONES" cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"/></a>
                 </s:form>
                 <s:form action="perfil" method="post">
@@ -49,7 +49,7 @@
                 <s:form action="temas" method="post">
                     <a><s:submit value="TEMAS" cssClass="w3-bar-item w3-button w3-padding-large" /></a>
                 </s:form>
-                <s:form action="publicaciones" method="post">
+                <s:form action="misPublicaciones" method="post">
                     <a><s:submit value="PUBLICACIONES" cssClass="w3-bar-item w3-button w3-padding-large"/></a>
                 </s:form>
                 <s:form action="perfil" method="post">

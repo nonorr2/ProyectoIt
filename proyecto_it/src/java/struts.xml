@@ -29,4 +29,13 @@
             <result name="success">perfil.jsp</result>
         </action>
     </package>
+    
+    <package name="misPublicaciones" extends="struts-default">
+        <action name="misPublicaciones" class="acciones.MisPublicacionesAccion">
+            <result name="success">misPublicaciones.jsp</result>
+        </action>    
+        <action name="borrarMiPublicacion" class="acciones.MisPublicacionesAccion" method="borrarPublicacion">
+            <result name="success">misPublicaciones.jsp</result>
+        </action>   
+    </package>
 </struts>
