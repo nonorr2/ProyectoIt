@@ -21,7 +21,7 @@ import javax.ws.rs.core.GenericType;
  *        client.close();
  * </pre>
  *
- * @author David
+ * @author Nono
  */
 public class UsuarioWS {
 
@@ -34,13 +34,13 @@ public class UsuarioWS {
         webTarget = client.target(BASE_URI).path("ws.usuario");
     }
 
-    public <T> T getUsuariosPorNombre_XML(Class<T> responseType, String nombre) throws ClientErrorException {
+    public <T> T getUsuariosPorNombre_XML(GenericType<T> responseType, String nombre) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("getUsuariosPorNombre/{0}", new Object[]{nombre}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
-    public <T> T getUsuariosPorNombre_JSON(Class<T> responseType, String nombre) throws ClientErrorException {
+    public <T> T getUsuariosPorNombre_JSON(GenericType<T> responseType, String nombre) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("getUsuariosPorNombre/{0}", new Object[]{nombre}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
@@ -96,6 +96,18 @@ public class UsuarioWS {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("login/{0}/{1}", new Object[]{usuario, password}));
         return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(responseType);
+    }
+
+    public <T> T getUsuarioByUsername_XML(GenericType<T> responseType, String username) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getUsuarioByUsername/{0}", new Object[]{username}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
+
+    public <T> T getUsuarioByUsername_JSON(GenericType<T> responseType, String username) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getUsuarioByUsername/{0}", new Object[]{username}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
     public <T> T findAll_XML(GenericType<T> responseType) throws ClientErrorException {

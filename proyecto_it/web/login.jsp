@@ -4,7 +4,7 @@
 
 
 <s:div id="id01" cssClass="modal">
-    <s:form theme="simple" cssClass="modal-content animate" action="">
+    <s:form theme="simple" cssClass="modal-content animate" action="login">
         <s:div cssClass="imgcontainer">
             <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">&times;</span>
             <img src="images/imgLogin.png" alt="Avatar" class="avatar">
