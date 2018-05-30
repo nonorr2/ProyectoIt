@@ -43,7 +43,11 @@ public class loginLogout extends ActionSupport {
             Usuario usu = usuarioClient.getUsuarioByUsername_XML(tipoUsuario, usuario);
             session = (Map) ActionContext.getContext().get("session");
             session.put("user", usu);
-            return SUCCESS;
+            if (usu.getTipo()) {
+                return SUCCESS;
+            } else {
+                return LOGIN;
+            }
         } else {
             return ERROR;
         }

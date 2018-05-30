@@ -32,7 +32,8 @@
     
     <package name="loginLogout" extends="struts-default">
         <action name="login" class="acciones.loginLogout" method="login">
-            <result name="success">home.jsp</result>
+            <result name="success">usuariosAdmin.jsp</result>
+            <result name="login">home.jsp</result>
             <result name="error">index.jsp</result>
         </action>
     </package>
