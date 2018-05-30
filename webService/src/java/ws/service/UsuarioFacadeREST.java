@@ -123,7 +123,10 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         return resultado;
     }
 
-    private Usuario getUsuarioByUsername(String username) throws Exception {
+    @GET
+    @Path("/getUsuarioByUsername/{username}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Usuario getUsuarioByUsername(@PathParam("username") String username) throws Exception {
         Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.nickname= :username");
         query.setParameter("username", username);
         Usuario result = (Usuario) query.getSingleResult();
