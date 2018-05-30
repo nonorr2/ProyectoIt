@@ -29,4 +29,12 @@
             <result name="success">perfil.jsp</result>
         </action>
     </package>
+    
+    <package name="loginLogout" extends="struts-default">
+        <action name="login" class="acciones.loginLogout" method="login">
+            <result name="success">home.jsp</result>
+            <result name="error">index.jsp</result>
+        </action>
+    </package>
+    
 </struts>
