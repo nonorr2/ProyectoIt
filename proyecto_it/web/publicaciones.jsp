@@ -5,98 +5,25 @@
     <div class="banner-gen">
         <h1 class="text-banner">PUBLICACIONES</h1>
     </div>
-    <div class="container-fluid text-center">
-        <div class="row">
-            <div class="contenedor-publi sombreado" onclick="document.getElementById('id01').style.display = 'block'">
-                <div class="publi-no-imagen">
-                    <div class="letras-imagen">
-                        <p class="iniciales-no-imagen">NR</p>
-                    </div>
-                </div>
-                <div class="datos-publicacion">
-                    <h1>Titulo de la publicacion</h1>
-                    <p>Fecha y hora</p>
-                    <p>Numero de votos</p>
-                    <p>Numero de comentarios</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="contenedor-publi sombreado" onclick="document.getElementById('id01').style.display = 'block'">
-                <div class="publi-no-imagen">
-                    <div class="letras-imagen">
-                        <p class="iniciales-no-imagen">NR</p>
-                    </div>
-                </div>
-                <div class="datos-publicacion">
-                    <h1>Titulo de la publicacion</h1>
-                    <p>Fecha y hora</p>
-                    <p>Numero de votos</p>
-                    <p>Numero de comentarios</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="contenedor-publi sombreado" onclick="document.getElementById('id01').style.display = 'block'">
-                <div class="publi-no-imagen">
-                    <div class="letras-imagen">
-                        <p class="iniciales-no-imagen">NR</p>
-                    </div>
-                </div>
-                <div class="datos-publicacion">
-                    <h1>Titulo de la publicacion</h1>
-                    <p>Fecha y hora</p>
-                    <p>Numero de votos</p>
-                    <p>Numero de comentarios</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="contenedor-publi sombreado" onclick="document.getElementById('id01').style.display = 'block'">
-                <div class="publi-no-imagen">
-                    <div class="letras-imagen">
-                        <p class="iniciales-no-imagen">NR</p>
-                    </div>
-                </div>
-                <div class="datos-publicacion">
-                    <h1>Titulo de la publicacion</h1>
-                    <p>Fecha y hora</p>
-                    <p>Numero de votos</p>
-                    <p>Numero de comentarios</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="contenedor-publi sombreado" onclick="document.getElementById('id01').style.display = 'block'">
-                <div class="publi-no-imagen">
-                    <div class="letras-imagen">
-                        <p class="iniciales-no-imagen">NR</p>
-                    </div>
-                </div>
-                <div class="datos-publicacion">
-                    <h1>Titulo de la publicacion</h1>
-                    <p>Fecha y hora</p>
-                    <p>Numero de votos</p>
-                    <p>Numero de comentarios</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="contenedor-publi sombreado" onclick="document.getElementById('id01').style.display = 'block'">
-                <div class="publi-no-imagen">
-                    <div class="letras-imagen">
-                        <p class="iniciales-no-imagen">NR</p>
-                    </div>
-                </div>
-                <div class="datos-publicacion">
-                    <h1>Titulo de la publicacion</h1>
-                    <p>Fecha y hora</p>
-                    <p>Numero de votos</p>
-                    <p>Numero de comentarios</p>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
+    <s:div cssClass="container-fluid text-center">
+        <s:iterator var="publicacion" value="publicaciones">
+            <s:div cssClass="row">
+                <s:div cssClass="contenedor-publi sombreado" onclick="document.getElementById('id01').style.display = 'block'">
+                    <s:div cssClass="publi-no-imagen">
+                        <s:div cssClass="letras-imagen">
+                            <p class="iniciales-no-imagen">NR</p>
+                        </s:div>
+                    </s:div>
+                    <s:div cssClass="datos-publicacion">
+                        <h1><s:property value="titulo" /></h1>
+                        <!--                    LA FECHA NO SALE-->
+                        <p><s:property value="fechaHoraModificacion" /></p>
+                        <!--COMO HAGO LO DE LOS VOTOS Y LOS COMENTARIOS-->
+                        <p>Numero de votos</p>
+                        <p>Numero de comentarios</p>
+                    </s:div>
+                </s:div>
+            </s:div>
+        </s:iterator>
+    </s:div>
     <%@include file="footer.jsp" %>

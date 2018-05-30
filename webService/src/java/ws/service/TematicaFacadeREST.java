@@ -105,5 +105,13 @@ public class TematicaFacadeREST extends AbstractFacade<Tematica> {
         List<Tematica> result = query.getResultList();
         return result;
     }
-
+    
+    @GET
+    @Path("getTematicasMasPopulares")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Tematica> getTematicasMasPopulares() {
+        Query query = em.createQuery("SELECT t FROM Publicacion p, Tematica t WHERE p.idTematica=t").setMaxResults(8);
+        List<Tematica> result = query.getResultList();
+        return result;
+    }
 }
