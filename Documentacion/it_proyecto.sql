@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-05-2018 a las 17:55:50
--- Versión del servidor: 10.1.26-MariaDB
--- Versión de PHP: 7.1.9
+-- Tiempo de generación: 30-05-2018 a las 16:52:43
+-- Versión del servidor: 10.1.30-MariaDB
+-- Versión de PHP: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -119,10 +119,10 @@ CREATE TABLE `publicacion` (
 --
 
 INSERT INTO `publicacion` (`id`, `titulo`, `contenido`, `fecha_hora_creacion`, `fecha_hora_modificacion`, `ruta`, `id_usuario`, `id_tematica`, `foto`) VALUES
-(1, 'Fútbol', 'Descripción fútbol', '2018-05-02 11:00:00', '0000-00-00 00:00:00', 'https://as.com/', 2, 3, ''),
-(2, 'Perros', 'Descripción perros', '2018-05-01 13:00:00', '0000-00-00 00:00:00', 'https://es.wikipedia.org/wiki/Canis_lupus_familiaris', 4, 1, ''),
-(3, 'Viajar a Alemania', 'Descripción del viaje', '2018-05-03 15:00:00', '0000-00-00 00:00:00', 'https://www.touristforum.net/es/baviera-alemania-viajes-en-coche-de-alquiler?gclid=EAIaIQobChMIj4rNp7rn2gIV8jLTCh1PjgtDEAAYASAAEgIoG_D_BwE', 3, 4, ''),
-(4, 'Informática', 'Descripción', '2018-04-04 17:00:00', '0000-00-00 00:00:00', 'https://es.wikipedia.org/wiki/Inform%C3%A1tica', 2, 2, '');
+(1, 'Fútbol', 'Descripción fútbol', '2018-05-02 11:00:00', '2018-05-02 11:00:00', 'https://as.com/', 2, 3, 'images/prueba1.jpg'),
+(2, 'Perros', 'Descripción perros', '2018-05-01 13:00:00', '2018-05-01 13:00:00', 'https://es.wikipedia.org/wiki/Canis_lupus_familiaris', 4, 2, 'images/prueba2.jpg'),
+(3, 'Viajar a Alemania', 'Descripción del viaje', '2018-05-03 15:00:00', '2018-05-01 13:00:00', 'https://www.touristforum.net/es/baviera-alemania-viajes-en-coche-de-alquiler?gclid=EAIaIQobChMIj4rNp7rn2gIV8jLTCh1PjgtDEAAYASAAEgIoG_D_BwE', 3, 4, 'images/prueba3.jpg'),
+(4, 'Informática', 'Descripción', '2018-04-04 17:00:00', '2018-04-04 17:00:00', 'https://es.wikipedia.org/wiki/Inform%C3%A1tica', 2, 2, 'images/prueba4.jpg');
 
 -- --------------------------------------------------------
 
@@ -194,7 +194,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `nickname`, `password`, `email`, `tipo`, `fecha_nacimiento`, `foto`) VALUES
-(1, 'Admin', 'Admin', 'admin', '1234', 'admin@admin.com', 1, '2018-05-15', ''),
+(1, 'Admin', 'Admin', 'admin', '$2a$12$nV1irJdczUDtCgYKYePUYOEla0F6y4mFcoQltPqBNhZ3A7fRD.c8S', 'admin@admin.com', 1, '2018-05-15', ''),
 (2, 'Nono', 'Rodriguez', 'nono', '1234', 'nono@nono.com', 0, '2018-05-23', ''),
 (3, 'David', 'Ruiz', 'david', '1234', 'david@david.com', 0, '2018-05-10', ''),
 (4, 'Lydia', 'Reina', 'lydia', '1234', 'lydia@lydia.com', 0, '2018-05-31', ''),
