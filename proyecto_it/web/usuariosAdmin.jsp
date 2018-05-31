@@ -9,9 +9,6 @@
     <s:div cssClass="container-fluid text-center">
         <s:textfield  cssClass="textFileFiltrar"/>
         <s:submit name="btoLogin" cssClass="btn btn-primary filtro" value="Filtrar"/>
-        <s:div cssClass="contenedor-icono-add">
-            <img src="images/iconos/add.png" class="icono"/>
-        </s:div>
     </s:div>
     <s:iterator var="usuario" value="usuarios">
         <s:div cssClass="container-fluid text-center">
@@ -25,8 +22,15 @@
                         <p><s:property value="email"/></p>
                     </s:div>
                     <s:div cssClass="contenedor-iconos">
-                        <img src="images/iconos/papelera.png" class="icono"/>
-                        <img src="images/iconos/editar.png" class="icono"/>
+                        
+                        <s:form action="removeUser" method="post">
+                            <s:hidden name="idUsuarioRemove" value="%{id}" /> 
+                            <s:submit type="image" src="images/iconos/papelera.png" name="removeUser" cssClass="icono"/>
+                        </s:form>
+                        <s:form action="editUser" method="post">
+                            <s:hidden name="idUsuarioEdit" value="%{id}" /> 
+                            <s:submit type="image" src="images/iconos/editar.png" name="editUser" cssClass="icono"/>
+                        </s:form>
                     </s:div>
                 </s:div>
             </s:div>
