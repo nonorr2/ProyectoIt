@@ -9,6 +9,10 @@
 <s:div cssClass="container-fluid text-center">
     <s:textfield  cssClass="textFileFiltrar"/>
     <s:submit name="btoLogin" cssClass="btn btn-primary filtro" value="Filtrar"/>
+    
+    <s:form action="" method="post">
+        <s:submit type="image" src="images/iconos/add.png" name="anadirPublicacion" cssClass="icono"/>
+    </s:form>
 </s:div>
 <s:iterator value="misPublicaciones" var="publicacion">
     <s:div cssClass="container-fluid text-center">
@@ -21,7 +25,7 @@
                 </s:div>
                 <s:div cssClass="datos-publicacion">
                     <h1><s:property value="titulo" /></h1>
-                    <p>Autor<s:property value="titulo" /></p>
+                    <p><s:property value="idUsuario.getNombre()" /></p>
                     <p><s:property value="fechaHoraModificacion" /></p>
                     <p>Numero de votos</p>
                     <p>Numero de comentarios</p>
