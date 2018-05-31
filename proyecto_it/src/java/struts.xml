@@ -30,6 +30,12 @@
         </action>
     </package>
     
+    <package name="top_menu_logueado" extends="struts-default">
+        <action name="chats" class="acciones.menu_top_logueado" method="chats">
+            <result name="success">chats.jsp</result>
+        </action>
+    </package>
+    
     <package name="misPublicaciones" extends="struts-default">
         <action name="misPublicaciones" class="acciones.MisPublicacionesAccion">
             <result name="success">misPublicaciones.jsp</result>
