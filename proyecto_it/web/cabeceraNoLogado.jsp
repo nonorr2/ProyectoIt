@@ -33,7 +33,7 @@
                 <s:form action="registro" method="post">
                     <a><s:submit value="REGISTRARSE"  cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"/></a>
                 </s:form>
-                <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" onclick="document.getElementById('id01').style.display = 'block'"> Login</a>
+                <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" onclick="document.getElementById('id01').style.display = 'block'">LOGIN</a>
             </div>
 
             <!-- Navbar on small screens -->

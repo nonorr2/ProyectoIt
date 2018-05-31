@@ -126,6 +126,19 @@ public class Usuario implements Serializable {
         this.foto = foto;
     }
 
+    public Usuario(int id, String nombre, String apellidos, String nickname, String password, Date fechaNacimiento, String foto, String email) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.nickname = nickname;
+        this.password = password;
+        this.email = email;
+        this.fechaNacimiento = fechaNacimiento;
+        this.foto = foto;
+    }
+    
+    
+
     public Integer getId() {
         return id;
     }

@@ -8,6 +8,8 @@ package acciones;
 import WS.Publicacion;
 import WS.PublicacionWS;
 import WS.Usuario;
+import WS.VotoPublicacion;
+import WS.VotoPublicacionWS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
@@ -25,6 +27,11 @@ public class MisPublicacionesAccion extends ActionSupport {
     private List<Publicacion> misPublicaciones;      
     private String idPublicacion;
     
+//    private VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
+//    private Integer votosPositivos;
+    
+    
+    
     public MisPublicacionesAccion() {
     }
     
@@ -34,10 +41,15 @@ public class MisPublicacionesAccion extends ActionSupport {
      * @throws Exception 
      */
     public String execute() throws Exception {      
-        Map session = (Map) ActionContext.getContext().get("session");
-        Usuario usuario = (Usuario) session.get("user");
+        loginLogout.session = (Map) ActionContext.getContext().get("session");
+        Usuario usuario = (Usuario) loginLogout.session.get("user");
         GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {};
         this.misPublicaciones = (List<Publicacion>) this.publicacionCliente.getMisPublicaciones_XML(tipoPublicacion, String.valueOf(usuario.getId()));
+        
+//        GenericType<Integer> tipoVotoPublicacion = new GenericType<Integer>() {};
+//        this.votosPositivos = this.votoPublicacionCliente.getVotosPositivos(tipoVotoPublicacion, idPublicacion);
+        
+        
         return SUCCESS;
     }
     
@@ -49,8 +61,8 @@ public class MisPublicacionesAccion extends ActionSupport {
     public String borrarPublicacion() throws Exception{
         this.publicacionCliente.remove(idPublicacion);
         
-        Map session = (Map) ActionContext.getContext().get("session");
-        Usuario usuario = (Usuario) session.get("user");
+        loginLogout.session = (Map) ActionContext.getContext().get("session");
+        Usuario usuario = (Usuario) loginLogout.session.get("user");
         GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {};
         this.misPublicaciones = (List<Publicacion>) this.publicacionCliente.getMisPublicaciones_XML(tipoPublicacion, String.valueOf(usuario.getId()));
         return SUCCESS;
@@ -71,6 +83,32 @@ public class MisPublicacionesAccion extends ActionSupport {
     public void setMisPublicaciones(List<Publicacion> misPublicaciones) {
         this.misPublicaciones = misPublicaciones;
     }
+
+    public String getIdPublicacion() {
+        return idPublicacion;
+    }
+
+    public void setIdPublicacion(String idPublicacion) {
+        this.idPublicacion = idPublicacion;
+    }
+
+//    public VotoPublicacionWS getVotoPublicacionCliente() {
+//        return votoPublicacionCliente;
+//    }
+//
+//    public void setVotoPublicacionCliente(VotoPublicacionWS votoPublicacionCliente) {
+//        this.votoPublicacionCliente = votoPublicacionCliente;
+//    }
+//
+//    public Integer getVotosPositivos() {
+//        return votosPositivos;
+//    }
+//
+//    public void setVotosPositivos(Integer votosPositivos) {
+//        this.votosPositivos = votosPositivos;
+//    }
+    
+    
     
     
     
