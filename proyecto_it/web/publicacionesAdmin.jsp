@@ -18,8 +18,8 @@
                     </div>
                     <s:div cssClass="datos-publicacion">
                         <h1><s:property value="titulo" /></h1>
-                        <p>Autor</p>
-                        <p>Fecha y hora</p>
+                        <p><s:property value="idUsuario.nickname"/></p>
+                        <p><s:property value="fechaHoraModificacion"/></p>
                         <p>Numero de votos</p>
                         <p>Numero de comentarios</p>
                     </s:div>

@@ -1,17 +1,35 @@
-<%-- 
-    Document   : usuariosAdmin
-    Created on : 30-may-2018, 16:51:27
-    Author     : David
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@taglib prefix="s" uri="/struts-tags" %>
+<%@include file="cabeceraAdmin.jsp" %>
+<body id="myPage">
+
+    <s:div cssClass="banner-gen">
+        <h1 class="text-banner">USUARIOS</h1>
+    </s:div>
+    <s:div cssClass="container-fluid text-center">
+        <s:textfield  cssClass="textFileFiltrar"/>
+        <s:submit name="btoLogin" cssClass="btn btn-primary filtro" value="Filtrar"/>
+        <s:div cssClass="contenedor-icono-add">
+            <img src="images/iconos/add.png" class="icono"/>
+        </s:div>
+    </s:div>
+    <s:iterator var="usuario" value="usuarios">
+        <s:div cssClass="container-fluid text-center">
+            <s:div cssClass="row">
+                <s:div cssClass="contenedor-publi sombreado">
+                    <div class="publi-no-imagen" style=" background-image: url('<s:property value="foto" />')">
+                    </div>
+                    <s:div cssClass="datos-publicacion">
+                        <h1><s:property value="nombre"/> <s:property value="apellidos"/></h1>
+                        <p><s:property value="nickname"/></p>
+                        <p><s:property value="email"/></p>
+                    </s:div>
+                    <s:div cssClass="contenedor-iconos">
+                        <img src="images/iconos/papelera.png" class="icono"/>
+                        <img src="images/iconos/editar.png" class="icono"/>
+                    </s:div>
+                </s:div>
+            </s:div>
+        </s:div>
+    </s:iterator>
+    <%@include file="footer.jsp" %>

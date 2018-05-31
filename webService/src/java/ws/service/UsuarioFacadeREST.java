@@ -132,5 +132,20 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         Usuario result = (Usuario) query.getSingleResult();
         return result;
     }
+    
+    /**
+     * Metodo que devuelve una lista de usuarios de tipo 0 (todos menos los administradores)
+     * @return Lista de usuarios
+     * @throws Exception 
+     */
+
+    @GET
+    @Path("/getUsuarioTipo")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Usuario> getUsuarioTipo() throws Exception {
+        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.tipo = 0");
+        List<Usuario> result = (List<Usuario>) query.getResultList();
+        return result;
+    }
 
 }

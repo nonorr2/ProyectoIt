@@ -6,7 +6,9 @@
 package acciones;
 
 import WS.Publicacion;
+import WS.PublicacionWS;
 import WS.Tematica;
+import WS.TematicaWS;
 import WS.Usuario;
 import WS.UsuarioWS;
 import com.opensymphony.xwork2.ActionSupport;
@@ -18,24 +20,65 @@ import javax.ws.rs.core.GenericType;
  * @author David
  */
 public class menu_top_admin extends ActionSupport {
-      
+
     private List<Usuario> usuarios;
     private List<Tematica> tematicas;
     private List<Publicacion> publicaciones;
-    
+
     public menu_top_admin() {
     }
-    
+
     public String execute() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
     public String usuarios() throws Exception {
-        GenericType<List<Usuario>> tipoUsuarios = new GenericType<List<Usuario>>(){
+        GenericType<List<Usuario>> tipoUsuarios = new GenericType<List<Usuario>>() {
         };
         UsuarioWS usuarioClient = new UsuarioWS();
-        usuarios = usuarioClient.findAll_JSON(tipoUsuarios);
+        usuarios = usuarioClient.getUsuarioTipo_JSON(tipoUsuarios);
         return SUCCESS;
+    }
+
+    public String publicacionesAdmin() throws Exception {
+        GenericType<List<Publicacion>> tipoPublicacionAdmin = new GenericType<List<Publicacion>>() {
+        };
+
+        PublicacionWS publicacionClient = new PublicacionWS();
+        publicaciones = publicacionClient.findAll_JSON(tipoPublicacionAdmin);
+        return SUCCESS;
+    }
+
+    public String tematicasAdmin() throws Exception {
+        GenericType<List<Tematica>> tipoTematicaaAdmin = new GenericType<List<Tematica>>() {
+        };
+        TematicaWS tematicaClient = new TematicaWS();
+        tematicas = tematicaClient.findAll_JSON(tipoTematicaaAdmin);
+        return SUCCESS;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public List<Tematica> getTematicas() {
+        return tematicas;
+    }
+
+    public void setTematicas(List<Tematica> tematicas) {
+        this.tematicas = tematicas;
+    }
+
+    public List<Publicacion> getPublicaciones() {
+        return publicaciones;
+    }
+
+    public void setPublicaciones(List<Publicacion> publicaciones) {
+        this.publicaciones = publicaciones;
     }
     
     

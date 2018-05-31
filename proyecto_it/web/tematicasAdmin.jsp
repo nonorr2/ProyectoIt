@@ -13,17 +13,14 @@
             <img src="images/iconos/add.png" class="icono"/>
         </s:div>
     </s:div>
-    <s:iterator>
+        <s:iterator var="tematica" value="tematicas">
         <s:div cssClass="container-fluid text-center">
             <s:div cssClass="row">
                 <s:div cssClass="contenedor-publi sombreado">
-                    <s:div cssClass="publi-no-imagen">
-                        <s:div cssClass="letras-imagen">
-                            <p class="iniciales-no-imagen">TEM</p>
-                        </s:div>
-                    </s:div>
+                    <div class="publi-no-imagen" style=" background-image: url('<s:property value="imagen" />')">
+                    </div>
                     <s:div cssClass="datos-publicacion">
-                        <h1><s:property value=""/></h1>
+                        <h1><s:property value="nombre"/></h1>
                         <p>Numero de publicaciones asociada</p>
                     </s:div>
                     <s:div cssClass="contenedor-iconos">

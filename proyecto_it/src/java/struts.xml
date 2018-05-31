@@ -46,4 +46,15 @@
         </action>
     </package>
     
+    <package name="top_menu_admin" extends="struts-default">
+        <action name="usuarios" class="acciones.menu_top_admin" method="usuarios">
+            <result name="success">usuariosAdmin.jsp</result>
+        </action>
+        <action name="tematicasAdministrador" class="acciones.menu_top_admin" method="tematicasAdmin">
+            <result name="success">tematicasAdmin.jsp</result>
+        </action>
+        <action name="publicacionesAdministrador" class="acciones.menu_top_admin" method="publicacionesAdmin">
+            <result name="success">publicacionesAdmin.jsp</result>
+        </action>
+    </package>
 </struts>
