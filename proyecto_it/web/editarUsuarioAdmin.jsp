@@ -11,6 +11,9 @@
     <s:div cssClass="col-sm-2"></s:div>
     <s:div cssClass="col-sm-8 text-left" >
         <s:form method="post" action="editUserPersistencia"> 
+            <s:div cssClass="imgcontainer">
+                <img class="avatar" src="<s:url value="%{usuario.foto}"/>"/>
+            </s:div>
             <s:div cssClass="form-group col-sm-6">
                 <s:label><b>Nombre:</b></s:label>
                 <s:textfield name="nombre" placeholder="Introduzaca el nombre" cssClass="form-control" id="nombre" value="%{usuario.nombre}"/>
@@ -43,3 +46,4 @@
     </s:div>
     <s:div cssClass="col-sm-2"></s:div>
 </s:div>
+<%@include file="footer.jsp" %>              
