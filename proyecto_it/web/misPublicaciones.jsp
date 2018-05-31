@@ -2,7 +2,7 @@
 <%@taglib prefix="s" uri="/struts-tags" %>
 <s:set name="theme" value="'simple'" scope="page" />
 <%@include file="cabeceraLogado.jsp" %>
-<%@include file="login.jsp" %>
+<%@include file="addPublicacion.jsp" %>
 
 <s:div cssClass="banner-gen">
     <h1 class="text-banner">MIS PUBLICACIONES</h1>
@@ -19,7 +19,7 @@
         <%--</s:form>--%>
     <%--</s:div>--%>
 
-    <s:div cssClass="contenedor-icono-add" onclick="document.getElementById('id01').style.display = 'block'">
+    <s:div cssClass="contenedor-icono-add" onclick="document.getElementById('id02').style.display = 'block'">
         <img src="images/iconos/add.png" class="icono"/>
     </s:div>
 </s:div>
