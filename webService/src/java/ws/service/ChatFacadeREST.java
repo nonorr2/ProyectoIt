@@ -5,8 +5,15 @@
  */
 package ws.service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -91,7 +98,7 @@ public class ChatFacadeREST extends AbstractFacade<Chat> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
     /**
      * Devuelve los chats de los que es participante el usuario con id pasado
      * como parámetro
@@ -112,7 +119,7 @@ public class ChatFacadeREST extends AbstractFacade<Chat> {
         for (UsuarioChat uc : usuario_chat) {
             chats.add(uc.getChat());
         }
-        
+
         return chats;
     }
 
@@ -128,5 +135,23 @@ public class ChatFacadeREST extends AbstractFacade<Chat> {
         Usuario usu = (Usuario) qUsuario.getSingleResult();
         return usu;
     }
-    
+
+    @GET
+    @Path("/getChatByNameAndTime/{name}/{time}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Chat getChatByNameAndTime(@PathParam("name") String name, @PathParam("time") String time) {
+        Date date = null;
+        try {
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
+            date = format.parse(time);
+        } catch (ParseException ex) {
+
+        }
+        Query query = em.createQuery("SELECT c FROM Chat c WHERE c.nombre = :name AND c.fechaHora= :time");
+        query.setParameter("name", name);
+        query.setParameter("time", date);
+        Chat chat = (Chat) query.getSingleResult();
+        return chat;
+    }
+
 }

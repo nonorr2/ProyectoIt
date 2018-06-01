@@ -36,6 +36,19 @@
         </action>
     </package>
     
+    <package name="chatsLogueado" extends="struts-default">
+        <action name="chatsLogueado" class="acciones.ChatAction" method="crearChat">
+            <result name="success" type="chain">
+                <param name="actionName">chats</param>
+            </result>
+        </action>
+        <action name="borrarChat" class="acciones.ChatAction" method="borrarChat">
+            <result name="success" type="chain">
+                <param name="actionName">chats</param>
+            </result>
+        </action>
+    </package>
+    
     <package name="misPublicaciones" extends="struts-default">
         <action name="misPublicaciones" class="acciones.MisPublicacionesAccion">
             <result name="success">misPublicaciones.jsp</result>
