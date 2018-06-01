@@ -80,15 +80,7 @@ public class UsuarioChatFacadeREST extends AbstractFacade<UsuarioChat> {
         ws.UsuarioChatPK key = getPrimaryKey(id);
         super.remove(super.find(key));
     }
-    
-    @DELETE
-    @Path("/removeByChat/{id}")
-    public void removeByChat(@PathParam("id") PathSegment id) {
-        Query q = em.createQuery("DELETE FROM UsuarioChat uc WHERE uc.chat.id = :id_chat");
-        q.setParameter("id_chat", id);
-        q.executeUpdate();
-    }
-    
+
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})

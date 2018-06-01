@@ -31,10 +31,10 @@
     <s:div cssClass="row">
         <s:iterator var="chat" value="chats">
             <s:div cssClass="col-sm-4 sombreado">
-                <s:form method="post" action="">
+                <s:form method="post" action="borrarChat">
                     <h4><s:property value="nombre" /></h4>
                     <p><s:property value="fechaHora" /></p>
-                    <s:hidden name="idChat" value="id" />
+                    <s:hidden name="idChat" value="%{id}" />
                     <s:submit type="image" src="images/iconos/papelera.png" name="borrarChat" cssClass="icono"/>
                 </s:form>
             </s:div>
