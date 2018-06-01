@@ -7,9 +7,12 @@ package acciones;
 
 import WS.Publicacion;
 import WS.PublicacionWS;
+import WS.Tematica;
+import WS.TematicaWS;
 import WS.Usuario;
 import WS.VotoPublicacion;
 import WS.VotoPublicacionWS;
+import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
@@ -24,7 +27,8 @@ import javax.ws.rs.core.GenericType;
 public class MisPublicacionesAccion extends ActionSupport {
     
     private PublicacionWS publicacionCliente = new PublicacionWS();
-    private List<Publicacion> misPublicaciones;      
+    private List<Publicacion> misPublicaciones;
+    private List<Tematica> tematicas;
     private String idPublicacion;
     
 //    private VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
@@ -43,13 +47,13 @@ public class MisPublicacionesAccion extends ActionSupport {
     public String execute() throws Exception {      
         loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario) loginLogout.session.get("user");
+        
         GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {};
         this.misPublicaciones = (List<Publicacion>) this.publicacionCliente.getMisPublicaciones_XML(tipoPublicacion, String.valueOf(usuario.getId()));
         
-//        GenericType<Integer> tipoVotoPublicacion = new GenericType<Integer>() {};
-//        this.votosPositivos = this.votoPublicacionCliente.getVotosPositivos(tipoVotoPublicacion, idPublicacion);
-        
-        
+        GenericType<List<Tematica>> tipoTematica = new GenericType<List<Tematica>>() {};
+        TematicaWS tematicaClient = new TematicaWS();
+        tematicas = (List<Tematica>) tematicaClient.getTematicasMasPopulares_JSON(tipoTematica);
         return SUCCESS;
     }
     
@@ -92,21 +96,13 @@ public class MisPublicacionesAccion extends ActionSupport {
         this.idPublicacion = idPublicacion;
     }
 
-//    public VotoPublicacionWS getVotoPublicacionCliente() {
-//        return votoPublicacionCliente;
-//    }
-//
-//    public void setVotoPublicacionCliente(VotoPublicacionWS votoPublicacionCliente) {
-//        this.votoPublicacionCliente = votoPublicacionCliente;
-//    }
-//
-//    public Integer getVotosPositivos() {
-//        return votosPositivos;
-//    }
-//
-//    public void setVotosPositivos(Integer votosPositivos) {
-//        this.votosPositivos = votosPositivos;
-//    }
+    public List<Tematica> getTematicas() {
+        return tematicas;
+    }
+
+    public void setTematicas(List<Tematica> tematicas) {
+        this.tematicas = tematicas;
+    }
     
     
     

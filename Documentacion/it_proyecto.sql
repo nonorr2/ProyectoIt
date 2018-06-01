@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-05-2018 a las 16:52:43
--- Versión del servidor: 10.1.30-MariaDB
--- Versión de PHP: 7.2.1
+-- Tiempo de generación: 31-05-2018 a las 17:19:19
+-- Versión del servidor: 10.1.21-MariaDB
+-- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -30,7 +28,6 @@ USE `it_proyecto`;
 -- Estructura de tabla para la tabla `chat`
 --
 
-DROP TABLE IF EXISTS `chat`;
 CREATE TABLE `chat` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) CHARACTER SET latin1 NOT NULL,
@@ -51,7 +48,6 @@ INSERT INTO `chat` (`id`, `nombre`, `fecha_hora`) VALUES
 -- Estructura de tabla para la tabla `comentario`
 --
 
-DROP TABLE IF EXISTS `comentario`;
 CREATE TABLE `comentario` (
   `id` int(11) NOT NULL,
   `fecha_hora_modificacion` datetime NOT NULL,
@@ -77,7 +73,6 @@ INSERT INTO `comentario` (`id`, `fecha_hora_modificacion`, `contenido`, `id_usua
 -- Estructura de tabla para la tabla `mensaje`
 --
 
-DROP TABLE IF EXISTS `mensaje`;
 CREATE TABLE `mensaje` (
   `id` int(11) NOT NULL,
   `contenido` varchar(5000) CHARACTER SET latin1 NOT NULL,
@@ -101,7 +96,6 @@ INSERT INTO `mensaje` (`id`, `contenido`, `fecha_hora`, `id_usuario`, `id_chat`,
 -- Estructura de tabla para la tabla `publicacion`
 --
 
-DROP TABLE IF EXISTS `publicacion`;
 CREATE TABLE `publicacion` (
   `id` int(11) NOT NULL,
   `titulo` varchar(500) CHARACTER SET latin1 NOT NULL,
@@ -111,7 +105,7 @@ CREATE TABLE `publicacion` (
   `ruta` varchar(500) CHARACTER SET latin1 NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `id_tematica` int(11) NOT NULL,
-  `foto` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+  `foto` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -119,10 +113,9 @@ CREATE TABLE `publicacion` (
 --
 
 INSERT INTO `publicacion` (`id`, `titulo`, `contenido`, `fecha_hora_creacion`, `fecha_hora_modificacion`, `ruta`, `id_usuario`, `id_tematica`, `foto`) VALUES
-(1, 'Fútbol', 'Descripción fútbol', '2018-05-02 11:00:00', '2018-05-02 11:00:00', 'https://as.com/', 2, 3, 'images/prueba1.jpg'),
-(2, 'Perros', 'Descripción perros', '2018-05-01 13:00:00', '2018-05-01 13:00:00', 'https://es.wikipedia.org/wiki/Canis_lupus_familiaris', 4, 2, 'images/prueba2.jpg'),
-(3, 'Viajar a Alemania', 'Descripción del viaje', '2018-05-03 15:00:00', '2018-05-01 13:00:00', 'https://www.touristforum.net/es/baviera-alemania-viajes-en-coche-de-alquiler?gclid=EAIaIQobChMIj4rNp7rn2gIV8jLTCh1PjgtDEAAYASAAEgIoG_D_BwE', 3, 4, 'images/prueba3.jpg'),
-(4, 'Informática', 'Descripción', '2018-04-04 17:00:00', '2018-04-04 17:00:00', 'https://es.wikipedia.org/wiki/Inform%C3%A1tica', 2, 2, 'images/prueba4.jpg');
+(1, 'Fútbol', 'Descripción fútbol', '2018-05-02 11:00:00', '2018-05-02 11:00:00', 'https://as.com/', 2, 3, 'svfbvdfxv'),
+(3, 'Viajar a Alemania', 'Descripción del viaje', '2018-05-03 15:00:00', '2018-05-02 11:00:00', 'https://www.touristforum.net/es/baviera-alemania-viajes-en-coche-de-alquiler?gclid=EAIaIQobChMIj4rNp7rn2gIV8jLTCh1PjgtDEAAYASAAEgIoG_D_BwE', 3, 4, 'srfersf'),
+(4, 'Informática', 'Descripción', '2018-04-04 17:00:00', '2018-05-02 11:00:00', 'https://es.wikipedia.org/wiki/Inform%C3%A1tica', 2, 2, 'stdfbtbv');
 
 -- --------------------------------------------------------
 
@@ -130,7 +123,6 @@ INSERT INTO `publicacion` (`id`, `titulo`, `contenido`, `fecha_hora_creacion`, `
 -- Estructura de tabla para la tabla `suscripcion`
 --
 
-DROP TABLE IF EXISTS `suscripcion`;
 CREATE TABLE `suscripcion` (
   `fecha_hora` datetime NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -144,8 +136,7 @@ CREATE TABLE `suscripcion` (
 INSERT INTO `suscripcion` (`fecha_hora`, `id_usuario`, `id_publicacion`) VALUES
 ('2018-05-03 08:00:00', 2, 1),
 ('2018-05-01 00:00:00', 3, 4),
-('2018-05-02 20:00:00', 4, 1),
-('2018-05-04 17:00:00', 4, 2);
+('2018-05-02 20:00:00', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -153,7 +144,6 @@ INSERT INTO `suscripcion` (`fecha_hora`, `id_usuario`, `id_publicacion`) VALUES
 -- Estructura de tabla para la tabla `tematica`
 --
 
-DROP TABLE IF EXISTS `tematica`;
 CREATE TABLE `tematica` (
   `id` int(11) NOT NULL,
   `nombre` varchar(150) CHARACTER SET latin1 NOT NULL,
@@ -176,7 +166,6 @@ INSERT INTO `tematica` (`id`, `nombre`, `imagen`) VALUES
 -- Estructura de tabla para la tabla `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) CHARACTER SET latin1 NOT NULL,
@@ -195,10 +184,10 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `nickname`, `password`, `email`, `tipo`, `fecha_nacimiento`, `foto`) VALUES
 (1, 'Admin', 'Admin', 'admin', '$2a$12$nV1irJdczUDtCgYKYePUYOEla0F6y4mFcoQltPqBNhZ3A7fRD.c8S', 'admin@admin.com', 1, '2018-05-15', ''),
-(2, 'Nono', 'Rodriguez', 'nono', '1234', 'nono@nono.com', 0, '2018-05-23', ''),
-(3, 'David', 'Ruiz', 'david', '1234', 'david@david.com', 0, '2018-05-10', ''),
-(4, 'Lydia', 'Reina', 'lydia', '1234', 'lydia@lydia.com', 0, '2018-05-31', ''),
-(5, 'Alba', 'Carrasco', 'alba', '1234', 'alba@gmail.com', 0, '2000-05-15', '');
+(2, 'Nono', 'Rodriguez', 'nono', '$2a$12$nV1irJdczUDtCgYKYePUYOEla0F6y4mFcoQltPqBNhZ3A7fRD.c8S', 'nono@nono.com', 0, '2018-05-23', ''),
+(3, 'David', 'Ruiz', 'david', '$2a$12$nV1irJdczUDtCgYKYePUYOEla0F6y4mFcoQltPqBNhZ3A7fRD.c8S', 'david@david.com', 0, '2018-05-10', 'cfhncf'),
+(4, 'Lydia', 'Reina', 'lydia', '$2a$12$VV1xRg0Obd2Qs4KOxx3t3eLTXwl7yy8E2AeERcvylb9ZcBE7RwXUK', 'lydia@lydia.com', 0, '2018-05-31', ''),
+(5, 'Alba', 'Carrasco', 'alba', '$2a$12$nV1irJdczUDtCgYKYePUYOEla0F6y4mFcoQltPqBNhZ3A7fRD.c8S', 'alba@gmail.com', 0, '2000-05-15', '');
 
 -- --------------------------------------------------------
 
@@ -206,7 +195,6 @@ INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `nickname`, `password`, `ema
 -- Estructura de tabla para la tabla `usuario_chat`
 --
 
-DROP TABLE IF EXISTS `usuario_chat`;
 CREATE TABLE `usuario_chat` (
   `id_usuario` int(11) NOT NULL,
   `id_chat` int(11) NOT NULL,
@@ -229,7 +217,6 @@ INSERT INTO `usuario_chat` (`id_usuario`, `id_chat`, `fecha`) VALUES
 -- Estructura de tabla para la tabla `voto_comentario`
 --
 
-DROP TABLE IF EXISTS `voto_comentario`;
 CREATE TABLE `voto_comentario` (
   `tipo` tinyint(1) NOT NULL,
   `fecha_hora` datetime NOT NULL,
@@ -253,7 +240,6 @@ INSERT INTO `voto_comentario` (`tipo`, `fecha_hora`, `id_usuario`, `id_comentari
 -- Estructura de tabla para la tabla `voto_publicacion`
 --
 
-DROP TABLE IF EXISTS `voto_publicacion`;
 CREATE TABLE `voto_publicacion` (
   `tipo` tinyint(1) NOT NULL,
   `fecha_hora` datetime NOT NULL,
@@ -360,37 +346,31 @@ ALTER TABLE `voto_publicacion`
 --
 ALTER TABLE `chat`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `mensaje`
 --
 ALTER TABLE `mensaje`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `tematica`
 --
 ALTER TABLE `tematica`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- Restricciones para tablas volcadas
 --
@@ -399,51 +379,50 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id`),
-  ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `mensaje`
 --
 ALTER TABLE `mensaje`
-  ADD CONSTRAINT `mensaje_ibfk_1` FOREIGN KEY (`id_chat`) REFERENCES `chat` (`id`),
+  ADD CONSTRAINT `mensaje_ibfk_1` FOREIGN KEY (`id_chat`) REFERENCES `chat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `mensaje_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`);
 
 --
 -- Filtros para la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
-  ADD CONSTRAINT `publicacion_ibfk_1` FOREIGN KEY (`id_tematica`) REFERENCES `tematica` (`id`),
-  ADD CONSTRAINT `publicacion_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `publicacion_ibfk_1` FOREIGN KEY (`id_tematica`) REFERENCES `tematica` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `publicacion_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `suscripcion`
 --
 ALTER TABLE `suscripcion`
-  ADD CONSTRAINT `suscripcion_ibfk_1` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id`),
-  ADD CONSTRAINT `suscripcion_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `suscripcion_ibfk_1` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `suscripcion_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuario_chat`
 --
 ALTER TABLE `usuario_chat`
-  ADD CONSTRAINT `usuario_chat_ibfk_1` FOREIGN KEY (`id_chat`) REFERENCES `chat` (`id`),
-  ADD CONSTRAINT `usuario_chat_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `usuario_chat_ibfk_1` FOREIGN KEY (`id_chat`) REFERENCES `chat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usuario_chat_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `voto_comentario`
 --
 ALTER TABLE `voto_comentario`
-  ADD CONSTRAINT `voto_comentario_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`),
-  ADD CONSTRAINT `voto_comentario_ibfk_2` FOREIGN KEY (`id_comentario`) REFERENCES `comentario` (`id`);
+  ADD CONSTRAINT `voto_comentario_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `voto_comentario_ibfk_2` FOREIGN KEY (`id_comentario`) REFERENCES `comentario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `voto_publicacion`
 --
 ALTER TABLE `voto_publicacion`
-  ADD CONSTRAINT `voto_publicacion_ibfk_1` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id`),
-  ADD CONSTRAINT `voto_publicacion_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`);
-COMMIT;
+  ADD CONSTRAINT `voto_publicacion_ibfk_1` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `voto_publicacion_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -14,15 +14,15 @@
         <s:div cssClass="container-fluid text-center">
             <s:div cssClass="row">
                 <s:div cssClass="contenedor-publi sombreado">
-                    <div class="publi-no-imagen" style=" background-image: url('<s:property value="foto" />')">
-                    </div>
+                    <s:div cssClass="publi-no-imagen">
+                        <img src="<s:property value="foto"/>"/>
+                    </s:div>  
                     <s:div cssClass="datos-publicacion">
                         <h1><s:property value="nombre"/> <s:property value="apellidos"/></h1>
                         <p><s:property value="nickname"/></p>
                         <p><s:property value="email"/></p>
                     </s:div>
                     <s:div cssClass="contenedor-iconos">
-                        
                         <s:form action="removeUser" method="post">
                             <s:hidden name="idUsuarioRemove" value="%{id}" /> 
                             <s:submit type="image" src="images/iconos/papelera.png" name="removeUser" cssClass="icono"/>

@@ -14,8 +14,9 @@
         <s:div cssClass="container-fluid text-center">
             <s:div cssClass="row">
                 <s:div cssClass="contenedor-publi sombreado">
-                    <div class="publi-no-imagen" style=" background-image: url('<s:property value="foto" />')">
-                    </div>
+                    <s:div cssClass="publi-no-imagen">
+                        <img src="<s:property value="foto"/>"/>
+                    </s:div>
                     <s:div cssClass="datos-publicacion">
                         <h1><s:property value="titulo" /></h1>
                         <p><s:property value="idUsuario.nickname"/></p>
@@ -24,7 +25,10 @@
                         <p>Numero de comentarios</p>
                     </s:div>
                     <s:div cssClass="contenedor-iconos">
-                        <img src="images/iconos/papelera.png" class="icono"/>
+                        <s:form action="removePublicacion" method="post">
+                            <s:hidden name="idPublicacionRemove" value="%{id}" /> 
+                            <s:submit type="image" src="images/iconos/papelera.png" name="removePublicacion" cssClass="icono"/>
+                        </s:form>
                     </s:div>
                 </s:div>
             </s:div>
