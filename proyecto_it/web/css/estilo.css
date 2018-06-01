@@ -253,6 +253,10 @@ span.psw {
     overflow: hidden;
 }
 
+.fileImgUser{
+    float: right;
+    margin-top: 5%;
+}
 
 @media (max-width: 800px){
     .modal-content {
