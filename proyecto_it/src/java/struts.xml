@@ -30,20 +30,42 @@
         </action>
     </package>
     
+    <package name="gestionPublicacion" extends="struts-default">
+        <action name="removePublicacion" class="acciones.GestionPublicacion" method="removePublicacion">
+            <result name="success">publicacionesAdmin.jsp</result>
+        </action>
+        <action name="borrarMiPublicacion" class="acciones.GestionPublicacion" method="removePublicacion">
+            <result name="success">misPublicaciones.jsp</result>
+            <result name="success" type="chain">
+                <param name="actionName">misPublicaciones</param>
+            </result>
+        </action>
+        <action name="addPublicacion" class="acciones.GestionPublicacion" method="addPublicacion">
+            <result name="success">misPublicaciones.jsp</result>
+            <result name="success" type="chain">
+                <param name="actionName">misPublicaciones</param>
+            </result>
+        </action>
+        
+    </package>
+    
     <package name="top_menu_logueado" extends="struts-default">
         <action name="chats" class="acciones.menu_top_logueado" method="chats">
             <result name="success">chats.jsp</result>
         </action>
+        <action name="misPublicaciones" class="acciones.menu_top_logueado" method="misPubicaciones">
+            <result name="success">misPublicaciones.jsp</result>
+        </action> 
     </package>
     
-    <package name="misPublicaciones" extends="struts-default">
+    <!--    <package name="misPublicaciones" extends="struts-default">
         <action name="misPublicaciones" class="acciones.MisPublicacionesAccion">
             <result name="success">misPublicaciones.jsp</result>
         </action>    
         <action name="borrarMiPublicacion" class="acciones.MisPublicacionesAccion" method="borrarPublicacion">
             <result name="success">misPublicaciones.jsp</result>
         </action>   
-    </package>
+    </package>-->
     <package name="loginLogout" extends="struts-default">
         <action name="login" class="acciones.loginLogout" method="login">
             <result name="success">usuariosAdmin.jsp</result>
@@ -73,12 +95,6 @@
         </action>
         <action name="removeUser" class="acciones.GestionUsuario" method="removeUser">
             <result name="success">usuariosAdmin.jsp</result>
-        </action>
-    </package>
-    
-    <package name="gestionPublicacion" extends="struts-default">
-        <action name="removePublicacion" class="acciones.GestionPublicacion" method="removePublicacion">
-            <result name="success">publicacionesAdmin.jsp</result>
         </action>
     </package>
 </struts>

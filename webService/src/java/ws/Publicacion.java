@@ -78,8 +78,8 @@ public class Publicacion implements Serializable {
     @Column(name = "ruta")
     private String ruta;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    //@NotNull
+    //@Size(min = 1, max = 100)
     @Column(name = "foto")
     private String foto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "publicacion")

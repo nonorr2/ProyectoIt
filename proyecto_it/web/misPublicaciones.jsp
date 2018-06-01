@@ -42,7 +42,7 @@
                 </s:div>
                 <s:div cssClass="contenedor-iconos">
                     <s:form action="borrarMiPublicacion" method="post">
-                        <s:hidden name="idPublicacion" value="%{id}" /> 
+                        <s:hidden name="idPublicacionRemove" value="%{id}" /> 
                         <s:submit type="image" src="images/iconos/papelera.png" name="borrarPublicacion" cssClass="icono"/>
                     </s:form>
                 </s:div>
