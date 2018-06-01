@@ -74,6 +74,11 @@
         <action name="removeUser" class="acciones.GestionUsuario" method="removeUser">
             <result name="success">usuariosAdmin.jsp</result>
         </action>
-        
+    </package>
+    
+    <package name="gestionPublicacion" extends="struts-default">
+        <action name="removePublicacion" class="acciones.GestionPublicacion" method="removePublicacion">
+            <result name="success">publicacionesAdmin.jsp</result>
+        </action>
     </package>
 </struts>

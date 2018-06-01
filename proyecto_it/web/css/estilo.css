@@ -150,6 +150,10 @@ span.psw {
     width: 25%;
 }
 
+.contenedor-nweTematica{
+    width: 40%!important;
+}
+
 .close {
     position: absolute;
     right: 25px;
