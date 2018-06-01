@@ -123,6 +123,14 @@ img.avatar {
     margin: 5%;
 }
 
+.container-crearChat{
+    margin: 5%;
+}
+
+.titulo-popUp{
+    color: #F44336;
+}
+
 span.psw {
     float: right;
     padding-top: 16px;
@@ -149,6 +157,8 @@ span.psw {
     border: 1px solid #888;
     width: 25%;
 }
+
+
 
 .close {
     position: absolute;
@@ -238,7 +248,9 @@ span.psw {
 
 .contenedor-icono-add{
     margin-right: 4%;
+    overflow: hidden;
 }
+
 
 @media (max-width: 800px){
     .modal-content {

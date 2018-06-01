@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,6 +20,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.PathSegment;
+import ws.Usuario;
 import ws.UsuarioChat;
 import ws.UsuarioChatPK;
 
@@ -78,7 +80,15 @@ public class UsuarioChatFacadeREST extends AbstractFacade<UsuarioChat> {
         ws.UsuarioChatPK key = getPrimaryKey(id);
         super.remove(super.find(key));
     }
-
+    
+    @DELETE
+    @Path("/removeByChat/{id}")
+    public void removeByChat(@PathParam("id") PathSegment id) {
+        Query q = em.createQuery("DELETE FROM UsuarioChat uc WHERE uc.chat.id = :id_chat");
+        q.setParameter("id_chat", id);
+        q.executeUpdate();
+    }
+    
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
