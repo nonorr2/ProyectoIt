@@ -14,6 +14,7 @@ import WS.TematicaWS;
 import WS.Usuario;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
+import WS.UsuarioWS;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,8 @@ import javax.ws.rs.core.GenericType;
 public class menu_top_logueado extends ActionSupport {
 
     List<Chat> chats;
-    
+    List<Usuario> usuarios;
+
     private List<Publicacion> misPublicaciones;
     private List<Tematica> tematicas;
 
@@ -40,27 +42,36 @@ public class menu_top_logueado extends ActionSupport {
     public String chats() throws Exception {
         GenericType<List<Chat>> tipoChat = new GenericType<List<Chat>>() {
         };
+        GenericType<List<Usuario>> tipoUsuario = new GenericType<List<Usuario>>() {
+        };
         ChatWS chatClient = new ChatWS();
+        UsuarioWS usuarioClient = new UsuarioWS();
 
         Usuario usuario = (Usuario) loginLogout.session.get("user");
         chats = chatClient.getChatsUsuario_JSON(tipoChat, String.valueOf(usuario.getId()));
+        usuarios = usuarioClient.findAll_JSON(tipoUsuario);
+
         return SUCCESS;
     }
-    
+
     /**
-     * Método para lista todas las publiaciones que ha creado el usuario logueado.
-     * @return 
-     * @throws Exception 
+     * Método para lista todas las publiaciones que ha creado el usuario
+     * logueado.
+     *
+     * @return
+     * @throws Exception
      */
-    public String misPubicaciones() throws Exception {      
+    public String misPubicaciones() throws Exception {
         loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario) loginLogout.session.get("user");
-        
-        GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {};
+
+        GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
+        };
         PublicacionWS publicacionCliente = new PublicacionWS();
         this.misPublicaciones = (List<Publicacion>) publicacionCliente.getMisPublicaciones_XML(tipoPublicacion, String.valueOf(usuario.getId()));
-        
-        GenericType<List<Tematica>> tipoTematica = new GenericType<List<Tematica>>() {};
+
+        GenericType<List<Tematica>> tipoTematica = new GenericType<List<Tematica>>() {
+        };
         TematicaWS tematicaClient = new TematicaWS();
         tematicas = (List<Tematica>) tematicaClient.getTematicasMasPopulares_JSON(tipoTematica);
         return SUCCESS;
@@ -89,7 +100,13 @@ public class menu_top_logueado extends ActionSupport {
     public void setTematicas(List<Tematica> tematicas) {
         this.tematicas = tematicas;
     }
-    
-    
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
 
 }

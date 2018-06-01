@@ -2,6 +2,7 @@
 <%@taglib prefix="s" uri="/struts-tags" %>
 <%@include file="cabeceraAdmin.jsp" %>
 <%@include file="addTematica.jsp" %>
+<%@include file="editarTematica.jsp" %>
 
 <s:div cssClass="banner-gen">
     <h1 class="text-banner">TEMATICAS</h1>
@@ -33,7 +34,9 @@
                     </s:form>
                     <s:form action="editTematica" method="post">
                         <s:hidden name="idTematicaEdit" value="%{id}" /> 
-                        <s:submit type="image" src="images/iconos/editar.png" name="editTematica" cssClass="icono"/>
+                        <s:div cssClass="contenedor-icono-add" onclick="document.getElementById('id04').style.display = 'block'">
+                            <s:submit type="image" src="images/iconos/editar.png" name="editTematica" cssClass="icono"/>
+                        </s:div>
                     </s:form>
                 </s:div>
             </s:div>

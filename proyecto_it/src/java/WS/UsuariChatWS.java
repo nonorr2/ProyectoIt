@@ -11,10 +11,11 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 
 /**
- * Jersey REST client generated for REST resource:ChatFacadeREST [ws.chat]<br>
+ * Jersey REST client generated for REST resource:UsuarioChatFacadeREST
+ * [ws.usuariochat]<br>
  * USAGE:
  * <pre>
- *        ChatWS client = new ChatWS();
+ *        UsuariChatWS client = new UsuariChatWS();
  *        Object response = client.XXX(...);
  *        // do whatever with response
  *        client.close();
@@ -22,27 +23,15 @@ import javax.ws.rs.core.GenericType;
  *
  * @author Nono
  */
-public class ChatWS {
+public class UsuariChatWS {
 
     private WebTarget webTarget;
     private Client client;
     private static final String BASE_URI = "http://localhost:8080/webService/webresources";
 
-    public ChatWS() {
+    public UsuariChatWS() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
-        webTarget = client.target(BASE_URI).path("ws.chat");
-    }
-
-    public <T> T getChatsUsuario_XML(GenericType<T> responseType, String id_user) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getChatsUsuario/{0}", new Object[]{id_user}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
-    }
-
-    public <T> T getChatsUsuario_JSON(GenericType<T> responseType, String id_user) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getChatsUsuario/{0}", new Object[]{id_user}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+        webTarget = client.target(BASE_URI).path("ws.usuariochat");
     }
 
     public String countREST() throws ClientErrorException {
@@ -89,18 +78,6 @@ public class ChatWS {
 
     public void create_JSON(Object requestEntity) throws ClientErrorException {
         webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
-    }
-
-    public <T> T getChatByNameAndTime_XML(GenericType<T> responseType, String name, String time) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getChatByNameAndTime/{0}/{1}", new Object[]{name, time}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
-    }
-
-    public <T> T getChatByNameAndTime_JSON(GenericType<T> responseType, String name, String time) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getChatByNameAndTime/{0}/{1}", new Object[]{name, time}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
     public <T> T findAll_XML(GenericType<T> responseType) throws ClientErrorException {

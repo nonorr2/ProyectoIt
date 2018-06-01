@@ -58,6 +58,20 @@
         </action> 
     </package>
     
+    <package name="chatsLogueado" extends="struts-default">
+        <action name="chatsLogueado" class="acciones.ChatAction" method="crearChat">
+            <result name="success" type="chain">
+                <param name="actionName">chats</param>
+            </result>
+        </action>
+        <action name="borrarChat" class="acciones.ChatAction" method="borrarChat">
+            <result name="success" type="chain">
+                <param name="actionName">chats</param>
+            </result>
+        </action>
+    </package>
+    
+    <package name="misPublicaciones" extends="struts-default">
     <!--    <package name="misPublicaciones" extends="struts-default">
         <action name="misPublicaciones" class="acciones.MisPublicacionesAccion">
             <result name="success">misPublicaciones.jsp</result>
@@ -68,9 +82,27 @@
     </package>-->
     <package name="loginLogout" extends="struts-default">
         <action name="login" class="acciones.loginLogout" method="login">
-            <result name="success">usuariosAdmin.jsp</result>
+            <result name="success" type="chain">
+                <param name="actionName">usuarios</param>
+            </result>
             <result name="login">home.jsp</result>
             <result name="error">index.jsp</result>
+        </action>
+    </package>
+    
+    <package name="gestionUsuario" extends="struts-default">
+        <action name="editUser" class="acciones.GestionUsuario" method="editUser">
+            <result name="success">editarUsuarioAdmin.jsp</result>
+        </action>
+        <action name="editUserPersistencia" class="acciones.GestionUsuario" method="editUserPersistencia">
+             <result name="success" type="chain">
+                <param name="actionName">usuarios</param>
+            </result>
+        </action>
+        <action name="removeUser" class="acciones.GestionUsuario" method="removeUser">
+             <result name="success" type="chain">
+                <param name="actionName">usuarios</param>
+            </result>
         </action>
     </package>
     
@@ -86,6 +118,9 @@
         </action>
     </package>
     
+    <package name="gestionPublicacion" extends="struts-default">
+        <action name="removePublicacion" class="acciones.GestionPublicacion" method="removePublicacion">
+            <result name="success">publicacionesAdmin.jsp</result>
     <package name="gestionUsuario" extends="struts-default">
         <action name="editUser" class="acciones.GestionUsuario" method="editUser">
             <result name="success">editarUsuarioAdmin.jsp</result>

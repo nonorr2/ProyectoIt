@@ -11,8 +11,10 @@
     <s:div cssClass="col-sm-2"></s:div>
     <s:div cssClass="col-sm-8 text-left" >
         <s:form method="post" action="editUserPersistencia"> 
+
             <s:div cssClass="imgcontainer">
                 <img class="avatar" src="<s:url value="%{usuario.foto}"/>"/>
+                <s:file name="imgPerfilUsuario" id="fileImgUser" cssClass="fileImgUser"/>
             </s:div>
             <s:div cssClass="form-group col-sm-6">
                 <s:label><b>Nombre:</b></s:label>
@@ -32,7 +34,8 @@
             </s:div>    
             <s:div cssClass="form-group col-sm-6">
                 <s:label><b>Contraseña:</b></s:label>
-                <s:password name="password" placeholder="Contraseña" cssClass="form-control" id="password" value="%{usuario.password}"/>
+                <%--<s:password value="%{usuario.password}" name="password" placeholder="Contraseña" cssClass="form-control" id="password"></s:password>--%>
+                <input type="password" name="password" placeholder="Contraseña" class="form-control" id="password" value="<s:property value="%{usuario.password}"/>"/>
             </s:div>            
             <s:div cssClass="form-group col-sm-6">
                 <s:label><b>Fecha de nacimiento:</b></s:label>                
