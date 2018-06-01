@@ -244,6 +244,11 @@ span.psw {
     margin-right: 4%;
 }
 
+.fileImgUser{
+    float: right;
+    margin-top: 5%;
+}
+
 @media (max-width: 800px){
     .modal-content {
         width: 50%;

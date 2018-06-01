@@ -28,8 +28,10 @@ public class GestionUsuario extends ActionSupport {
     private String password;
     private Date fechaNacimiento;
     private String foto;
+    private String imgPerfilUsuario;
 
     public GestionUsuario() {
+        
     }
 
     public String execute() throws Exception {
@@ -45,8 +47,9 @@ public class GestionUsuario extends ActionSupport {
     }
 
     public String editUserPersistencia() throws Exception {
-        UsuarioWS userWS = new UsuarioWS();
-        Usuario user = new Usuario(Integer.valueOf(id), nombre, apellidos, nickname, password, fechaNacimiento, "prueba", email);
+        UsuarioWS userWS = new UsuarioWS(); 
+        String ruta = "images/fotosPerfil/" +imgPerfilUsuario;
+        Usuario user = new Usuario(Integer.valueOf(id), nombre, apellidos, nickname, password, fechaNacimiento, ruta, email);
         userWS.edit_JSON(user, id);
         return SUCCESS;
     }
@@ -144,7 +147,13 @@ public class GestionUsuario extends ActionSupport {
     public void setFoto(String foto) {
         this.foto = foto;
     }
-    
-    
 
+    public String getImgPerfilUsuario() {
+        return imgPerfilUsuario;
+    }
+
+    public void setImgPerfilUsuario(String imgPerfilUsuario) {
+        this.imgPerfilUsuario = imgPerfilUsuario;
+    }
+    
 }
