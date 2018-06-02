@@ -112,6 +112,7 @@ button:hover {
     text-align: center;
     margin: 24px 0 12px 0;
     position: relative;
+    overflow: hidden;
 }
 
 img.avatar {
@@ -257,6 +258,22 @@ span.psw {
     float: right;
     margin-top: 5%;
 }
+
+.borde-tematica {
+    border: solid;
+    padding: 0 5% 2% 5%;
+    width: 50%;
+}
+
+.imgTematica {
+    float: left;
+}
+
+.col-sm-2-new {
+    width: 25%;
+}
+
+
 
 @media (max-width: 800px){
     .modal-content {

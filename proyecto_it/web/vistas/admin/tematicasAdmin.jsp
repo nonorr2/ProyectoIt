@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
-<%@include file="cabeceraAdmin.jsp" %>
+<%@include file="../admin/cabeceraAdmin.jsp" %>
 <%@include file="addTematica.jsp" %>
-<%@include file="editarTematica.jsp" %>
 
 <s:div cssClass="banner-gen">
     <h1 class="text-banner">TEMATICAS</h1>
@@ -34,13 +33,11 @@
                     </s:form>
                     <s:form action="editTematica" method="post">
                         <s:hidden name="idTematicaEdit" value="%{id}" /> 
-                        <s:div cssClass="contenedor-icono-add" onclick="document.getElementById('id04').style.display = 'block'">
-                            <s:submit type="image" src="images/iconos/editar.png" name="editTematica" cssClass="icono"/>
-                        </s:div>
+                        <s:submit type="image" src="images/iconos/editar.png" name="editTematica" cssClass="icono"/>
                     </s:form>
                 </s:div>
             </s:div>
         </s:div>
     </s:div>
 </s:iterator>
-<%@include file="footer.jsp" %>
+<%@include file="../../footer.jsp" %>

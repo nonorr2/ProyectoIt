@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
-<%@include file="cabeceraAdmin.jsp" %>
+<%@include file="../admin/cabeceraAdmin.jsp" %>
 <body id="myPage">
 
     <s:div cssClass="banner-gen">
@@ -36,4 +36,4 @@
             </s:div>
         </s:div>
     </s:iterator>
-    <%@include file="footer.jsp" %>
+    <%@include file="../../footer.jsp" %>

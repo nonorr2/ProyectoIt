@@ -69,6 +69,10 @@ public class Tematica implements Serializable {
         this.imagen = imagen;
     }
 
+    public Tematica(String nombre, String imagen) {
+        this.nombre = nombre;
+        this.imagen = imagen;
+    }
     public Integer getId() {
         return id;
     }

@@ -32,21 +32,20 @@
     
     <package name="gestionPublicacion" extends="struts-default">
         <action name="removePublicacion" class="acciones.GestionPublicacion" method="removePublicacion">
-            <result name="success">publicacionesAdmin.jsp</result>
+            <result name="success" type="chain">
+                <param name="actionName">publicacionesAdministrador</param>
+            </result>
         </action>
         <action name="borrarMiPublicacion" class="acciones.GestionPublicacion" method="removePublicacion">
-            <result name="success">misPublicaciones.jsp</result>
             <result name="success" type="chain">
                 <param name="actionName">misPublicaciones</param>
             </result>
         </action>
         <action name="addPublicacion" class="acciones.GestionPublicacion" method="addPublicacion">
-            <result name="success">misPublicaciones.jsp</result>
             <result name="success" type="chain">
                 <param name="actionName">misPublicaciones</param>
             </result>
         </action>
-        
     </package>
     
     <package name="top_menu_logueado" extends="struts-default">
@@ -70,9 +69,8 @@
             </result>
         </action>
     </package>
-    
-    <package name="misPublicaciones" extends="struts-default">
-    <!--    <package name="misPublicaciones" extends="struts-default">
+
+<!--    <package name="misPublicaciones" extends="struts-default">
         <action name="misPublicaciones" class="acciones.MisPublicacionesAccion">
             <result name="success">misPublicaciones.jsp</result>
         </action>    
@@ -80,6 +78,7 @@
             <result name="success">misPublicaciones.jsp</result>
         </action>   
     </package>-->
+    
     <package name="loginLogout" extends="struts-default">
         <action name="login" class="acciones.loginLogout" method="login">
             <result name="success" type="chain">
@@ -92,44 +91,50 @@
     
     <package name="gestionUsuario" extends="struts-default">
         <action name="editUser" class="acciones.GestionUsuario" method="editUser">
-            <result name="success">editarUsuarioAdmin.jsp</result>
+            <result name="success">/vistas/admin/editarUsuarioAdmin.jsp</result>
         </action>
         <action name="editUserPersistencia" class="acciones.GestionUsuario" method="editUserPersistencia">
-             <result name="success" type="chain">
+            <result name="success" type="chain">
                 <param name="actionName">usuarios</param>
             </result>
         </action>
         <action name="removeUser" class="acciones.GestionUsuario" method="removeUser">
-             <result name="success" type="chain">
+            <result name="success" type="chain">
                 <param name="actionName">usuarios</param>
+            </result>
+        </action>
+    </package>
+    
+    <package name="gestionTematica" extends="struts-default">
+        <action name="editTematica" class="acciones.GestionTematica" method="editTematica">
+            <result name="success">/vistas/admin/editarTematica.jsp</result>
+        </action>
+        <action name="editTemaPersistencia" class="acciones.GestionTematica" method="editTemaPersistencia">
+            <result name="success" type="chain">
+                <param name="actionName">tematicasAdministrador</param>
+            </result>
+        </action>
+        <action name="addTemaPersistencia" class="acciones.GestionTematica" method="addTemaPersistencia">
+            <result name="success" type="chain">
+                <param name="actionName">tematicasAdministrador</param>
+            </result>
+        </action>
+        <action name="removeTematica" class="acciones.GestionTematica" method="removeTematica">
+            <result name="success" type="chain">
+                <param name="actionName">tematicasAdministrador</param>
             </result>
         </action>
     </package>
     
     <package name="top_menu_admin" extends="struts-default">
         <action name="usuarios" class="acciones.menu_top_admin" method="usuarios">
-            <result name="success">usuariosAdmin.jsp</result>
+            <result name="success">/vistas/admin/usuariosAdmin.jsp</result>
         </action>
         <action name="tematicasAdministrador" class="acciones.menu_top_admin" method="tematicasAdmin">
-            <result name="success">tematicasAdmin.jsp</result>
+            <result name="success">/vistas/admin/tematicasAdmin.jsp</result>
         </action>
         <action name="publicacionesAdministrador" class="acciones.menu_top_admin" method="publicacionesAdmin">
-            <result name="success">publicacionesAdmin.jsp</result>
-        </action>
-    </package>
-    
-    <package name="gestionPublicacion" extends="struts-default">
-        <action name="removePublicacion" class="acciones.GestionPublicacion" method="removePublicacion">
-            <result name="success">publicacionesAdmin.jsp</result>
-    <package name="gestionUsuario" extends="struts-default">
-        <action name="editUser" class="acciones.GestionUsuario" method="editUser">
-            <result name="success">editarUsuarioAdmin.jsp</result>
-        </action>
-        <action name="editUserPersistencia" class="acciones.GestionUsuario" method="editUserPersistencia">
-            <result name="success">usuariosAdmin.jsp</result>
-        </action>
-        <action name="removeUser" class="acciones.GestionUsuario" method="removeUser">
-            <result name="success">usuariosAdmin.jsp</result>
+            <result name="success">/vistas/admin/publicacionesAdmin.jsp</result>
         </action>
     </package>
 </struts>

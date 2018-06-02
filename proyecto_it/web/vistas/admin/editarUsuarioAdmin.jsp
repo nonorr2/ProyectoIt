@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <s:set name="theme" value="'simple'" scope="page" />
-<%@include file="cabeceraAdmin.jsp" %>
+<%@include file="../admin/cabeceraAdmin.jsp" %>
 
 <div class="banner-gen">
     <h1 class="text-banner">EDITAR USUARIO</h1>
@@ -43,10 +43,10 @@
             </s:div>  
             <s:div cssClass="botonAceptarPerfil">
                 <s:hidden name="id" value="%{usuario.id}" /> 
-                <s:submit name="addUsuario" cssClass="btn btn-success" value="Editar"/>
+                <s:submit name="addUsuario" cssClass="btn btn-primary filtro" value="Editar"/>
             </s:div>
         </s:form>
     </s:div>
     <s:div cssClass="col-sm-2"></s:div>
 </s:div>
-<%@include file="footer.jsp" %>              
+<%@include file="../../footer.jsp" %>              

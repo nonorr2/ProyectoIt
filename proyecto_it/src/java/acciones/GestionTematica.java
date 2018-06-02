@@ -19,6 +19,11 @@ public class GestionTematica extends ActionSupport {
     private String idTematicaRemove;
     private String idTematicaEdit;
     Tematica tematica = new Tematica();
+    private String id;
+    private String imagen;
+    private String nombre;
+    
+    TematicaWS tematicasWS = new TematicaWS();
     
     public GestionTematica() {
     }
@@ -29,8 +34,26 @@ public class GestionTematica extends ActionSupport {
     
     public String editTematica() throws Exception {
         GenericType<Tematica> tipoTema = new GenericType<Tematica>(){};
-        TematicaWS tematicasWS = new TematicaWS();
         tematica = tematicasWS.find_JSON(tipoTema, idTematicaEdit);
+        return SUCCESS;
+    }
+    
+    public String editTemaPersistencia() throws Exception{
+        String ruta = "images/tematicas/" +imagen;
+        Tematica newTematica = new Tematica(Integer.valueOf(id),nombre, ruta);
+        tematicasWS.edit_JSON(newTematica, id);
+        return SUCCESS;
+    }
+    
+    public String addTemaPersistencia() throws Exception{
+//        String ruta = "images/tematicas/" +imagen;
+        Tematica newTematica = new Tematica(nombre, imagen);
+        tematicasWS.create_JSON(newTematica);
+        return SUCCESS;
+    }
+    
+    public String removeTematica() throws Exception{
+        tematicasWS.remove(idTematicaRemove);
         return SUCCESS;
     }
 
@@ -57,6 +80,31 @@ public class GestionTematica extends ActionSupport {
     public void setTematica(Tematica tematica) {
         this.tematica = tematica;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     
     
 }
