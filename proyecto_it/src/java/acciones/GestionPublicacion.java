@@ -12,6 +12,12 @@ import WS.TematicaWS;
 import WS.Usuario;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.StandardOpenOption;
 import java.util.Date;
 import java.util.Map;
 import javax.ws.rs.core.GenericType;
@@ -21,51 +27,55 @@ import javax.ws.rs.core.GenericType;
  * @author David
  */
 public class GestionPublicacion extends ActionSupport {
-    
+
     private String idPublicacionRemove;
-    
+
     private String tituloPubliacion;
-    private String fotoPubliacion;
+    private File fotoPubliacion;
     private String contenidoPubliacion;
     private String rutaPubliacion;
     private String tematicaPubliacion;
-    
+    private String fileUploadContentType;
+    private String fileUploadFileName;
+
     public GestionPublicacion() {
     }
-    
+
     public String execute() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
-    public String removePublicacion() throws Exception{
+
+    public String removePublicacion() throws Exception {
         PublicacionWS publicacionWS = new PublicacionWS();
         publicacionWS.remove(idPublicacionRemove);
         return SUCCESS;
     }
-    
+
     /**
      * Método pra crear una nueva publicación
+     *
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
-    public String addPublicacion() throws Exception{
+    public String addPublicacion() throws Exception {
         PublicacionWS publicacionWS = new PublicacionWS();
         TematicaWS tematicaWS = new TematicaWS();
-        
+
         loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario) loginLogout.session.get("user");
-        
-        GenericType<Tematica> tipoTematica = new GenericType<Tematica>() {};
+
+        GenericType<Tematica> tipoTematica = new GenericType<Tematica>() {
+        };
         Tematica tematica = tematicaWS.find_XML(tipoTematica, tematicaPubliacion);
-        
+
         Publicacion publicacion = new Publicacion(null, tituloPubliacion, contenidoPubliacion, new Date(), new Date(), rutaPubliacion, null);
         publicacion.setIdUsuario(usuario);
         publicacion.setIdTematica(tematica);
-        
+
         publicacionWS.create_JSON(publicacion);
-        
+
         return SUCCESS;
-    } 
+    }
 
     public String getIdPublicacionRemove() {
         return idPublicacionRemove;
@@ -83,11 +93,11 @@ public class GestionPublicacion extends ActionSupport {
         this.tituloPubliacion = tituloPubliacion;
     }
 
-    public String getFotoPubliacion() {
+    public File getFotoPubliacion() {
         return fotoPubliacion;
     }
 
-    public void setFotoPubliacion(String fotoPubliacion) {
+    public void setFotoPubliacion(File fotoPubliacion) {
         this.fotoPubliacion = fotoPubliacion;
     }
 
@@ -114,8 +124,21 @@ public class GestionPublicacion extends ActionSupport {
     public void setTematicaPubliacion(String tematicaPubliacion) {
         this.tematicaPubliacion = tematicaPubliacion;
     }
-    
-    
-    
-    
+
+    public String getFileUploadContentType() {
+        return fileUploadContentType;
+    }
+
+    public void setFileUploadContentType(String fileUploadContentType) {
+        this.fileUploadContentType = fileUploadContentType;
+    }
+
+    public String getFileUploadFileName() {
+        return fileUploadFileName;
+    }
+
+    public void setFileUploadFileName(String fileUploadFileName) {
+        this.fileUploadFileName = fileUploadFileName;
+    }
+
 }

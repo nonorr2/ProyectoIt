@@ -55,6 +55,9 @@
         <action name="misPublicaciones" class="acciones.menu_top_logueado" method="misPubicaciones">
             <result name="success">misPublicaciones.jsp</result>
         </action> 
+        <action name="perfil" class="acciones.GestionUsuario" method="perfil">
+            <result name="success">perfil.jsp</result>
+        </action> 
     </package>
     
     <package name="chatsLogueado" extends="struts-default">
@@ -87,6 +90,9 @@
             <result name="login">home.jsp</result>
             <result name="error">index.jsp</result>
         </action>
+        <action name="logout" class="acciones.loginLogout" method="logout">
+            <result name="success">index.jsp</result>
+        </action>
     </package>
     
     <package name="gestionUsuario" extends="struts-default">
@@ -102,6 +108,16 @@
             <result name="success" type="chain">
                 <param name="actionName">usuarios</param>
             </result>
+        </action>
+        <action name="editUserPersistencia" class="acciones.GestionUsuario" method="editUserPersistencia">
+            <result name="success">home.jsp</result>
+        </action>
+        <action name="removeMiCuenta" class="acciones.GestionUsuario" method="removeMiCuenta">
+            <result name="success">index.jsp</result>
+        </action>
+        <action name="addUsuario" class="acciones.GestionUsuario" method="addUsuario">
+            <result name="success">home.jsp</result>
+            <result name="error">registro.jsp</result>
         </action>
     </package>
     

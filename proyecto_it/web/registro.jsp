@@ -4,13 +4,19 @@
 <%@include file="cabeceraNoLogado.jsp" %>
 
 <div class="banner-gen">
-        <h1 class="text-banner">&Uacute;NETE A NOSOTROS</h1>
+    <h1 class="text-banner">&Uacute;NETE A NOSOTROS</h1>
 </div>
 
 <s:div cssClass="container-fluid text-center">
     <s:div cssClass="col-sm-2"></s:div>
     <s:div cssClass="col-sm-8 text-left" >
-        <s:form method="post" action=""> 
+        <s:form method="post" action="addUsuario"> 
+            <s:div cssClass="imgcontainer">
+                <img class="avatar" src="images/imgLogin.png"/>                
+            </s:div>
+            <s:div cssClass="form-group col-sm-12 subir_foto">
+                <s:file name="imgPerfilUsuario" id="fileImgUser" cssClass="fileImgUser"/>  
+            </s:div>
             <s:div cssClass="form-group col-sm-6">
                 <s:label><b>Nombre:</b></s:label>
                 <s:textfield name="nombre" placeholder="Introduzaca el nombre" cssClass="form-control" id="nombre"/>
@@ -36,15 +42,15 @@
                 <s:password name="confirmarPassword" placeholder="Introduzaca la contraseña" cssClass="form-control" id="confirmarPassword"/>
             </s:div>             
             <s:div cssClass="form-group col-sm-6">
-                <s:label><b>Fecha de nacimiento:</b></s:label>                
-                <input type="date" name="fechaNacimiento" class="form-control" id="fechaNacimiento"/>
+                <s:label><b>Fecha de nacimiento:</b></s:label> 
+                <s:textfield name="fechaNacimiento" placeholder="dd/mm/aaaa" cssClass="form-control" id="fechaNacimiento" />
             </s:div>  
             <s:div cssClass="botonAceptarPerfil">
-                <s:submit name="addUsuario" cssClass="btn btn-success" value="Enviar"/>
+                <s:submit name="addUsuario" cssClass="btn btn-primary filtro" value="Enviar"/>
             </s:div>
         </s:form>
     </s:div>
     <s:div cssClass="col-sm-2"></s:div>
 </s:div>
 
-<%--<%@include file="footer.jsp" %>--%>
+<%@include file="footer.jsp" %>

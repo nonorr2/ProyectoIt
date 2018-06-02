@@ -7,8 +7,10 @@ package acciones;
 
 import WS.Usuario;
 import WS.UsuarioWS;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.Date;
+import java.util.Map;
 import javax.ws.rs.core.GenericType;
 
 /**
@@ -29,6 +31,7 @@ public class GestionUsuario extends ActionSupport {
     private Date fechaNacimiento;
     private String foto;
     private String imgPerfilUsuario;
+    private String confirmarPassword;
 
     public GestionUsuario() {
         
@@ -36,6 +39,16 @@ public class GestionUsuario extends ActionSupport {
 
     public String execute() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public String perfil() throws Exception{     
+        loginLogout.session = (Map) ActionContext.getContext().get("session");        
+        Usuario usuarioSession = (Usuario) loginLogout.session.get("user"); 
+        
+        GenericType<Usuario> tipoUser = new GenericType<Usuario>() {}; 
+        UsuarioWS usuarioWS = new UsuarioWS();
+        this.usuario = usuarioWS.find_XML(tipoUser, String.valueOf(usuarioSession.getId()));
+        return SUCCESS;   
     }
 
     public String editUser() throws Exception {
@@ -49,7 +62,7 @@ public class GestionUsuario extends ActionSupport {
     public String editUserPersistencia() throws Exception {
         UsuarioWS userWS = new UsuarioWS(); 
         String ruta = "images/fotosPerfil/" +imgPerfilUsuario;
-        Usuario user = new Usuario(Integer.valueOf(id), nombre, apellidos, nickname, password, fechaNacimiento, ruta, email);
+        Usuario user = new Usuario(Integer.valueOf(id), nombre, apellidos, nickname, password, fechaNacimiento, ruta, imgPerfilUsuario);
         userWS.edit_JSON(user, id);
         return SUCCESS;
     }
@@ -59,6 +72,33 @@ public class GestionUsuario extends ActionSupport {
         userWS.remove(idUsuarioRemove);
         return SUCCESS;
     }
+    
+    /**
+     * Método para eliminar la cuenta del usuario logueado
+     * @return
+     * @throws Exception 
+     */
+    public String removeMiCuenta() throws Exception{
+        loginLogout.session = (Map) ActionContext.getContext().get("session");
+        loginLogout.session.clear();        
+        UsuarioWS userWS = new UsuarioWS();
+        userWS.remove(idUsuarioRemove);        
+        return SUCCESS;
+    }
+    
+    public String addUsuario() throws Exception{ //NO FUNCIONA
+        UsuarioWS userWS = new UsuarioWS();  //falta método para encriptar la contraseña
+        
+        if(this.password.equals(this.confirmarPassword)){
+            Usuario newUsuario = new Usuario(null, nombre, apellidos, nickname, password, email, true, fechaNacimiento, foto);
+            userWS.create_XML(newUsuario);
+            return SUCCESS;
+        }else{
+            return ERROR;
+        }   
+    } 
+    
+    
 
     public Usuario getUsuario() {
         return usuario;
@@ -155,5 +195,15 @@ public class GestionUsuario extends ActionSupport {
     public void setImgPerfilUsuario(String imgPerfilUsuario) {
         this.imgPerfilUsuario = imgPerfilUsuario;
     }
+
+    public String getConfirmarPassword() {
+        return confirmarPassword;
+    }
+
+    public void setConfirmarPassword(String confirmarPassword) {
+        this.confirmarPassword = confirmarPassword;
+    }
+    
+    
     
 }

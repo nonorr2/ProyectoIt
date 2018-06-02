@@ -119,7 +119,7 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
             resultado = false;
         }
 
-        String as = BCrypt.hashpw(password, BCrypt.gensalt(12));
+        //String as = BCrypt.hashpw(password, BCrypt.gensalt(12));
         return resultado;
     }
 

@@ -36,7 +36,7 @@
                 <s:form action="chats" method="post">
                     <a><s:submit value="CHAT"  cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"/></a>
                 </s:form>
-                <s:form action="inicio" method="post">
+                <s:form action="logout" method="post">
                     <a><s:submit value="LOGOUT"  cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"/></a>
                 </s:form>
             </div>
