@@ -11,27 +11,33 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 
 /**
- * Jersey REST client generated for REST resource:PublicacionFacadeREST
- * [ws.publicacion]<br>
+ * Jersey REST client generated for REST resource:ComentarioFacadeREST
+ * [ws.comentario]<br>
  * USAGE:
  * <pre>
- *        PublicacionWS client = new PublicacionWS();
+ *        ComentarioWS client = new ComentarioWS();
  *        Object response = client.XXX(...);
  *        // do whatever with response
  *        client.close();
  * </pre>
  *
- * @author Nono
+ * @author Lydia
  */
-public class PublicacionWS {
+public class ComentarioWS {
 
     private WebTarget webTarget;
     private Client client;
     private static final String BASE_URI = "http://localhost:8080/webService/webresources";
 
-    public PublicacionWS() {
+    public ComentarioWS() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
-        webTarget = client.target(BASE_URI).path("ws.publicacion");
+        webTarget = client.target(BASE_URI).path("ws.comentario");
+    }
+
+    public <T> T getNumComentarios(GenericType<T> responseType, String id) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getNumComentarios/{0}", new Object[]{id}));
+        return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(responseType);
     }
 
     public String countREST() throws ClientErrorException {
@@ -40,24 +46,24 @@ public class PublicacionWS {
         return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
     }
 
+    public <T> T getUltimoComentarioPublicacion_XML(GenericType<T> responseType, String idPublicacion) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getUltimoComentarioPublicacion/{0}", new Object[]{idPublicacion}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
+
+    public <T> T getUltimoComentarioPublicacion_JSON(GenericType<T> responseType, String idPublicacion) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getUltimoComentarioPublicacion/{0}", new Object[]{idPublicacion}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public void edit_XML(Object requestEntity, String id) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("{0}", new Object[]{id})).request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
 
     public void edit_JSON(Object requestEntity, String id) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("{0}", new Object[]{id})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
-    }
-
-    public <T> T getPublicacionesByTema_XML(GenericType<T> responseType, String id_tematica) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getPublicacionesByTematica/{0}", new Object[]{id_tematica}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
-    }
-
-    public <T> T getPublicacionesByTema_JSON(GenericType<T> responseType, String id_tematica) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getPublicacionesByTematica/{0}", new Object[]{id_tematica}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
     public <T> T find_XML(GenericType<T> responseType, String id) throws ClientErrorException {
@@ -84,30 +90,6 @@ public class PublicacionWS {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
-    public <T> T getPublicacionPorTitulo_XML(GenericType<T> responseType, String titulo) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getPublicacionPorTitulo/{0}", new Object[]{titulo}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
-    }
-
-    public <T> T getPublicacionPorTitulo_JSON(GenericType<T> responseType, String titulo) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getPublicacionPorTitulo/{0}", new Object[]{titulo}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
-    }
-
-    public <T> T getMisPublicaciones_XML(GenericType<T> responseType, String idUsuario) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getMisPublicaciones/{0}", new Object[]{idUsuario}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
-    }
-
-    public <T> T getMisPublicaciones_JSON(GenericType<T> responseType, String idUsuario) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getMisPublicaciones/{0}", new Object[]{idUsuario}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
-    }
-
     public void create_XML(Object requestEntity) throws ClientErrorException {
         webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
@@ -116,25 +98,25 @@ public class PublicacionWS {
         webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
-    public <T> T findAll_XML(GenericType<T> responseType) throws ClientErrorException {
+    public <T> T getComentariosPublicacion_XML(Class<T> responseType, String id_publicacion) throws ClientErrorException {
         WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getComentariosPublicacion/{0}", new Object[]{id_publicacion}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
-    public <T> T findAll_JSON(GenericType<T> responseType) throws ClientErrorException {
+    public <T> T getComentariosPublicacion_JSON(Class<T> responseType, String id_publicacion) throws ClientErrorException {
         WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getComentariosPublicacion/{0}", new Object[]{id_publicacion}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
-    
-    public <T> T getPublicacionesSuscritoOrdenadoNumComentarios_XML(GenericType<T> responseType, String idUsuario) throws ClientErrorException {
+
+    public <T> T findAll_XML(Class<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getPublicacionesSuscritoOrdenadoNumComentarios/{0}", new Object[]{idUsuario}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
-    public <T> T getPublicacionesSuscritoOrdenadoNumComentarios_JSON(GenericType<T> responseType, String idUsuario) throws ClientErrorException {
+    public <T> T findAll_JSON(Class<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getPublicacionesSuscritoOrdenadoNumComentarios/{0}", new Object[]{idUsuario}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 

@@ -19,8 +19,12 @@ import java.nio.file.Files;
 import java.nio.file.OpenOption;
 import java.nio.file.StandardOpenOption;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
+import javax.servlet.ServletContext;
 import javax.ws.rs.core.GenericType;
+import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
 
 /**
  *
@@ -52,12 +56,17 @@ public class GestionPublicacion extends ActionSupport {
     }
 
     /**
-     * Método pra crear una nueva publicación
+     * Método para crear una nueva publicación
      *
      * @return
      * @throws Exception
      */
     public String addPublicacion() throws Exception {
+        ServletContext context = ServletActionContext.getServletContext();
+//        String hola = context.getRealPath("/");
+        String ruta = System.getProperty("catalina.home") + "/prueba/prueba.png";
+        File nuevo = new File(ruta);
+        FileUtils.copyFile(fotoPubliacion, nuevo);
         PublicacionWS publicacionWS = new PublicacionWS();
         TematicaWS tematicaWS = new TematicaWS();
 
@@ -68,14 +77,22 @@ public class GestionPublicacion extends ActionSupport {
         };
         Tematica tematica = tematicaWS.find_XML(tipoTematica, tematicaPubliacion);
 
-        Publicacion publicacion = new Publicacion(null, tituloPubliacion, contenidoPubliacion, new Date(), new Date(), rutaPubliacion, null);
+        Publicacion publicacion = new Publicacion(null, tituloPubliacion, contenidoPubliacion, new Date(), new Date(), rutaPubliacion, ruta);
         publicacion.setIdUsuario(usuario);
         publicacion.setIdTematica(tematica);
 
         publicacionWS.create_JSON(publicacion);
-
         return SUCCESS;
     }
+
+    @Override
+    public void validate() {
+        if(this.getTituloPubliacion().trim().length() == 0 || this.getTituloPubliacion() == null){
+            addFieldError("tituloPubliacion", "El título de la publicación es obligatorio");
+        }
+    }
+    
+    
 
     public String getIdPublicacionRemove() {
         return idPublicacionRemove;
@@ -141,4 +158,5 @@ public class GestionPublicacion extends ActionSupport {
         this.fileUploadFileName = fileUploadFileName;
     }
 
+    
 }

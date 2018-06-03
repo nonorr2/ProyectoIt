@@ -12,13 +12,6 @@
         <s:textfield  cssClass="textFileFiltrar"/>
         <s:submit name="btoLogin" cssClass="btn btn-primary filtro" value="Filtrar"/>
     </s:form>
-
-    <%--<s:div onclick="document.getElementById('id01').style.display = 'block'">--%>
-        <%--<s:form action="" method="post">--%>
-        <%--<s:submit type="image" src="images/iconos/add.png" name="anadirPublicacion" cssClass="icono"/>--%>
-        <%--</s:form>--%>
-    <%--</s:div>--%>
-
     <s:div cssClass="contenedor-icono-add" onclick="document.getElementById('id02').style.display = 'block'">
         <img src="images/iconos/add.png" class="icono"/>
     </s:div>
@@ -28,14 +21,16 @@
         <s:div cssClass="row">
             <s:div cssClass="contenedor-publi sombreado">
                 <s:div cssClass="publi-no-imagen">
-                    <img src="<s:property value="foto"/>" />
-                    <%--<s:div cssClass="letras-imagen">--%>
-                    <!--<p class="iniciales-no-imagen">NR</p>-->
-                    <%--</s:div>--%>
+                    <s:if test="%{foto.length() > 0}"> 
+                        <img src="<s:property value="foto"/>" />
+                    </s:if>
+                    <s:else>
+                        <img src="images/noFoto.png"/>
+                    </s:else>
                 </s:div>
                 <s:div cssClass="datos-publicacion">
                     <h1><s:property value="titulo" /></h1>
-                    <p><s:property value="idUsuario.getNombre()" /></p>
+                    <p><s:property value="idUsuario.getNickname()" /></p>
                     <p><s:property value="fechaHoraModificacion" /></p>
                     <p>Numero de votos</p>
                     <p>Numero de comentarios</p>                    

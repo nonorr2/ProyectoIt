@@ -158,6 +158,6 @@ public class ComentarioFacadeREST extends AbstractFacade<Comentario> {
         query.setParameter("publicacion", publicacion);
         Long result = (Long) query.getSingleResult();
         return result;
-    }
+    }  
     
 }
