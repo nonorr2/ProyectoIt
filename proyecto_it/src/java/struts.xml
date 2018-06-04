@@ -45,6 +45,7 @@
             <result name="success" type="chain">
                 <param name="actionName">misPublicaciones</param>
             </result>
+            <result name="input">addPublicacion.jsp</result>
         </action>
     </package>
     
@@ -57,6 +58,9 @@
         </action> 
         <action name="perfil" class="acciones.GestionUsuario" method="perfil">
             <result name="success">perfil.jsp</result>
+        </action> 
+        <action name="home" class="acciones.menu_top_logueado" method="home">
+            <result name="success">home.jsp</result>
         </action> 
     </package>
     
@@ -77,15 +81,6 @@
             </result>
         </action>
     </package>
-
-<!--    <package name="misPublicaciones" extends="struts-default">
-        <action name="misPublicaciones" class="acciones.MisPublicacionesAccion">
-            <result name="success">misPublicaciones.jsp</result>
-        </action>    
-        <action name="borrarMiPublicacion" class="acciones.MisPublicacionesAccion" method="borrarPublicacion">
-            <result name="success">misPublicaciones.jsp</result>
-        </action>   
-    </package>-->
     
     <package name="loginLogout" extends="struts-default">
         <action name="login" class="acciones.loginLogout" method="login">
