@@ -161,5 +161,8 @@
         <action name="publicacionesAdministrador" class="acciones.menu_top_admin" method="publicacionesAdmin">
             <result name="success">/vistas/admin/publicacionesAdmin.jsp</result>
         </action>
+        <action name="chatsAdministrador" class="acciones.menu_top_admin" method="chatsAdmin">
+            <result name="success">/vistas/admin/chats.jsp</result>
+        </action>
     </package>
 </struts>
