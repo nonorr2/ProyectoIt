@@ -7,11 +7,19 @@ package acciones;
 
 import WS.Usuario;
 import WS.UsuarioWS;
+import static acciones.loginLogout.session;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.text.SimpleDateFormat;
+import static com.opensymphony.xwork2.Action.SUCCESS;
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 import javax.ws.rs.core.GenericType;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -33,22 +41,28 @@ public class GestionUsuario extends ActionSupport {
     private String imgPerfilUsuario;
     private String confirmarPassword;
 
+    private File myFile;
+    private String myFileContentType;
+    private String myFileFileName;
+    private String destPath;
+
     public GestionUsuario() {
-        
+
     }
 
     public String execute() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
-    public String perfil() throws Exception{     
-        loginLogout.session = (Map) ActionContext.getContext().get("session");        
-        Usuario usuarioSession = (Usuario) loginLogout.session.get("user"); 
-        
-        GenericType<Usuario> tipoUser = new GenericType<Usuario>() {}; 
+
+    public String perfil() throws Exception {
+        loginLogout.session = (Map) ActionContext.getContext().get("session");
+        Usuario usuarioSession = (Usuario) loginLogout.session.get("user");
+
+        GenericType<Usuario> tipoUser = new GenericType<Usuario>() {
+        };
         UsuarioWS usuarioWS = new UsuarioWS();
         this.usuario = usuarioWS.find_XML(tipoUser, String.valueOf(usuarioSession.getId()));
-        return SUCCESS;   
+        return SUCCESS;
     }
 
     public String editUser() throws Exception {
@@ -60,8 +74,13 @@ public class GestionUsuario extends ActionSupport {
     }
 
     public String editUserPersistencia() throws Exception {
-        UsuarioWS userWS = new UsuarioWS(); 
-        String ruta = "images/fotosPerfil/" +imgPerfilUsuario;
+        destPath = "images/fotosPerfil/";
+        String ruta = "images/fotosPerfil/" + myFileFileName;
+
+        File desFile = new File(destPath, myFileFileName);
+        FileUtils.copyFile(myFile, desFile);
+
+        UsuarioWS userWS = new UsuarioWS();
         Usuario user = new Usuario(Integer.valueOf(id), nombre, apellidos, nickname, password, fechaNacimiento, ruta, imgPerfilUsuario);
         userWS.edit_JSON(user, id);
         return SUCCESS;
@@ -72,33 +91,37 @@ public class GestionUsuario extends ActionSupport {
         userWS.remove(idUsuarioRemove);
         return SUCCESS;
     }
-    
+
     /**
      * Método para eliminar la cuenta del usuario logueado
+     *
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
-    public String removeMiCuenta() throws Exception{
+    public String removeMiCuenta() throws Exception {
         loginLogout.session = (Map) ActionContext.getContext().get("session");
-        loginLogout.session.clear();        
+        loginLogout.session.clear();
         UsuarioWS userWS = new UsuarioWS();
-        userWS.remove(idUsuarioRemove);        
+        userWS.remove(idUsuarioRemove);
         return SUCCESS;
     }
     
-    public String addUsuario() throws Exception{ //NO FUNCIONA
-        UsuarioWS userWS = new UsuarioWS();  //falta método para encriptar la contraseña
+    public String addUsuario() throws Exception{ 
+        UsuarioWS userWS = new UsuarioWS();  
+        GenericType<Usuario> tipoUsuario = new GenericType<Usuario>() {};
         
         if(this.password.equals(this.confirmarPassword)){
-            Usuario newUsuario = new Usuario(null, nombre, apellidos, nickname, password, email, true, fechaNacimiento, foto);
+            Usuario newUsuario = new Usuario(null, nombre, apellidos, nickname, password, email, false, fechaNacimiento, foto);
             userWS.create_XML(newUsuario);
+            
+            Usuario usu = userWS.getUsuarioByUsername_XML(tipoUsuario, nickname);
+            session = (Map) ActionContext.getContext().get("session");
+            session.put("user", usu);
             return SUCCESS;
-        }else{
+        } else {
             return ERROR;
-        }   
-    } 
-    
-    
+        }
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -203,7 +226,37 @@ public class GestionUsuario extends ActionSupport {
     public void setConfirmarPassword(String confirmarPassword) {
         this.confirmarPassword = confirmarPassword;
     }
-    
-    
-    
+
+    public File getMyFile() {
+        return myFile;
+    }
+
+    public void setMyFile(File myFile) {
+        this.myFile = myFile;
+    }
+
+    public String getMyFileContentType() {
+        return myFileContentType;
+    }
+
+    public void setMyFileContentType(String myFileContentType) {
+        this.myFileContentType = myFileContentType;
+    }
+
+    public String getMyFileFileName() {
+        return myFileFileName;
+    }
+
+    public void setMyFileFileName(String myFileFileName) {
+        this.myFileFileName = myFileFileName;
+    }
+
+    public String getDestPath() {
+        return destPath;
+    }
+
+    public void setDestPath(String destPath) {
+        this.destPath = destPath;
+    }
+
 }

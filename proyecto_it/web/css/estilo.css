@@ -332,3 +332,28 @@ span.psw {
 .container-addPublicacion{
     margin: 5%;
 }
+
+.flechas{
+    float: right;
+    display: block;
+    width:85px;
+    height: 50px;
+    margin: 5px;
+    cursor: pointer;
+    z-index: 15;
+}
+
+.follow{ 
+   height: 30px!important;
+}
+
+.contenedor-flechas{
+    float: left;
+/*    width: 100%;*/
+    height: 100%;
+    
+/*    width: 50%;*/
+/*    margin-top: 145px;*/
+    margin-right: 0px;
+    
+}

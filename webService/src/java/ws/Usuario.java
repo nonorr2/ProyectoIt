@@ -88,8 +88,8 @@ public class Usuario implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+//    @NotNull
+//    @Size(min = 1, max = 100)
     @Column(name = "foto")
     private String foto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")

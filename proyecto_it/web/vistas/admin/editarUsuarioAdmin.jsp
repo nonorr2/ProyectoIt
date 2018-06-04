@@ -14,7 +14,7 @@
 
             <s:div cssClass="imgcontainer">
                 <img class="avatar" src="<s:url value="%{usuario.foto}"/>"/>
-                <s:file name="imgPerfilUsuario" id="fileImgUser" cssClass="fileImgUser"/>
+                <s:file name="myFile" id="fileImgUser" cssClass="fileImgUser"/>
             </s:div>
             <s:div cssClass="form-group col-sm-6">
                 <s:label><b>Nombre:</b></s:label>

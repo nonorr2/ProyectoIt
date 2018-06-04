@@ -21,19 +21,19 @@
         <s:div cssClass="row">
             <s:div cssClass="contenedor-publi sombreado">
                 <s:div cssClass="publi-no-imagen">
-                    <s:if test="%{foto.length() > 0}"> 
-                        <img src="<s:property value="foto"/>" />
+                    <s:if test="%{publicacion.getFoto().length() > 0}"> 
+                        <img src="<s:property value="publicacion.getFoto()"/>" />
                     </s:if>
                     <s:else>
                         <img src="images/noFoto.png"/>
                     </s:else>
                 </s:div>
                 <s:div cssClass="datos-publicacion">
-                    <h1><s:property value="titulo" /></h1>
-                    <p><s:property value="idUsuario.getNickname()" /></p>
-                    <p><s:property value="fechaHoraModificacion" /></p>
-                    <p>Numero de votos</p>
-                    <p>Numero de comentarios</p>                    
+                    <h1><s:property value="publicacion.getTitulo()" /></h1>
+                    <p>Fecha de cración: <s:property value="publicacion.getFechaHoraModificacion()" /></p>
+                    <p>Número de votos positivos: <s:property value="numVotosPositivosPublicacion" /></p>
+                    <p>Número de votos negativos: <s:property value="numVotosNegativosPublicacion" /></p>
+                    <p>Numero de comentarios: <s:property value="numComentarios" /></p>                    
                 </s:div>
                 <s:div cssClass="contenedor-iconos">
                     <s:form action="borrarMiPublicacion" method="post">

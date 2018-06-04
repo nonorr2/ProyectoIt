@@ -5,6 +5,8 @@
  */
 package acciones;
 
+import WS.Chat;
+import WS.ChatWS;
 import WS.Publicacion;
 import WS.PublicacionWS;
 import WS.Tematica;
@@ -24,6 +26,7 @@ public class menu_top_admin extends ActionSupport {
     private List<Usuario> usuarios;
     private List<Tematica> tematicas;
     private List<Publicacion> publicaciones;
+    private List<Chat> chats;
 
     public menu_top_admin() {
     }
@@ -56,6 +59,13 @@ public class menu_top_admin extends ActionSupport {
         tematicas = tematicaClient.findAll_JSON(tipoTematicaaAdmin);
         return SUCCESS;
     }
+    
+    public String chatsAdmin() throws Exception {
+        GenericType<List<Chat>> tipoChat = new GenericType<List<Chat>>(){};
+        ChatWS chatClient = new ChatWS();
+        chats = chatClient.findAll_JSON(tipoChat);
+        return SUCCESS;
+    }
 
     public List<Usuario> getUsuarios() {
         return usuarios;
@@ -80,6 +90,13 @@ public class menu_top_admin extends ActionSupport {
     public void setPublicaciones(List<Publicacion> publicaciones) {
         this.publicaciones = publicaciones;
     }
-    
+
+    public List<Chat> getChats() {
+        return chats;
+    }
+
+    public void setChats(List<Chat> chats) {
+        this.chats = chats;
+    }
     
 }

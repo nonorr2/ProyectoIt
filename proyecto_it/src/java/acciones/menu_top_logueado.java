@@ -35,7 +35,7 @@ public class menu_top_logueado extends ActionSupport {
     List<Usuario> usuarios;
     Integer id_user;
 
-    private List<Publicacion> misPublicaciones;
+    private List<PublicacionDecorado> misPublicaciones;
     private List<Tematica> tematicas;
     private List<PublicacionDecorado> publicacionesSuscrito;
 
@@ -63,7 +63,7 @@ public class menu_top_logueado extends ActionSupport {
     }
 
     /**
-     * Método para lista todas las publiaciones que ha creado el usuario
+     * Método para listar todas las publiaciones que ha creado el usuario
      * logueado.
      *
      * @return
@@ -73,15 +73,33 @@ public class menu_top_logueado extends ActionSupport {
         loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
-        GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
-        };
-        PublicacionWS publicacionCliente = new PublicacionWS();
-        this.misPublicaciones = (List<Publicacion>) publicacionCliente.getMisPublicaciones_XML(tipoPublicacion, String.valueOf(usuario.getId()));
-
-        GenericType<List<Tematica>> tipoTematica = new GenericType<List<Tematica>>() {
-        };
+        GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {};
+        GenericType<Long> tipoLong = new GenericType<Long>() {};
+        
+        PublicacionWS publicacionCliente = new PublicacionWS();        
+        ComentarioWS comentarioCliente = new ComentarioWS();
+        VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
+        
+        List<Publicacion> publicaciones = (List<Publicacion>) publicacionCliente.getMisPublicaciones_XML(tipoPublicacion, String.valueOf(usuario.getId()));
+        this.misPublicaciones = new ArrayList<PublicacionDecorado>();
+        
+        for(Publicacion publicacion : publicaciones){
+            PublicacionDecorado publicacionDecorado = new PublicacionDecorado();
+            Long numComentarios = comentarioCliente.getNumComentarios(tipoLong, String.valueOf(publicacion.getId()));
+            Long numVotosPositivos = votoPublicacionCliente.getVotosPositivos(tipoLong, String.valueOf(publicacion.getId()));
+            Long numVotosNegativos = votoPublicacionCliente.getVotosNegativos(tipoLong, String.valueOf(publicacion.getId()));
+            publicacionDecorado.setPublicacion(publicacion);
+            publicacionDecorado.setNumComentarios(numComentarios.intValue());
+            publicacionDecorado.setNumVotosPositivosPublicacion(numVotosPositivos.intValue());
+            publicacionDecorado.setNumVotosNegativosPublicacion(numVotosNegativos.intValue());
+            this.misPublicaciones.add(publicacionDecorado);
+        }
+        
+        //Listar las temáticas para el selec de añadir piblicacion
+        GenericType<List<Tematica>> tipoTematica = new GenericType<List<Tematica>>() {};
         TematicaWS tematicaClient = new TematicaWS();
         tematicas = (List<Tematica>) tematicaClient.getTematicasMasPopulares_JSON(tipoTematica);
+        
         return SUCCESS;
     }
 
@@ -98,6 +116,7 @@ public class menu_top_logueado extends ActionSupport {
         PublicacionWS publicacionCliente = new PublicacionWS();
         ComentarioWS comentarioCliente = new ComentarioWS();
         VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
+        
         List<Publicacion> publicaciones = publicacionCliente.getPublicacionesSuscritoOrdenadoNumComentarios_XML(tipoPublicacion, String.valueOf(usuario.getId()));
         this.publicacionesSuscrito = new ArrayList<PublicacionDecorado>();
 
@@ -126,11 +145,11 @@ public class menu_top_logueado extends ActionSupport {
         this.chats = chats;
     }
 
-    public List<Publicacion> getMisPublicaciones() {
+    public List<PublicacionDecorado> getMisPublicaciones() {
         return misPublicaciones;
     }
 
-    public void setMisPublicaciones(List<Publicacion> misPublicaciones) {
+    public void setMisPublicaciones(List<PublicacionDecorado> misPublicaciones) {
         this.misPublicaciones = misPublicaciones;
     }
 
