@@ -40,6 +40,7 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Usuario entity) {
+        entity.setPassword(BCrypt.hashpw(entity.getPassword(), BCrypt.gensalt(12)));
         super.create(entity);
     }
 

@@ -47,6 +47,11 @@
             </result>
             <result name="input">addPublicacion.jsp</result>
         </action>
+        <action name="votoPositivoPublicacon" class="acciones.GestionPublicacion" method="votoPositivoPublicacion">
+            <result name="success" type="chain">
+                <param name="actionName">home</param>
+            </result>
+        </action>
     </package>
     
     <package name="top_menu_logueado" extends="struts-default">
@@ -87,7 +92,9 @@
             <result name="success" type="chain">
                 <param name="actionName">usuarios</param>
             </result>
-            <result name="login">home.jsp</result>
+            <result name="login" type="chain">
+                <param name="actionName">home</param>
+            </result>
             <result name="error">index.jsp</result>
         </action>
         <action name="logout" class="acciones.loginLogout" method="logout">
@@ -116,7 +123,9 @@
             <result name="success">index.jsp</result>
         </action>
         <action name="addUsuario" class="acciones.GestionUsuario" method="addUsuario">
-            <result name="success">home.jsp</result>
+            <result name="success" type="chain">
+                <param name="actionName">home</param>
+            </result>
             <result name="error">registro.jsp</result>
         </action>
     </package>

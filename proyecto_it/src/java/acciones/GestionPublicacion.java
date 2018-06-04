@@ -10,6 +10,8 @@ import WS.PublicacionWS;
 import WS.Tematica;
 import WS.TematicaWS;
 import WS.Usuario;
+import WS.VotoPublicacion;
+import WS.VotoPublicacionWS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
@@ -41,6 +43,7 @@ public class GestionPublicacion extends ActionSupport {
     private String tematicaPubliacion;
     private String fileUploadContentType;
     private String fileUploadFileName;
+    private String idPublicacion;
 
     public GestionPublicacion() {
     }
@@ -85,12 +88,28 @@ public class GestionPublicacion extends ActionSupport {
         return SUCCESS;
     }
 
-    @Override
-    public void validate() {
-        if(this.getTituloPubliacion().trim().length() == 0 || this.getTituloPubliacion() == null){
-            addFieldError("tituloPubliacion", "El título de la publicación es obligatorio");
-        }
-    }
+//    @Override
+//    public void validate() {
+//        if(this.getTituloPubliacion().trim().length() == 0 || this.getTituloPubliacion() == null){
+//            addFieldError("tituloPubliacion", "El título de la publicación es obligatorio");
+//        }
+//    }
+    
+//    public String votoPositivoPublicacion() throws Exception {
+//        loginLogout.session = (Map) ActionContext.getContext().get("session");
+//        Usuario usuario = (Usuario) loginLogout.session.get("user");
+//        VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
+//        PublicacionWS publicacionCliente = new PublicacionWS();
+//        GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {};
+//        Publicacion publicacion = publicacionCliente.find_XML(tipoPublicacion, this.idPublicacion);
+//        VotoPublicacion votoPositivo =  new VotoPublicacion();
+//        votoPositivo.setPublicacion(publicacion);
+//        votoPositivo.setUsuario(usuario);
+//        votoPositivo.setTipo(true);
+//        votoPositivo.setFechaHora(new Date());
+//        votoPublicacionCliente.create_JSON(votoPositivo);
+//        return SUCCESS;
+//    }
     
     
 
@@ -158,5 +177,14 @@ public class GestionPublicacion extends ActionSupport {
         this.fileUploadFileName = fileUploadFileName;
     }
 
+    public String getIdPublicacion() {
+        return idPublicacion;
+    }
+
+    public void setIdPublicacion(String idPublicacion) {
+        this.idPublicacion = idPublicacion;
+    }
+
+    
     
 }

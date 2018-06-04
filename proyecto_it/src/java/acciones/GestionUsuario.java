@@ -7,8 +7,10 @@ package acciones;
 
 import WS.Usuario;
 import WS.UsuarioWS;
+import static acciones.loginLogout.session;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import javax.ws.rs.core.GenericType;
@@ -86,12 +88,17 @@ public class GestionUsuario extends ActionSupport {
         return SUCCESS;
     }
     
-    public String addUsuario() throws Exception{ //NO FUNCIONA
-        UsuarioWS userWS = new UsuarioWS();  //falta método para encriptar la contraseña
+    public String addUsuario() throws Exception{ 
+        UsuarioWS userWS = new UsuarioWS();  
+        GenericType<Usuario> tipoUsuario = new GenericType<Usuario>() {};
         
         if(this.password.equals(this.confirmarPassword)){
-            Usuario newUsuario = new Usuario(null, nombre, apellidos, nickname, password, email, true, fechaNacimiento, foto);
+            Usuario newUsuario = new Usuario(null, nombre, apellidos, nickname, password, email, false, fechaNacimiento, foto);
             userWS.create_XML(newUsuario);
+            
+            Usuario usu = userWS.getUsuarioByUsername_XML(tipoUsuario, nickname);
+            session = (Map) ActionContext.getContext().get("session");
+            session.put("user", usu);
             return SUCCESS;
         }else{
             return ERROR;
