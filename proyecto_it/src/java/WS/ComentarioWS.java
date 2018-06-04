@@ -98,24 +98,24 @@ public class ComentarioWS {
         webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
-    public <T> T getComentariosPublicacion_XML(Class<T> responseType, String id_publicacion) throws ClientErrorException {
+    public <T> T getComentariosPublicacion_XML(GenericType<T> responseType, String id_publicacion) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("getComentariosPublicacion/{0}", new Object[]{id_publicacion}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
-    public <T> T getComentariosPublicacion_JSON(Class<T> responseType, String id_publicacion) throws ClientErrorException {
+    public <T> T getComentariosPublicacion_JSON(GenericType<T> responseType, String id_publicacion) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("getComentariosPublicacion/{0}", new Object[]{id_publicacion}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
-    public <T> T findAll_XML(Class<T> responseType) throws ClientErrorException {
+    public <T> T findAll_XML(GenericType<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
-    public <T> T findAll_JSON(Class<T> responseType) throws ClientErrorException {
+    public <T> T findAll_JSON(GenericType<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }

@@ -5,6 +5,7 @@
 
 <s:div cssClass="banner-gen">
     <h1 class="text-banner">MIS CHATS</h1>
+    <input type="hidden" id="id_user" value="<s:property value="id_user" />">
 </s:div>
 
 <s:div id="crearChat" cssClass="modal">
@@ -62,9 +63,36 @@
 <div id="chat" style="position: absolute; bottom: 0px; right: 0px; width: 300px; overflow: hidden; background: #f2f2f1">
 </div>
 <style>
-    .mensaje_chat{
-        margin: 1px 5px;
+    .msj_prop{
+        background-color: #2EFE64;
+        padding: 10px 5px;
+        border-radius: 15px;
+        width: 75%;
+        float: right;
+        margin: 5px;
+        overflow: hidden;
+    }
+
+    .msj_prop p{
+        color: white;
         text-align: right;
+        margin: 0px 15px;
+    }
+
+    .msj_noProp{
+        background-color: white;
+        padding: 10px 5px;
+        border-radius: 15px;
+        width: 75%;
+        float: left;
+        margin: 5px;
+        overflow: hidden;
+    }
+
+    .msj_noProp p{
+        color: black;
+        text-align: right;
+        margin: 0px 15px;
     }
 
     .texto_chat{
@@ -78,6 +106,14 @@
         left: 5px;
         width: 15px;
         height: 15px;
+        z-index: 10;
+    }
+
+    .icon_hide{
+        width: 10px;
+        height: 10px;
+        float: left;
+        margin-left: 5px;
         z-index: 10;
     }
 </style>
@@ -106,17 +142,26 @@
         entrada.setAttribute("type", "text");
         entrada.setAttribute("id", "new_msj");
         entrada.setAttribute("style", "width: 80%; padding: 2px; margin: 0px;");
-        contenedor_entrada.appendChild(entrada);
+
         var btn_envio = document.createElement("input");
         btn_envio.setAttribute("type", "button");
         btn_envio.setAttribute("value", "Enviar");
         btn_envio.setAttribute("onclick", "enviarMensaje()");
         btn_envio.setAttribute("style", "width: 20%; padding: 2px; margin: 0px;");
         contenedor_entrada.appendChild(btn_envio);
+        contenedor_entrada.appendChild(entrada);
 
         var datos_chat = document.createElement("div");
         datos_chat.setAttribute("id", "datos_chat");
         datos_chat.setAttribute("style", "width: 100%; background: #FE7728; height: 30px");
+
+        var id_chat_hidden = document.createElement("input");
+        id_chat_hidden.setAttribute("type", "hidden");
+        id_chat_hidden.setAttribute("id", "id_chat_hidden");
+        id_chat_hidden.setAttribute("value", id_chat);
+        datos_chat.appendChild(id_chat_hidden);
+
+
 
         var contenedor_chat = document.getElementById("chat");
         contenedor_chat.appendChild(contenedor_mensajes);
@@ -129,7 +174,7 @@
 
         interval = setInterval(function () {
             cargarMensajes(id_chat);
-        }, 10000);
+        }, 5000);
     }
 
     function cargarMensajes(id_chat) {
@@ -153,7 +198,19 @@
                         $(conversacion).empty();
 
                         for (var i in mensajes) {
-                            $(conversacion).append('<p class="mensaje_chat">' + mensajes[i]['contenido'] + '</p>');
+                            if (mensajes[i]['idUsuario']['id'] == $("#id_user").val()) {
+                                if (mensajes[i]['estado'] == false) {
+                                    $(conversacion).append('<div class="msj_prop"><img src="images/iconos/ocultar.png" class="icon_hide" onclick="ocultar(' + mensajes[i]['id'] + ')"><p>' + mensajes[i]['contenido'] + '</p></div>');
+                                } else {
+                                    $(conversacion).append('<div class="msj_prop"><p><i>EL TEXTO HA SIDO OCULTADO<i></p></div>');
+                                }
+                            } else {
+                                if (mensajes[i]['estado'] == false) {
+                                    $(conversacion).append('<div class="msj_noProp"><p>' + mensajes[i]['contenido'] + '</p></div>');
+                                } else {
+                                    $(conversacion).append('<div class="msj_noProp"><p><i>EL TEXTO HA SIDO OCULTADO<i></p></div>');
+                                }
+                            }
                         }
                     }
                 }
@@ -168,38 +225,69 @@
 
     function enviarMensaje() {
         var mensaje = document.getElementById("new_msj").value;
+
+//COGER EL CHAT
+        var xhttpChat = new XMLHttpRequest();
+        xhttpChat.open("GET", "http://localhost:8080/webService/webresources/ws.chat/" + $("#id_chat_hidden").val(), false);
+        xhttpChat.setRequestHeader("Content-Type", "application/xml");
+        xhttpChat.send();
+        var chat = xhttpChat.responseText;
+
+//COGER EL USUARIO
+        var id_usuario = $("#id_user").val();
+        var xhttpUser = new XMLHttpRequest();
+        xhttpUser.open("GET", "http://localhost:8080/webService/webresources/ws.usuario/" + id_usuario, false);
+        xhttpUser.setRequestHeader("Content-Type", "application/xml");
+        xhttpUser.send();
+        var usuario = xhttpUser.responseXML;
+
+
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "http://localhost:8080/webService/webresources/ws.mensaje", false);
         xhttp.setRequestHeader("Content-Type", "application/xml");
 
-//COMO HAGO LA INSERCION SI NECESITO MIS DATOS???
-//           <mensaje> 
-//        <contenido>Nono tonto</contenido> 
-//        <estado>false</estado> 
-//        <fechaHora>2018-05-02T20:00:00+02:00</fechaHora> 
-//        <id>2</id> 
-//        <idChat> 
-//            <fechaHora>2018-05-02T12:00:00+02:00</fechaHora> 
-//            <id>1</id> 
-//            <nombre>Perrors Flauta</nombre> 
-//        </idChat> 
-//        <idUsuario> 
-//            <apellidos>Reina</apellidos> 
-//            <email>lydia@lydia.com</email> 
-//            <fechaNacimiento>2018-05-31T00:00:00+02:00</fechaNacimiento> 
-//            <foto/> 
-//            <id>4</id> 
-//            <nickname>lydia</nickname> 
-//            <nombre>Lydia</nombre> 
-//            <password>$2a$12$VV1xRg0Obd2Qs4KOxx3t3eLTXwl7yy8E2AeERcvylb9ZcBE7RwXUK</password> 
-//            <tipo>false</tipo> 
-//        </idUsuario> 
-//    </mensaje>
+        var contenido = '<contenido>' + mensaje + '</contenido>';
+        var estado = '<estado>false</estado>';
+        var fechaHora = '<fechaHora>' + new Date().toISOString() + '</fechaHora>';
+        var id = '<id></id>';
+        var fechaHoraChat = '<fechaHora>' + $(chat).find("fechaHora")[0].textContent + '</fechaHora>';
+        var idChat = '<id>' + $(chat).find("id")[0].textContent + '</id>';
+        var nombreChat = '<nombre>' + $(chat).find("nombre")[0].textContent + '</nombre>';
 
-        var xmlMensaje = '';
+        var apellidos = '<apellidos>' + $(usuario).find("apellidos")[0].textContent + '</apellidos>';
+        var email = '<email>' + $(usuario).find("email")[0].textContent + '</email>';
+        var fechaNacimiento = '<fechaNacimiento>' + $(usuario).find("fechaNacimiento")[0].textContent + '</fechaNacimiento>';
+        var foto = '<foto>' + $(usuario).find("foto")[0].textContent + '</foto>';
+        var id_user_xml = '<id>' + id_usuario + '</id>';
+        var nickname = '<nickname>' + $(usuario).find("nickname")[0].textContent + '</nickname>';
+        var nombre = '<nombre>' + $(usuario).find("nombre")[0].textContent + '</nombre>';
+        var password = '<password>' + $(usuario).find("password")[0].textContent + '</password>';
+        var tipo = '<tipo>' + $(usuario).find("tipo")[0].textContent + '</tipo>';
+        var xmlMensaje = '<mensaje>' + contenido + estado + fechaHora + id + '<idChat>' + fechaHoraChat + idChat + nombreChat + '</idChat><idUsuario>' + apellidos + email + fechaNacimiento + foto + id_user_xml + nickname + nombre + password + tipo + '</idUsuario></mensaje>';
         xhttp.send(xmlMensaje);
+
+        var conversacion = document.getElementById("mensajes");
+        $(conversacion).append('<div class="msj_prop"><p>' + document.getElementById("new_msj").value + '</p></div>')
+
+        document.getElementById("new_msj").value = "";
     }
 
+    function ocultar(id_mensaje) {
+
+//COGER EL MENSAJE
+        var xhttpMensaje = new XMLHttpRequest();
+        xhttpMensaje.open("GET", "http://localhost:8080/webService/webresources/ws.mensaje/" + id_mensaje, false);
+        xhttpMensaje.setRequestHeader("Accept", "application/json");
+        xhttpMensaje.send();
+        var mensaje = xhttpMensaje.responseText;
+        mensaje = JSON.parse(mensaje);
+        mensaje['estado'] = true;
+
+        var xhttpMensaje = new XMLHttpRequest();
+        xhttpMensaje.open("PUT", "http://localhost:8080/webService/webresources/ws.mensaje/" + id_mensaje, false);
+        xhttpMensaje.setRequestHeader("Content-Type", "application/json");
+        xhttpMensaje.send(JSON.stringify(mensaje));
+    }
 </script>
 
 <%@include file="footer.jsp" %>

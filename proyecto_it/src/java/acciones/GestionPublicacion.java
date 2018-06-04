@@ -13,13 +13,7 @@ import WS.Usuario;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.OpenOption;
-import java.nio.file.StandardOpenOption;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.ws.rs.core.GenericType;
@@ -87,12 +81,10 @@ public class GestionPublicacion extends ActionSupport {
 
     @Override
     public void validate() {
-        if(this.getTituloPubliacion().trim().length() == 0 || this.getTituloPubliacion() == null){
+        if (this.getTituloPubliacion().trim().length() == 0 || this.getTituloPubliacion() == null) {
             addFieldError("tituloPubliacion", "El título de la publicación es obligatorio");
         }
     }
-    
-    
 
     public String getIdPublicacionRemove() {
         return idPublicacionRemove;
@@ -158,5 +150,4 @@ public class GestionPublicacion extends ActionSupport {
         this.fileUploadFileName = fileUploadFileName;
     }
 
-    
 }

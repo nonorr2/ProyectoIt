@@ -47,6 +47,9 @@
             </result>
             <result name="input">addPublicacion.jsp</result>
         </action>
+        <action name="verPublicacion" class="acciones.PublicacionAction" method="verPublicacion">
+            <result name="success">publicacion.jsp</result>
+        </action>
     </package>
     
     <package name="top_menu_logueado" extends="struts-default">
