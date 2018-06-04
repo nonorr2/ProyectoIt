@@ -24,7 +24,7 @@
     </s:form>
 </s:div>
 <s:div id="editarChat" cssClass="modal">
-    <s:form theme="simple" cssClass="modal-content animate" action="chatsLogueado">
+    <s:form theme="simple" cssClass="modal-content animate" action="editarChat">
         <s:div cssClass="imgcontainer">
             <h2 class="titulo-popUp">Editar chat</h2>
             <span onclick="document.getElementById('editarChat').style.display = 'none'" class="close" title="Close Modal">&times;</span>
@@ -45,9 +45,10 @@
     </s:div>
     <s:div cssClass="row">
         <s:iterator var="chat" value="chats">
+
             <s:div cssClass="col-sm-4 sombreado">
                 <s:form method="post" action="borrarChat">
-                    <h4><s:property value="nombre" /></h4>
+                    <a onclick="showChat(<s:property value="id"/>)"><h4><s:property value="nombre" /></h4></a>
                     <p><s:property value="fechaHora" /></p>
                     <s:hidden name="idChat" value="%{id}" />
                     <img src="images/iconos/editar.png" id="<s:property value="id" />" class="icono" onclick="showEdit(this)"/>
@@ -57,12 +58,148 @@
         </s:iterator>
     </s:div>
 </s:div>
+
+<div id="chat" style="position: absolute; bottom: 0px; right: 0px; width: 300px; overflow: hidden; background: #f2f2f1">
+</div>
+<style>
+    .mensaje_chat{
+        margin: 1px 5px;
+        text-align: right;
+    }
+
+    .texto_chat{
+        color: white;
+        text-align: center;
+    }
+
+    .close_chat{
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: 15px;
+        height: 15px;
+        z-index: 10;
+    }
+</style>
+
 <script>
     function showEdit(imagen) {
         var id = imagen.getAttribute("id");
         document.getElementById("idChatEdit").setAttribute("value", id);
         document.getElementById('editarChat').style.display = 'block';
     }
+
+    function showChat(id_chat) {
+        var imagen_close = document.createElement("img");
+        imagen_close.setAttribute("src", "images/iconos/close.png");
+        imagen_close.setAttribute("class", "close_chat");
+        imagen_close.setAttribute("onclick", "cerrarChat()");
+
+        var contenedor_mensajes = document.createElement("div");
+        contenedor_mensajes.setAttribute("style", "width: 100%; background: #E8E8E8; overflow-y: scroll; height: 300px");
+        contenedor_mensajes.setAttribute("id", "mensajes");
+
+        var contenedor_entrada = document.createElement("div");
+        contenedor_entrada.setAttribute("id", "contenedor_entrada");
+
+        var entrada = document.createElement("input");
+        entrada.setAttribute("type", "text");
+        entrada.setAttribute("id", "new_msj");
+        entrada.setAttribute("style", "width: 80%; padding: 2px; margin: 0px;");
+        contenedor_entrada.appendChild(entrada);
+        var btn_envio = document.createElement("input");
+        btn_envio.setAttribute("type", "button");
+        btn_envio.setAttribute("value", "Enviar");
+        btn_envio.setAttribute("onclick", "enviarMensaje()");
+        btn_envio.setAttribute("style", "width: 20%; padding: 2px; margin: 0px;");
+        contenedor_entrada.appendChild(btn_envio);
+
+        var datos_chat = document.createElement("div");
+        datos_chat.setAttribute("id", "datos_chat");
+        datos_chat.setAttribute("style", "width: 100%; background: #FE7728; height: 30px");
+
+        var contenedor_chat = document.getElementById("chat");
+        contenedor_chat.appendChild(contenedor_mensajes);
+        contenedor_chat.appendChild(contenedor_entrada);
+        contenedor_chat.appendChild(entrada);
+        contenedor_chat.appendChild(datos_chat);
+        contenedor_chat.appendChild(imagen_close);
+
+        cargarMensajes(id_chat);
+
+        interval = setInterval(function () {
+            cargarMensajes(id_chat);
+        }, 10000);
+    }
+
+    function cargarMensajes(id_chat) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "http://localhost:8080/webService/webresources/ws.chat/" + id_chat, true);
+        xhttp.setRequestHeader("Accept", "application/xml");
+        xhttp.send();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                var chat = xhttp.responseXML;
+                $("#datos_chat").append('<p class="texto_chat">' + $(chat).find("nombre")[0].textContent + '</p>');
+                var xhttpMensajes = new XMLHttpRequest();
+                xhttpMensajes.open("GET", "http://localhost:8080/webService/webresources/ws.mensaje/getMensajesChat/" + id_chat, true);
+                xhttpMensajes.setRequestHeader("Accept", "application/json");
+                xhttpMensajes.send();
+                xhttpMensajes.onreadystatechange = function () {
+                    if (xhttpMensajes.readyState == 4 && xhttpMensajes.status == 200) {
+                        var mensajes = eval(xhttpMensajes.responseText);
+
+                        var conversacion = document.getElementById("mensajes");
+                        $(conversacion).empty();
+
+                        for (var i in mensajes) {
+                            $(conversacion).append('<p class="mensaje_chat">' + mensajes[i]['contenido'] + '</p>');
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    function cerrarChat() {
+        $("#chat").empty();
+        clearInterval(interval);
+    }
+
+    function enviarMensaje() {
+        var mensaje = document.getElementById("new_msj").value;
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "http://localhost:8080/webService/webresources/ws.mensaje", false);
+        xhttp.setRequestHeader("Content-Type", "application/xml");
+
+//COMO HAGO LA INSERCION SI NECESITO MIS DATOS???
+//           <mensaje> 
+//        <contenido>Nono tonto</contenido> 
+//        <estado>false</estado> 
+//        <fechaHora>2018-05-02T20:00:00+02:00</fechaHora> 
+//        <id>2</id> 
+//        <idChat> 
+//            <fechaHora>2018-05-02T12:00:00+02:00</fechaHora> 
+//            <id>1</id> 
+//            <nombre>Perrors Flauta</nombre> 
+//        </idChat> 
+//        <idUsuario> 
+//            <apellidos>Reina</apellidos> 
+//            <email>lydia@lydia.com</email> 
+//            <fechaNacimiento>2018-05-31T00:00:00+02:00</fechaNacimiento> 
+//            <foto/> 
+//            <id>4</id> 
+//            <nickname>lydia</nickname> 
+//            <nombre>Lydia</nombre> 
+//            <password>$2a$12$VV1xRg0Obd2Qs4KOxx3t3eLTXwl7yy8E2AeERcvylb9ZcBE7RwXUK</password> 
+//            <tipo>false</tipo> 
+//        </idUsuario> 
+//    </mensaje>
+
+        var xmlMensaje = '';
+        xhttp.send(xmlMensaje);
+    }
+
 </script>
 
 <%@include file="footer.jsp" %>

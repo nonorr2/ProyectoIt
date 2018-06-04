@@ -60,13 +60,18 @@
         </action> 
     </package>
     
-    <package name="chatsLogueado" extends="struts-default">
+    <package name="gestionChats" extends="struts-default">
         <action name="chatsLogueado" class="acciones.ChatAction" method="crearChat">
             <result name="success" type="chain">
                 <param name="actionName">chats</param>
             </result>
         </action>
         <action name="borrarChat" class="acciones.ChatAction" method="borrarChat">
+            <result name="success" type="chain">
+                <param name="actionName">chats</param>
+            </result>
+        </action>
+        <action name="editarChat" class="acciones.ChatAction" method="editarChat">
             <result name="success" type="chain">
                 <param name="actionName">chats</param>
             </result>

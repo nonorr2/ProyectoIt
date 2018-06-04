@@ -21,6 +21,7 @@ public class ChatAction extends ActionSupport {
     String nombreChat;
     String usuario;
     String idChat;
+    String idChatEdit;
 
     public ChatAction() {
     }
@@ -70,6 +71,16 @@ public class ChatAction extends ActionSupport {
         return SUCCESS;
     }
 
+    public String editarChat() throws Exception {
+        ChatWS chatClient = new ChatWS();
+        GenericType<Chat> tipoChat = new GenericType<Chat>() {
+        };
+        Chat chat = chatClient.find_XML(tipoChat, idChatEdit);
+        chat.setNombre(nombreChat);
+        chatClient.edit_XML(chat, idChatEdit);
+        return SUCCESS;
+    }
+
     public String getNombreChat() {
         return nombreChat;
     }
@@ -92,6 +103,14 @@ public class ChatAction extends ActionSupport {
 
     public void setIdChat(String idChat) {
         this.idChat = idChat;
+    }
+
+    public String getIdChatEdit() {
+        return idChatEdit;
+    }
+
+    public void setIdChatEdit(String idChatEdit) {
+        this.idChatEdit = idChatEdit;
     }
 
 }
