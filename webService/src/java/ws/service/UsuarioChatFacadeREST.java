@@ -114,5 +114,5 @@ public class UsuarioChatFacadeREST extends AbstractFacade<UsuarioChat> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

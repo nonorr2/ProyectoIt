@@ -153,5 +153,42 @@ public class ChatFacadeREST extends AbstractFacade<Chat> {
         Chat chat = (Chat) query.getSingleResult();
         return chat;
     }
+    
+    /**
+     * Devuelve una lista de usuarios asociado al chat a un chat
+     *
+     * @param id_chat
+     * @return Usuario
+     */
+    
+    @GET
+    @Path("/getUsuariosDeUnChat/{id}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Usuario> getUsuariosDeUnChat(@PathParam("id") Integer id) throws Exception {
+        Chat c = getChatById(id);
+        Query query = em.createQuery("SELECT uc FROM UsuarioChat uc WHERE uc.chat =:chat");
+        query.setParameter("chat", c);
+        List<UsuarioChat> usuarioChat = query.getResultList();
+        List<Usuario> usuarios = new ArrayList<Usuario>();
+        
+        for (UsuarioChat usu : usuarioChat) {
+            usuarios.add(usu.getUsuario());
+        }
+        
+        return usuarios;
+    }
+    
+    /**
+     * Devuelve un chat que coincide con el id pasado como parámetro
+     *
+     * @param id_chat
+     * @return Usuario
+     */
+    private Chat getChatById(Integer id_chat) {
+        Query qChat = em.createQuery("SELECT c FROM Chat c WHERE c.id= :id_chat");
+        qChat.setParameter("id_chat", id_chat);
+        Chat c = (Chat) qChat.getSingleResult();
+        return c;
+    }
 
 }
