@@ -49,7 +49,7 @@ public class GestionUsuario extends ActionSupport {
     }
 
     public String perfil() throws Exception {
-        loginLogout.session = (Map) ActionContext.getContext().get("session");
+        //loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuarioSession = (Usuario) loginLogout.session.get("user");
 
         GenericType<Usuario> tipoUser = new GenericType<Usuario>() {
@@ -88,7 +88,7 @@ public class GestionUsuario extends ActionSupport {
      * @throws Exception
      */
     public String removeMiCuenta() throws Exception {
-        loginLogout.session = (Map) ActionContext.getContext().get("session");
+        //loginLogout.session = (Map) ActionContext.getContext().get("session");
         loginLogout.session.clear();
         UsuarioWS userWS = new UsuarioWS();
         userWS.remove(idUsuarioRemove);

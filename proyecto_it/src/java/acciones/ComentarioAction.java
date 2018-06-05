@@ -23,21 +23,19 @@ public class ComentarioAction extends ActionSupport {
 
     public String votoPositivo() throws Exception {
         Usuario user = (Usuario) loginLogout.session.get("user");
-//
-//        ComentarioWS comentarioClient = new ComentarioWS();
-//        GenericType<Comentario> tipoComentario = new GenericType<Comentario>() {
-//        };
-//        Comentario coment = comentarioClient.find_XML(tipoComentario, String.valueOf(idComentario));
-//
-//        VotoComentario vt = new VotoComentario();
-//        vt.setVotoComentarioPK(new VotoComentarioPK(user.getId(), idComentario));
-//        vt.setFechaHora(new Date());
-//        vt.setTipo(true);
-//        vt.setUsuario(user);
-//        vt.setComentario(coment);
-//
-//        VotoComentarioWS votoComentarioClient = new VotoComentarioWS();
-//        votoComentarioClient.create_XML(vt);
+
+        ComentarioWS comentarioClient = new ComentarioWS();
+        GenericType<Comentario> tipoComentario = new GenericType<Comentario>() {
+        };
+        Comentario coment = comentarioClient.find_XML(tipoComentario, String.valueOf(idComentario));
+
+        VotoComentario vt = new VotoComentario(null, true, new Date());
+        vt.setIdUsuario(user);
+        vt.setIdComentario(coment);
+        
+
+        VotoComentarioWS votoComentarioClient = new VotoComentarioWS();
+        votoComentarioClient.create_XML(vt);
         return SUCCESS;
     }
 

@@ -70,7 +70,7 @@ public class menu_top_logueado extends ActionSupport {
      * @throws Exception
      */
     public String misPubicaciones() throws Exception {
-        loginLogout.session = (Map) ActionContext.getContext().get("session");
+        //loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
         GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {};
@@ -104,7 +104,7 @@ public class menu_top_logueado extends ActionSupport {
     }
 
     public String home() throws Exception {
-        loginLogout.session = (Map) ActionContext.getContext().get("session");
+        //loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
         GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
