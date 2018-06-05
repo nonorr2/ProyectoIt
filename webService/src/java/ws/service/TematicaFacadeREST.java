@@ -23,7 +23,7 @@ import ws.Tematica;
 
 /**
  *
- * @author David
+ * @author Nono
  */
 @Stateless
 @Path("ws.tematica")
@@ -105,7 +105,7 @@ public class TematicaFacadeREST extends AbstractFacade<Tematica> {
         List<Tematica> result = query.getResultList();
         return result;
     }
-    
+
     @GET
     @Path("getTematicasMasPopulares")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})

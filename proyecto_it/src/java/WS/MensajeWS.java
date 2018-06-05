@@ -11,11 +11,11 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 
 /**
- * Jersey REST client generated for REST resource:UsuarioChatFacadeREST
- * [ws.usuariochat]<br>
+ * Jersey REST client generated for REST resource:MensajeFacadeREST
+ * [ws.mensaje]<br>
  * USAGE:
  * <pre>
- *        UsuariChatWS client = new UsuariChatWS();
+ *        MensajeWS client = new MensajeWS();
  *        Object response = client.XXX(...);
  *        // do whatever with response
  *        client.close();
@@ -23,21 +23,33 @@ import javax.ws.rs.core.GenericType;
  *
  * @author Nono
  */
-public class UsuariChatWS {
+public class MensajeWS {
 
     private WebTarget webTarget;
     private Client client;
     private static final String BASE_URI = "http://localhost:8080/webService/webresources";
 
-    public UsuariChatWS() {
+    public MensajeWS() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
-        webTarget = client.target(BASE_URI).path("ws.usuariochat");
+        webTarget = client.target(BASE_URI).path("ws.mensaje");
     }
 
     public String countREST() throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("count");
         return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
+    }
+
+    public <T> T getMensajesChat_XML(GenericType<T> responseType, String id_chat) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getMensajesChat/{0}", new Object[]{id_chat}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
+
+    public <T> T getMensajesChat_JSON(GenericType<T> responseType, String id_chat) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getMensajesChat/{0}", new Object[]{id_chat}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
     public void edit_XML(Object requestEntity, String id) throws ClientErrorException {

@@ -23,7 +23,7 @@ import ws.Usuario;
 
 /**
  *
- * @author David
+ * @author Nono
  */
 @Stateless
 @Path("ws.usuario")
@@ -40,7 +40,6 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Usuario entity) {
-        entity.setPassword(BCrypt.hashpw(entity.getPassword(), BCrypt.gensalt(12)));
         super.create(entity);
     }
 
@@ -133,13 +132,14 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         Usuario result = (Usuario) query.getSingleResult();
         return result;
     }
-    
-    /**
-     * Metodo que devuelve una lista de usuarios de tipo 0 (todos menos los administradores)
-     * @return Lista de usuarios
-     * @throws Exception 
-     */
 
+    /**
+     * Metodo que devuelve una lista de usuarios de tipo 0 (todos menos los
+     * administradores)
+     *
+     * @return Lista de usuarios
+     * @throws Exception
+     */
     @GET
     @Path("/getUsuarioTipo")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -148,5 +148,4 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         List<Usuario> result = (List<Usuario>) query.getResultList();
         return result;
     }
-
 }

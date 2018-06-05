@@ -109,5 +109,5 @@ public class VotoComentarioWS {
     public void close() {
         client.close();
     }
-
+    
 }

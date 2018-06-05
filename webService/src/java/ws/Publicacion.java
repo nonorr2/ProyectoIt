@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author David
+ * @author Nono
  */
 @Entity
 @Table(name = "publicacion")
@@ -77,16 +77,14 @@ public class Publicacion implements Serializable {
     @Size(min = 1, max = 500)
     @Column(name = "ruta")
     private String ruta;
-    @Basic(optional = false)
-    //@NotNull
-    //@Size(min = 1, max = 100)
+    @Size(max = 100)
     @Column(name = "foto")
     private String foto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "publicacion")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPublicacion")
     private Collection<Suscripcion> suscripcionCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPublicacion")
     private Collection<Comentario> comentarioCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "publicacion")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPublicacion")
     private Collection<VotoPublicacion> votoPublicacionCollection;
     @JoinColumn(name = "id_tematica", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -102,14 +100,13 @@ public class Publicacion implements Serializable {
         this.id = id;
     }
 
-    public Publicacion(Integer id, String titulo, String contenido, Date fechaHoraCreacion, Date fechaHoraModificacion, String ruta, String foto) {
+    public Publicacion(Integer id, String titulo, String contenido, Date fechaHoraCreacion, Date fechaHoraModificacion, String ruta) {
         this.id = id;
         this.titulo = titulo;
         this.contenido = contenido;
         this.fechaHoraCreacion = fechaHoraCreacion;
         this.fechaHoraModificacion = fechaHoraModificacion;
         this.ruta = ruta;
-        this.foto = foto;
     }
 
     public Integer getId() {

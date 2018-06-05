@@ -11,9 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -33,7 +30,7 @@ import ws.UsuarioChat;
 
 /**
  *
- * @author David
+ * @author Nono
  */
 @Stateless
 @Path("ws.chat")
@@ -153,14 +150,13 @@ public class ChatFacadeREST extends AbstractFacade<Chat> {
         Chat chat = (Chat) query.getSingleResult();
         return chat;
     }
-    
+
     /**
      * Devuelve una lista de usuarios asociado al chat a un chat
      *
      * @param id_chat
      * @return Usuario
      */
-    
     @GET
     @Path("/getUsuariosDeUnChat/{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -170,14 +166,14 @@ public class ChatFacadeREST extends AbstractFacade<Chat> {
         query.setParameter("chat", c);
         List<UsuarioChat> usuarioChat = query.getResultList();
         List<Usuario> usuarios = new ArrayList<Usuario>();
-        
+
         for (UsuarioChat usu : usuarioChat) {
             usuarios.add(usu.getUsuario());
         }
-        
+
         return usuarios;
     }
-    
+
     /**
      * Devuelve un chat que coincide con el id pasado como parámetro
      *
@@ -190,5 +186,4 @@ public class ChatFacadeREST extends AbstractFacade<Chat> {
         Chat c = (Chat) qChat.getSingleResult();
         return c;
     }
-
 }

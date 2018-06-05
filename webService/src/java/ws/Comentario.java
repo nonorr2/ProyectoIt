@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author David
+ * @author Nono
  */
 @Entity
 @Table(name = "comentario")
@@ -64,7 +64,7 @@ public class Comentario implements Serializable {
     @Column(name = "fecha_hora_creacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHoraCreacion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comentario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idComentario")
     private Collection<VotoComentario> votoComentarioCollection;
     @JoinColumn(name = "id_publicacion", referencedColumnName = "id")
     @ManyToOne(optional = false)

@@ -19,14 +19,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.PathSegment;
 import ws.Suscripcion;
-import ws.SuscripcionPK;
 import ws.Usuario;
 
 /**
  *
- * @author David
+ * @author Nono
  */
 @Stateless
 @Path("ws.suscripcion")
@@ -34,27 +32,6 @@ public class SuscripcionFacadeREST extends AbstractFacade<Suscripcion> {
 
     @PersistenceContext(unitName = "webServicePU")
     private EntityManager em;
-
-    private SuscripcionPK getPrimaryKey(PathSegment pathSegment) {
-        /*
-         * pathSemgent represents a URI path segment and any associated matrix parameters.
-         * URI path part is supposed to be in form of 'somePath;idUsuario=idUsuarioValue;idPublicacion=idPublicacionValue'.
-         * Here 'somePath' is a result of getPath() method invocation and
-         * it is ignored in the following code.
-         * Matrix parameters are used as field names to build a primary key instance.
-         */
-        ws.SuscripcionPK key = new ws.SuscripcionPK();
-        javax.ws.rs.core.MultivaluedMap<String, String> map = pathSegment.getMatrixParameters();
-        java.util.List<String> idUsuario = map.get("idUsuario");
-        if (idUsuario != null && !idUsuario.isEmpty()) {
-            key.setIdUsuario(new java.lang.Integer(idUsuario.get(0)));
-        }
-        java.util.List<String> idPublicacion = map.get("idPublicacion");
-        if (idPublicacion != null && !idPublicacion.isEmpty()) {
-            key.setIdPublicacion(new java.lang.Integer(idPublicacion.get(0)));
-        }
-        return key;
-    }
 
     public SuscripcionFacadeREST() {
         super(Suscripcion.class);
@@ -70,23 +47,21 @@ public class SuscripcionFacadeREST extends AbstractFacade<Suscripcion> {
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") PathSegment id, Suscripcion entity) {
+    public void edit(@PathParam("id") Integer id, Suscripcion entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") PathSegment id) {
-        ws.SuscripcionPK key = getPrimaryKey(id);
-        super.remove(super.find(key));
+    public void remove(@PathParam("id") Integer id) {
+        super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Suscripcion find(@PathParam("id") PathSegment id) {
-        ws.SuscripcionPK key = getPrimaryKey(id);
-        return super.find(key);
+    public Suscripcion find(@PathParam("id") Integer id) {
+        return super.find(id);
     }
 
     @GET
@@ -114,9 +89,11 @@ public class SuscripcionFacadeREST extends AbstractFacade<Suscripcion> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
     /**
-     * Método para obtener todas las publicaciones en las que el usuario esta subcrito.
+     * Método para obtener todas las publicaciones en las que el usuario esta
+     * subcrito.
+     *
      * @param idUsuario
      * @return lista de subcripcion
      */
@@ -125,24 +102,23 @@ public class SuscripcionFacadeREST extends AbstractFacade<Suscripcion> {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Suscripcion> getPublicacionSuscrito(@PathParam("idUsuario") Integer idUsuario) {
         Usuario usuario = this.getUsuario(idUsuario);
-        String jpql = "SELECT s FROM Suscripcion s WHERE s.usuario = :usuario";        
-        Query query = em.createQuery(jpql); 
+        Query query = em.createQuery("SELECT s FROM Suscripcion s WHERE s.idUsuario = :usuario");
         query.setParameter("usuario", usuario);
-        List<Suscripcion> suscripciones = query.getResultList(); 
+        List<Suscripcion> suscripciones = query.getResultList();
         return suscripciones;
     }
-    
+
     /**
      * Método auxiliar para obtener un usuario a partir del identificardor.
+     *
      * @param idUsuario
      * @return un objeto usario
      */
     private Usuario getUsuario(@PathParam("idUsuario") Integer idUsuario) {
-        String jpql = "SELECT u FROM Usuario u WHERE u.id = :idUsuario";        
-        Query query = em.createQuery(jpql); 
+        String jpql = "SELECT u FROM Usuario u WHERE u.id = :idUsuario";
+        Query query = em.createQuery(jpql);
         query.setParameter("idUsuario", idUsuario);
         Usuario usuario = (Usuario) query.getSingleResult();
         return usuario;
-    } 
-    
+    }
 }
