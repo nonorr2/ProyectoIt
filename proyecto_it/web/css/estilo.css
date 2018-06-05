@@ -220,7 +220,8 @@ span.psw {
 
 .sombreado{
     box-shadow:  6px 7px 5px 2px rgba(0,0,0,0.09);
-    margin-bottom: 5px !important;
+    margin: 10px 0px !important;
+    padding-left: 0px;
 }
 
 .contenedor-publi{
@@ -385,6 +386,27 @@ span.psw {
     padding: 5px 15px;
 }
 
+.img-comentario{
+    float: left;
+    overflow: hidden;
+    height: 150px;
+    width: 150px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.contenido-mensaje{
+    float: left;
+    padding: 10px 30px;
+}
+
+.autor-comment{
+    color: white;
+    text-align: center;
+    background-color: rgba(0,0,0,0.6);
+    font-size: 30px;
+}
+
 @media (max-width: 800px){
     .modal-content {
         width: 50%;
@@ -448,6 +470,16 @@ span.psw {
     z-index: 15;
 }
 
+.flechas-comentarios{
+    float: right;
+    display: block;
+    width: 45px;
+    height: 45px;
+    margin: 5px;
+    cursor: pointer;
+    z-index: 15;
+}
+
 .follow{ 
     height: 30px!important;
 }
@@ -460,5 +492,10 @@ span.psw {
     /*    width: 50%;*/
     /*    margin-top: 145px;*/
     margin-right: 0px;
+}
 
+.contenedor-flechas-comentarios{
+    float: right;
+    height: 100%;
+    margin: 15px 5px;
 }

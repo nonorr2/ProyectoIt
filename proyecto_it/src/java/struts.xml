@@ -90,6 +90,19 @@
         </action>
     </package>
     
+    <package name="gestionComentarios" extends="struts-default">
+        <action name="votoPositivoComentario" class="acciones.ComentarioAction" method="votoPositivo">
+            <result name="success" type="chain">
+                <param name="actionName">verPublicacion</param>
+            </result>
+        </action>
+        <action name="votoNegativoComentario" class="acciones.ComentarioAction" method="votoNegativo">
+            <result name="success" type="chain">
+                <param name="actionName">verPublicacion</param>
+            </result>
+        </action>
+    </package>
+    
     <package name="loginLogout" extends="struts-default">
         <action name="login" class="acciones.loginLogout" method="login">
             <result name="success" type="chain">
