@@ -6,8 +6,10 @@
     <h1 class="text-banner">PUBLICACIONES</h1>
 </s:div>
 <s:div cssClass="container-fluid text-center">
-    <s:textfield  cssClass="textFileFiltrar"/>
-    <s:submit name="btoLogin" cssClass="btn btn-primary filtro" value="Filtrar"/>
+    <s:form action="filtroPubli">
+        <s:textfield name="filtroPublicacion" cssClass="textFileFiltrar"/>
+        <s:submit name="btoFiltroPubli" cssClass="btn btn-primary filtro" value="Filtrar"/>
+    </s:form>
 </s:div>
 <s:iterator var="publicacion" value="publicaciones">
     <s:div cssClass="container-fluid text-center">

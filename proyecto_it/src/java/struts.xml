@@ -60,6 +60,9 @@
                 <param name="actionName">home</param>
             </result>
         </action>
+        <action name="filtroPubli" class="acciones.GestionPublicacion" method="filtroPubli">
+            <result name="success">/vistas/admin/publicacionesAdmin.jsp</result>
+        </action>
     </package>
     
     <package name="top_menu_logueado" extends="struts-default">
@@ -91,6 +94,11 @@
         <action name="editarChat" class="acciones.ChatAction" method="editarChat">
             <result name="success" type="chain">
                 <param name="actionName">chats</param>
+            </result>
+        </action>
+        <action name="borrarChatAdmin" class="acciones.ChatAction" method="borrarChat">
+            <result name="success" type="chain">
+                <param name="actionName">chatsAdministrador</param>
             </result>
         </action>
     </package>
@@ -127,7 +135,7 @@
         <action name="editUser" class="acciones.GestionUsuario" method="editUser">
             <result name="success">/vistas/admin/editarUsuarioAdmin.jsp</result>
         </action>
-        <action name="editUserPersistencia" class="acciones.GestionUsuario" method="editUserPersistencia">
+        <action name="editUserPersistenciaAdmin" class="acciones.GestionUsuario" method="editUserPersistencia">
             <result name="success" type="chain">
                 <param name="actionName">usuarios</param>
             </result>

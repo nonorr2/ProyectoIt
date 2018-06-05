@@ -10,7 +10,7 @@
 <s:div cssClass="container-fluid text-center">
     <s:div cssClass="col-sm-2"></s:div>
     <s:div cssClass="col-sm-8 text-left" >
-        <s:form method="post" action="editUserPersistencia"> 
+        <s:form method="post" action="editUserPersistenciaAdmin"> 
 
             <s:div cssClass="imgcontainer">
                 <img class="avatar" src="<s:url value="%{usuario.foto}"/>"/>
