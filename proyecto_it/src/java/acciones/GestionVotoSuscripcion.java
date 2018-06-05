@@ -8,7 +8,6 @@ package acciones;
 import WS.Publicacion;
 import WS.PublicacionWS;
 import WS.Suscripcion;
-import WS.SuscripcionPK;
 import WS.SuscripcionWS;
 import WS.Usuario;
 import WS.VotoPublicacion;
@@ -68,23 +67,23 @@ public class GestionVotoSuscripcion extends ActionSupport {
 //        return SUCCESS;
 //    }
     
-    public String unFollowPublicacion() throws Exception{
-        loginLogout.session = (Map) ActionContext.getContext().get("session");
-        Usuario usuario = (Usuario) loginLogout.session.get("user");
-        PublicacionWS publicacionCliente = new PublicacionWS();
-        GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {};
-        Publicacion publicacion = publicacionCliente.find_XML(tipoPublicacion, this.idPublicacion);
-        
-        SuscripcionWS suscripcionClinete = new SuscripcionWS();
-        Suscripcion newSuscripcion = new Suscripcion();
-        newSuscripcion.setFechaHora(new Date());
-        newSuscripcion.setUsuario(usuario);
-        newSuscripcion.setPublicacion(publicacion);
-        SuscripcionPK susPK = new SuscripcionPK(usuario.getId(), Integer.parseInt(idPublicacion));
-        
-        suscripcionClinete.remove(String.valueOf(susPK));
-        return SUCCESS;
-    }
+//    public String unFollowPublicacion() throws Exception{
+//        loginLogout.session = (Map) ActionContext.getContext().get("session");
+//        Usuario usuario = (Usuario) loginLogout.session.get("user");
+//        PublicacionWS publicacionCliente = new PublicacionWS();
+//        GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {};
+//        Publicacion publicacion = publicacionCliente.find_XML(tipoPublicacion, this.idPublicacion);
+//        
+//        SuscripcionWS suscripcionClinete = new SuscripcionWS();
+//        Suscripcion newSuscripcion = new Suscripcion();
+//        newSuscripcion.setFechaHora(new Date());
+//        newSuscripcion.setUsuario(usuario);
+//        newSuscripcion.setPublicacion(publicacion);
+//        SuscripcionPK susPK = new SuscripcionPK(usuario.getId(), Integer.parseInt(idPublicacion));
+//        
+//        suscripcionClinete.remove(String.valueOf(susPK));
+//        return SUCCESS;
+//    }
 
     public String getIdPublicacion() {
         return idPublicacion;

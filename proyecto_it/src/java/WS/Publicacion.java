@@ -77,16 +77,14 @@ public class Publicacion implements Serializable {
     @Size(min = 1, max = 500)
     @Column(name = "ruta")
     private String ruta;
-    @Basic(optional = false)
-//    @NotNull
-//    @Size(min = 1, max = 100)
+    @Size(max = 100)
     @Column(name = "foto")
     private String foto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "publicacion")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPublicacion")
     private Collection<Suscripcion> suscripcionCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPublicacion")
     private Collection<Comentario> comentarioCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "publicacion")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPublicacion")
     private Collection<VotoPublicacion> votoPublicacionCollection;
     @JoinColumn(name = "id_tematica", referencedColumnName = "id")
     @ManyToOne(optional = false)

@@ -11,11 +11,11 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 
 /**
- * Jersey REST client generated for REST resource:UsuarioFacadeREST
- * [ws.usuario]<br>
+ * Jersey REST client generated for REST resource:VotoComentarioFacadeREST
+ * [ws.votocomentario]<br>
  * USAGE:
  * <pre>
- *        UsuarioWS client = new UsuarioWS();
+ *        VotoComentarioWS client = new VotoComentarioWS();
  *        Object response = client.XXX(...);
  *        // do whatever with response
  *        client.close();
@@ -23,27 +23,15 @@ import javax.ws.rs.core.GenericType;
  *
  * @author Nono
  */
-public class UsuarioWS {
+public class VotoComentarioWS {
 
     private WebTarget webTarget;
     private Client client;
     private static final String BASE_URI = "http://localhost:8080/webService/webresources";
 
-    public UsuarioWS() {
+    public VotoComentarioWS() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
-        webTarget = client.target(BASE_URI).path("ws.usuario");
-    }
-
-    public <T> T getUsuariosPorNombre_XML(GenericType<T> responseType, String nombre) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getUsuariosPorNombre/{0}", new Object[]{nombre}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
-    }
-
-    public <T> T getUsuariosPorNombre_JSON(GenericType<T> responseType, String nombre) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getUsuariosPorNombre/{0}", new Object[]{nombre}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+        webTarget = client.target(BASE_URI).path("ws.votocomentario");
     }
 
     public String countREST() throws ClientErrorException {
@@ -58,18 +46,6 @@ public class UsuarioWS {
 
     public void edit_JSON(Object requestEntity, String id) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("{0}", new Object[]{id})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
-    }
-
-    public <T> T getUsuarioTipo_XML(GenericType<T> responseType) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path("getUsuarioTipo");
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
-    }
-
-    public <T> T getUsuarioTipo_JSON(GenericType<T> responseType) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path("getUsuarioTipo");
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
     public <T> T find_XML(GenericType<T> responseType, String id) throws ClientErrorException {
@@ -104,22 +80,10 @@ public class UsuarioWS {
         webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
-    public <T> T login(GenericType<T> responseType, String usuario, String password) throws ClientErrorException {
+    public <T> T getVotosPositivos(GenericType<T> responseType, String id_comentario) throws ClientErrorException {
         WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("login/{0}/{1}", new Object[]{usuario, password}));
+        resource = resource.path(java.text.MessageFormat.format("getVotosPositivos/{0}", new Object[]{id_comentario}));
         return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(responseType);
-    }
-
-    public <T> T getUsuarioByUsername_XML(GenericType<T> responseType, String username) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getUsuarioByUsername/{0}", new Object[]{username}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
-    }
-
-    public <T> T getUsuarioByUsername_JSON(GenericType<T> responseType, String username) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getUsuarioByUsername/{0}", new Object[]{username}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
     public <T> T findAll_XML(GenericType<T> responseType) throws ClientErrorException {
@@ -134,6 +98,12 @@ public class UsuarioWS {
 
     public void remove(String id) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("{0}", new Object[]{id})).request().delete();
+    }
+
+    public <T> T getVotosNegativos(GenericType<T> responseType, String id_comentario) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getVotosNegativos/{0}", new Object[]{id_comentario}));
+        return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(responseType);
     }
 
     public void close() {

@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author David
+ * @author Nono
  */
 @Embeddable
 public class UsuarioChatPK implements Serializable {

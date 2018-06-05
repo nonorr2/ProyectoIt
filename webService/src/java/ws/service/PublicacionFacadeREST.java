@@ -25,7 +25,7 @@ import ws.Usuario;
 
 /**
  *
- * @author David
+ * @author Nono
  */
 @Stateless
 @Path("ws.publicacion")
@@ -158,8 +158,8 @@ public class PublicacionFacadeREST extends AbstractFacade<Publicacion> {
         List<Publicacion> publicaciones = query.getResultList();
         return publicaciones;
     }
-    
-     /**
+
+    /**
      * Obtiene las publicaciones a las que está suscrito un usuario y ordenadas
      * descendentemente por número de comentarios.
      *
@@ -170,19 +170,19 @@ public class PublicacionFacadeREST extends AbstractFacade<Publicacion> {
     @Path("/getPublicacionesSuscritoOrdenadoNumComentarios/{idUsuario}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Publicacion> getPublicacionesSuscritoOrdenadoNumComentarios(@PathParam("idUsuario") Integer idUsuario) {
-        String sentencia = "select sub.id, sub.titulo, sub.contenido, " +
-                            "sub.fecha_hora_creacion, sub.fecha_hora_modificacion, sub.ruta, " +
-                            "sub.id_usuario, sub.id_tematica, sub.foto " +
-                            "FROM(" +
-                            "select count(*) comentarios, pub.* " +
-                            "from publicacion pub " +
-                            "inner join comentario com on com.id_publicacion = pub.id " +
-                            "inner join suscripcion sus on sus.id_publicacion = pub.id " +
-                            "inner join usuario usu on sus.id_usuario = usu.id " +
-                            "where usu.id = #usuario " +
-                            "group by pub.id " +
-                            "order by comentarios desc " +
-                            ") sub";
+        String sentencia = "select sub.id, sub.titulo, sub.contenido, "
+                + "sub.fecha_hora_creacion, sub.fecha_hora_modificacion, sub.ruta, "
+                + "sub.id_usuario, sub.id_tematica, sub.foto "
+                + "FROM("
+                + "select count(*) comentarios, pub.* "
+                + "from publicacion pub "
+                + "inner join comentario com on com.id_publicacion = pub.id "
+                + "inner join suscripcion sus on sus.id_publicacion = pub.id "
+                + "inner join usuario usu on sus.id_usuario = usu.id "
+                + "where usu.id = #usuario "
+                + "group by pub.id "
+                + "order by comentarios desc "
+                + ") sub";
         Query query = em.createNativeQuery(sentencia, Publicacion.class);
         query.setParameter("usuario", idUsuario);
 
@@ -201,5 +201,4 @@ public class PublicacionFacadeREST extends AbstractFacade<Publicacion> {
         q.setParameter("tematica", id_tematica);
         return (Tematica) q.getSingleResult();
     }
-
 }
