@@ -8,18 +8,13 @@ package acciones;
 import WS.Usuario;
 import WS.UsuarioWS;
 import static acciones.loginLogout.session;
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-import java.text.SimpleDateFormat;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import java.io.File;
-import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import javax.ws.rs.core.GenericType;
-import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -40,11 +35,10 @@ public class GestionUsuario extends ActionSupport {
     private String foto;
     private String imgPerfilUsuario;
     private String confirmarPassword;
-
-    private File myFile;
-    private String myFileContentType;
-    private String myFileFileName;
-    private String destPath;
+    private String myFile;
+    private String filtroUser;
+    
+    private List<Usuario> usuarios;
 
     public GestionUsuario() {
 
@@ -74,14 +68,9 @@ public class GestionUsuario extends ActionSupport {
     }
 
     public String editUserPersistencia() throws Exception {
-        destPath = "images/fotosPerfil/";
-        String ruta = "images/fotosPerfil/" + myFileFileName;
-
-        File desFile = new File(destPath, myFileFileName);
-        FileUtils.copyFile(myFile, desFile);
-
+        String ruta = "images/fotosPerfil/" + myFile;
         UsuarioWS userWS = new UsuarioWS();
-        Usuario user = new Usuario(Integer.valueOf(id), nombre, apellidos, nickname, password, fechaNacimiento, ruta, imgPerfilUsuario);
+        Usuario user = new Usuario(Integer.valueOf(id), nombre, apellidos, nickname, password, fechaNacimiento, ruta, email);
         userWS.edit_JSON(user, id);
         return SUCCESS;
     }
@@ -121,6 +110,19 @@ public class GestionUsuario extends ActionSupport {
         } else {
             return ERROR;
         }
+    }
+    
+    public String filtrarUser() throws Exception {
+        GenericType<List<Usuario>> tipoUsuarios = new GenericType<List<Usuario>>() {
+        };
+        UsuarioWS usuarioClient = new UsuarioWS();
+        if(filtroUser.equals("")){
+            usuarios = usuarioClient.getUsuarioTipo_XML(tipoUsuarios);
+        }else{
+            usuarios = usuarioClient.getUsuariosPorNombre_JSON(tipoUsuarios, filtroUser);
+        }
+        
+        return SUCCESS;
     }
 
     public Usuario getUsuario() {
@@ -227,36 +229,29 @@ public class GestionUsuario extends ActionSupport {
         this.confirmarPassword = confirmarPassword;
     }
 
-    public File getMyFile() {
+    public String getMyFile() {
         return myFile;
     }
 
-    public void setMyFile(File myFile) {
+    public void setMyFile(String myFile) {
         this.myFile = myFile;
     }
 
-    public String getMyFileContentType() {
-        return myFileContentType;
+    public String getFiltroUser() {
+        return filtroUser;
     }
 
-    public void setMyFileContentType(String myFileContentType) {
-        this.myFileContentType = myFileContentType;
+    public void setFiltroUser(String filtroUser) {
+        this.filtroUser = filtroUser;
     }
 
-    public String getMyFileFileName() {
-        return myFileFileName;
+    public List<Usuario> getUsuarios() {
+        return usuarios;
     }
 
-    public void setMyFileFileName(String myFileFileName) {
-        this.myFileFileName = myFileFileName;
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
-
-    public String getDestPath() {
-        return destPath;
-    }
-
-    public void setDestPath(String destPath) {
-        this.destPath = destPath;
-    }
-
+    
+    
 }
