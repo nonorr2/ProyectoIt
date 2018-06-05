@@ -61,9 +61,10 @@ public class GestionPublicacion extends ActionSupport {
     public String addPublicacion() throws Exception {
         ServletContext context = ServletActionContext.getServletContext();
 //        String hola = context.getRealPath("/");
-        String ruta = System.getProperty("catalina.home") + "/prueba/prueba.png";
+        String ruta = System.getProperty("catalina.home") + "/prueba/prueba2.png";           
         File nuevo = new File(ruta);
         FileUtils.copyFile(fotoPubliacion, nuevo);
+        nuevo.renameTo(new File("/images/publicaciones/" + "prueba1subida.png"));
         PublicacionWS publicacionWS = new PublicacionWS();
         TematicaWS tematicaWS = new TematicaWS();
 
@@ -89,21 +90,7 @@ public class GestionPublicacion extends ActionSupport {
 //        }
 //    }
     
-//    public String votoPositivoPublicacion() throws Exception {
-//        loginLogout.session = (Map) ActionContext.getContext().get("session");
-//        Usuario usuario = (Usuario) loginLogout.session.get("user");
-//        VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
-//        PublicacionWS publicacionCliente = new PublicacionWS();
-//        GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {};
-//        Publicacion publicacion = publicacionCliente.find_XML(tipoPublicacion, this.idPublicacion);
-//        VotoPublicacion votoPositivo =  new VotoPublicacion();
-//        votoPositivo.setPublicacion(publicacion);
-//        votoPositivo.setUsuario(usuario);
-//        votoPositivo.setTipo(true);
-//        votoPositivo.setFechaHora(new Date());
-//        votoPublicacionCliente.create_JSON(votoPositivo);
-//        return SUCCESS;
-//    }
+
     
     
 

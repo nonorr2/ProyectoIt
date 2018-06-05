@@ -462,3 +462,11 @@ span.psw {
     margin-right: 0px;
 
 }
+
+.noContenido{
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    margin-top: 15px;
+    font-size: 17px;
+}
