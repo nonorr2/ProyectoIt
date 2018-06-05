@@ -141,7 +141,9 @@
             <result name="success">/vistas/admin/usuariosAdmin.jsp</result>
         </action>
         <action name="editUserPersistencia" class="acciones.GestionUsuario" method="editUserPersistencia">
-            <result name="success">home.jsp</result>
+            <result name="success" type="chain">
+                <param name="actionName">home</param>
+            </result>
         </action>
         <action name="removeMiCuenta" class="acciones.GestionUsuario" method="removeMiCuenta">
             <result name="success">index.jsp</result>

@@ -54,7 +54,7 @@ public class loginLogout extends ActionSupport {
     }
     
     public String logout() throws Exception {
-        loginLogout.session = (Map) ActionContext.getContext().get("session");
+        //loginLogout.session = (Map) ActionContext.getContext().get("session");
         loginLogout.session.clear();
         return SUCCESS;
     }

@@ -19,6 +19,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import ws.Publicacion;
 import ws.Suscripcion;
 import ws.Usuario;
 
@@ -120,5 +121,31 @@ public class SuscripcionFacadeREST extends AbstractFacade<Suscripcion> {
         query.setParameter("idUsuario", idUsuario);
         Usuario usuario = (Usuario) query.getSingleResult();
         return usuario;
+    }
+    
+    /**
+     * Método auxiliar para obtener una publicación a partir del identificardor.
+     *
+     * @param idPublicacion
+     * @return un objeto usario
+     */
+    private Publicacion getPublicacion(@PathParam("idPublicacion") Integer idPublicacion) {
+        Query query = em.createQuery("SELECT p FROM Publicacion p WHERE p.id = :idPublicacion");
+        query.setParameter("idPublicacion", idPublicacion);
+        Publicacion publicacion = (Publicacion) query.getSingleResult();
+        return publicacion;
+    }
+    
+    @GET
+    @Path("/getSuscripcion/{idUsuario}/{idPublicacion}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Suscripcion getSuscripcion(@PathParam("idUsuario") Integer idUsuario, @PathParam("idPublicacion") Integer idPublicacion) {
+        Publicacion publicacion = this.getPublicacion(idPublicacion);
+        Usuario usuario = this.getUsuario(idUsuario);
+        Query query = em.createQuery("SELECT s FROM Suscripcion s WHERE s.idUsuario = :usuario AND s.idPublicacion = :publicacion");
+        query.setParameter("usuario", usuario);
+        query.setParameter("publicacion", publicacion);
+        Suscripcion suscripcion = (Suscripcion) query.getSingleResult();
+        return suscripcion;
     }
 }

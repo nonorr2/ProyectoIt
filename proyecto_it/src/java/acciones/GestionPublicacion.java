@@ -68,7 +68,7 @@ public class GestionPublicacion extends ActionSupport {
         PublicacionWS publicacionWS = new PublicacionWS();
         TematicaWS tematicaWS = new TematicaWS();
 
-        loginLogout.session = (Map) ActionContext.getContext().get("session");
+        //loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
         GenericType<Tematica> tipoTematica = new GenericType<Tematica>() {
