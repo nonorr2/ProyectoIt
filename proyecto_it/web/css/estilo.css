@@ -51,6 +51,13 @@ footer .glyphicon {
     background: url(../images/cabecera_temas.png) no-repeat center top;
 }
 
+.banner-gen-publi{
+    width: 100%;
+    height: 180px;
+    margin: 50px 0px 0px 0px;
+    background: url(../images/cabecera_temas.png) no-repeat center top;
+}
+
 .div-icono{
     width: 100%;
     margin: 0px;
@@ -59,9 +66,8 @@ footer .glyphicon {
 }
 
 .text-banner{
-    font-size: 30px;
+    font-size: 60px;
     color: white;
-    float: top;
     text-align: center;
     position: relative;
     top: 30%;
@@ -278,7 +284,106 @@ span.psw {
     width: 25%;
 }
 
+.chat{
+    position: absolute; 
+    bottom: 0px; 
+    right: 0px; 
+    width: 300px; 
+    overflow: hidden; 
+    background: #f2f2f1;
+}
 
+.msj_prop{
+    background-color: #2EFE64;
+    padding: 10px 5px;
+    border-radius: 15px;
+    width: 75%;
+    float: right;
+    margin: 5px;
+    overflow: hidden;
+}
+
+.msj_prop p{
+    color: white;
+    text-align: right;
+    margin: 0px 15px;
+}
+
+.msj_noProp{
+    background-color: white;
+    padding: 10px 5px;
+    border-radius: 15px;
+    width: 75%;
+    float: left;
+    margin: 5px;
+    overflow: hidden;
+}
+
+.msj_noProp p{
+    color: black;
+    text-align: right;
+    margin: 0px 15px;
+}
+
+.texto_chat{
+    color: white;
+    text-align: center;
+}
+
+.close_chat{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 15px;
+    height: 15px;
+    z-index: 10;
+}
+
+.icon_hide{
+    width: 10px;
+    height: 10px;
+    float: left;
+    margin-left: 5px;
+    z-index: 10;
+}
+
+.contenedor-mensajes{
+    width: 100%; 
+    background: #E8E8E8; 
+    overflow-y: scroll; 
+    height: 300px;
+}
+
+.input-entrada-chat{
+    width: 80%; 
+    padding: 2px; 
+    margin: 0px;
+}
+
+.btn-entrada-chat{
+    width: 20%; 
+    padding: 2px; 
+    margin: 0px;
+}
+
+.datos-chat{
+    width: 100%; 
+    background: #FE7728; 
+    height: 30px
+}
+
+.contenido-publicacion{
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 6px 7px 5px 2px rgba(0,0,0,0.2);
+    padding: 15px 30px;
+    background-color: #f5f5f5;
+}
+
+.letras-titulo-publi{
+    background-color: rgba(0,0,0,0.6);
+    padding: 5px 15px;
+}
 
 @media (max-width: 800px){
     .modal-content {
@@ -344,16 +449,16 @@ span.psw {
 }
 
 .follow{ 
-   height: 30px!important;
+    height: 30px!important;
 }
 
 .contenedor-flechas{
     float: left;
-/*    width: 100%;*/
+    /*    width: 100%;*/
     height: 100%;
-    
-/*    width: 50%;*/
-/*    margin-top: 145px;*/
+
+    /*    width: 50%;*/
+    /*    margin-top: 145px;*/
     margin-right: 0px;
-    
+
 }

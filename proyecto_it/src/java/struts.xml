@@ -51,6 +51,7 @@
             <result name="success" type="chain">
                 <param name="actionName">home</param>
             </result>
+        </action>
         <action name="verPublicacion" class="acciones.PublicacionAction" method="verPublicacion">
             <result name="success">publicacion.jsp</result>
         </action>

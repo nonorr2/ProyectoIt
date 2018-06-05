@@ -60,64 +60,8 @@
     </s:div>
 </s:div>
 
-<div id="chat" style="position: absolute; bottom: 0px; right: 0px; width: 300px; overflow: hidden; background: #f2f2f1">
-</div>
-<style>
-    .msj_prop{
-        background-color: #2EFE64;
-        padding: 10px 5px;
-        border-radius: 15px;
-        width: 75%;
-        float: right;
-        margin: 5px;
-        overflow: hidden;
-    }
-
-    .msj_prop p{
-        color: white;
-        text-align: right;
-        margin: 0px 15px;
-    }
-
-    .msj_noProp{
-        background-color: white;
-        padding: 10px 5px;
-        border-radius: 15px;
-        width: 75%;
-        float: left;
-        margin: 5px;
-        overflow: hidden;
-    }
-
-    .msj_noProp p{
-        color: black;
-        text-align: right;
-        margin: 0px 15px;
-    }
-
-    .texto_chat{
-        color: white;
-        text-align: center;
-    }
-
-    .close_chat{
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        width: 15px;
-        height: 15px;
-        z-index: 10;
-    }
-
-    .icon_hide{
-        width: 10px;
-        height: 10px;
-        float: left;
-        margin-left: 5px;
-        z-index: 10;
-    }
-</style>
-
+<s:div id="chat" cssClass="chat">
+</s:div>
 <script>
     function showEdit(imagen) {
         var id = imagen.getAttribute("id");
@@ -132,7 +76,7 @@
         imagen_close.setAttribute("onclick", "cerrarChat()");
 
         var contenedor_mensajes = document.createElement("div");
-        contenedor_mensajes.setAttribute("style", "width: 100%; background: #E8E8E8; overflow-y: scroll; height: 300px");
+        contenedor_mensajes.setAttribute("class", "contenedor-mensajes");
         contenedor_mensajes.setAttribute("id", "mensajes");
 
         var contenedor_entrada = document.createElement("div");
@@ -141,19 +85,19 @@
         var entrada = document.createElement("input");
         entrada.setAttribute("type", "text");
         entrada.setAttribute("id", "new_msj");
-        entrada.setAttribute("style", "width: 80%; padding: 2px; margin: 0px;");
+        entrada.setAttribute("class", "input-entrada-chat");
 
         var btn_envio = document.createElement("input");
         btn_envio.setAttribute("type", "button");
         btn_envio.setAttribute("value", "Enviar");
         btn_envio.setAttribute("onclick", "enviarMensaje()");
-        btn_envio.setAttribute("style", "width: 20%; padding: 2px; margin: 0px;");
+        btn_envio.setAttribute("class", "btn-entrada-chat");
         contenedor_entrada.appendChild(btn_envio);
         contenedor_entrada.appendChild(entrada);
 
         var datos_chat = document.createElement("div");
         datos_chat.setAttribute("id", "datos_chat");
-        datos_chat.setAttribute("style", "width: 100%; background: #FE7728; height: 30px");
+        datos_chat.setAttribute("class", "datos-chat");
 
         var id_chat_hidden = document.createElement("input");
         id_chat_hidden.setAttribute("type", "hidden");
