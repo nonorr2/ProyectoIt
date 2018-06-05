@@ -55,6 +55,11 @@
         <action name="verPublicacion" class="acciones.PublicacionAction" method="verPublicacion">
             <result name="success">publicacion.jsp</result>
         </action>
+        <action name="unFollowPublicacion" class="acciones.GestionVotoSuscripcion" method="unFollowPublicacion">
+            <result name="success" type="chain">
+                <param name="actionName">home</param>
+            </result>
+        </action>
     </package>
     
     <package name="top_menu_logueado" extends="struts-default">
@@ -86,6 +91,19 @@
         <action name="editarChat" class="acciones.ChatAction" method="editarChat">
             <result name="success" type="chain">
                 <param name="actionName">chats</param>
+            </result>
+        </action>
+    </package>
+    
+    <package name="gestionComentarios" extends="struts-default">
+        <action name="votoPositivoComentario" class="acciones.ComentarioAction" method="votoPositivo">
+            <result name="success" type="chain">
+                <param name="actionName">verPublicacion</param>
+            </result>
+        </action>
+        <action name="votoNegativoComentario" class="acciones.ComentarioAction" method="votoNegativo">
+            <result name="success" type="chain">
+                <param name="actionName">verPublicacion</param>
             </result>
         </action>
     </package>

@@ -24,7 +24,7 @@ import ws.Mensaje;
 
 /**
  *
- * @author David
+ * @author Nono
  */
 @Stateless
 @Path("ws.mensaje")
@@ -89,7 +89,7 @@ public class MensajeFacadeREST extends AbstractFacade<Mensaje> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
     /**
      * Devuelve los mensajes que pertenecen al chat con el id pasado com
      * parámetro
@@ -120,5 +120,4 @@ public class MensajeFacadeREST extends AbstractFacade<Mensaje> {
         Chat chat = (Chat) query.getSingleResult();
         return chat;
     }
-    
 }

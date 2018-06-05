@@ -9,8 +9,10 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -32,13 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VotoPublicacion.findAll", query = "SELECT v FROM VotoPublicacion v")
     , @NamedQuery(name = "VotoPublicacion.findByTipo", query = "SELECT v FROM VotoPublicacion v WHERE v.tipo = :tipo")
     , @NamedQuery(name = "VotoPublicacion.findByFechaHora", query = "SELECT v FROM VotoPublicacion v WHERE v.fechaHora = :fechaHora")
-    , @NamedQuery(name = "VotoPublicacion.findByIdUsuario", query = "SELECT v FROM VotoPublicacion v WHERE v.votoPublicacionPK.idUsuario = :idUsuario")
-    , @NamedQuery(name = "VotoPublicacion.findByIdPublicacion", query = "SELECT v FROM VotoPublicacion v WHERE v.votoPublicacionPK.idPublicacion = :idPublicacion")})
+    , @NamedQuery(name = "VotoPublicacion.findById", query = "SELECT v FROM VotoPublicacion v WHERE v.id = :id")})
 public class VotoPublicacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected VotoPublicacionPK votoPublicacionPK;
     @Basic(optional = false)
     @NotNull
     @Column(name = "tipo")
@@ -48,36 +47,29 @@ public class VotoPublicacion implements Serializable {
     @Column(name = "fecha_hora")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHora;
-    @JoinColumn(name = "id_publicacion", referencedColumnName = "id", insertable = false, updatable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+    @JoinColumn(name = "id_publicacion", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Publicacion publicacion;
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
+    private Publicacion idPublicacion;
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Usuario usuario;
+    private Usuario idUsuario;
 
     public VotoPublicacion() {
     }
 
-    public VotoPublicacion(VotoPublicacionPK votoPublicacionPK) {
-        this.votoPublicacionPK = votoPublicacionPK;
+    public VotoPublicacion(Integer id) {
+        this.id = id;
     }
 
-    public VotoPublicacion(VotoPublicacionPK votoPublicacionPK, boolean tipo, Date fechaHora) {
-        this.votoPublicacionPK = votoPublicacionPK;
+    public VotoPublicacion(Integer id, boolean tipo, Date fechaHora) {
+        this.id = id;
         this.tipo = tipo;
         this.fechaHora = fechaHora;
-    }
-
-    public VotoPublicacion(int idUsuario, int idPublicacion) {
-        this.votoPublicacionPK = new VotoPublicacionPK(idUsuario, idPublicacion);
-    }
-
-    public VotoPublicacionPK getVotoPublicacionPK() {
-        return votoPublicacionPK;
-    }
-
-    public void setVotoPublicacionPK(VotoPublicacionPK votoPublicacionPK) {
-        this.votoPublicacionPK = votoPublicacionPK;
     }
 
     public boolean getTipo() {
@@ -96,26 +88,34 @@ public class VotoPublicacion implements Serializable {
         this.fechaHora = fechaHora;
     }
 
-    public Publicacion getPublicacion() {
-        return publicacion;
+    public Integer getId() {
+        return id;
     }
 
-    public void setPublicacion(Publicacion publicacion) {
-        this.publicacion = publicacion;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Publicacion getIdPublicacion() {
+        return idPublicacion;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setIdPublicacion(Publicacion idPublicacion) {
+        this.idPublicacion = idPublicacion;
+    }
+
+    public Usuario getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (votoPublicacionPK != null ? votoPublicacionPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -126,7 +126,7 @@ public class VotoPublicacion implements Serializable {
             return false;
         }
         VotoPublicacion other = (VotoPublicacion) object;
-        if ((this.votoPublicacionPK == null && other.votoPublicacionPK != null) || (this.votoPublicacionPK != null && !this.votoPublicacionPK.equals(other.votoPublicacionPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -134,7 +134,7 @@ public class VotoPublicacion implements Serializable {
 
     @Override
     public String toString() {
-        return "WS.VotoPublicacion[ votoPublicacionPK=" + votoPublicacionPK + " ]";
+        return "WS.VotoPublicacion[ id=" + id + " ]";
     }
     
 }

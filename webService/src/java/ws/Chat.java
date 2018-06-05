@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author David
+ * @author Nono
  */
 @Entity
 @Table(name = "chat")

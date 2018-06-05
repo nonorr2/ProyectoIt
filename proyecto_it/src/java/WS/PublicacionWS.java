@@ -60,6 +60,18 @@ public class PublicacionWS {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public <T> T getPublicacionesSuscritoOrdenadoNumComentarios_XML(GenericType<T> responseType, String idUsuario) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getPublicacionesSuscritoOrdenadoNumComentarios/{0}", new Object[]{idUsuario}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
+
+    public <T> T getPublicacionesSuscritoOrdenadoNumComentarios_JSON(GenericType<T> responseType, String idUsuario) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getPublicacionesSuscritoOrdenadoNumComentarios/{0}", new Object[]{idUsuario}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public <T> T find_XML(GenericType<T> responseType, String id) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("{0}", new Object[]{id}));
@@ -123,18 +135,6 @@ public class PublicacionWS {
 
     public <T> T findAll_JSON(GenericType<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
-    }
-    
-    public <T> T getPublicacionesSuscritoOrdenadoNumComentarios_XML(GenericType<T> responseType, String idUsuario) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getPublicacionesSuscritoOrdenadoNumComentarios/{0}", new Object[]{idUsuario}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
-    }
-
-    public <T> T getPublicacionesSuscritoOrdenadoNumComentarios_JSON(GenericType<T> responseType, String idUsuario) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getPublicacionesSuscritoOrdenadoNumComentarios/{0}", new Object[]{idUsuario}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 

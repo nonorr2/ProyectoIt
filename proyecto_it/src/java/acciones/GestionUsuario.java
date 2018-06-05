@@ -70,7 +70,7 @@ public class GestionUsuario extends ActionSupport {
     public String editUserPersistencia() throws Exception {
         String ruta = "images/fotosPerfil/" + myFile;
         UsuarioWS userWS = new UsuarioWS();
-        Usuario user = new Usuario(Integer.valueOf(id), nombre, apellidos, nickname, password, fechaNacimiento, ruta, email);
+        Usuario user = new Usuario(Integer.valueOf(id), nombre, apellidos, nickname, password, email, ruta, fechaNacimiento);
         userWS.edit_JSON(user, id);
         return SUCCESS;
     }
@@ -94,15 +94,16 @@ public class GestionUsuario extends ActionSupport {
         userWS.remove(idUsuarioRemove);
         return SUCCESS;
     }
-    
-    public String addUsuario() throws Exception{ 
-        UsuarioWS userWS = new UsuarioWS();  
-        GenericType<Usuario> tipoUsuario = new GenericType<Usuario>() {};
-        
-        if(this.password.equals(this.confirmarPassword)){
+
+    public String addUsuario() throws Exception {
+        UsuarioWS userWS = new UsuarioWS();
+        GenericType<Usuario> tipoUsuario = new GenericType<Usuario>() {
+        };
+
+        if (this.password.equals(this.confirmarPassword)) {
             Usuario newUsuario = new Usuario(null, nombre, apellidos, nickname, password, email, false, fechaNacimiento, foto);
             userWS.create_XML(newUsuario);
-            
+
             Usuario usu = userWS.getUsuarioByUsername_XML(tipoUsuario, nickname);
             session = (Map) ActionContext.getContext().get("session");
             session.put("user", usu);

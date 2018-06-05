@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author David
+ * @author Nono
  */
 @Entity
 @Table(name = "usuario")
@@ -87,14 +87,12 @@ public class Usuario implements Serializable {
     @Column(name = "fecha_nacimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
-    @Basic(optional = false)
-//    @NotNull
-//    @Size(min = 1, max = 100)
+    @Size(max = 100)
     @Column(name = "foto")
     private String foto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private Collection<VotoComentario> votoComentarioCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private Collection<Suscripcion> suscripcionCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Collection<UsuarioChat> usuarioChatCollection;
@@ -102,7 +100,7 @@ public class Usuario implements Serializable {
     private Collection<Mensaje> mensajeCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private Collection<Comentario> comentarioCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private Collection<VotoPublicacion> votoPublicacionCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private Collection<Publicacion> publicacionCollection;
@@ -114,7 +112,7 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public Usuario(Integer id, String nombre, String apellidos, String nickname, String password, String email, boolean tipo, Date fechaNacimiento, String foto) {
+    public Usuario(Integer id, String nombre, String apellidos, String nickname, String password, String email, boolean tipo, Date fechaNacimiento) {
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -123,7 +121,6 @@ public class Usuario implements Serializable {
         this.email = email;
         this.tipo = tipo;
         this.fechaNacimiento = fechaNacimiento;
-        this.foto = foto;
     }
 
     public Integer getId() {

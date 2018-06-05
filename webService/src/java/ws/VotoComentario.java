@@ -9,8 +9,10 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -23,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author David
+ * @author Nono
  */
 @Entity
 @Table(name = "voto_comentario")
@@ -32,13 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VotoComentario.findAll", query = "SELECT v FROM VotoComentario v")
     , @NamedQuery(name = "VotoComentario.findByTipo", query = "SELECT v FROM VotoComentario v WHERE v.tipo = :tipo")
     , @NamedQuery(name = "VotoComentario.findByFechaHora", query = "SELECT v FROM VotoComentario v WHERE v.fechaHora = :fechaHora")
-    , @NamedQuery(name = "VotoComentario.findByIdUsuario", query = "SELECT v FROM VotoComentario v WHERE v.votoComentarioPK.idUsuario = :idUsuario")
-    , @NamedQuery(name = "VotoComentario.findByIdComentario", query = "SELECT v FROM VotoComentario v WHERE v.votoComentarioPK.idComentario = :idComentario")})
+    , @NamedQuery(name = "VotoComentario.findById", query = "SELECT v FROM VotoComentario v WHERE v.id = :id")})
 public class VotoComentario implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected VotoComentarioPK votoComentarioPK;
     @Basic(optional = false)
     @NotNull
     @Column(name = "tipo")
@@ -48,36 +47,29 @@ public class VotoComentario implements Serializable {
     @Column(name = "fecha_hora")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHora;
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Usuario usuario;
-    @JoinColumn(name = "id_comentario", referencedColumnName = "id", insertable = false, updatable = false)
+    private Usuario idUsuario;
+    @JoinColumn(name = "id_comentario", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Comentario comentario;
+    private Comentario idComentario;
 
     public VotoComentario() {
     }
 
-    public VotoComentario(VotoComentarioPK votoComentarioPK) {
-        this.votoComentarioPK = votoComentarioPK;
+    public VotoComentario(Integer id) {
+        this.id = id;
     }
 
-    public VotoComentario(VotoComentarioPK votoComentarioPK, boolean tipo, Date fechaHora) {
-        this.votoComentarioPK = votoComentarioPK;
+    public VotoComentario(Integer id, boolean tipo, Date fechaHora) {
+        this.id = id;
         this.tipo = tipo;
         this.fechaHora = fechaHora;
-    }
-
-    public VotoComentario(int idUsuario, int idComentario) {
-        this.votoComentarioPK = new VotoComentarioPK(idUsuario, idComentario);
-    }
-
-    public VotoComentarioPK getVotoComentarioPK() {
-        return votoComentarioPK;
-    }
-
-    public void setVotoComentarioPK(VotoComentarioPK votoComentarioPK) {
-        this.votoComentarioPK = votoComentarioPK;
     }
 
     public boolean getTipo() {
@@ -96,26 +88,34 @@ public class VotoComentario implements Serializable {
         this.fechaHora = fechaHora;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Comentario getComentario() {
-        return comentario;
+    public Usuario getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setComentario(Comentario comentario) {
-        this.comentario = comentario;
+    public void setIdUsuario(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Comentario getIdComentario() {
+        return idComentario;
+    }
+
+    public void setIdComentario(Comentario idComentario) {
+        this.idComentario = idComentario;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (votoComentarioPK != null ? votoComentarioPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -126,7 +126,7 @@ public class VotoComentario implements Serializable {
             return false;
         }
         VotoComentario other = (VotoComentario) object;
-        if ((this.votoComentarioPK == null && other.votoComentarioPK != null) || (this.votoComentarioPK != null && !this.votoComentarioPK.equals(other.votoComentarioPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -134,7 +134,7 @@ public class VotoComentario implements Serializable {
 
     @Override
     public String toString() {
-        return "ws.VotoComentario[ votoComentarioPK=" + votoComentarioPK + " ]";
+        return "ws.VotoComentario[ id=" + id + " ]";
     }
     
 }

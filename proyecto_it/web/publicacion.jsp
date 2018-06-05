@@ -20,13 +20,30 @@
     <p>Autor: <s:property value="publicacion.getIdUsuario().getNickname()" /></p>
 </s:div>
 <s:iterator var="comentario" value="comentarios">
-    <s:div cssClass="col-sm-7 sombreado-publicacion">
-        <s:div>
-            <img src="<s:property value="idUsuario.getFoto()" />">
-            <p><s:property value="idUsuario.getNickname()" /></p>
+    <s:div cssClass="col-sm-12">
+        <s:div cssClass="col-sm-1"></s:div>
+        <s:div cssClass="col-sm-10 sombreado">
+            <div class="img-comentario" style="background: url(<s:property value="idUsuario.getFoto()" />) no-repeat center center;">
+                <p class="autor-comment"><s:property value="idUsuario.getNickname()" /></p>
+            </div>
+            <s:div cssClass="contenido-mensaje">
+                <p><s:property value="getContenido()" /></p>
+                <p class="fecha-comment"><s:property value="getFechaHoraModificacion()" /></p>
+            </s:div>
+            <s:div cssClass="contenedor-flechas-comentarios">
+                <s:form method="post" action="votoPositivoComentario">
+                    <s:hidden name="idComentario" value="%{getId()}" />
+                    <s:hidden name="id_publi" value="%{publicacion.getId()}" />
+                    <s:submit type="image" src="images/iconos/up.png" name="votoPositivoComentario" cssClass="flechas-comentarios"/>
+                </s:form>
+                <s:form method="post" action="votoNegativoComentario">
+                    <s:hidden name="idComentario" value="%{getId()}" />
+                    <s:hidden name="id_publi" value="%{publicacion.getId()}" />
+                    <s:submit type="image" src="images/iconos/down.png" name="votoNegativoComentario" cssClass="flechas-comentarios"/>
+                </s:form>
+            </s:div>
         </s:div>
-        <p><s:property value="getContenido()" /></p>
-        <p><s:property value="getFechaHoraModificacion()" /></p>
+        <s:div cssClass="col-sm-1"></s:div>
     </s:div>
 </s:iterator>
 

@@ -13,7 +13,9 @@
     </s:form>
 </s:div>
 <s:if test="%{publicacionesSuscrito.isEmpty()}">
-    <p>No tiene ninguna suscripci&oacute;n</p>
+    <s:div cssClass="alert alert-warning noContenido">
+        <p>No tiene ninguna suscripci&oacute;n</p>
+    </s:div>
 </s:if>    
 <s:else>  
     <s:iterator value="publicacionesSuscrito" var="publicacion">
@@ -36,9 +38,9 @@
                             <s:hidden name="idPublicacion" value="%{publicacion.getId()}" />
                             <s:submit type="image" src="images/iconos/flechaVerde.png" name="votoPositivoPublicacion" cssClass="flechas"/>
                         </s:form>
-                        <s:form method="post" action="">
+                        <s:form method="post" action="unFollowPublicacion">
                             <s:hidden name="idPublicacion" value="%{id}" />
-                            <s:submit name="followPublicacion" value="Follow" cssClass="btn btn-warning flechas follow" />
+                            <s:submit name="unFollowPublicacion" value="UnFollow" cssClass="btn btn-warning flechas follow" />
                         </s:form>
                         <s:form method="post" action="">
                             <s:hidden name="idPublicacion" value="%{id}" />

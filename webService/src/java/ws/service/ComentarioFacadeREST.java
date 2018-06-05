@@ -24,7 +24,7 @@ import ws.Publicacion;
 
 /**
  *
- * @author David
+ * @author Nono
  */
 @Stateless
 @Path("ws.comentario")
@@ -89,8 +89,8 @@ public class ComentarioFacadeREST extends AbstractFacade<Comentario> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
-     /**
+
+    /**
      * Devuelve una lista de comentarios pertenecientes a una publicación que
      * coincide con el id pasado como parámetro
      *
@@ -148,7 +148,6 @@ public class ComentarioFacadeREST extends AbstractFacade<Comentario> {
      * @param id
      * @return número de comentarios
      */
-    
     @GET
     @Path("/getNumComentarios/{id}")
     @Produces({MediaType.TEXT_PLAIN})
@@ -158,6 +157,5 @@ public class ComentarioFacadeREST extends AbstractFacade<Comentario> {
         query.setParameter("publicacion", publicacion);
         Long result = (Long) query.getSingleResult();
         return result;
-    }  
-    
+    }
 }

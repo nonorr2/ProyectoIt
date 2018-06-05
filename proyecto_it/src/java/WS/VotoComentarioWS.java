@@ -11,11 +11,11 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 
 /**
- * Jersey REST client generated for REST resource:VotoPublicacionFacadeREST
- * [ws.votopublicacion]<br>
+ * Jersey REST client generated for REST resource:VotoComentarioFacadeREST
+ * [ws.votocomentario]<br>
  * USAGE:
  * <pre>
- *        VotoPublicacionWS client = new VotoPublicacionWS();
+ *        VotoComentarioWS client = new VotoComentarioWS();
  *        Object response = client.XXX(...);
  *        // do whatever with response
  *        client.close();
@@ -23,15 +23,15 @@ import javax.ws.rs.core.GenericType;
  *
  * @author Nono
  */
-public class VotoPublicacionWS {
+public class VotoComentarioWS {
 
     private WebTarget webTarget;
     private Client client;
     private static final String BASE_URI = "http://localhost:8080/webService/webresources";
 
-    public VotoPublicacionWS() {
+    public VotoComentarioWS() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
-        webTarget = client.target(BASE_URI).path("ws.votopublicacion");
+        webTarget = client.target(BASE_URI).path("ws.votocomentario");
     }
 
     public String countREST() throws ClientErrorException {
@@ -80,9 +80,9 @@ public class VotoPublicacionWS {
         webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
-    public <T> T getVotosPositivos(GenericType<T> responseType, String idPublicacion) throws ClientErrorException {
+    public <T> T getVotosPositivos(GenericType<T> responseType, String id_comentario) throws ClientErrorException {
         WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getVotosPositivos/{0}", new Object[]{idPublicacion}));
+        resource = resource.path(java.text.MessageFormat.format("getVotosPositivos/{0}", new Object[]{id_comentario}));
         return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(responseType);
     }
 
@@ -100,9 +100,9 @@ public class VotoPublicacionWS {
         webTarget.path(java.text.MessageFormat.format("{0}", new Object[]{id})).request().delete();
     }
 
-    public <T> T getVotosNegativos(GenericType<T> responseType, String idPublicacion) throws ClientErrorException {
+    public <T> T getVotosNegativos(GenericType<T> responseType, String id_comentario) throws ClientErrorException {
         WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("getVotosNegativos/{0}", new Object[]{idPublicacion}));
+        resource = resource.path(java.text.MessageFormat.format("getVotosNegativos/{0}", new Object[]{id_comentario}));
         return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(responseType);
     }
 

@@ -19,14 +19,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.PathSegment;
 import ws.Publicacion;
 import ws.VotoPublicacion;
-import ws.VotoPublicacionPK;
 
 /**
  *
- * @author David
+ * @author Nono
  */
 @Stateless
 @Path("ws.votopublicacion")
@@ -34,27 +32,6 @@ public class VotoPublicacionFacadeREST extends AbstractFacade<VotoPublicacion> {
 
     @PersistenceContext(unitName = "webServicePU")
     private EntityManager em;
-
-    private VotoPublicacionPK getPrimaryKey(PathSegment pathSegment) {
-        /*
-         * pathSemgent represents a URI path segment and any associated matrix parameters.
-         * URI path part is supposed to be in form of 'somePath;idUsuario=idUsuarioValue;idPublicacion=idPublicacionValue'.
-         * Here 'somePath' is a result of getPath() method invocation and
-         * it is ignored in the following code.
-         * Matrix parameters are used as field names to build a primary key instance.
-         */
-        ws.VotoPublicacionPK key = new ws.VotoPublicacionPK();
-        javax.ws.rs.core.MultivaluedMap<String, String> map = pathSegment.getMatrixParameters();
-        java.util.List<String> idUsuario = map.get("idUsuario");
-        if (idUsuario != null && !idUsuario.isEmpty()) {
-            key.setIdUsuario(new java.lang.Integer(idUsuario.get(0)));
-        }
-        java.util.List<String> idPublicacion = map.get("idPublicacion");
-        if (idPublicacion != null && !idPublicacion.isEmpty()) {
-            key.setIdPublicacion(new java.lang.Integer(idPublicacion.get(0)));
-        }
-        return key;
-    }
 
     public VotoPublicacionFacadeREST() {
         super(VotoPublicacion.class);
@@ -70,23 +47,21 @@ public class VotoPublicacionFacadeREST extends AbstractFacade<VotoPublicacion> {
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") PathSegment id, VotoPublicacion entity) {
+    public void edit(@PathParam("id") Integer id, VotoPublicacion entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") PathSegment id) {
-        ws.VotoPublicacionPK key = getPrimaryKey(id);
-        super.remove(super.find(key));
+    public void remove(@PathParam("id") Integer id) {
+        super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public VotoPublicacion find(@PathParam("id") PathSegment id) {
-        ws.VotoPublicacionPK key = getPrimaryKey(id);
-        return super.find(key);
+    public VotoPublicacion find(@PathParam("id") Integer id) {
+        return super.find(id);
     }
 
     @GET
@@ -127,7 +102,7 @@ public class VotoPublicacionFacadeREST extends AbstractFacade<VotoPublicacion> {
     @Produces({MediaType.TEXT_PLAIN})
     public Long getVotosNegativos(@PathParam("idPublicacion") Integer id) {
         Publicacion publicacion = getPublicacion(id);
-        Query query = em.createQuery("SELECT COUNT(v.publicacion) FROM VotoPublicacion v WHERE v.publicacion = :publicacion AND v.tipo = 0");
+        Query query = em.createQuery("SELECT COUNT(v.idPublicacion) FROM VotoPublicacion v WHERE v.idPublicacion = :publicacion AND v.tipo = 0");
         query.setParameter("publicacion", publicacion);
         Long result = (Long) query.getSingleResult();
         return result;
@@ -145,7 +120,7 @@ public class VotoPublicacionFacadeREST extends AbstractFacade<VotoPublicacion> {
     @Produces({MediaType.TEXT_PLAIN})
     public Long getVotosPositivos(@PathParam("idPublicacion") Integer id) {
         Publicacion publicacion = getPublicacion(id);
-        Query query = em.createQuery("SELECT COUNT(v.publicacion) FROM VotoPublicacion v WHERE v.publicacion = :publicacion AND v.tipo = 1");
+        Query query = em.createQuery("SELECT COUNT(v.idPublicacion) FROM VotoPublicacion v WHERE v.idPublicacion = :publicacion AND v.tipo = 1");
         query.setParameter("publicacion", publicacion);
         Long result = (Long) query.getSingleResult();
         return result;
@@ -158,11 +133,9 @@ public class VotoPublicacionFacadeREST extends AbstractFacade<VotoPublicacion> {
      * @return Publicacion
      */
     private Publicacion getPublicacion(Integer id) {
-        String jpql = "SELECT p FROM Publicacion p WHERE p.id = :id";
-        Query query = em.createQuery(jpql);
+        Query query = em.createQuery("SELECT p FROM Publicacion p WHERE p.id = :id");
         query.setParameter("id", id);
         Publicacion p = (Publicacion) query.getSingleResult();
         return p;
     }
-
 }
