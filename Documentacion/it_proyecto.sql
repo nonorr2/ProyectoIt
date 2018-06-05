@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2018 a las 19:53:42
--- Versión del servidor: 10.1.30-MariaDB
--- Versión de PHP: 7.2.1
+-- Tiempo de generación: 05-06-2018 a las 20:03:08
+-- Versión del servidor: 10.1.21-MariaDB
+-- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -30,7 +28,6 @@ USE `it_proyecto`;
 -- Estructura de tabla para la tabla `chat`
 --
 
-DROP TABLE IF EXISTS `chat`;
 CREATE TABLE `chat` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) CHARACTER SET latin1 NOT NULL,
@@ -50,7 +47,6 @@ INSERT INTO `chat` (`id`, `nombre`, `fecha_hora`) VALUES
 -- Estructura de tabla para la tabla `comentario`
 --
 
-DROP TABLE IF EXISTS `comentario`;
 CREATE TABLE `comentario` (
   `id` int(11) NOT NULL,
   `fecha_hora_modificacion` datetime NOT NULL,
@@ -74,7 +70,6 @@ INSERT INTO `comentario` (`id`, `fecha_hora_modificacion`, `contenido`, `id_usua
 -- Estructura de tabla para la tabla `mensaje`
 --
 
-DROP TABLE IF EXISTS `mensaje`;
 CREATE TABLE `mensaje` (
   `id` int(11) NOT NULL,
   `contenido` varchar(5000) CHARACTER SET latin1 NOT NULL,
@@ -89,8 +84,6 @@ CREATE TABLE `mensaje` (
 --
 
 INSERT INTO `mensaje` (`id`, `contenido`, `fecha_hora`, `id_usuario`, `id_chat`, `estado`) VALUES
-(2, 'Nono tonto', '2018-05-02 20:00:00', 4, 1, 0),
-(3, 'jajajajaja', '2018-05-02 20:00:00', 4, 1, 0),
 (4, 'tu mas', '2018-06-04 00:00:00', 2, 1, 1),
 (5, 'fea', '2018-06-04 00:00:00', 2, 1, 0),
 (6, 'perra', '2018-06-04 00:00:00', 2, 1, 0),
@@ -103,17 +96,12 @@ INSERT INTO `mensaje` (`id`, `contenido`, `fecha_hora`, `id_usuario`, `id_chat`,
 (13, 'ppppprrrr', '2018-06-04 19:31:12', 2, 1, 0),
 (14, 'dtfhbfhb', '2018-06-04 19:31:38', 2, 1, 0),
 (15, 'mamona', '2018-06-04 19:33:27', 2, 1, 1),
-(16, 'mamona tu', '2018-05-02 20:00:00', 4, 1, 0),
 (17, 'perrrrrrooo', '2018-06-04 20:17:38', 2, 1, 0),
 (18, 'sdvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', '2018-06-04 20:17:53', 2, 1, 1),
 (19, 'sdvv svsrvsr vsrvwrv rgsvwevswe vr', '2018-06-04 20:19:27', 2, 1, 0),
 (20, 'njdhdjbhf rfsbrb wjrbfebf wejb', '2018-06-04 20:19:35', 2, 1, 1),
 (21, 'de mentra', '2018-06-04 20:20:31', 2, 1, 0),
 (22, 'antonio', '2018-06-04 20:21:36', 2, 1, 1),
-(23, 'sefsfcfc', '2018-05-02 20:00:00', 4, 1, 0),
-(24, 'Nono tonto', '2018-05-02 20:00:00', 4, 1, 0),
-(25, 'Nono tonto', '2018-05-02 20:00:00', 4, 1, 0),
-(26, 'Nono tonto', '2018-05-02 20:00:00', 4, 1, 0),
 (27, 'perra', '2018-06-05 11:56:36', 2, 1, 1);
 
 -- --------------------------------------------------------
@@ -122,7 +110,6 @@ INSERT INTO `mensaje` (`id`, `contenido`, `fecha_hora`, `id_usuario`, `id_chat`,
 -- Estructura de tabla para la tabla `publicacion`
 --
 
-DROP TABLE IF EXISTS `publicacion`;
 CREATE TABLE `publicacion` (
   `id` int(11) NOT NULL,
   `titulo` varchar(500) CHARACTER SET latin1 NOT NULL,
@@ -148,7 +135,6 @@ INSERT INTO `publicacion` (`id`, `titulo`, `contenido`, `fecha_hora_creacion`, `
 -- Estructura de tabla para la tabla `suscripcion`
 --
 
-DROP TABLE IF EXISTS `suscripcion`;
 CREATE TABLE `suscripcion` (
   `fecha_hora` datetime NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -161,8 +147,7 @@ CREATE TABLE `suscripcion` (
 --
 
 INSERT INTO `suscripcion` (`fecha_hora`, `id_usuario`, `id_publicacion`, `id`) VALUES
-('2018-05-03 08:00:00', 2, 1, 1),
-('2018-05-02 20:00:00', 4, 1, 3);
+('2018-05-03 08:00:00', 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -170,7 +155,6 @@ INSERT INTO `suscripcion` (`fecha_hora`, `id_usuario`, `id_publicacion`, `id`) V
 -- Estructura de tabla para la tabla `tematica`
 --
 
-DROP TABLE IF EXISTS `tematica`;
 CREATE TABLE `tematica` (
   `id` int(11) NOT NULL,
   `nombre` varchar(150) CHARACTER SET latin1 NOT NULL,
@@ -192,7 +176,6 @@ INSERT INTO `tematica` (`id`, `nombre`, `imagen`) VALUES
 -- Estructura de tabla para la tabla `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) CHARACTER SET latin1 NOT NULL,
@@ -212,8 +195,7 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `nickname`, `password`, `email`, `tipo`, `fecha_nacimiento`, `foto`) VALUES
 (1, 'Admin', 'Admin', 'admin', '$2a$12$nV1irJdczUDtCgYKYePUYOEla0F6y4mFcoQltPqBNhZ3A7fRD.c8S', 'admin@admin.com', 1, '2018-05-15', ''),
 (2, 'Nono', 'Rodriguez', 'nono', '$2a$12$nV1irJdczUDtCgYKYePUYOEla0F6y4mFcoQltPqBNhZ3A7fRD.c8S', 'nono@nono.com', 0, '2018-05-23', 'images/fotosPerfil/prueba2.jpg'),
-(3, 'David', 'Ruiz', 'david', '$2a$12$nV1irJdczUDtCgYKYePUYOEla0F6y4mFcoQltPqBNhZ3A7fRD.c8S', 'david@david.com', 0, '2018-05-10', 'images/fotosPerfil/prueba1.jpg'),
-(4, 'Lydia', 'Reina', 'lydia', '$2a$12$VV1xRg0Obd2Qs4KOxx3t3eLTXwl7yy8E2AeERcvylb9ZcBE7RwXUK', 'lydia@lydia.com', 0, '2018-05-31', 'images/fotosPerfil/prueba3.jpg');
+(3, 'David', 'Ruiz', 'david', '$2a$12$nV1irJdczUDtCgYKYePUYOEla0F6y4mFcoQltPqBNhZ3A7fRD.c8S', 'david@david.com', 0, '2018-05-10', 'images/fotosPerfil/prueba1.jpg');
 
 -- --------------------------------------------------------
 
@@ -221,7 +203,6 @@ INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `nickname`, `password`, `ema
 -- Estructura de tabla para la tabla `usuario_chat`
 --
 
-DROP TABLE IF EXISTS `usuario_chat`;
 CREATE TABLE `usuario_chat` (
   `id_usuario` int(11) NOT NULL,
   `id_chat` int(11) NOT NULL,
@@ -233,8 +214,7 @@ CREATE TABLE `usuario_chat` (
 --
 
 INSERT INTO `usuario_chat` (`id_usuario`, `id_chat`, `fecha`) VALUES
-(2, 1, '2018-05-26 17:18:57'),
-(4, 1, '2018-05-26 17:18:57');
+(2, 1, '2018-05-26 17:18:57');
 
 -- --------------------------------------------------------
 
@@ -242,7 +222,6 @@ INSERT INTO `usuario_chat` (`id_usuario`, `id_chat`, `fecha`) VALUES
 -- Estructura de tabla para la tabla `voto_comentario`
 --
 
-DROP TABLE IF EXISTS `voto_comentario`;
 CREATE TABLE `voto_comentario` (
   `tipo` tinyint(1) NOT NULL,
   `fecha_hora` datetime NOT NULL,
@@ -256,8 +235,7 @@ CREATE TABLE `voto_comentario` (
 --
 
 INSERT INTO `voto_comentario` (`tipo`, `fecha_hora`, `id_usuario`, `id_comentario`, `id`) VALUES
-(1, '2018-06-05 17:35:46', 2, 2, 2),
-(0, '2018-05-16 00:00:00', 4, 4, 4);
+(1, '2018-06-05 17:35:46', 2, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -265,7 +243,6 @@ INSERT INTO `voto_comentario` (`tipo`, `fecha_hora`, `id_usuario`, `id_comentari
 -- Estructura de tabla para la tabla `voto_publicacion`
 --
 
-DROP TABLE IF EXISTS `voto_publicacion`;
 CREATE TABLE `voto_publicacion` (
   `tipo` tinyint(1) NOT NULL,
   `fecha_hora` datetime NOT NULL,
@@ -279,8 +256,7 @@ CREATE TABLE `voto_publicacion` (
 --
 
 INSERT INTO `voto_publicacion` (`tipo`, `fecha_hora`, `id_usuario`, `id_publicacion`, `id`) VALUES
-(0, '2018-05-02 00:00:00', 3, 1, 2),
-(0, '2017-12-28 05:00:00', 4, 1, 4);
+(0, '2018-05-02 00:00:00', 3, 1, 2);
 
 --
 -- Índices para tablas volcadas
@@ -369,55 +345,46 @@ ALTER TABLE `voto_publicacion`
 --
 ALTER TABLE `chat`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `mensaje`
 --
 ALTER TABLE `mensaje`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
 --
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT de la tabla `suscripcion`
 --
 ALTER TABLE `suscripcion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `tematica`
 --
 ALTER TABLE `tematica`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT de la tabla `voto_comentario`
 --
 ALTER TABLE `voto_comentario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `voto_publicacion`
 --
 ALTER TABLE `voto_publicacion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- Restricciones para tablas volcadas
 --
@@ -434,7 +401,7 @@ ALTER TABLE `comentario`
 --
 ALTER TABLE `mensaje`
   ADD CONSTRAINT `mensaje_ibfk_1` FOREIGN KEY (`id_chat`) REFERENCES `chat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `mensaje_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `mensaje_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `publicacion`
@@ -470,7 +437,6 @@ ALTER TABLE `voto_comentario`
 ALTER TABLE `voto_publicacion`
   ADD CONSTRAINT `voto_publicacion_ibfk_1` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `voto_publicacion_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
