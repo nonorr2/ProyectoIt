@@ -7,8 +7,10 @@
     <h1 class="text-banner">TEMATICAS</h1>
 </s:div>
 <s:div cssClass="container-fluid text-center">
-    <s:textfield  cssClass="textFileFiltrar"/>
-    <s:submit name="btoLogin" cssClass="btn btn-primary filtro" value="Filtrar"/>
+    <s:form action="filtrarTema">
+        <s:textfield name="filtrarTema"  cssClass="textFileFiltrar"/>
+        <s:submit name="btoFiltrarTema" cssClass="btn btn-primary filtro" value="Filtrar"/>
+    </s:form>
     <s:div cssClass="contenedor-icono-add">
         <s:div cssClass="contenedor-icono-add" onclick="document.getElementById('id03').style.display = 'block'">
             <img src="images/iconos/add.png" class="icono"/>

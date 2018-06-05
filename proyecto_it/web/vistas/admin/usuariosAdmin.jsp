@@ -7,8 +7,10 @@
         <h1 class="text-banner">USUARIOS</h1>
     </s:div>
     <s:div cssClass="container-fluid text-center">
-        <s:textfield  cssClass="textFileFiltrar"/>
-        <s:submit name="btoLogin" cssClass="btn btn-primary filtro" value="Filtrar"/>
+        <s:form action="filtrarUser">
+            <s:textfield name="filtroUser"  cssClass="textFileFiltrar"/>
+            <s:submit name="btoFiltrarUser" cssClass="btn btn-primary filtro" value="Filtrar"/>
+        </s:form>
     </s:div>
     <s:iterator var="usuario" value="usuarios">
         <s:div cssClass="container-fluid text-center">

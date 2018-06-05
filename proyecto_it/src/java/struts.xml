@@ -119,6 +119,9 @@
                 <param name="actionName">usuarios</param>
             </result>
         </action>
+        <action name="filtrarUser" class="acciones.GestionUsuario" method="filtrarUser">
+            <result name="success">/vistas/admin/usuariosAdmin.jsp</result>
+        </action>
         <action name="editUserPersistencia" class="acciones.GestionUsuario" method="editUserPersistencia">
             <result name="success">home.jsp</result>
         </action>
@@ -136,6 +139,9 @@
     <package name="gestionTematica" extends="struts-default">
         <action name="editTematica" class="acciones.GestionTematica" method="editTematica">
             <result name="success">/vistas/admin/editarTematica.jsp</result>
+        </action>
+        <action name="filtrarTema" class="acciones.GestionTematica" method="filtrarTema">
+            <result name="success">/vistas/admin/tematicasAdmin.jsp</result>
         </action>
         <action name="editTemaPersistencia" class="acciones.GestionTematica" method="editTemaPersistencia">
             <result name="success" type="chain">

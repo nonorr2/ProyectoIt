@@ -19,12 +19,54 @@
                     <s:hidden name="idChat" value="%{id}" /> 
                     <s:submit type="image" src="images/iconos/papelera.png" name="removeChat" cssClass="icono"/>
                 </s:form>
-                <s:form action="" method="post">
-                    <s:hidden name="idChatVisualizar" value="%{id}" /> 
-                    <s:submit type="image" src="images/iconos/visualizar.png" name="visualizarChat" cssClass="icono" />
-                </s:form>
+                <%--<s:submit type="image" src="images/iconos/visualizar.png" id="%{id}" name="visualizarChat" cssClass="icono" onmouseover="visualizarUser(this)"/>--%>
+                <img src="images/iconos/visualizar.png"  class="icono" onmouseenter="visualizarUserChat(<s:property value="id"/>)" onmouseleave="borrarUserChat()"/>
+            </s:div>
+            <s:div id="userChat" cssClass="userChat">
             </s:div>
         </s:iterator>
     </s:div>
 </s:div>
+<script>
+    function visualizarUserChat(id_chat) {
+        var contenedorUser1 = document.createElement("div");
+        contenedorUser1.setAttribute("class", "contenedor_user");
+
+        var contenedorUser2 = document.createElement("div");
+        contenedorUser2.setAttribute("class", "contenedor_user");
+
+        var contenedor = document.getElementById("userChat");
+        contenedor.appendChild(contenedorUser1);
+        contenedor.appendChild(contenedorUser2);
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "http://localhost:8080/webService/webresources/ws.chat/getUsuariosDeUnChat/" + id_chat, false);
+        xhttp.setRequestHeader("Accept", "application/json");
+        xhttp.send();
+        var usuarios = xhttp.responseText;
+        usuarios = JSON.parse(usuarios);
+
+        
+        var pNickName1 = document.createElement("p");
+        pNickName1.appendChild(document.createTextNode(usuarios[0]['nickname']));
+        var imgUser1 = document.createElement("img");
+        imgUser1.setAttribute("src", usuarios[0]['foto']);
+        imgUser1.setAttribute("class", "icono");
+        contenedorUser1.appendChild(imgUser1);
+        contenedorUser1.appendChild(pNickName1);
+
+        var imgUser2 = document.createElement("img");
+        imgUser2.setAttribute("src", usuarios[1]['foto']);
+        imgUser2.setAttribute("class", "icono");
+        var pNickName2 = document.createElement("p");
+        pNickName2.appendChild(document.createTextNode(usuarios[1]['nickname']));
+        contenedorUser2.appendChild(imgUser2);
+        contenedorUser2.appendChild(pNickName2);
+
+    }
+
+    function borrarUserChat() {
+        $("#userChat").empty();
+    }
+</script>
 <%@include file="../../footer.jsp" %>

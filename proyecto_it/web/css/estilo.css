@@ -385,6 +385,19 @@ span.psw {
     padding: 5px 15px;
 }
 
+.userChat{
+    background-color: #ffa500;
+    position: relative;
+    top: 10px;
+    right: 90px;
+    width: 20%;
+    overflow: hidden;
+}
+
+.contenedor_user{
+    overflow: hidden;
+    width: 50%;
+}
 @media (max-width: 800px){
     .modal-content {
         width: 50%;
