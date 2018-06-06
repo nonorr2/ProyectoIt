@@ -32,7 +32,7 @@
                     </s:div>
                     <s:div cssClass="datos-publicacion">
                         <h1><s:property value="nombre"/></h1>
-                        <p>Numero de publicaciones asociada</p>
+                        <p>N&uacute;mero de publicaciones: <s:property value="numPublicacionesDeUnaTematica"/></p>       
                     </s:div>
                     <s:div cssClass="contenedor-iconos">
                         <s:form action="removeTematica" method="post">

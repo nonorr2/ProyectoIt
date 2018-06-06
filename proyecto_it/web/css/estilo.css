@@ -197,7 +197,7 @@ span.psw {
 
 .publi-no-imagen{
     width: 15%;
-    height: 190px;
+    height: 220px;
     float: left;
     overflow: hidden;
     margin: 0px;
@@ -228,7 +228,7 @@ span.psw {
     overflow: hidden;
     text-align: left;
     width: 90%;
-    margin: 15px auto;
+    margin: 15px auto!important;
 }
 
 .iniciales-no-imagen{
@@ -258,7 +258,7 @@ span.psw {
 .contenedor-iconos{
     float: left;
     width: 14%;
-    margin-top: 145px;
+    margin-top: 180px;
 }
 
 .contenedor-icono-add{
@@ -418,6 +418,31 @@ span.psw {
     text-align: center;
     background-color: rgba(0,0,0,0.6);
     font-size: 30px;
+}
+
+.icono-pulgar{
+    border-radius:150px;
+    float: left;
+    width:40px;
+    height: 40px!important;
+    margin: 5px 50px 5px 0;
+    cursor: pointer;
+    z-index: 15;
+}
+
+.contenedor-iconos-pulgares{
+    overflow: hidden;
+    width: 50%;
+}
+
+.divPulgarPos{
+    position: absolute;
+    right: 76%;
+}
+
+.divPulgarNeg {
+    position: absolute;
+    right: 69%;
 }
 
 @media (max-width: 800px){
