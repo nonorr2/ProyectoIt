@@ -34,15 +34,15 @@
                         <p>Último comentario: <s:property value="ultimoComentario.getFechaHoraModificacion()" /></p>                    
                     </s:div>
                     <s:div cssClass="contenedor-flechas">
-                        <s:form method="post" action="votoPositivoPublicacon">
-                            <s:hidden name="idPublicacion" value="%{publicacion.getId()}" />
+                        <s:form method="post" action="votoPositivoPublicacion">
+                            <s:hidden name="idPublicacion" value="%{id}" />
                             <s:submit type="image" src="images/iconos/flechaVerde.png" name="votoPositivoPublicacion" cssClass="flechas"/>
                         </s:form>
                         <s:form method="post" action="unFollowPublicacion">
                             <s:hidden name="idPublicacion" value="%{id}" />
                             <s:submit name="unFollowPublicacion" value="UnFollow" cssClass="btn btn-warning flechas follow" />
                         </s:form>
-                        <s:form method="post" action="">
+                        <s:form method="post" action="votoNegativoPublicacion">
                             <s:hidden name="idPublicacion" value="%{id}" />
                             <s:submit type="image" src="images/iconos/flechaRoja.png" name="votoNegativoPublicacion" cssClass="flechas"/>
                         </s:form>

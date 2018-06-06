@@ -60,6 +60,16 @@
                 <param name="actionName">home</param>
             </result>
         </action>
+        <action name="votoPositivoPublicacion" class="acciones.GestionVotoSuscripcion" method="votoPositivoPublicacion">
+            <result name="success" type="chain">
+                <param name="actionName">home</param>
+            </result>
+        </action>
+        <action name="votoNegativoPublicacion" class="acciones.GestionVotoSuscripcion" method="votoNegativoPublicacion">
+            <result name="success" type="chain">
+                <param name="actionName">home</param>
+            </result>
+        </action>
         <action name="filtroPubli" class="acciones.GestionPublicacion" method="filtroPubli">
             <result name="success">/vistas/admin/publicacionesAdmin.jsp</result>
         </action>
@@ -164,6 +174,7 @@
                 <param name="actionName">home</param>
             </result>
             <result name="error">registro.jsp</result>
+            <result name="input">registro.jsp</result>
         </action>
     </package>
     

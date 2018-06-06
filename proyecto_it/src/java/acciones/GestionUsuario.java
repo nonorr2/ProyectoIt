@@ -11,6 +11,7 @@ import static acciones.loginLogout.session;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.validator.annotations.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -154,6 +155,8 @@ public class GestionUsuario extends ActionSupport {
         return nombre;
     }
 
+    @RequiredStringValidator(message = "El nombre es obligatorio")
+    @StringLengthFieldValidator(maxLength = "50", message = "Tamaño máximo 50 carácteres")
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -162,6 +165,8 @@ public class GestionUsuario extends ActionSupport {
         return apellidos;
     }
 
+    @RequiredStringValidator(message = "El apellido es obligatorio")
+    @StringLengthFieldValidator(maxLength = "50", message = "Tamaño máximo 50 carácteres")
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
@@ -170,6 +175,8 @@ public class GestionUsuario extends ActionSupport {
         return nickname;
     }
 
+    @RequiredStringValidator(message = "El nombre de usuario es obligatorio")
+    @StringLengthFieldValidator(maxLength = "50", message = "Tamaño máximo 50 carácteres")
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
@@ -178,6 +185,8 @@ public class GestionUsuario extends ActionSupport {
         return email;
     }
 
+    @RequiredStringValidator(message = "El email es obligatorio")
+    @EmailValidator(message = "Formato del email incorrecto")
     public void setEmail(String email) {
         this.email = email;
     }
@@ -186,6 +195,8 @@ public class GestionUsuario extends ActionSupport {
         return password;
     }
 
+    @RequiredStringValidator(message = "La contraseña es obligatoria")
+    @StringLengthFieldValidator(minLength = "5", maxLength = "10", message = "La contraseña debe estar comprendida entren 5 y 10 carácteres")
     public void setPassword(String password) {
         this.password = password;
     }
@@ -194,6 +205,8 @@ public class GestionUsuario extends ActionSupport {
         return fechaNacimiento;
     }
 
+    @RequiredFieldValidator(message = "La fecha de nacimiento es obligatoria")
+    @RegexFieldValidator(regex = "/^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})(\\s)([0-1][0-9]|2[0-3])(:)([0-5][0-9])$/", message = "Formato de la fecha de nacimiento incorrecto")
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }

@@ -136,6 +136,12 @@ public class SuscripcionFacadeREST extends AbstractFacade<Suscripcion> {
         return publicacion;
     }
     
+    /**
+     * Método para obtener una suscripción a partir del identificador del usurio y la publicación
+     * @param idUsuario
+     * @param idPublicacion
+     * @return 
+     */
     @GET
     @Path("/getSuscripcion/{idUsuario}/{idPublicacion}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})

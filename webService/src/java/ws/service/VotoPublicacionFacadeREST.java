@@ -20,6 +20,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import ws.Publicacion;
+import ws.Suscripcion;
+import ws.Usuario;
 import ws.VotoPublicacion;
 
 /**
@@ -138,4 +140,71 @@ public class VotoPublicacionFacadeREST extends AbstractFacade<VotoPublicacion> {
         Publicacion p = (Publicacion) query.getSingleResult();
         return p;
     }
+
+    /**
+     * Método auxiliar para obtener un usuario a partir del identificardor.
+     *
+     * @param idUsuario
+     * @return un objeto usario
+     */
+    private Usuario getUsuario(@PathParam("idUsuario") Integer idUsuario) {
+        String jpql = "SELECT u FROM Usuario u WHERE u.id = :idUsuario";
+        Query query = em.createQuery(jpql);
+        query.setParameter("idUsuario", idUsuario);
+        Usuario usuario = (Usuario) query.getSingleResult();
+        return usuario;
+    }
+
+    /**
+     * Método para obtener un voto de la publicación a partir del identificador
+     * del usurio y la publicación
+     *
+     * @param idUsuario
+     * @param idPublicacion
+     * @return
+     */
+    @GET
+    @Path("/getVotoPublicacion/{idUsuario}/{idPublicacion}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public VotoPublicacion getVotoPublicacion(@PathParam("idUsuario") Integer idUsuario, @PathParam("idPublicacion") Integer idPublicacion) {
+        Publicacion publicacion = this.getPublicacion(idPublicacion);
+        Usuario usuario = this.getUsuario(idUsuario);
+        Query query = em.createQuery("SELECT vp FROM VotoPublicacion vp WHERE vp.idUsuario = :usuario AND vp.idPublicacion = :publicacion");
+        query.setParameter("usuario", usuario);
+        query.setParameter("publicacion", publicacion);
+        VotoPublicacion votoPublicacion = (VotoPublicacion) query.getSingleResult();
+        return votoPublicacion;
+    }
+
+    /**
+     * Método para comprobar si ya se ha votado la publicación.
+     *
+     * @param idUsuario
+     * @param idPublicacion
+     * @return
+     */
+    @GET
+    @Path("/existeVotoPublicacion/{idUsuario}/{idPublicacion}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Boolean existeVotoPublicacion(@PathParam("idUsuario") Integer idUsuario, @PathParam("idPublicacion") Integer idPublicacion) {
+        boolean encontrado = false;
+        Publicacion publicacion = this.getPublicacion(idPublicacion);
+        Usuario usuario = this.getUsuario(idUsuario);
+        Query query = em.createQuery("SELECT vp FROM VotoPublicacion vp WHERE vp.idUsuario = :usuario AND vp.idPublicacion = :publicacion");
+        query.setParameter("usuario", usuario);
+        query.setParameter("publicacion", publicacion);
+
+        try {
+            VotoPublicacion votoPublicacion = (VotoPublicacion) query.getSingleResult();
+
+            if (votoPublicacion != null) {
+                encontrado = true;
+            }
+        } catch (Exception e) {
+            encontrado = false;
+        }
+
+        return encontrado;
+    }
+
 }
