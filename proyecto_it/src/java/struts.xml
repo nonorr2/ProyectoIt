@@ -101,6 +101,9 @@
                 <param name="actionName">chatsAdministrador</param>
             </result>
         </action>
+        <action name="filtrarChat" class="acciones.ChatAction" method="filtrarChat">
+            <result name="success">/vistas/admin/chats.jsp</result>
+        </action>
     </package>
     
     <package name="gestionComentarios" extends="struts-default">

@@ -17,29 +17,36 @@
         </s:div>
     </s:div>
 </s:div>
-<s:iterator var="tematica" value="tematicas">
-    <s:div cssClass="container-fluid text-center">
-        <s:div cssClass="row">
-            <s:div cssClass="contenedor-publi sombreado">
-                <s:div cssClass="publi-no-imagen">
-                    <img src="<s:property value="imagen"/>"/>
-                </s:div>
-                <s:div cssClass="datos-publicacion">
-                    <h1><s:property value="nombre"/></h1>
-                    <p>Numero de publicaciones asociada</p>
-                </s:div>
-                <s:div cssClass="contenedor-iconos">
-                    <s:form action="removeTematica" method="post">
-                        <s:hidden name="idTematicaRemove" value="%{id}" /> 
-                        <s:submit type="image" src="images/iconos/papelera.png" name="removeTematica" cssClass="icono"/>
-                    </s:form>
-                    <s:form action="editTematica" method="post">
-                        <s:hidden name="idTematicaEdit" value="%{id}" /> 
-                        <s:submit type="image" src="images/iconos/editar.png" name="editTematica" cssClass="icono"/>
-                    </s:form>
+<s:if test="%{tematicas.isEmpty()}">
+    <s:div cssClass="alert alert-warning noContenido">
+        <p>No hay ninguna tematica que empiece por <s:property value="filtrarTema"/></p>
+    </s:div>
+</s:if>
+<s:else>
+    <s:iterator var="tematica" value="tematicas">
+        <s:div cssClass="container-fluid text-center">
+            <s:div cssClass="row">
+                <s:div cssClass="contenedor-publi sombreado">
+                    <s:div cssClass="publi-no-imagen">
+                        <img src="<s:property value="imagen"/>"/>
+                    </s:div>
+                    <s:div cssClass="datos-publicacion">
+                        <h1><s:property value="nombre"/></h1>
+                        <p>Numero de publicaciones asociada</p>
+                    </s:div>
+                    <s:div cssClass="contenedor-iconos">
+                        <s:form action="removeTematica" method="post">
+                            <s:hidden name="idTematicaRemove" value="%{id}" /> 
+                            <s:submit type="image" src="images/iconos/papelera.png" name="removeTematica" cssClass="icono"/>
+                        </s:form>
+                        <s:form action="editTematica" method="post">
+                            <s:hidden name="idTematicaEdit" value="%{id}" /> 
+                            <s:submit type="image" src="images/iconos/editar.png" name="editTematica" cssClass="icono"/>
+                        </s:form>
+                    </s:div>
                 </s:div>
             </s:div>
         </s:div>
-    </s:div>
-</s:iterator>
+    </s:iterator>
+</s:else>
 <%@include file="../../footer.jsp" %>

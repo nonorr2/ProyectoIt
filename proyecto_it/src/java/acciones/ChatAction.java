@@ -14,6 +14,7 @@ import WS.UsuarioWS;
 import com.opensymphony.xwork2.ActionSupport;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.ws.rs.core.GenericType;
 
 public class ChatAction extends ActionSupport {
@@ -22,6 +23,9 @@ public class ChatAction extends ActionSupport {
     String usuario;
     String idChat;
     String idChatEdit;
+    String filtroChat;
+
+    List<Chat> chats;
 
     public ChatAction() {
     }
@@ -81,6 +85,19 @@ public class ChatAction extends ActionSupport {
         return SUCCESS;
     }
 
+    public String filtrarChat() throws Exception {
+        GenericType<List<Chat>> tipoChat = new GenericType<List<Chat>>() {
+        };
+        ChatWS chatClient = new ChatWS();
+        if (filtroChat.equals("")) {
+            chats = chatClient.findAll_XML(tipoChat);
+        } else {
+            chats = chatClient.getChatPorNombre_XML(tipoChat, filtroChat);
+        }
+
+        return SUCCESS;
+    }
+
     public String getNombreChat() {
         return nombreChat;
     }
@@ -111,6 +128,22 @@ public class ChatAction extends ActionSupport {
 
     public void setIdChatEdit(String idChatEdit) {
         this.idChatEdit = idChatEdit;
+    }
+
+    public String getFiltroChat() {
+        return filtroChat;
+    }
+
+    public void setFiltroChat(String filtroChat) {
+        this.filtroChat = filtroChat;
+    }
+
+    public List<Chat> getChats() {
+        return chats;
+    }
+
+    public void setChats(List<Chat> chats) {
+        this.chats = chats;
     }
 
 }

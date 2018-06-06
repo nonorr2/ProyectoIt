@@ -48,7 +48,11 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Usuario entity) {
-        entity.setPassword(BCrypt.hashpw(entity.getPassword(), BCrypt.gensalt(12)));
+        if (super.find(id).getPassword().equals(entity.getPassword())){
+            entity.setPassword(super.find(id).getPassword());
+        }else{
+            entity.setPassword(BCrypt.hashpw(entity.getPassword(), BCrypt.gensalt(12)));
+        }
         super.edit(entity);
     }
 
