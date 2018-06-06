@@ -5,13 +5,18 @@
  */
 package acciones;
 
+import WS.Comentario;
+import WS.ComentarioWS;
 import WS.Publicacion;
 import WS.PublicacionWS;
 import WS.Suscripcion;
 import WS.SuscripcionWS;
 import WS.Usuario;
+import WS.VotoComentario;
+import WS.VotoComentarioWS;
 import WS.VotoPublicacion;
 import WS.VotoPublicacionWS;
+import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.Date;
@@ -23,61 +28,86 @@ import javax.ws.rs.core.GenericType;
  * @author Lydia
  */
 public class GestionVotoSuscripcion extends ActionSupport {
-    
+
     private String idPublicacion;
-    
+
     public GestionVotoSuscripcion() {
     }
-    
+
     public String execute() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
-//    public String votoPositivoPublicacion() throws Exception {
-//        loginLogout.session = (Map) ActionContext.getContext().get("session");
-//        Usuario usuario = (Usuario) loginLogout.session.get("user");
-//        VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
-//        PublicacionWS publicacionCliente = new PublicacionWS();
-//        GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {
-//        };
-//        Publicacion publicacion = publicacionCliente.find_XML(tipoPublicacion, this.idPublicacion);
-//        VotoPublicacion votoPositivo = new VotoPublicacion();
-//        votoPositivo.setPublicacion(publicacion);
-//        votoPositivo.setUsuario(usuario);
-//        votoPositivo.setTipo(true);
-//        votoPositivo.setFechaHora(new Date());
-//        votoPublicacionCliente.create_JSON(votoPositivo);
-//        return SUCCESS;
-//    }
-    
-//    public String suscribirPublicacion() throws Exception{
-//        loginLogout.session = (Map) ActionContext.getContext().get("session");
-//        Usuario usuario = (Usuario) loginLogout.session.get("user");
-//        PublicacionWS publicacionCliente = new PublicacionWS();
-//        GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {};
-//        Publicacion publicacion = publicacionCliente.find_XML(tipoPublicacion, this.idPublicacion);
-//        
-//        SuscripcionWS suscripcionClinete = new SuscripcionWS();
-//        Suscripcion newSuscripcion = new Suscripcion();
-//        newSuscripcion.setFechaHora(new Date());
-//        newSuscripcion.setUsuario(usuario);
-//        newSuscripcion.setPublicacion(publicacion);
-//        
-//        suscripcionClinete.create_XML(newSuscripcion);
-//        return SUCCESS;
-//    }
-    
-    public String unFollowPublicacion() throws Exception{
+
+    public String votoPositivoPublicacion() throws Exception {
         Usuario usuario = (Usuario) loginLogout.session.get("user");
+        VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
         PublicacionWS publicacionCliente = new PublicacionWS();
-        GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {};
-        Publicacion publicacion = publicacionCliente.find_XML(tipoPublicacion, this.idPublicacion);
-        
+        GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {
+        };
+        GenericType<Boolean> tipoBoolean = new GenericType<Boolean>() {
+        };
+        GenericType<VotoPublicacion> tipoVotoPublicacion = new GenericType<VotoPublicacion>() {
+        };
+        Publicacion publicacion = publicacionCliente.find_XML(tipoPublicacion, idPublicacion);
+
+        boolean encontrado = votoPublicacionCliente.existeVotoPublicacion(tipoBoolean, String.valueOf(usuario.getId()), idPublicacion);
+
+        if (encontrado == false) {
+            VotoPublicacion votoPublicacion = new VotoPublicacion(null, true, new Date());
+            votoPublicacion.setIdPublicacion(publicacion);
+            votoPublicacion.setIdUsuario(usuario);
+            votoPublicacionCliente.create_XML(votoPublicacion);
+        } else {
+            VotoPublicacion votoPublicacion2 = votoPublicacionCliente.getVotoPublicacion_XML(tipoVotoPublicacion, String.valueOf(usuario.getId()), idPublicacion);
+            if (votoPublicacion2.getTipo() == false) {
+                votoPublicacion2.setTipo(true);
+                votoPublicacionCliente.edit_XML(votoPublicacion2, String.valueOf(votoPublicacion2.getId()));
+            }
+        }
+
+        return SUCCESS;
+    }
+
+    public String votoNegativoPublicacion() throws Exception {
+        Usuario usuario = (Usuario) loginLogout.session.get("user");
+        VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
+        PublicacionWS publicacionCliente = new PublicacionWS();
+        GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {
+        };
+        GenericType<VotoPublicacion> tipoVotoPublicacion = new GenericType<VotoPublicacion>() {
+        };
+        GenericType<Boolean> tipoBoolean = new GenericType<Boolean>() {
+        };
+        Publicacion publicacion = publicacionCliente.find_XML(tipoPublicacion, idPublicacion);
+
+        boolean encontrado = votoPublicacionCliente.existeVotoPublicacion(tipoBoolean, String.valueOf(usuario.getId()), idPublicacion);
+
+        if (encontrado == false) {
+            VotoPublicacion votoPublicacion = new VotoPublicacion(null, false, new Date());
+            votoPublicacion.setIdPublicacion(publicacion);
+            votoPublicacion.setIdUsuario(usuario);
+            votoPublicacionCliente.create_XML(votoPublicacion);
+        } else {
+            VotoPublicacion votoPublicacion2 = votoPublicacionCliente.getVotoPublicacion_XML(tipoVotoPublicacion, String.valueOf(usuario.getId()), idPublicacion);
+            if (votoPublicacion2.getTipo() == true) {
+                votoPublicacion2.setTipo(false);
+                votoPublicacionCliente.edit_XML(votoPublicacion2, String.valueOf(votoPublicacion2.getId()));
+            }
+
+        }
+
+        return SUCCESS;
+    }
+
+    public String unFollowPublicacion() throws Exception {
+        Usuario usuario = (Usuario) loginLogout.session.get("user");
+        GenericType<Suscripcion> tipoSuscriocion = new GenericType<Suscripcion>() {
+        };
         SuscripcionWS suscripcionClinete = new SuscripcionWS();
-        Suscripcion newSuscripcion = new Suscripcion();
-        
-        //TERMINAR -- METER METODO DEL WS
-        
+        Suscripcion suscripcion = suscripcionClinete.getSuscripcion_XML(tipoSuscriocion, String.valueOf(usuario.getId()), idPublicacion);
+
+        suscripcionClinete.remove(String.valueOf(suscripcion.getId()));
+
         return SUCCESS;
     }
 
@@ -88,6 +118,4 @@ public class GestionVotoSuscripcion extends ActionSupport {
     public void setIdPublicacion(String idPublicacion) {
         this.idPublicacion = idPublicacion;
     }
-    
-    
 }
