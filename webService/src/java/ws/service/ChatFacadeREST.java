@@ -186,4 +186,13 @@ public class ChatFacadeREST extends AbstractFacade<Chat> {
         Chat c = (Chat) qChat.getSingleResult();
         return c;
     }
+
+    @GET
+    @Path("/getChatPorNombre/{nombre}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Chat> getChatPorNombre(@PathParam("nombre") String nombre) {
+        Query query = em.createQuery("SELECT c FROM Chat c WHERE c.nombre LIKE '" + nombre + "%'");
+        List<Chat> result = query.getResultList();
+        return result;
+    }
 }

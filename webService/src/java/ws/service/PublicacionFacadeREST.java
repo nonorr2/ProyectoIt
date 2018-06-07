@@ -201,4 +201,22 @@ public class PublicacionFacadeREST extends AbstractFacade<Publicacion> {
         q.setParameter("tematica", id_tematica);
         return (Tematica) q.getSingleResult();
     }
+    
+    /**
+     * Devuelve el número de publicaciones perteneciente a la temática que
+     * coincide con el id pasado como parámetro
+     *
+     * @param id_tematica
+     * @return List<Publicacion>
+     */
+    @GET
+    @Path("/getNumPublicacionesByTematica/{id_tematica}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Long getNumPublicacionesByTematica(@PathParam("id_tematica") Integer id_tematica) {
+        Tematica tematica = getTematicaById(id_tematica);
+        Query query = em.createQuery("SELECT COUNT(p.idTematica) numPubli FROM Publicacion p WHERE p.idTematica = :tematica");
+        query.setParameter("tematica", tematica);
+        Long numPublicaciones = (Long) query.getSingleResult();
+        return numPublicaciones;
+    }
 }

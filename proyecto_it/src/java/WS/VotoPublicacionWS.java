@@ -21,7 +21,7 @@ import javax.ws.rs.core.GenericType;
  *        client.close();
  * </pre>
  *
- * @author Nono
+ * @author Lydia
  */
 public class VotoPublicacionWS {
 
@@ -34,10 +34,28 @@ public class VotoPublicacionWS {
         webTarget = client.target(BASE_URI).path("ws.votopublicacion");
     }
 
+    public <T> T getVotoPublicacion_XML(GenericType<T> responseType, String idUsuario, String idPublicacion) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getVotoPublicacion/{0}/{1}", new Object[]{idUsuario, idPublicacion}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
+
+    public <T> T getVotoPublicacion_JSON(GenericType<T> responseType, String idUsuario, String idPublicacion) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getVotoPublicacion/{0}/{1}", new Object[]{idUsuario, idPublicacion}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public String countREST() throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("count");
         return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
+    }
+
+    public <T> T existeVotoPublicacion(GenericType<T> responseType, String idUsuario, String idPublicacion) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("existeVotoPublicacion/{0}/{1}", new Object[]{idUsuario, idPublicacion}));
+        return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(responseType);
     }
 
     public void edit_XML(Object requestEntity, String id) throws ClientErrorException {

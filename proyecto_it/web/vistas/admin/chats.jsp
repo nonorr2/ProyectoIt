@@ -6,27 +6,36 @@
     <h1 class="text-banner">CHATS</h1>
 </s:div>
 <s:div cssClass="container-fluid text-center">
-    <s:textfield  cssClass="textFileFiltrar"/>
-    <s:submit name="btoLogin" cssClass="btn btn-primary filtro" value="Filtrar"/>
+    <s:form action="filtrarChat">
+        <s:textfield name="filtroChat"  cssClass="textFileFiltrar"/>
+        <s:submit name="btoFiltroChat" cssClass="btn btn-primary filtro" value="Filtrar"/>
+    </s:form>
 </s:div>
-<s:div cssClass="container-fluid text-center">
-    <s:div cssClass="row">
-        <s:iterator var="chat" value="chats">
-            <s:div cssClass="col-sm-4 sombreado">
-                <h1><s:property value="nombre"/></h1>
-                <p><s:property value="fechaHora" /></p>
-                <s:form action="borrarChatAdmin" method="post">
-                    <s:hidden name="idChat" value="%{id}" /> 
-                    <s:submit type="image" src="images/iconos/papelera.png" name="removeChat" cssClass="icono"/>
-                </s:form>
-                <%--<s:submit type="image" src="images/iconos/visualizar.png" id="%{id}" name="visualizarChat" cssClass="icono" onmouseover="visualizarUser(this)"/>--%>
-                <img src="images/iconos/visualizar.png"  class="icono" onmouseenter="visualizarUserChat(<s:property value="id"/>)" onmouseleave="borrarUserChat()"/>
-            </s:div>
-            <s:div id="userChat" cssClass="userChat">
-            </s:div>
-        </s:iterator>
+<s:if test="%{chats.isEmpty()}">
+    <s:div cssClass="alert alert-warning noContenido">
+        <p>No hay ninguna chat que empiece por <s:property value="filtroChat"/></p>
     </s:div>
-</s:div>
+</s:if>
+<s:else>
+    <s:div cssClass="container-fluid text-center">
+        <s:div cssClass="row">
+            <s:iterator var="chat" value="chats">
+                <s:div cssClass="col-sm-4 sombreado">
+                    <h1><s:property value="nombre"/></h1>
+                    <p><s:property value="fechaHora" /></p>
+                    <s:form action="borrarChatAdmin" method="post">
+                        <s:hidden name="idChat" value="%{id}" /> 
+                        <s:submit type="image" src="images/iconos/papelera.png" name="removeChat" cssClass="icono"/>
+                    </s:form>
+                    <%--<s:submit type="image" src="images/iconos/visualizar.png" id="%{id}" name="visualizarChat" cssClass="icono" onmouseover="visualizarUser(this)"/>--%>
+                    <img src="images/iconos/visualizar.png"  class="icono" onmouseenter="visualizarUserChat(<s:property value="id"/>)" onmouseleave="borrarUserChat()"/>
+                </s:div>
+                <s:div id="userChat" cssClass="userChat">
+                </s:div>
+            </s:iterator>
+        </s:div>
+    </s:div>
+</s:else>
 <script>
     function visualizarUserChat(id_chat) {
         var contenedorUser1 = document.createElement("div");
@@ -46,7 +55,7 @@
         var usuarios = xhttp.responseText;
         usuarios = JSON.parse(usuarios);
 
-        
+
         var pNickName1 = document.createElement("p");
         pNickName1.appendChild(document.createTextNode(usuarios[0]['nickname']));
         var imgUser1 = document.createElement("img");

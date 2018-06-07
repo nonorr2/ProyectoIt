@@ -20,7 +20,7 @@ import javax.ws.rs.core.GenericType;
  *        client.close();
  * </pre>
  *
- * @author Nono
+ * @author David
  */
 public class ChatWS {
 
@@ -49,6 +49,18 @@ public class ChatWS {
         WebTarget resource = webTarget;
         resource = resource.path("count");
         return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
+    }
+
+    public <T> T getChatPorNombre_XML(GenericType<T> responseType, String nombre) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getChatPorNombre/{0}", new Object[]{nombre}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
+
+    public <T> T getChatPorNombre_JSON(GenericType<T> responseType, String nombre) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getChatPorNombre/{0}", new Object[]{nombre}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
     public void edit_XML(Object requestEntity, String id) throws ClientErrorException {

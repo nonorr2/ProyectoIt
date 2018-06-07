@@ -16,6 +16,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.ws.rs.core.GenericType;
@@ -38,6 +39,9 @@ public class GestionPublicacion extends ActionSupport {
     private String fileUploadContentType;
     private String fileUploadFileName;
     private String idPublicacion;
+    private String filtroPublicacion;
+    
+    private List<Publicacion> publicaciones;
 
     public GestionPublicacion() {
     }
@@ -68,7 +72,7 @@ public class GestionPublicacion extends ActionSupport {
         PublicacionWS publicacionWS = new PublicacionWS();
         TematicaWS tematicaWS = new TematicaWS();
 
-        loginLogout.session = (Map) ActionContext.getContext().get("session");
+        //loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
         GenericType<Tematica> tipoTematica = new GenericType<Tematica>() {
@@ -90,7 +94,18 @@ public class GestionPublicacion extends ActionSupport {
 //        }
 //    }
     
-
+    public String filtroPubli() throws Exception {
+        GenericType<List<Publicacion>> tipoUsuarios = new GenericType<List<Publicacion>>() {
+        };
+        PublicacionWS usuarioClient = new PublicacionWS();
+        if(filtroPublicacion.equals("")){
+            publicaciones = usuarioClient.findAll_JSON(tipoUsuarios);
+        }else{
+            publicaciones = usuarioClient.getPublicacionPorTitulo_JSON(tipoUsuarios, filtroPublicacion);
+        }
+        
+        return SUCCESS;
+    }
     
     
 
@@ -164,6 +179,22 @@ public class GestionPublicacion extends ActionSupport {
 
     public void setIdPublicacion(String idPublicacion) {
         this.idPublicacion = idPublicacion;
+    }
+
+    public String getFiltroPublicacion() {
+        return filtroPublicacion;
+    }
+
+    public void setFiltroPublicacion(String filtroPublicacion) {
+        this.filtroPublicacion = filtroPublicacion;
+    }
+
+    public List<Publicacion> getPublicaciones() {
+        return publicaciones;
+    }
+
+    public void setPublicaciones(List<Publicacion> publicaciones) {
+        this.publicaciones = publicaciones;
     }
 
     

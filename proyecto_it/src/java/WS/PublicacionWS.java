@@ -21,7 +21,7 @@ import javax.ws.rs.core.GenericType;
  *        client.close();
  * </pre>
  *
- * @author Nono
+ * @author David
  */
 public class PublicacionWS {
 
@@ -136,6 +136,12 @@ public class PublicacionWS {
     public <T> T findAll_JSON(GenericType<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public <T> T getNumPublicacionesByTematica(GenericType<T> responseType, String id_tematica) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getNumPublicacionesByTematica/{0}", new Object[]{id_tematica}));
+        return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(responseType);
     }
 
     public void remove(String id) throws ClientErrorException {

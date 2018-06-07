@@ -21,7 +21,7 @@ import javax.ws.rs.core.GenericType;
  *        client.close();
  * </pre>
  *
- * @author Nono
+ * @author Lydia
  */
 public class SuscripcionWS {
 
@@ -69,6 +69,18 @@ public class SuscripcionWS {
     public <T> T findRange_JSON(GenericType<T> responseType, String from, String to) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("{0}/{1}", new Object[]{from, to}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public <T> T getSuscripcion_XML(GenericType<T> responseType, String idUsuario, String idPublicacion) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getSuscripcion/{0}/{1}", new Object[]{idUsuario, idPublicacion}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
+
+    public <T> T getSuscripcion_JSON(GenericType<T> responseType, String idUsuario, String idPublicacion) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getSuscripcion/{0}/{1}", new Object[]{idUsuario, idPublicacion}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 

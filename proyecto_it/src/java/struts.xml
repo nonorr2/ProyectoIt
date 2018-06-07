@@ -60,6 +60,19 @@
                 <param name="actionName">home</param>
             </result>
         </action>
+        <action name="votoPositivoPublicacion" class="acciones.GestionVotoSuscripcion" method="votoPositivoPublicacion">
+            <result name="success" type="chain">
+                <param name="actionName">home</param>
+            </result>
+        </action>
+        <action name="votoNegativoPublicacion" class="acciones.GestionVotoSuscripcion" method="votoNegativoPublicacion">
+            <result name="success" type="chain">
+                <param name="actionName">home</param>
+            </result>
+        </action>
+        <action name="filtroPubli" class="acciones.GestionPublicacion" method="filtroPubli">
+            <result name="success">/vistas/admin/publicacionesAdmin.jsp</result>
+        </action>
     </package>
     
     <package name="top_menu_logueado" extends="struts-default">
@@ -92,6 +105,14 @@
             <result name="success" type="chain">
                 <param name="actionName">chats</param>
             </result>
+        </action>
+        <action name="borrarChatAdmin" class="acciones.ChatAction" method="borrarChat">
+            <result name="success" type="chain">
+                <param name="actionName">chatsAdministrador</param>
+            </result>
+        </action>
+        <action name="filtrarChat" class="acciones.ChatAction" method="filtrarChat">
+            <result name="success">/vistas/admin/chats.jsp</result>
         </action>
     </package>
     
@@ -127,7 +148,7 @@
         <action name="editUser" class="acciones.GestionUsuario" method="editUser">
             <result name="success">/vistas/admin/editarUsuarioAdmin.jsp</result>
         </action>
-        <action name="editUserPersistencia" class="acciones.GestionUsuario" method="editUserPersistencia">
+        <action name="editUserPersistenciaAdmin" class="acciones.GestionUsuario" method="editUserPersistencia">
             <result name="success" type="chain">
                 <param name="actionName">usuarios</param>
             </result>
@@ -141,7 +162,9 @@
             <result name="success">/vistas/admin/usuariosAdmin.jsp</result>
         </action>
         <action name="editUserPersistencia" class="acciones.GestionUsuario" method="editUserPersistencia">
-            <result name="success">home.jsp</result>
+            <result name="success" type="chain">
+                <param name="actionName">home</param>
+            </result>
         </action>
         <action name="removeMiCuenta" class="acciones.GestionUsuario" method="removeMiCuenta">
             <result name="success">index.jsp</result>
@@ -151,6 +174,7 @@
                 <param name="actionName">home</param>
             </result>
             <result name="error">registro.jsp</result>
+            <result name="input">registro.jsp</result>
         </action>
     </package>
     
