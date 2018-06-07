@@ -35,7 +35,8 @@ public class menu_top_logueado extends ActionSupport {
     List<Usuario> usuarios;
     Integer id_user;
 
-    private List<PublicacionDecorado> misPublicaciones;
+//    private List<PublicacionDecorado> misPublicaciones;
+    private List<PublicacionDecorado> listaPublicaciones;
     private List<Tematica> tematicas;
     private List<PublicacionDecorado> publicacionesSuscrito;
 
@@ -70,7 +71,6 @@ public class menu_top_logueado extends ActionSupport {
      * @throws Exception
      */
     public String misPubicaciones() throws Exception {
-        //loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
         GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {};
@@ -81,7 +81,7 @@ public class menu_top_logueado extends ActionSupport {
         VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
         
         List<Publicacion> publicaciones = (List<Publicacion>) publicacionCliente.getMisPublicaciones_XML(tipoPublicacion, String.valueOf(usuario.getId()));
-        this.misPublicaciones = new ArrayList<PublicacionDecorado>();
+        this.listaPublicaciones = new ArrayList<PublicacionDecorado>();
         
         for(Publicacion publicacion : publicaciones){
             PublicacionDecorado publicacionDecorado = new PublicacionDecorado();
@@ -92,7 +92,7 @@ public class menu_top_logueado extends ActionSupport {
             publicacionDecorado.setNumComentarios(numComentarios.intValue());
             publicacionDecorado.setNumVotosPositivosPublicacion(numVotosPositivos.intValue());
             publicacionDecorado.setNumVotosNegativosPublicacion(numVotosNegativos.intValue());
-            this.misPublicaciones.add(publicacionDecorado);
+            this.listaPublicaciones.add(publicacionDecorado);
         }
         
         //Listar las temáticas para el selec de añadir piblicacion
@@ -145,14 +145,6 @@ public class menu_top_logueado extends ActionSupport {
         this.chats = chats;
     }
 
-    public List<PublicacionDecorado> getMisPublicaciones() {
-        return misPublicaciones;
-    }
-
-    public void setMisPublicaciones(List<PublicacionDecorado> misPublicaciones) {
-        this.misPublicaciones = misPublicaciones;
-    }
-
     public List<Tematica> getTematicas() {
         return tematicas;
     }
@@ -184,5 +176,15 @@ public class menu_top_logueado extends ActionSupport {
     public void setId_user(Integer id_user) {
         this.id_user = id_user;
     }
+
+    public List<PublicacionDecorado> getListaPublicaciones() {
+        return listaPublicaciones;
+    }
+
+    public void setListaPublicaciones(List<PublicacionDecorado> listaPublicaciones) {
+        this.listaPublicaciones = listaPublicaciones;
+    }
+    
+    
 
 }

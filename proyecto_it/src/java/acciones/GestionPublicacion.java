@@ -87,34 +87,7 @@ public class GestionPublicacion extends ActionSupport {
         publicacionWS.create_JSON(publicacion);
         return SUCCESS;
     }
-
-//    @Override
-//    public void validate() {
-//        if(this.getTituloPubliacion().trim().length() == 0 || this.getTituloPubliacion() == null){
-//            addFieldError("tituloPubliacion", "El título de la publicación es obligatorio");
-//        }
-//    }
-    public String filtroPubli() throws Exception {
-        GenericType<List<Publicacion>> tipoUsuarios = new GenericType<List<Publicacion>>() {
-        };
-        PublicacionWS usuarioClient = new PublicacionWS();
-        if (filtroPublicacion.equals("")) {
-            publicaciones = usuarioClient.findAll_JSON(tipoUsuarios);
-        } else {
-            publicaciones = usuarioClient.getPublicacionPorTitulo_JSON(tipoUsuarios, filtroPublicacion);
-        }
-
-        return SUCCESS;
-    }
-
-    public String publicacionesByTema() throws Exception{
-        GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
-        };
-        PublicacionWS publicacionClient = new PublicacionWS();
-        publicaciones = publicacionClient.getPublicacionesByTema_JSON(tipoPublicacion, idTema);
-        return SUCCESS;
-    }
-
+    
     public String getIdTema() {
         return idTema;
     }

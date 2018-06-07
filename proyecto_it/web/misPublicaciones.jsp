@@ -8,21 +8,21 @@
     <h1 class="text-banner">MIS PUBLICACIONES</h1>
 </s:div>
 <s:div cssClass="container-fluid text-center">
-    <s:form method="post" action="">
-        <s:textfield  cssClass="textFileFiltrar"/>
-        <s:submit name="btoLogin" cssClass="btn btn-primary filtro" value="Filtrar"/>
+    <s:form method="post" action="filtroMisPublicaciones">
+        <s:textfield name="filtroPublicacion" cssClass="textFileFiltrar"/>
+        <s:submit name="btoFiltroPubli" cssClass="btn btn-primary filtro" value="Filtrar"/>
     </s:form>
     <s:div cssClass="contenedor-icono-add" onclick="document.getElementById('id02').style.display = 'block'">
         <img src="images/iconos/add.png" class="icono"/>
     </s:div>
 </s:div>
-<s:if test="%{misPublicaciones.isEmpty()}">
+<s:if test="%{listaPublicaciones.isEmpty()}">
     <s:div cssClass="alert alert-warning noContenido">
         <p>No ha creado ninguna publicaci&oacute;n</p>
     </s:div>
 </s:if>    
 <s:else>       
-    <s:iterator value="misPublicaciones" var="publicacion">
+    <s:iterator value="listaPublicaciones" var="publicacion">
         <s:div cssClass="container-fluid text-center">
             <s:div cssClass="row">
                 <s:div cssClass="contenedor-publi sombreado">
