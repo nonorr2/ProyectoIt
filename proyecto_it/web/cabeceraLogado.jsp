@@ -39,9 +39,9 @@
                 <s:form action="logout" method="post">
                     <a><s:submit value="LOGOUT"  cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"/></a>
                 </s:form>
-                <s:form action="verPublicacion" method="post">
-                    <input type="hidden" value="1" name="id_publi">
-                    <a><s:submit value="PRUEBA DE PUBLICACION"  cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"/></a>
+                <s:form action="getPublicacionesByTema" method="post">
+                    <input type="hidden" value="3" name="idTema">
+                    <a><s:submit value="PRUEBA DE PUBLICACIONES"  cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"/></a>
                 </s:form>
             </div>
 

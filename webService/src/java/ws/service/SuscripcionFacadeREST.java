@@ -6,6 +6,7 @@
 package ws.service;
 
 import java.util.List;
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -122,7 +123,7 @@ public class SuscripcionFacadeREST extends AbstractFacade<Suscripcion> {
         Usuario usuario = (Usuario) query.getSingleResult();
         return usuario;
     }
-    
+
     /**
      * Método auxiliar para obtener una publicación a partir del identificardor.
      *
@@ -135,12 +136,14 @@ public class SuscripcionFacadeREST extends AbstractFacade<Suscripcion> {
         Publicacion publicacion = (Publicacion) query.getSingleResult();
         return publicacion;
     }
-    
+
     /**
-     * Método para obtener una suscripción a partir del identificador del usurio y la publicación
+     * Método para obtener una suscripción a partir del identificador del usurio
+     * y la publicación
+     *
      * @param idUsuario
      * @param idPublicacion
-     * @return 
+     * @return
      */
     @GET
     @Path("/getSuscripcion/{idUsuario}/{idPublicacion}")
@@ -151,7 +154,12 @@ public class SuscripcionFacadeREST extends AbstractFacade<Suscripcion> {
         Query query = em.createQuery("SELECT s FROM Suscripcion s WHERE s.idUsuario = :usuario AND s.idPublicacion = :publicacion");
         query.setParameter("usuario", usuario);
         query.setParameter("publicacion", publicacion);
-        Suscripcion suscripcion = (Suscripcion) query.getSingleResult();
+        Suscripcion suscripcion;
+        try {
+            suscripcion = (Suscripcion) query.getSingleResult();
+        } catch (Exception e) {
+            suscripcion = null;
+        }
         return suscripcion;
     }
 }

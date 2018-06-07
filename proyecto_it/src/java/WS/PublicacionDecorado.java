@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Lydia
  */
 public class PublicacionDecorado {
+
     private Publicacion publicacion;
     private Comentario ultimoComentario;
     private Integer numVotosPositivosPublicacion;
@@ -35,7 +36,7 @@ public class PublicacionDecorado {
     public void setUltimoComentario(Comentario ultimoComentario) {
         this.ultimoComentario = ultimoComentario;
     }
-    
+
     public Integer getId() {
         return publicacion.getId();
     }
@@ -155,5 +156,5 @@ public class PublicacionDecorado {
 
     public void setNumComentarios(Integer numComentarios) {
         this.numComentarios = numComentarios;
-    }   
+    }
 }

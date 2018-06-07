@@ -42,7 +42,6 @@ public class GestionPublicacion extends ActionSupport {
     private String filtroPublicacion;
 
     private List<Publicacion> publicaciones;
-    private String idTema;
 
     public GestionPublicacion() {
     }
@@ -105,22 +104,6 @@ public class GestionPublicacion extends ActionSupport {
         }
 
         return SUCCESS;
-    }
-
-    public String publicacionesByTema() throws Exception{
-        GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
-        };
-        PublicacionWS publicacionClient = new PublicacionWS();
-        publicaciones = publicacionClient.getPublicacionesByTema_JSON(tipoPublicacion, idTema);
-        return SUCCESS;
-    }
-
-    public String getIdTema() {
-        return idTema;
-    }
-
-    public void setIdTema(String idTema) {
-        this.idTema = idTema;
     }
 
     public String getIdPublicacionRemove() {

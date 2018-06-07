@@ -47,11 +47,6 @@
             </result>
             <result name="input">addPublicacion.jsp</result>
         </action>
-        <action name="votoPositivoPublicacon" class="acciones.GestionPublicacion" method="votoPositivoPublicacion">
-            <result name="success" type="chain">
-                <param name="actionName">home</param>
-            </result>
-        </action>
         <action name="verPublicacion" class="acciones.PublicacionAction" method="verPublicacion">
             <result name="success">publicacion.jsp</result>
         </action>
@@ -60,9 +55,24 @@
                 <param name="actionName">home</param>
             </result>
         </action>
+        <action name="unFollowPublicacionAjena" class="acciones.GestionVotoSuscripcion" method="unFollowPublicacion">
+            <result name="success" type="chain">
+                <param name="actionName">getPublicacionesByTema</param>
+            </result>
+        </action>
+        <action name="followPublicacion" class="acciones.GestionVotoSuscripcion" method="followPublicacion">
+            <result name="success" type="chain">
+                <param name="actionName">getPublicacionesByTema</param>
+            </result>
+        </action>
         <action name="votoPositivoPublicacion" class="acciones.GestionVotoSuscripcion" method="votoPositivoPublicacion">
             <result name="success" type="chain">
                 <param name="actionName">home</param>
+            </result>
+        </action>
+        <action name="votoPositivoPublicacionAjena" class="acciones.GestionVotoSuscripcion" method="votoPositivoPublicacion">
+            <result name="success" type="chain">
+                <param name="actionName">getPublicacionesByTema</param>
             </result>
         </action>
         <action name="votoNegativoPublicacion" class="acciones.GestionVotoSuscripcion" method="votoNegativoPublicacion">
@@ -70,10 +80,15 @@
                 <param name="actionName">home</param>
             </result>
         </action>
+        <action name="votoNegativoPublicacionAjena" class="acciones.GestionVotoSuscripcion" method="votoNegativoPublicacion">
+            <result name="success" type="chain">
+                <param name="actionName">getPublicacionesByTema</param>
+            </result>
+        </action>
         <action name="filtroPubli" class="acciones.GestionPublicacion" method="filtroPubli">
             <result name="success">/vistas/admin/publicacionesAdmin.jsp</result>
         </action>
-        <action name="getPublicacionesByTema" class="acciones.GestionPublicacion" method="publicacionesByTema">
+        <action name="getPublicacionesByTema" class="acciones.MostrarPublicacion" method="publicacionesByTema">
             <result name="success">publicaciones.jsp</result>
         </action>
     </package>
