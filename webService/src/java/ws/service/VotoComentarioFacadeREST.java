@@ -137,4 +137,19 @@ public class VotoComentarioFacadeREST extends AbstractFacade<VotoComentario> {
         q.setParameter("comentario", id_comentario);
         return (Comentario) q.getSingleResult();
     }
+
+    @GET
+    @Path("/haVotado/{id_user}/{id_coment}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Integer haVotado(@PathParam("id_user") Integer id_user, @PathParam("id_coment") Integer id_coment) {
+        Query query = em.createQuery("SELECT vc FROM VotoComentario vc WHERE vc.idComentario.id = :comentario AND vc.idUsuario.id = :usuario");
+        query.setParameter("comentario", id_coment);
+        query.setParameter("usuario", id_user);
+        try {
+            VotoComentario vc = (VotoComentario) query.getSingleResult();
+            return vc.getId();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

@@ -70,6 +70,12 @@
     }
 
     function showChat(id_chat) {
+
+        if (document.getElementById("id_chat_hidden") != null) {
+            $("#chat").empty();
+            clearInterval(interval);
+        }
+
         var imagen_close = document.createElement("img");
         imagen_close.setAttribute("src", "images/iconos/close.png");
         imagen_close.setAttribute("class", "close_chat");

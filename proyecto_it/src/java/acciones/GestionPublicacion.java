@@ -40,8 +40,9 @@ public class GestionPublicacion extends ActionSupport {
     private String fileUploadFileName;
     private String idPublicacion;
     private String filtroPublicacion;
-    
+
     private List<Publicacion> publicaciones;
+    private String idTema;
 
     public GestionPublicacion() {
     }
@@ -65,7 +66,7 @@ public class GestionPublicacion extends ActionSupport {
     public String addPublicacion() throws Exception {
         ServletContext context = ServletActionContext.getServletContext();
 //        String hola = context.getRealPath("/");
-        String ruta = System.getProperty("catalina.home") + "/prueba/prueba2.png";           
+        String ruta = System.getProperty("catalina.home") + "/prueba/prueba2.png";
         File nuevo = new File(ruta);
         FileUtils.copyFile(fotoPubliacion, nuevo);
         nuevo.renameTo(new File("/images/publicaciones/" + "prueba1subida.png"));
@@ -93,21 +94,34 @@ public class GestionPublicacion extends ActionSupport {
 //            addFieldError("tituloPubliacion", "El título de la publicación es obligatorio");
 //        }
 //    }
-    
     public String filtroPubli() throws Exception {
         GenericType<List<Publicacion>> tipoUsuarios = new GenericType<List<Publicacion>>() {
         };
         PublicacionWS usuarioClient = new PublicacionWS();
-        if(filtroPublicacion.equals("")){
+        if (filtroPublicacion.equals("")) {
             publicaciones = usuarioClient.findAll_JSON(tipoUsuarios);
-        }else{
+        } else {
             publicaciones = usuarioClient.getPublicacionPorTitulo_JSON(tipoUsuarios, filtroPublicacion);
         }
-        
+
         return SUCCESS;
     }
-    
-    
+
+    public String publicacionesByTema() throws Exception{
+        GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
+        };
+        PublicacionWS publicacionClient = new PublicacionWS();
+        publicaciones = publicacionClient.getPublicacionesByTema_JSON(tipoPublicacion, idTema);
+        return SUCCESS;
+    }
+
+    public String getIdTema() {
+        return idTema;
+    }
+
+    public void setIdTema(String idTema) {
+        this.idTema = idTema;
+    }
 
     public String getIdPublicacionRemove() {
         return idPublicacionRemove;
@@ -197,6 +211,4 @@ public class GestionPublicacion extends ActionSupport {
         this.publicaciones = publicaciones;
     }
 
-    
-    
 }

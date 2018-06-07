@@ -23,12 +23,14 @@
     <s:div cssClass="col-sm-12">
         <s:div cssClass="col-sm-1"></s:div>
         <s:div cssClass="col-sm-10 sombreado">
-            <div class="img-comentario" style="background: url(<s:property value="idUsuario.getFoto()" />) no-repeat center center;">
-                <p class="autor-comment"><s:property value="idUsuario.getNickname()" /></p>
+            <div class="img-comentario" style="background: url(<s:property value="getComentario().getIdUsuario().getFoto()" />) no-repeat center center;">
+                <p class="autor-comment"><s:property value="getComentario().getIdUsuario().getNickname()" /></p>
             </div>
             <s:div cssClass="contenido-mensaje">
-                <p><s:property value="getContenido()" /></p>
-                <p class="fecha-comment"><s:property value="getFechaHoraModificacion()" /></p>
+                <p><s:property value="getComentario().getContenido()" /></p>
+                <p class="fecha-comment"><s:property value="getComentario().getFechaHoraModificacion()" /></p>
+                <p>Número de votos positivos: <s:property value="getVotosPositivos()" /></p>
+                <p>Número de votos negativos: <s:property value="getVotosNegativos()" /></p>
             </s:div>
             <s:div cssClass="contenedor-flechas-comentarios">
                 <s:form method="post" action="votoPositivoComentario">

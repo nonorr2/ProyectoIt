@@ -73,6 +73,9 @@
         <action name="filtroPubli" class="acciones.GestionPublicacion" method="filtroPubli">
             <result name="success">/vistas/admin/publicacionesAdmin.jsp</result>
         </action>
+        <action name="getPublicacionesByTema" class="acciones.GestionPublicacion" method="publicacionesByTema">
+            <result name="success">publicaciones.jsp</result>
+        </action>
     </package>
     
     <package name="top_menu_logueado" extends="struts-default">
