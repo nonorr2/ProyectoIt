@@ -23,7 +23,12 @@
                 <s:div cssClass="row">
                     <s:div cssClass="contenedor-publi sombreado">
                         <s:div cssClass="publi-no-imagen">
-                            <img src="<s:property value="foto"/>"/>
+                            <s:if test="%{foto.length() > 0}">
+                                <img src="<s:property value="foto"/>"/>
+                            </s:if>
+                            <s:else>
+                                <img src="images/imgLogin.png"/>
+                            </s:else> 
                         </s:div>  
                         <s:div cssClass="datos-publicacion">
                             <h1><s:property value="nombre"/> <s:property value="apellidos"/></h1>

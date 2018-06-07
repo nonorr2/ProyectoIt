@@ -8,6 +8,8 @@ package acciones;
 import WS.Tematica;
 import WS.TematicaWS;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 
@@ -18,15 +20,9 @@ import javax.ws.rs.core.GenericType;
 public class GestionTematica extends ActionSupport {
 
     private String idTematicaRemove;
-    private String idTematicaEdit;
-    Tematica tematica = new Tematica();
     private String id;
     private String imagen;
     private String nombre;
-    private String filtrarTema;
-
-    List<Tematica> tematicas;
-
     TematicaWS tematicasWS = new TematicaWS();
 
     public GestionTematica() {
@@ -36,30 +32,10 @@ public class GestionTematica extends ActionSupport {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public String editTematica() throws Exception {
-        GenericType<Tematica> tipoTema = new GenericType<Tematica>() {
-        };
-        tematica = tematicasWS.find_JSON(tipoTema, idTematicaEdit);
-        return SUCCESS;
-    }
-
     public String editTemaPersistencia() throws Exception {
         String ruta = "images/tematicas/" + imagen;
         Tematica newTematica = new Tematica(Integer.valueOf(id), nombre, ruta);
         tematicasWS.edit_JSON(newTematica, id);
-        return SUCCESS;
-    }
-
-    public String filtrarTema() throws Exception {
-        GenericType<List<Tematica>> tipoUsuarios = new GenericType<List<Tematica>>() {
-        };
-        TematicaWS usuarioClient = new TematicaWS();
-        if (filtrarTema.equals("")) {
-            tematicas = usuarioClient.findAll_XML(tipoUsuarios);
-        } else {
-            tematicas = usuarioClient.getTematicasPorNombre_XML(tipoUsuarios, filtrarTema);
-        }
-
         return SUCCESS;
     }
 
@@ -83,22 +59,6 @@ public class GestionTematica extends ActionSupport {
         this.idTematicaRemove = idTematicaRemove;
     }
 
-    public String getIdTematicaEdit() {
-        return idTematicaEdit;
-    }
-
-    public void setIdTematicaEdit(String idTematicaEdit) {
-        this.idTematicaEdit = idTematicaEdit;
-    }
-
-    public Tematica getTematica() {
-        return tematica;
-    }
-
-    public void setTematica(Tematica tematica) {
-        this.tematica = tematica;
-    }
-
     public String getId() {
         return id;
     }
@@ -119,26 +79,10 @@ public class GestionTematica extends ActionSupport {
         return nombre;
     }
 
+    @RequiredStringValidator(message = "El titulo es obligatorio")
+    @StringLengthFieldValidator(maxLength = "50", message = "Tamaño máximo 50 carácteres")
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public String getFiltrarTema() {
-        return filtrarTema;
-    }
-
-    public void setFiltrarTema(String filtrarTema) {
-        this.filtrarTema = filtrarTema;
-    }
-
-    public List<Tematica> getTematicas() {
-        return tematicas;
-    }
-
-    public void setTematicas(List<Tematica> tematicas) {
-        this.tematicas = tematicas;
-    }
-    
-    
 
 }

@@ -23,7 +23,6 @@ import javax.ws.rs.core.GenericType;
  */
 public class GestionUsuario extends ActionSupport {
 
-    private String idUsuarioEdit;
     private String idUsuarioRemove;
     Usuario usuario = new Usuario();
     private String id;
@@ -37,9 +36,7 @@ public class GestionUsuario extends ActionSupport {
     private String imgPerfilUsuario;
     private String confirmarPassword;
     private String myFile;
-    private String filtroUser;
     
-    private List<Usuario> usuarios;
 
     public GestionUsuario() {
 
@@ -47,25 +44,6 @@ public class GestionUsuario extends ActionSupport {
 
     public String execute() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public String perfil() throws Exception {
-        //loginLogout.session = (Map) ActionContext.getContext().get("session");
-        Usuario usuarioSession = (Usuario) loginLogout.session.get("user");
-
-        GenericType<Usuario> tipoUser = new GenericType<Usuario>() {
-        };
-        UsuarioWS usuarioWS = new UsuarioWS();
-        this.usuario = usuarioWS.find_XML(tipoUser, String.valueOf(usuarioSession.getId()));
-        return SUCCESS;
-    }
-
-    public String editUser() throws Exception {
-        GenericType<Usuario> tipoUser = new GenericType<Usuario>() {
-        };
-        UsuarioWS userWS = new UsuarioWS();
-        usuario = userWS.find_XML(tipoUser, idUsuarioEdit);
-        return SUCCESS;
     }
 
     public String editUserPersistencia() throws Exception {
@@ -114,18 +92,7 @@ public class GestionUsuario extends ActionSupport {
         }
     }
     
-    public String filtrarUser() throws Exception {
-        GenericType<List<Usuario>> tipoUsuarios = new GenericType<List<Usuario>>() {
-        };
-        UsuarioWS usuarioClient = new UsuarioWS();
-        if(filtroUser.equals("")){
-            usuarios = usuarioClient.getUsuarioTipo_XML(tipoUsuarios);
-        }else{
-            usuarios = usuarioClient.getUsuariosPorNombre_JSON(tipoUsuarios, filtroUser);
-        }
-        
-        return SUCCESS;
-    }
+    
 
     public Usuario getUsuario() {
         return usuario;
@@ -133,14 +100,6 @@ public class GestionUsuario extends ActionSupport {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    public String getIdUsuarioEdit() {
-        return idUsuarioEdit;
-    }
-
-    public void setIdUsuarioEdit(String idUsuarioEdit) {
-        this.idUsuarioEdit = idUsuarioEdit;
     }
 
     public String getId() {
@@ -206,7 +165,7 @@ public class GestionUsuario extends ActionSupport {
     }
 
     @RequiredFieldValidator(message = "La fecha de nacimiento es obligatoria")
-    @RegexFieldValidator(regex = "/^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})(\\s)([0-1][0-9]|2[0-3])(:)([0-5][0-9])$/", message = "Formato de la fecha de nacimiento incorrecto")
+    @DateRangeFieldValidator(message = "Formato de la fecha de nacimiento incorrecto")
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
@@ -249,23 +208,6 @@ public class GestionUsuario extends ActionSupport {
 
     public void setMyFile(String myFile) {
         this.myFile = myFile;
-    }
-
-    public String getFiltroUser() {
-        return filtroUser;
-    }
-
-    public void setFiltroUser(String filtroUser) {
-        this.filtroUser = filtroUser;
-    }
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-    
+    } 
     
 }

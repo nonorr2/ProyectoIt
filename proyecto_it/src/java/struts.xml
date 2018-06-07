@@ -82,7 +82,7 @@
         <action name="misPublicaciones" class="acciones.menu_top_logueado" method="misPubicaciones">
             <result name="success">misPublicaciones.jsp</result>
         </action> 
-        <action name="perfil" class="acciones.GestionUsuario" method="perfil">
+        <action name="perfil" class="acciones.MostrarUsuarios" method="perfil">
             <result name="success">perfil.jsp</result>
         </action> 
         <action name="home" class="acciones.menu_top_logueado" method="home">
@@ -105,14 +105,6 @@
             <result name="success" type="chain">
                 <param name="actionName">chats</param>
             </result>
-        </action>
-        <action name="borrarChatAdmin" class="acciones.ChatAction" method="borrarChat">
-            <result name="success" type="chain">
-                <param name="actionName">chatsAdministrador</param>
-            </result>
-        </action>
-        <action name="filtrarChat" class="acciones.ChatAction" method="filtrarChat">
-            <result name="success">/vistas/admin/chats.jsp</result>
         </action>
     </package>
     
@@ -145,20 +137,21 @@
     </package>
     
     <package name="gestionUsuario" extends="struts-default">
-        <action name="editUser" class="acciones.GestionUsuario" method="editUser">
+        <action name="editUser" class="acciones.MostrarUsuarios" method="editUser">
             <result name="success">/vistas/admin/editarUsuarioAdmin.jsp</result>
         </action>
         <action name="editUserPersistenciaAdmin" class="acciones.GestionUsuario" method="editUserPersistencia">
             <result name="success" type="chain">
                 <param name="actionName">usuarios</param>
             </result>
+            <result name="input">/vistas/admin/editarUsuarioAdmin.jsp</result>
         </action>
         <action name="removeUser" class="acciones.GestionUsuario" method="removeUser">
             <result name="success" type="chain">
                 <param name="actionName">usuarios</param>
             </result>
         </action>
-        <action name="filtrarUser" class="acciones.GestionUsuario" method="filtrarUser">
+        <action name="filtrarUser" class="acciones.MostrarUsuarios" method="filtrarUser">
             <result name="success">/vistas/admin/usuariosAdmin.jsp</result>
         </action>
         <action name="editUserPersistencia" class="acciones.GestionUsuario" method="editUserPersistencia">
@@ -180,10 +173,10 @@
     </package>
     
     <package name="gestionTematica" extends="struts-default">
-        <action name="editTematica" class="acciones.GestionTematica" method="editTematica">
+        <action name="editTematica" class="acciones.MostrarTematicas" method="editTematica">
             <result name="success">/vistas/admin/editarTematica.jsp</result>
         </action>
-        <action name="filtrarTema" class="acciones.GestionTematica" method="filtrarTema">
+        <action name="filtrarTema" class="acciones.MostrarTematicas" method="filtrarTema">
             <result name="success">/vistas/admin/tematicasAdmin.jsp</result>
         </action>
         <action name="editTemaPersistencia" class="acciones.GestionTematica" method="editTemaPersistencia">
@@ -212,9 +205,6 @@
         </action>
         <action name="publicacionesAdministrador" class="acciones.menu_top_admin" method="publicacionesAdmin">
             <result name="success">/vistas/admin/publicacionesAdmin.jsp</result>
-        </action>
-        <action name="chatsAdministrador" class="acciones.menu_top_admin" method="chatsAdmin">
-            <result name="success">/vistas/admin/chats.jsp</result>
         </action>
     </package>
 </struts>

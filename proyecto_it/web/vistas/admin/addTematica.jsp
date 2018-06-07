@@ -8,6 +8,7 @@
         </s:div>
         <s:div cssClass="container-addPublicacion">
             <h2 style="color: #f4511e;">Nueva Tematica</h2>
+            <s:fielderror fieldName="nombre" cssClass="alert alert-danger" />
             <s:label><b>Titulo: </b></s:label>
             <s:textfield name="nombre" cssClass="form-control"/>
             <s:label><b>Imagen: </b></s:label> 
