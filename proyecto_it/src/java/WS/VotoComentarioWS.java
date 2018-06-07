@@ -40,6 +40,12 @@ public class VotoComentarioWS {
         return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
     }
 
+    public <T> T haVotado(GenericType<T> responseType, String id_user, String id_coment) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("haVotado/{0}/{1}", new Object[]{id_user, id_coment}));
+        return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(responseType);
+    }
+
     public void edit_XML(Object requestEntity, String id) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("{0}", new Object[]{id})).request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }

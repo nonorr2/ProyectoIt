@@ -32,30 +32,47 @@ public class ComentarioAction extends ActionSupport {
         VotoComentario vt = new VotoComentario(null, true, new Date());
         vt.setIdUsuario(user);
         vt.setIdComentario(coment);
-        
 
         VotoComentarioWS votoComentarioClient = new VotoComentarioWS();
-        votoComentarioClient.create_XML(vt);
+        GenericType<Integer> tipoInteger = new GenericType<Integer>() {
+        };
+
+        Integer exist = votoComentarioClient.haVotado(tipoInteger, String.valueOf(user.getId()), String.valueOf(idComentario));
+        if (exist == null) {
+            votoComentarioClient.create_XML(vt);
+        } else {
+            votoComentarioClient.edit_JSON(coment, String.valueOf(exist));
+        }
         return SUCCESS;
     }
 
     public String votoNegativo() throws Exception {
         Usuario user = (Usuario) loginLogout.session.get("user");
-//
-//        ComentarioWS comentarioClient = new ComentarioWS();
-//        GenericType<Comentario> tipoComentario = new GenericType<Comentario>() {
-//        };
-//        Comentario coment = comentarioClient.find_XML(tipoComentario, String.valueOf(idComentario));
-//
-//        VotoComentario vt = new VotoComentario();
-//        vt.setVotoComentarioPK(new VotoComentarioPK(user.getId(), idComentario));
-//        vt.setFechaHora(new Date());
-//        vt.setTipo(false);
-//        vt.setUsuario(user);
-//        vt.setComentario(coment);
-//
-//        VotoComentarioWS votoComentarioClient = new VotoComentarioWS();
-//        votoComentarioClient.create_XML(vt);
+
+        ComentarioWS comentarioClient = new ComentarioWS();
+        GenericType<Comentario> tipoComentario = new GenericType<Comentario>() {
+        };
+        Comentario coment = comentarioClient.find_XML(tipoComentario, String.valueOf(idComentario));
+
+        VotoComentario vtp = new VotoComentario(null, true, new Date());
+        vtp.setIdUsuario(user);
+        vtp.setIdComentario(coment);
+
+        VotoComentario vtn = new VotoComentario(null, false, new Date());
+        vtn.setIdUsuario(user);
+        vtn.setIdComentario(coment);
+
+        VotoComentarioWS votoComentarioClient = new VotoComentarioWS();
+        GenericType<Integer> tipoInteger = new GenericType<Integer>() {
+        };
+
+        Integer existPos = votoComentarioClient.haVotado(tipoInteger, String.valueOf(user.getId()), String.valueOf(idComentario));
+        Integer existNeg = votoComentarioClient.haVotado(tipoInteger, String.valueOf(user.getId()), String.valueOf(idComentario));
+        if (exist == null) {
+            votoComentarioClient.create_XML(vt);
+        } else {
+            votoComentarioClient.edit_JSON(coment, String.valueOf(exist));
+        }
         return SUCCESS;
     }
 
