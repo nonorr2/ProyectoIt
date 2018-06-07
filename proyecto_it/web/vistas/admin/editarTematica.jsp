@@ -17,6 +17,7 @@
                 <s:file name="imagen" id="fileImgTema" cssClass="fileImgUser"/>
             </s:div>
             <s:div cssClass="form-group col-sm-6">
+                <s:fielderror fieldName="nombre" cssClass="alert alert-danger" />
                 <s:label><b>Titulo:</b></s:label>
                 <s:textfield name="nombre" placeholder="Introduzaca el Titulo" cssClass="form-control" id="titulo" value="%{tematica.nombre}"/>
             </s:div>

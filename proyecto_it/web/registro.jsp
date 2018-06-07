@@ -10,7 +10,7 @@
 <s:div cssClass="container-fluid text-center">
     <s:div cssClass="col-sm-2"></s:div>
     <s:div cssClass="col-sm-8 text-left" >
-        <s:form method="post" action="addUsuario"> 
+        <s:form method="post" action="addUsuario" validate="true"> 
             <s:div cssClass="imgcontainer">
                 <img class="avatar" src="images/imgLogin.png"/>                
             </s:div>

@@ -30,9 +30,6 @@
                 <s:form action="publicacionesAdministrador" method="post">
                     <a><s:submit value="PUBLICACIONES" cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"/></a>
                 </s:form>
-                <s:form action="chatsAdministrador" method="post">
-                    <a><s:submit value="CHAT"  cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"/></a>
-                </s:form>
                 <s:form action="logout" method="post">
                     <a><s:submit value="LOGOUT"  cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"/></a>
                 </s:form>
@@ -48,9 +45,6 @@
                 </s:form>
                 <s:form action="publicaciones" method="post">
                     <a><s:submit value="PUBLICACIONES" cssClass="w3-bar-item w3-button w3-padding-large"/></a>
-                </s:form>
-                <s:form action="" method="post">
-                    <a><s:submit value="CHAT"  cssClass="w3-bar-item w3-button w3-padding-large"/></a>
                 </s:form>
                 <s:form action="logout" method="post">
                     <a><s:submit value="LOGOUT"  cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"/></a>
