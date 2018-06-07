@@ -338,6 +338,7 @@ span.psw {
     width: 15px;
     height: 15px;
     z-index: 10;
+    cursor: pointer;
 }
 
 .icon_hide{
@@ -346,6 +347,7 @@ span.psw {
     float: left;
     margin-left: 5px;
     z-index: 10;
+    cursor: pointer;
 }
 
 .contenedor-mensajes{
@@ -443,6 +445,10 @@ span.psw {
 .divPulgarNeg {
     position: absolute;
     right: 69%;
+}
+
+#borrarChat a h4{
+    cursor:pointer;
 }
 
 @media (max-width: 800px){

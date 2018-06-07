@@ -41,7 +41,8 @@ public class ComentarioAction extends ActionSupport {
         if (exist == null) {
             votoComentarioClient.create_XML(vt);
         } else {
-            votoComentarioClient.edit_JSON(coment, String.valueOf(exist));
+            vt.setId(exist);
+            votoComentarioClient.edit_JSON(vt, String.valueOf(exist));
         }
         return SUCCESS;
     }
@@ -66,12 +67,12 @@ public class ComentarioAction extends ActionSupport {
         GenericType<Integer> tipoInteger = new GenericType<Integer>() {
         };
 
-        Integer existPos = votoComentarioClient.haVotado(tipoInteger, String.valueOf(user.getId()), String.valueOf(idComentario));
-        Integer existNeg = votoComentarioClient.haVotado(tipoInteger, String.valueOf(user.getId()), String.valueOf(idComentario));
+        Integer exist = votoComentarioClient.haVotado(tipoInteger, String.valueOf(user.getId()), String.valueOf(idComentario));
         if (exist == null) {
-            votoComentarioClient.create_XML(vt);
+            votoComentarioClient.create_XML(vtn);
         } else {
-            votoComentarioClient.edit_JSON(coment, String.valueOf(exist));
+            vtn.setId(exist);
+            votoComentarioClient.edit_JSON(vtn, String.valueOf(exist));
         }
         return SUCCESS;
     }
