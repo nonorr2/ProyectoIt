@@ -165,6 +165,7 @@
             <result name="success" type="chain">
                 <param name="actionName">home</param>
             </result>
+            <result name="input">perfil.jsp</result>
         </action>
         <action name="removeMiCuenta" class="acciones.GestionUsuario" method="removeMiCuenta">
             <result name="success">index.jsp</result>
