@@ -135,9 +135,20 @@ public class ComentarioFacadeREST extends AbstractFacade<Comentario> {
         String jpql = "SELECT c FROM Comentario c WHERE c.idPublicacion= :publicacion ORDER BY c.fechaHoraModificacion DESC";
         Query query = em.createQuery(jpql);
         query.setParameter("publicacion", publicacion);
-        List<Comentario> comentarios = query.getResultList();
+//        List<Comentario> comentarios = query.getResultList();
+//        Comentario ultimoComentario = null;
+//        
+//        if(comentarios != null && !comentarios.isEmpty()){
+//            ultimoComentario = comentarios.get(0);
+//        } 
+        Comentario ultimoComentario;
 
-        Comentario ultimoComentario = comentarios.get(0);
+        try{
+            ultimoComentario = (Comentario) query.getSingleResult();
+        }catch(Exception e){
+            ultimoComentario = null;
+        }
+        
 
         return ultimoComentario;
     }

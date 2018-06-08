@@ -7,18 +7,18 @@
     <h1 class="text-banner">HOME</h1>
 </s:div>
 <s:div cssClass="container-fluid text-center">
-    <s:form method="post" action="">
-        <s:textfield  cssClass="textFileFiltrar"/>
+    <s:form method="post" action="filtroPublicacionesSuscrito">
+        <s:textfield name="filtroPublicacion" cssClass="textFileFiltrar"/>
         <s:submit name="btoLogin" cssClass="btn btn-primary filtro" value="Filtrar"/>
     </s:form>
 </s:div>
-<s:if test="%{publicacionesSuscrito.isEmpty()}">
+<s:if test="%{listaPublicaciones.isEmpty()}">
     <s:div cssClass="alert alert-warning noContenido">
         <p>No tiene ninguna suscripci&oacute;n</p>
     </s:div>
 </s:if>    
 <s:else>  
-    <s:iterator value="publicacionesSuscrito" var="publicacion">
+    <s:iterator value="listaPublicaciones" var="publicacion">
         <s:div cssClass="container-fluid text-center">
             <s:div cssClass="row">
                 <s:div cssClass="contenedor-publi sombreado">
