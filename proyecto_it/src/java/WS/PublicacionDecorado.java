@@ -155,5 +155,7 @@ public class PublicacionDecorado {
 
     public void setNumComentarios(Integer numComentarios) {
         this.numComentarios = numComentarios;
-    }   
+    }  
+    
+    
 }

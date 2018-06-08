@@ -68,8 +68,11 @@
         <action name="filtroPubli" class="acciones.MostrarPublicaciones" method="filtroPubli">
             <result name="success">/vistas/admin/publicacionesAdmin.jsp</result>
         </action>
-        <action name="filtroMisPublicaciones" class="acciones.MostrarPublicaciones" method="filtroPubli">
+        <action name="filtroMisPublicaciones" class="acciones.MostrarPublicaciones" method="filtroMisPublicaciones">
             <result name="success">misPublicaciones.jsp</result>
+        </action>
+        <action name="filtroPublicacionesSuscrito" class="acciones.MostrarPublicaciones" method="filtroPublicacionesSuscrito">
+            <result name="success">home.jsp</result>
         </action>
         <action name="getPublicacionesByTema" class="acciones.MostrarPublicaciones" method="publicacionesByTema">
             <result name="success">publicaciones.jsp</result>

@@ -38,7 +38,7 @@ public class menu_top_logueado extends ActionSupport {
 //    private List<PublicacionDecorado> misPublicaciones;
     private List<PublicacionDecorado> listaPublicaciones;
     private List<Tematica> tematicas;
-    private List<PublicacionDecorado> publicacionesSuscrito;
+//    private List<PublicacionDecorado> publicacionesSuscrito;
 
     public menu_top_logueado() {
     }
@@ -104,7 +104,6 @@ public class menu_top_logueado extends ActionSupport {
     }
 
     public String home() throws Exception {
-        //loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
         GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
@@ -118,7 +117,7 @@ public class menu_top_logueado extends ActionSupport {
         VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
         
         List<Publicacion> publicaciones = publicacionCliente.getPublicacionesSuscritoOrdenadoNumComentarios_XML(tipoPublicacion, String.valueOf(usuario.getId()));
-        this.publicacionesSuscrito = new ArrayList<PublicacionDecorado>();
+        this.listaPublicaciones = new ArrayList<PublicacionDecorado>();
 
         for (Publicacion publicacion : publicaciones) {
             PublicacionDecorado publicacionDecorado = new PublicacionDecorado();
@@ -131,7 +130,7 @@ public class menu_top_logueado extends ActionSupport {
             publicacionDecorado.setNumComentarios(numComentarios.intValue());
             publicacionDecorado.setNumVotosPositivosPublicacion(numVotosPositivos.intValue());
             publicacionDecorado.setNumVotosNegativosPublicacion(numVotosNegativos.intValue());
-            this.publicacionesSuscrito.add(publicacionDecorado);
+            this.listaPublicaciones.add(publicacionDecorado);
         }
 
         return SUCCESS;
@@ -159,14 +158,6 @@ public class menu_top_logueado extends ActionSupport {
 
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
-    }
-
-    public List<PublicacionDecorado> getPublicacionesSuscrito() {
-        return publicacionesSuscrito;
-    }
-
-    public void setPublicacionesSuscrito(List<PublicacionDecorado> publicacionesSuscrito) {
-        this.publicacionesSuscrito = publicacionesSuscrito;
     }
 
     public Integer getId_user() {
