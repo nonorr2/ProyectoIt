@@ -197,7 +197,7 @@ span.psw {
 
 .publi-no-imagen{
     width: 15%;
-    height: 220px;
+    height: 190px;
     float: left;
     overflow: hidden;
     margin: 0px;
@@ -258,7 +258,7 @@ span.psw {
 .contenedor-iconos{
     float: left;
     width: 14%;
-    margin-top: 180px;
+    margin-top: 140px;
 }
 
 .contenedor-icono-add{
@@ -431,24 +431,23 @@ span.psw {
     cursor: pointer;
     z-index: 15;
 }
-
-.contenedor-iconos-pulgares{
-    overflow: hidden;
+.datos-publicacion-left{
+    float: left;
     width: 50%;
 }
 
-.divPulgarPos{
-    position: absolute;
-    right: 76%;
-}
-
-.divPulgarNeg {
-    position: absolute;
-    right: 69%;
+.datos-publicacion-right{
+    width: 50%;
+    float: left;
+    margin-top: 60px;
 }
 
 #borrarChat a h4{
     cursor:pointer;
+}
+
+ul {
+    list-style-type: none;
 }
 
 @media (max-width: 800px){
