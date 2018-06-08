@@ -30,6 +30,7 @@ import javax.ws.rs.core.GenericType;
 public class GestionVotoSuscripcion extends ActionSupport {
 
     private String idPublicacion;
+    private String idTema;
 
     public GestionVotoSuscripcion() {
     }
@@ -101,14 +102,33 @@ public class GestionVotoSuscripcion extends ActionSupport {
 
     public String unFollowPublicacion() throws Exception {
         Usuario usuario = (Usuario) loginLogout.session.get("user");
-        GenericType<Suscripcion> tipoSuscriocion = new GenericType<Suscripcion>() {
+        GenericType<Suscripcion> tipoSuscripcion = new GenericType<Suscripcion>() {
         };
-        SuscripcionWS suscripcionClinete = new SuscripcionWS();
-        Suscripcion suscripcion = suscripcionClinete.getSuscripcion_XML(tipoSuscriocion, String.valueOf(usuario.getId()), idPublicacion);
+        SuscripcionWS suscripcionCliente = new SuscripcionWS();
+        Suscripcion suscripcion = suscripcionCliente.getSuscripcion_XML(tipoSuscripcion, String.valueOf(usuario.getId()), idPublicacion);
 
-        suscripcionClinete.remove(String.valueOf(suscripcion.getId()));
+        suscripcionCliente.remove(String.valueOf(suscripcion.getId()));
 
         return SUCCESS;
+    }
+
+    public String followPublicacion() throws Exception {
+        Usuario usuario = (Usuario) loginLogout.session.get("user");
+        GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {
+        };
+        SuscripcionWS suscripcionCliente = new SuscripcionWS();
+        PublicacionWS publicacionCliente = new PublicacionWS();
+        
+        Publicacion publiAux = publicacionCliente.find_JSON(tipoPublicacion, idPublicacion);
+        
+        Suscripcion suscripcion = new Suscripcion(null, new Date());
+        suscripcion.setIdPublicacion(publiAux);
+        suscripcion.setIdUsuario(usuario);
+
+        suscripcionCliente.create_JSON(suscripcion);
+
+        return SUCCESS;
+
     }
 
     public String getIdPublicacion() {
@@ -118,4 +138,13 @@ public class GestionVotoSuscripcion extends ActionSupport {
     public void setIdPublicacion(String idPublicacion) {
         this.idPublicacion = idPublicacion;
     }
+
+    public String getIdTema() {
+        return idTema;
+    }
+
+    public void setIdTema(String idTema) {
+        this.idTema = idTema;
+    }
+
 }

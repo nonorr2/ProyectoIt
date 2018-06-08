@@ -55,15 +55,38 @@
                 <param name="actionName">home</param>
             </result>
         </action>
+        <action name="unFollowPublicacionAjena" class="acciones.GestionVotoSuscripcion" method="unFollowPublicacion">
+            <result name="success" type="chain">
+                <param name="actionName">getPublicacionesByTema</param>
+            </result>
+        </action>
+        <action name="followPublicacion" class="acciones.GestionVotoSuscripcion" method="followPublicacion">
+            <result name="success" type="chain">
+                <param name="actionName">getPublicacionesByTema</param>
+            </result>
+        </action>
         <action name="votoPositivoPublicacion" class="acciones.GestionVotoSuscripcion" method="votoPositivoPublicacion">
             <result name="success" type="chain">
                 <param name="actionName">home</param>
+            </result>
+        </action>
+        <action name="votoPositivoPublicacionAjena" class="acciones.GestionVotoSuscripcion" method="votoPositivoPublicacion">
+            <result name="success" type="chain">
+                <param name="actionName">getPublicacionesByTema</param>
             </result>
         </action>
         <action name="votoNegativoPublicacion" class="acciones.GestionVotoSuscripcion" method="votoNegativoPublicacion">
             <result name="success" type="chain">
                 <param name="actionName">home</param>
             </result>
+        </action>
+        <action name="votoNegativoPublicacionAjena" class="acciones.GestionVotoSuscripcion" method="votoNegativoPublicacion">
+            <result name="success" type="chain">
+                <param name="actionName">getPublicacionesByTema</param>
+            </result>
+        </action>
+        <action name="filtroPubli" class="acciones.GestionPublicacion" method="filtroPubli">
+            <result name="success">/vistas/admin/publicacionesAdmin.jsp</result>
         </action>
         <action name="filtroPubli" class="acciones.MostrarPublicaciones" method="filtroPubli">
             <result name="success">/vistas/admin/publicacionesAdmin.jsp</result>

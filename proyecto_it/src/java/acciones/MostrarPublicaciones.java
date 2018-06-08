@@ -11,6 +11,10 @@ import WS.PublicacionDecorado;
 import WS.PublicacionWS;
 import WS.Tematica;
 import WS.TematicaWS;
+import WS.PublicacionDecoradorExterno;
+import WS.PublicacionWS;
+import WS.Suscripcion;
+import WS.SuscripcionWS;
 import WS.Usuario;
 import WS.VotoPublicacionWS;
 import static com.opensymphony.xwork2.Action.SUCCESS;
@@ -31,7 +35,10 @@ public class MostrarPublicaciones extends ActionSupport {
     private List<PublicacionDecorado> listaPublicaciones;
     private List<Tematica> tematicas;
 
+    private List<PublicacionDecoradorExterno> publicacionesDecoradas;
+    
     public MostrarPublicaciones() {
+        publicacionesDecoradas = new ArrayList<>();
     }
 
     public String execute() throws Exception {
@@ -138,7 +145,36 @@ public class MostrarPublicaciones extends ActionSupport {
         GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
         };
         PublicacionWS publicacionClient = new PublicacionWS();
-        publicaciones = publicacionClient.getPublicacionesByTema_JSON(tipoPublicacion, idTema);
+        List<Publicacion> listadoPublicaciones = publicacionClient.getPublicacionesByTema_JSON(tipoPublicacion, idTema);
+
+        VotoPublicacionWS votoPublicacionClient = new VotoPublicacionWS();
+        SuscripcionWS suscripcionClient = new SuscripcionWS();
+        ComentarioWS comentarioCliente = new ComentarioWS();
+
+        GenericType<Suscripcion> tipoSuscripcion = new GenericType<Suscripcion>() {
+        };
+        GenericType<Long> tipoVotoPublicacion = new GenericType<Long>() {
+        };
+
+        Usuario usu = (Usuario) loginLogout.session.get("user");
+
+        for (Publicacion publicacion : listadoPublicaciones) {
+            PublicacionDecoradorExterno aux = new PublicacionDecoradorExterno();
+            Suscripcion auxSuscripcion = suscripcionClient.getSuscripcion_JSON(tipoSuscripcion, String.valueOf(usu.getId()), String.valueOf(publicacion.getId()));
+
+            aux.setPublicacion(publicacion);
+            aux.setNumVotosNegativosPublicacion(votoPublicacionClient.getVotosNegativos(tipoVotoPublicacion, String.valueOf(publicacion.getId())).intValue());
+            aux.setNumVotosPositivosPublicacion(votoPublicacionClient.getVotosPositivos(tipoVotoPublicacion, String.valueOf(publicacion.getId())).intValue());
+            aux.setNumComentarios(comentarioCliente.getNumComentarios(tipoVotoPublicacion, String.valueOf(publicacion.getId())).intValue());
+
+            if (auxSuscripcion != null) {
+                aux.setSuscripcion(true);
+            } else {
+                aux.setSuscripcion(false);
+            }
+
+            publicacionesDecoradas.add(aux);
+        }
         return SUCCESS;
     }
 
@@ -182,5 +218,14 @@ public class MostrarPublicaciones extends ActionSupport {
         this.tematicas = tematicas;
     }
 
+    public List<PublicacionDecoradorExterno> getPublicacionesDecoradas() {
+        return publicacionesDecoradas;
+    }
+
+    public void setPublicacionesDecoradas(List<PublicacionDecoradorExterno> publicacionesDecoradas) {
+        this.publicacionesDecoradas = publicacionesDecoradas;
+    }
+    
+    
     
 }
