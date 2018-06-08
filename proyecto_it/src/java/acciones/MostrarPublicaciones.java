@@ -8,7 +8,6 @@ package acciones;
 import WS.ComentarioWS;
 import WS.Publicacion;
 import WS.PublicacionDecorado;
-import WS.PublicacionWS;
 import WS.Tematica;
 import WS.TematicaWS;
 import WS.PublicacionDecoradorExterno;
@@ -34,7 +33,7 @@ public class MostrarPublicaciones extends ActionSupport {
     private String idTema;
     private List<PublicacionDecorado> listaPublicaciones;
     private List<Tematica> tematicas;
-
+    private String idPublicacionRemove;
     private List<PublicacionDecoradorExterno> publicacionesDecoradas;
     
     public MostrarPublicaciones() {
@@ -43,6 +42,12 @@ public class MostrarPublicaciones extends ActionSupport {
 
     public String execute() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public String removePublicacion() throws Exception {
+        PublicacionWS publicacionWS = new PublicacionWS();
+        publicacionWS.remove(idPublicacionRemove);
+        return SUCCESS;
     }
 
     /**
@@ -224,6 +229,14 @@ public class MostrarPublicaciones extends ActionSupport {
 
     public void setPublicacionesDecoradas(List<PublicacionDecoradorExterno> publicacionesDecoradas) {
         this.publicacionesDecoradas = publicacionesDecoradas;
+    }
+
+    public String getIdPublicacionRemove() {
+        return idPublicacionRemove;
+    }
+
+    public void setIdPublicacionRemove(String idPublicacionRemove) {
+        this.idPublicacionRemove = idPublicacionRemove;
     }
     
     

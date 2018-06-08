@@ -15,6 +15,7 @@ import com.opensymphony.xwork2.validator.annotations.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import javax.ws.rs.core.GenericType;
 
 /**
@@ -34,7 +35,6 @@ public class GestionUsuario extends ActionSupport {
     private Date fechaNacimiento;
     private String foto;
     private String imgPerfilUsuario;
-    private String confirmarPassword;
     private String myFile;
     
 
@@ -78,8 +78,12 @@ public class GestionUsuario extends ActionSupport {
         UsuarioWS userWS = new UsuarioWS();
         GenericType<Usuario> tipoUsuario = new GenericType<Usuario>() {
         };
+        GenericType<Boolean> tipoBoolean = new GenericType<Boolean>() {
+        };
+        
+        boolean econtrado = userWS.existeNickname(tipoBoolean, nickname);
 
-        if (this.password.equals(this.confirmarPassword)) {
+        if (econtrado == false) {
             Usuario newUsuario = new Usuario(null, nombre, apellidos, nickname, password, email, false, fechaNacimiento, foto);
             userWS.create_XML(newUsuario);
 
@@ -91,6 +95,51 @@ public class GestionUsuario extends ActionSupport {
             return ERROR;
         }
     }
+
+    @Override
+    public void validate() {
+        if(this.getNombre() == null || this.getNombre().trim().length() == 0){
+            addFieldError("nombre", "El nombre es obligatorio");
+        }else if(this.getNombre().length() > 50){
+            addFieldError("nombre", "Tamaño máximo 50 carácteres");
+        }
+        
+        if(this.getApellidos() == null || this.getApellidos().trim().length() == 0){
+            addFieldError("apellidos", "El apellido es obligatorio");
+        }else if(this.getApellidos().length() > 50){
+            addFieldError("apellidos", "Tamaño máximo 50 carácteres");
+        }
+        
+        UsuarioWS userWS = new UsuarioWS();
+        GenericType<Boolean> tipoBoolean = new GenericType<Boolean>() {
+        };
+        if(this.getNickname() == null || this.getNickname().trim().length() == 0){
+            addFieldError("nickname", "El nombre de usuario es obligatorio");
+        }else if(userWS.existeNickname(tipoBoolean, this.getNickname()) == true){
+            addFieldError("nickname", "El nombre de usuario ya existe");
+        }else if(this.getNickname().length() > 50){
+            addFieldError("nickname", "Tamaño máximo 50 carácteres");
+        }
+        
+        if(this.getPassword() == null || this.getPassword().trim().length() == 0){
+            addFieldError("password", "La contraseña es obligatoria");
+        }else if(this.getPassword().length() < 6){
+            addFieldError("password", "Tamaño mínimo 5 carácteres");
+        }
+        
+        if(this.getEmail() == null || this.getEmail().trim().length() == 0){
+            addFieldError("email", "El email es obligatorio");
+        }else if(this.getEmail().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")){
+            addFieldError("email", "Formato incorrecto");
+        }
+        
+        if(this.getFechaNacimiento() == null){
+            addFieldError("fechaNacimiento", "La de nacimiento es obligatorio");    
+        }       
+        
+    }
+    
     
     
 
@@ -114,8 +163,8 @@ public class GestionUsuario extends ActionSupport {
         return nombre;
     }
 
-    @RequiredStringValidator(message = "El nombre es obligatorio")
-    @StringLengthFieldValidator(maxLength = "50", message = "Tamaño máximo 50 carácteres")
+//    @RequiredStringValidator(message = "El nombre es obligatorio")
+//    @StringLengthFieldValidator(maxLength = "50", message = "Tamaño máximo 50 carácteres")
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -124,8 +173,8 @@ public class GestionUsuario extends ActionSupport {
         return apellidos;
     }
 
-    @RequiredStringValidator(message = "El apellido es obligatorio")
-    @StringLengthFieldValidator(maxLength = "50", message = "Tamaño máximo 50 carácteres")
+//    @RequiredStringValidator(message = "El apellido es obligatorio")
+//    @StringLengthFieldValidator(maxLength = "50", message = "Tamaño máximo 50 carácteres")
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
@@ -134,8 +183,8 @@ public class GestionUsuario extends ActionSupport {
         return nickname;
     }
 
-    @RequiredStringValidator(message = "El nombre de usuario es obligatorio")
-    @StringLengthFieldValidator(maxLength = "50", message = "Tamaño máximo 50 carácteres")
+//    @RequiredStringValidator(message = "El nombre de usuario es obligatorio")
+//    @StringLengthFieldValidator(maxLength = "50", message = "Tamaño máximo 50 carácteres")
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
@@ -144,8 +193,8 @@ public class GestionUsuario extends ActionSupport {
         return email;
     }
 
-    @RequiredStringValidator(message = "El email es obligatorio")
-    @EmailValidator(message = "Formato del email incorrecto")
+//    @RequiredStringValidator(message = "El email es obligatorio")
+//    @EmailValidator(message = "Formato del email incorrecto")
     public void setEmail(String email) {
         this.email = email;
     }
@@ -154,8 +203,8 @@ public class GestionUsuario extends ActionSupport {
         return password;
     }
 
-    @RequiredStringValidator(message = "La contraseña es obligatoria")
-    @StringLengthFieldValidator(minLength = "5", maxLength = "10", message = "La contraseña debe estar comprendida entren 5 y 10 carácteres")
+//    @RequiredStringValidator(message = "La contraseña es obligatoria")
+//    @StringLengthFieldValidator(minLength = "5", message = "La contraseña debe tener mínimo 5 carácteres")
     public void setPassword(String password) {
         this.password = password;
     }
@@ -164,8 +213,8 @@ public class GestionUsuario extends ActionSupport {
         return fechaNacimiento;
     }
 
-    @RequiredFieldValidator(message = "La fecha de nacimiento es obligatoria")
-    @DateRangeFieldValidator(message = "Formato de la fecha de nacimiento incorrecto")
+//    @RequiredFieldValidator(message = "La fecha de nacimiento es obligatoria")
+//    @DateRangeFieldValidator(message = "Formato de la fecha de nacimiento incorrecto")
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
@@ -192,14 +241,6 @@ public class GestionUsuario extends ActionSupport {
 
     public void setImgPerfilUsuario(String imgPerfilUsuario) {
         this.imgPerfilUsuario = imgPerfilUsuario;
-    }
-
-    public String getConfirmarPassword() {
-        return confirmarPassword;
-    }
-
-    public void setConfirmarPassword(String confirmarPassword) {
-        this.confirmarPassword = confirmarPassword;
     }
 
     public String getMyFile() {

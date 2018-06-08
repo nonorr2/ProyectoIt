@@ -42,10 +42,10 @@
                 <s:label><b>Contraseña:</b></s:label>
                 <s:password name="password" placeholder="Introduzaca la contraseña" cssClass="form-control" id="password"/>
             </s:div>
-            <s:div cssClass="form-group col-sm-6">
-                <s:label><b>Confirmar contraseña:</b></s:label>
-                <s:password name="confirmarPassword" placeholder="Introduzaca la contraseña" cssClass="form-control" id="confirmarPassword"/>
-            </s:div>             
+            <%--<s:div cssClass="form-group col-sm-6">--%>
+                <%--<s:label><b>Confirmar contraseña:</b></s:label>--%>
+                <%--<s:password name="confirmarPassword" placeholder="Introduzaca la contraseña" cssClass="form-control" id="confirmarPassword"/>--%>
+            <%--</s:div>--%>             
             <s:div cssClass="form-group col-sm-6">
                 <s:fielderror fieldName="fechaNacimiento" cssClass="alert alert-danger" />
                 <s:label><b>Fecha de nacimiento:</b></s:label> 

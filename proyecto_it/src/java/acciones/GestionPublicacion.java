@@ -14,6 +14,8 @@ import WS.VotoPublicacion;
 import WS.VotoPublicacionWS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
@@ -36,24 +38,17 @@ public class GestionPublicacion extends ActionSupport {
     private String contenidoPubliacion;
     private String rutaPubliacion;
     private String tematicaPubliacion;
-    private String fileUploadContentType;
-    private String fileUploadFileName;
     private String idPublicacion;
     private String filtroPublicacion;
 
     private List<Publicacion> publicaciones;
+    private List<Tematica> tematicas;
 
     public GestionPublicacion() {
     }
 
     public String execute() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public String removePublicacion() throws Exception {
-        PublicacionWS publicacionWS = new PublicacionWS();
-        publicacionWS.remove(idPublicacionRemove);
-        return SUCCESS;
     }
 
     /**
@@ -63,28 +58,46 @@ public class GestionPublicacion extends ActionSupport {
      * @throws Exception
      */
     public String addPublicacion() throws Exception {
-        ServletContext context = ServletActionContext.getServletContext();
-//        String hola = context.getRealPath("/");
-        String ruta = System.getProperty("catalina.home") + "/prueba/prueba2.png";
-        File nuevo = new File(ruta);
-        FileUtils.copyFile(fotoPubliacion, nuevo);
-        nuevo.renameTo(new File("/images/publicaciones/" + "prueba1subida.png"));
+        String rutaRelativa = null;
+        
+        if (fotoPubliacion != null) {
+            ServletContext context = ServletActionContext.getServletContext();
+            String nombreFichero = tituloPubliacion + ".png";
+            rutaRelativa = "images/publicaciones/" + nombreFichero;
+            String ruta = context.getRealPath("/") + rutaRelativa;
+            File nuevo = new File(ruta);
+            FileUtils.copyFile(fotoPubliacion, nuevo);
+        }
+
         PublicacionWS publicacionWS = new PublicacionWS();
         TematicaWS tematicaWS = new TematicaWS();
 
-        //loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
         GenericType<Tematica> tipoTematica = new GenericType<Tematica>() {
         };
         Tematica tematica = tematicaWS.find_XML(tipoTematica, tematicaPubliacion);
 
-        Publicacion publicacion = new Publicacion(null, tituloPubliacion, contenidoPubliacion, new Date(), new Date(), rutaPubliacion, ruta);
+        Publicacion publicacion = new Publicacion(null, tituloPubliacion, contenidoPubliacion, new Date(), new Date(), rutaPubliacion, rutaRelativa);
         publicacion.setIdUsuario(usuario);
         publicacion.setIdTematica(tematica);
 
         publicacionWS.create_JSON(publicacion);
+
         return SUCCESS;
+    }
+
+    @Override
+    public void validate() {
+        //Listar las temáticas para el selec de añadir piblicacion
+        GenericType<List<Tematica>> tipoListTematica = new GenericType<List<Tematica>>() {
+        };
+        TematicaWS tematicaClient = new TematicaWS();
+        tematicas = (List<Tematica>) tematicaClient.findAll_XML(tipoListTematica);
+
+        if (this.getTituloPubliacion() == null || this.getTituloPubliacion().trim().length() == 0) {
+            addFieldError("tituloPubliacion", "El título es obligatorio");
+        }
     }
 
     public String getIdPublicacionRemove() {
@@ -135,22 +148,6 @@ public class GestionPublicacion extends ActionSupport {
         this.tematicaPubliacion = tematicaPubliacion;
     }
 
-    public String getFileUploadContentType() {
-        return fileUploadContentType;
-    }
-
-    public void setFileUploadContentType(String fileUploadContentType) {
-        this.fileUploadContentType = fileUploadContentType;
-    }
-
-    public String getFileUploadFileName() {
-        return fileUploadFileName;
-    }
-
-    public void setFileUploadFileName(String fileUploadFileName) {
-        this.fileUploadFileName = fileUploadFileName;
-    }
-
     public String getIdPublicacion() {
         return idPublicacion;
     }
@@ -173,6 +170,14 @@ public class GestionPublicacion extends ActionSupport {
 
     public void setPublicaciones(List<Publicacion> publicaciones) {
         this.publicaciones = publicaciones;
+    }
+
+    public List<Tematica> getTematicas() {
+        return tematicas;
+    }
+
+    public void setTematicas(List<Tematica> tematicas) {
+        this.tematicas = tematicas;
     }
 
 }

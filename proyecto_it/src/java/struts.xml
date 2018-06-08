@@ -36,7 +36,7 @@
                 <param name="actionName">publicacionesAdministrador</param>
             </result>
         </action>
-        <action name="borrarMiPublicacion" class="acciones.GestionPublicacion" method="removePublicacion">
+        <action name="borrarMiPublicacion" class="acciones.MostrarPublicaciones" method="removePublicacion">
             <result name="success" type="chain">
                 <param name="actionName">misPublicaciones</param>
             </result>

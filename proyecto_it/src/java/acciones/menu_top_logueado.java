@@ -98,7 +98,7 @@ public class menu_top_logueado extends ActionSupport {
         //Listar las temáticas para el selec de añadir piblicacion
         GenericType<List<Tematica>> tipoTematica = new GenericType<List<Tematica>>() {};
         TematicaWS tematicaClient = new TematicaWS();
-        tematicas = (List<Tematica>) tematicaClient.getTematicasMasPopulares_JSON(tipoTematica);
+        tematicas = (List<Tematica>) tematicaClient.findAll_XML(tipoTematica);
         
         return SUCCESS;
     }

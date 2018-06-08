@@ -154,4 +154,31 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         List<Usuario> result = (List<Usuario>) query.getResultList();
         return result;
     }
+    
+    /**
+     * Método para comprobar si ya existe un usuario con el nickname
+     * pasado por parámetro
+     * @param nickname
+     * @return 
+     */
+    @GET
+    @Path("/existeNickname/{nickname}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Boolean existeNickname(@PathParam("nickname") String nickname) {
+        boolean encontrado = false;
+        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.nickname = :nickname");
+        query.setParameter("nickname", nickname);
+
+        try {
+            Usuario usuario = (Usuario) query.getSingleResult();
+
+            if (usuario != null) {
+                encontrado = true;
+            }
+        } catch (Exception e) {
+            encontrado = false;
+        }
+
+        return encontrado;
+    }
 }
