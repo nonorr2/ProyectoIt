@@ -16,14 +16,15 @@ import WS.Tematica;
 import WS.TematicaWS;
 import WS.Usuario;
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import com.opensymphony.xwork2.ActionContext;
 import WS.UsuarioWS;
 import WS.VotoPublicacionWS;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -38,7 +39,7 @@ public class menu_top_logueado extends ActionSupport {
 //    private List<PublicacionDecorado> misPublicaciones;
     private List<PublicacionDecorado> listaPublicaciones;
     private List<Tematica> tematicas;
-    private List<PublicacionDecorado> publicacionesSuscrito;
+//    private List<PublicacionDecorado> publicacionesSuscrito;
 
     public menu_top_logueado() {
     }
@@ -73,17 +74,19 @@ public class menu_top_logueado extends ActionSupport {
     public String misPubicaciones() throws Exception {
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
-        GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {};
-        GenericType<Long> tipoLong = new GenericType<Long>() {};
-        
-        PublicacionWS publicacionCliente = new PublicacionWS();        
+        GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
+        };
+        GenericType<Long> tipoLong = new GenericType<Long>() {
+        };
+
+        PublicacionWS publicacionCliente = new PublicacionWS();
         ComentarioWS comentarioCliente = new ComentarioWS();
         VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
-        
+
         List<Publicacion> publicaciones = (List<Publicacion>) publicacionCliente.getMisPublicaciones_XML(tipoPublicacion, String.valueOf(usuario.getId()));
         this.listaPublicaciones = new ArrayList<PublicacionDecorado>();
-        
-        for(Publicacion publicacion : publicaciones){
+
+        for (Publicacion publicacion : publicaciones) {
             PublicacionDecorado publicacionDecorado = new PublicacionDecorado();
             Long numComentarios = comentarioCliente.getNumComentarios(tipoLong, String.valueOf(publicacion.getId()));
             Long numVotosPositivos = votoPublicacionCliente.getVotosPositivos(tipoLong, String.valueOf(publicacion.getId()));
@@ -94,17 +97,17 @@ public class menu_top_logueado extends ActionSupport {
             publicacionDecorado.setNumVotosNegativosPublicacion(numVotosNegativos.intValue());
             this.listaPublicaciones.add(publicacionDecorado);
         }
-        
+
         //Listar las temáticas para el selec de añadir piblicacion
-        GenericType<List<Tematica>> tipoTematica = new GenericType<List<Tematica>>() {};
+        GenericType<List<Tematica>> tipoTematica = new GenericType<List<Tematica>>() {
+        };
         TematicaWS tematicaClient = new TematicaWS();
         tematicas = (List<Tematica>) tematicaClient.getTematicasMasPopulares_JSON(tipoTematica);
-        
+
         return SUCCESS;
     }
 
     public String home() throws Exception {
-        //loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
         GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
@@ -116,9 +119,9 @@ public class menu_top_logueado extends ActionSupport {
         PublicacionWS publicacionCliente = new PublicacionWS();
         ComentarioWS comentarioCliente = new ComentarioWS();
         VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
-        
+
         List<Publicacion> publicaciones = publicacionCliente.getPublicacionesSuscritoOrdenadoNumComentarios_XML(tipoPublicacion, String.valueOf(usuario.getId()));
-        this.publicacionesSuscrito = new ArrayList<PublicacionDecorado>();
+        this.listaPublicaciones = new ArrayList<PublicacionDecorado>();
 
         for (Publicacion publicacion : publicaciones) {
             PublicacionDecorado publicacionDecorado = new PublicacionDecorado();
@@ -131,7 +134,7 @@ public class menu_top_logueado extends ActionSupport {
             publicacionDecorado.setNumComentarios(numComentarios.intValue());
             publicacionDecorado.setNumVotosPositivosPublicacion(numVotosPositivos.intValue());
             publicacionDecorado.setNumVotosNegativosPublicacion(numVotosNegativos.intValue());
-            this.publicacionesSuscrito.add(publicacionDecorado);
+            this.listaPublicaciones.add(publicacionDecorado);
         }
 
         return SUCCESS;
@@ -161,14 +164,6 @@ public class menu_top_logueado extends ActionSupport {
         this.usuarios = usuarios;
     }
 
-    public List<PublicacionDecorado> getPublicacionesSuscrito() {
-        return publicacionesSuscrito;
-    }
-
-    public void setPublicacionesSuscrito(List<PublicacionDecorado> publicacionesSuscrito) {
-        this.publicacionesSuscrito = publicacionesSuscrito;
-    }
-
     public Integer getId_user() {
         return id_user;
     }
@@ -184,7 +179,5 @@ public class menu_top_logueado extends ActionSupport {
     public void setListaPublicaciones(List<PublicacionDecorado> listaPublicaciones) {
         this.listaPublicaciones = listaPublicaciones;
     }
-    
-    
 
 }

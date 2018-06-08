@@ -7,7 +7,7 @@
     <h1 class="text-banner">PUBLICACIONES</h1>
 </s:div>
 <s:div cssClass="container-fluid text-center">
-    <s:form method="post" action="">
+    <s:form method="post" action="filtrarPublicacion">
         <s:textfield  cssClass="textFileFiltrar"/>
         <s:submit name="btoLogin" cssClass="btn btn-primary filtro" value="Filtrar"/>
     </s:form>

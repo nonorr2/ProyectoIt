@@ -98,9 +98,9 @@
         btn_envio.setAttribute("value", "Enviar");
         btn_envio.setAttribute("onclick", "enviarMensaje()");
         btn_envio.setAttribute("class", "btn-entrada-chat");
-        contenedor_entrada.appendChild(btn_envio);
         contenedor_entrada.appendChild(entrada);
-
+        contenedor_entrada.appendChild(btn_envio);
+        
         var datos_chat = document.createElement("div");
         datos_chat.setAttribute("id", "datos_chat");
         datos_chat.setAttribute("class", "datos-chat");
@@ -116,7 +116,6 @@
         var contenedor_chat = document.getElementById("chat");
         contenedor_chat.appendChild(contenedor_mensajes);
         contenedor_chat.appendChild(contenedor_entrada);
-        contenedor_chat.appendChild(entrada);
         contenedor_chat.appendChild(datos_chat);
         contenedor_chat.appendChild(imagen_close);
 
