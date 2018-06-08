@@ -5,10 +5,13 @@
  */
 package acciones;
 
+import WS.PublicacionWS;
 import WS.Tematica;
+import WS.TematicaDecorado;
 import WS.TematicaWS;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 
@@ -22,8 +25,9 @@ public class MostrarTematicas extends ActionSupport {
     TematicaWS tematicasWS = new TematicaWS();
     private String idTematicaEdit;
     private String filtrarTema;
-    List<Tematica> tematicas;
-    
+    List<TematicaDecorado> tematicas;
+    private String idTematicaRemove;
+
     public MostrarTematicas() {
     }
 
@@ -39,15 +43,35 @@ public class MostrarTematicas extends ActionSupport {
     }
 
     public String filtrarTema() throws Exception {
-        GenericType<List<Tematica>> tipoUsuarios = new GenericType<List<Tematica>>() {
+        GenericType<List<Tematica>> tipoTematicaaAdmin = new GenericType<List<Tematica>>() {
         };
-        TematicaWS usuarioClient = new TematicaWS();
+        GenericType<Long> tipoLong = new GenericType<Long>() {
+        };
+
+        TematicaWS tematicaClient = new TematicaWS();
+        PublicacionWS publicacionClient = new PublicacionWS();
+        List<Tematica> listTematica;
+
         if (filtrarTema.equals("")) {
-            tematicas = usuarioClient.findAll_XML(tipoUsuarios);
+            listTematica = tematicaClient.findAll_XML(tipoTematicaaAdmin);
         } else {
-            tematicas = usuarioClient.getTematicasPorNombre_XML(tipoUsuarios, filtrarTema);
+            listTematica = tematicaClient.getTematicasPorNombre_XML(tipoTematicaaAdmin, filtrarTema);
         }
 
+        this.tematicas = new ArrayList<TematicaDecorado>();
+
+        for (Tematica t : listTematica) {
+            TematicaDecorado tematicaDecorado = new TematicaDecorado();
+            Long numPubliTema = publicacionClient.getNumPublicacionesByTematica(tipoLong, String.valueOf(t.getId()));
+            tematicaDecorado.setTematicas(t);
+            tematicaDecorado.setNumPublicacionesDeUnaTematica(numPubliTema.intValue());
+            this.tematicas.add(tematicaDecorado);
+        }
+        return SUCCESS;
+    }
+
+    public String removeTematica() throws Exception {
+        tematicasWS.remove(idTematicaRemove);
         return SUCCESS;
     }
 
@@ -83,12 +107,20 @@ public class MostrarTematicas extends ActionSupport {
         this.filtrarTema = filtrarTema;
     }
 
-    public List<Tematica> getTematicas() {
+    public List<TematicaDecorado> getTematicas() {
         return tematicas;
     }
 
-    public void setTematicas(List<Tematica> tematicas) {
+    public void setTematicas(List<TematicaDecorado> tematicas) {
         this.tematicas = tematicas;
     }
-    
+
+    public String getIdTematicaRemove() {
+        return idTematicaRemove;
+    }
+
+    public void setIdTematicaRemove(String idTematicaRemove) {
+        this.idTematicaRemove = idTematicaRemove;
+    }
+
 }

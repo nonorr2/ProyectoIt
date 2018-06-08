@@ -24,7 +24,7 @@ import javax.ws.rs.core.GenericType;
  */
 public class GestionUsuario extends ActionSupport {
 
-    private String idUsuarioRemove;
+    
     Usuario usuario = new Usuario();
     private String id;
     private String nombre;
@@ -51,26 +51,6 @@ public class GestionUsuario extends ActionSupport {
         UsuarioWS userWS = new UsuarioWS();
         Usuario user = new Usuario(Integer.valueOf(id), nombre, apellidos, nickname, password, email, ruta, fechaNacimiento);
         userWS.edit_JSON(user, id);
-        return SUCCESS;
-    }
-
-    public String removeUser() throws Exception {
-        UsuarioWS userWS = new UsuarioWS();
-        userWS.remove(idUsuarioRemove);
-        return SUCCESS;
-    }
-
-    /**
-     * Método para eliminar la cuenta del usuario logueado
-     *
-     * @return
-     * @throws Exception
-     */
-    public String removeMiCuenta() throws Exception {
-        //loginLogout.session = (Map) ActionContext.getContext().get("session");
-        loginLogout.session.clear();
-        UsuarioWS userWS = new UsuarioWS();
-        userWS.remove(idUsuarioRemove);
         return SUCCESS;
     }
 
@@ -217,14 +197,6 @@ public class GestionUsuario extends ActionSupport {
 //    @DateRangeFieldValidator(message = "Formato de la fecha de nacimiento incorrecto")
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public String getIdUsuarioRemove() {
-        return idUsuarioRemove;
-    }
-
-    public void setIdUsuarioRemove(String idUsuarioRemove) {
-        this.idUsuarioRemove = idUsuarioRemove;
     }
 
     public String getFoto() {

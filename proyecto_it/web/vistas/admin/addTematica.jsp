@@ -8,10 +8,16 @@
         </s:div>
         <s:div cssClass="container-addPublicacion">
             <h2 style="color: #f4511e;">Nueva Tematica</h2>
+            <s:if test="tematicaIguales">
+                <s:div cssClass="alert alert-warning noContenido">
+                    <p>Tematica ya existente en el sistema</p>
+                </s:div>
+            </s:if>
             <s:fielderror fieldName="nombre" cssClass="alert alert-danger" />
             <s:label><b>Titulo: </b></s:label>
             <s:textfield name="nombre" cssClass="form-control"/>
             <s:label><b>Imagen: </b></s:label> 
+            <s:fielderror fieldName="imagen" cssClass="alert alert-danger" />
             <s:file name="imagen" id="fileImgTematica"/>
             <s:submit name="btoAddTematica" cssClass="btn btn-primary" value="Crear"/>            
         </s:div>

@@ -173,7 +173,7 @@
             </result>
             <result name="input">/vistas/admin/editarUsuarioAdmin.jsp</result>
         </action>
-        <action name="removeUser" class="acciones.GestionUsuario" method="removeUser">
+        <action name="removeUser" class="acciones.MostrarUsuarios" method="removeUser">
             <result name="success" type="chain">
                 <param name="actionName">usuarios</param>
             </result>
@@ -187,7 +187,7 @@
             </result>
             <result name="input">perfil.jsp</result>
         </action>
-        <action name="removeMiCuenta" class="acciones.GestionUsuario" method="removeMiCuenta">
+        <action name="removeMiCuenta" class="acciones.MostrarUsuarios" method="removeMiCuenta">
             <result name="success">index.jsp</result>
         </action>
         <action name="addUsuario" class="acciones.GestionUsuario" method="addUsuario">
@@ -211,13 +211,16 @@
             <result name="success" type="chain">
                 <param name="actionName">tematicasAdministrador</param>
             </result>
+            <result name="input">/vistas/admin/editarTematica.jsp</result> 
         </action>
         <action name="addTemaPersistencia" class="acciones.GestionTematica" method="addTemaPersistencia">
             <result name="success" type="chain">
                 <param name="actionName">tematicasAdministrador</param>
             </result>
+            <result name="error">/vistas/admin/tematicasAdmin.jsp</result>
+            <result name="input">/vistas/admin/tematicasAdmin.jsp</result>
         </action>
-        <action name="removeTematica" class="acciones.GestionTematica" method="removeTematica">
+        <action name="removeTematica" class="acciones.MostrarTematicas" method="removeTematica">
             <result name="success" type="chain">
                 <param name="actionName">tematicasAdministrador</param>
             </result>

@@ -23,6 +23,7 @@ public class loginLogout extends ActionSupport {
     String usuario;
     String password;
     static Map session;
+    Boolean error = false;
 
     public loginLogout() {
     }
@@ -49,6 +50,7 @@ public class loginLogout extends ActionSupport {
                 return LOGIN;
             }
         } else {
+            error = true;
             return ERROR;
         }
     }
@@ -73,6 +75,14 @@ public class loginLogout extends ActionSupport {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getError() {
+        return error;
+    }
+
+    public void setError(Boolean error) {
+        this.error = error;
     }
 
 }

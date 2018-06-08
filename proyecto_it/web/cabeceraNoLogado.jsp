@@ -14,9 +14,17 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="css/estilo.css">        
+        <link rel="stylesheet" href="css/estilo.css">   
+        
+        <s:if test="error">
+            <%@include file="login.jsp"%>
+            <script>
+                document.getElementById('id01').style.display = 'block';
+            </script>
+        </s:if>
     </head>
     <body>
+        
         <!-- Navbar -->
         <div class="w3-top">
             <div class="w3-bar w3-red w3-card w3-left-align w3-large">
@@ -33,7 +41,7 @@
                 <s:form action="registro" method="post">
                     <a><s:submit value="REGISTRARSE"  cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"/></a>
                 </s:form>
-                <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" onclick="document.getElementById('id01').style.display = 'block'">LOGIN</a>
+                <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" onclick="document.getElementById('id01').style.display = 'block'">LOGIN</a>               
             </div>
 
             <!-- Navbar on small screens -->

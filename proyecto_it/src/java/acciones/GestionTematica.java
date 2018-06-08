@@ -19,11 +19,12 @@ import javax.ws.rs.core.GenericType;
  */
 public class GestionTematica extends ActionSupport {
 
-    private String idTematicaRemove;
     private String id;
     private String imagen;
     private String nombre;
     TematicaWS tematicasWS = new TematicaWS();
+    Boolean error = false;
+    Boolean tematicaIguales = false;
 
     public GestionTematica() {
     }
@@ -40,23 +41,18 @@ public class GestionTematica extends ActionSupport {
     }
 
     public String addTemaPersistencia() throws Exception {
-//        String ruta = "images/tematicas/" +imagen;
-        Tematica newTematica = new Tematica(nombre, imagen);
-        tematicasWS.create_JSON(newTematica);
-        return SUCCESS;
-    }
-
-    public String removeTematica() throws Exception {
-        tematicasWS.remove(idTematicaRemove);
-        return SUCCESS;
-    }
-
-    public String getIdTematicaRemove() {
-        return idTematicaRemove;
-    }
-
-    public void setIdTematicaRemove(String idTematicaRemove) {
-        this.idTematicaRemove = idTematicaRemove;
+        GenericType<Boolean> tipoTematica = new GenericType<Boolean>() {
+        };
+        TematicaWS tematicaClient = new TematicaWS();
+        String ruta = "images/tematicas/" + imagen;
+        Tematica newTematica = new Tematica(nombre, ruta);
+        if (tematicaClient.encontrarTematica(tipoTematica, newTematica.getNombre())) {
+            tematicaIguales = true;
+            return ERROR;
+        } else {
+            tematicasWS.create_JSON(newTematica);
+            return SUCCESS;
+        }
     }
 
     public String getId() {
@@ -79,10 +75,43 @@ public class GestionTematica extends ActionSupport {
         return nombre;
     }
 
-    @RequiredStringValidator(message = "El titulo es obligatorio")
-    @StringLengthFieldValidator(maxLength = "50", message = "Tamaño máximo 50 carácteres")
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Boolean getError() {
+        return error;
+    }
+
+    public void setError(Boolean error) {
+        this.error = error;
+    }
+
+    public Boolean getTematicaIguales() {
+        return tematicaIguales;
+    }
+
+    public void setTematicaIguales(Boolean tematicaIguales) {
+        this.tematicaIguales = tematicaIguales;
+    }
+    
+    
+    
+    public void validate(){
+        if (imagen == null || imagen.length() == 0) {
+            addFieldError("imagen", "La imagen es obligatoria");
+            error = true;
+        }
+        
+        if(nombre.trim().length() == 0){
+            addFieldError("nombre", "El campo nombre es obligatorio");
+            error = true;
+        }
+        
+        if(nombre.trim().length() > 149){
+            addFieldError("nombre", "El nombre no puede ser mayor a 150 palabras");
+            error = true;
+        }
     }
 
 }
