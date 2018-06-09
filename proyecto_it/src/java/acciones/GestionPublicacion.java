@@ -19,19 +19,14 @@ import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.ws.rs.core.GenericType;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
-/**
- *
- * @author David
- */
 public class GestionPublicacion extends ActionSupport {
 
-    private String idPublicacionRemove;
+    //private String idPublicacionRemove;
 
     private String tituloPubliacion;
     private File fotoPubliacion;
@@ -43,6 +38,8 @@ public class GestionPublicacion extends ActionSupport {
 
     private List<Publicacion> publicaciones;
     private List<Tematica> tematicas;
+    
+    Boolean error = false;
 
     public GestionPublicacion() {
     }
@@ -97,15 +94,25 @@ public class GestionPublicacion extends ActionSupport {
 
         if (this.getTituloPubliacion() == null || this.getTituloPubliacion().trim().length() == 0) {
             addFieldError("tituloPubliacion", "El título es obligatorio");
+            error = true;
+        }else if (this.getTituloPubliacion().length() > 500) {
+            addFieldError("tituloPubliacion", "Tamaño máximo 500 carácteres");
+            error = true;
         }
-    }
-
-    public String getIdPublicacionRemove() {
-        return idPublicacionRemove;
-    }
-
-    public void setIdPublicacionRemove(String idPublicacionRemove) {
-        this.idPublicacionRemove = idPublicacionRemove;
+        
+        if (this.getContenidoPubliacion() == null || this.getContenidoPubliacion().trim().length() == 0) {
+            addFieldError("contenidoPubliacion", "El contenido es obligatorio");
+            error = true;
+        }else if (this.getContenidoPubliacion().length() > 5000) {
+            addFieldError("contenidoPubliacion", "Tamaño máximo 5000 carácteres");
+            error = true;
+        }
+        
+        //NO FUNCIONA LA EXPRESION
+        if (!this.getRutaPubliacion().matches("^((http[s]?|ftp):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*\\/)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$")) {
+            addFieldError("rutaPubliacion", "Formato no correcto");
+            error = true;
+        }
     }
 
     public String getTituloPubliacion() {
@@ -179,5 +186,15 @@ public class GestionPublicacion extends ActionSupport {
     public void setTematicas(List<Tematica> tematicas) {
         this.tematicas = tematicas;
     }
+
+    public Boolean getError() {
+        return error;
+    }
+
+    public void setError(Boolean error) {
+        this.error = error;
+    }
+    
+    
 
 }

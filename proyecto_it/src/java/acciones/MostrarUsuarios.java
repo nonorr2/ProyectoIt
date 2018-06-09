@@ -43,7 +43,6 @@ public class MostrarUsuarios extends ActionSupport {
     }
     
     public String perfil() throws Exception {
-        //loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuarioSession = (Usuario) loginLogout.session.get("user");
 
         GenericType<Usuario> tipoUser = new GenericType<Usuario>() {
