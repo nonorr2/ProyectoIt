@@ -456,44 +456,6 @@ ul {
     list-style-type: none;
 }
 
-@media (max-width: 800px){
-    .modal-content {
-        width: 50%;
-    }  
-
-    .publi-no-imagen{
-        width: 30%;
-        height: 230px;
-    }
-
-    .contenedor-iconos{
-        float: left;
-        width: 4%;
-        margin-top: 150px;
-    }
-
-    .datos-publicacion{
-        width: 65%;
-    }
-} 
-
-@media (max-width: 400px){
-    .modal-content {
-        width: 90%;
-    }
-
-    .publi-no-imagen{
-        width: 30%;
-        height: 230px;
-    }
-
-    .contenedor-iconos{
-        float: left;
-        width: 4%;
-        margin-top: 150px;
-    }
-} 
-
 .botonAceptarPerfil{
     float:right !important;
     clear:both !important;
@@ -555,3 +517,42 @@ ul {
     height: 100%;
     margin: 15px 5px;
 }
+
+@media (max-width: 800px){
+    .modal-content {
+        width: 50%;
+    }  
+
+    .publi-no-imagen{
+        width: 30%;
+        height: 230px;
+    }
+
+    .contenedor-iconos{
+        overflow: hidden;
+        float: right;
+        width: 30%;
+        margin-top: 60px;
+    }
+
+    .datos-publicacion{
+        width: 65%;
+    }
+} 
+
+@media (max-width: 400px){
+    .modal-content {
+        width: 90%;
+    }
+
+    .publi-no-imagen{
+        width: 30%;
+        height: 230px;
+    }
+
+    .contenedor-iconos{
+        float: left;
+        width: 4%;
+        margin-top: 150px;
+    }
+} 

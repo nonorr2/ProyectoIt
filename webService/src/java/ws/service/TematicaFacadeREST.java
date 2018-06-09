@@ -100,7 +100,7 @@ public class TematicaFacadeREST extends AbstractFacade<Tematica> {
     @Path("/getTematicasPorNombre/{nombre}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Tematica> getTematicasPorNombre(@PathParam("nombre") String nombre) {
-        String jpql = "SELECT t FROM Tematica t WHERE t.nombre LIKE '" + nombre + "%'";
+        String jpql = "SELECT t FROM Tematica t WHERE t.nombre LIKE '%" + nombre + "%'";
         Query query = em.createQuery(jpql);
         List<Tematica> result = query.getResultList();
         return result;
