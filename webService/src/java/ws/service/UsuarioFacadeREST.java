@@ -106,7 +106,7 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     @Path("/getUsuariosPorNombre/{nombre}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Usuario> getUsuariosPorNombre(@PathParam("nombre") String nombre) {
-        String jpql = "SELECT u FROM Usuario u WHERE u.nombre LIKE '" + nombre + "%'";
+        String jpql = "SELECT u FROM Usuario u WHERE u.nombre LIKE '%" + nombre + "%'";
         Query query = em.createQuery(jpql);
         List<Usuario> result = query.getResultList();
         return result;

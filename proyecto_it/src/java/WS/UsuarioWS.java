@@ -21,7 +21,7 @@ import javax.ws.rs.core.GenericType;
  *        client.close();
  * </pre>
  *
- * @author Lydia
+ * @author David
  */
 public class UsuarioWS {
 
