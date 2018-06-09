@@ -26,11 +26,6 @@
                 <s:textfield name="apellidos" placeholder="Introduzaca los apellidos" cssClass="form-control" id="apellidos" value="%{usuario.apellidos}"/>
             </s:div>
             <s:div cssClass="form-group col-sm-6">
-                <s:fielderror fieldName="nickname" cssClass="alert alert-danger" />
-                <s:label><b>Nombre de usuario:</b></s:label>
-                <s:textfield name="nickname" placeholder="Introduzaca el nickname" cssClass="form-control" id="nickname" value="%{usuario.nickname}"/>
-            </s:div>
-            <s:div cssClass="form-group col-sm-6">
                 <s:fielderror fieldName="email" cssClass="alert alert-danger" />
                 <s:label><b>Email:</b></s:label>
                 <s:textfield name="email" placeholder="Introduzaca el email" cssClass="form-control" id="email" value="%{usuario.email}"/>
