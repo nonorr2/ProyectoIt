@@ -6,7 +6,7 @@
 
 <s:if test="error">
     <script>
-        document.getElementById('id03').style.display = 'block';
+        document.getElementById('id02').style.display = 'block';
     </script>
 </s:if>
 
