@@ -35,6 +35,7 @@ public class GestionUsuario extends ActionSupport {
     private Date fechaNacimiento;
     private File imgPerfilUsuario;
     private String editUsuario;
+    UsuarioWS userWS = new UsuarioWS();
 
     public GestionUsuario() {
 
@@ -54,6 +55,12 @@ public class GestionUsuario extends ActionSupport {
             String ruta = context.getRealPath("/") + rutaRelativa;
             File nuevo = new File(ruta);
             FileUtils.copyFile(imgPerfilUsuario, nuevo);
+        } else {
+
+            GenericType<Usuario> tipoUser = new GenericType<Usuario>() {
+            };
+            usuario = userWS.find_XML(tipoUser, id);
+            rutaRelativa = usuario.getFoto();
         }
 
         UsuarioWS userWS = new UsuarioWS();
@@ -108,8 +115,7 @@ public class GestionUsuario extends ActionSupport {
         } else if (this.getApellidos().length() > 50) {
             addFieldError("apellidos", "Tamaño máximo 50 carácteres");
         }
-
-        UsuarioWS userWS = new UsuarioWS();
+        
         GenericType<Boolean> tipoBoolean = new GenericType<Boolean>() {
         };
         if (this.getNickname() == null || this.getNickname().trim().length() == 0) {
@@ -130,13 +136,19 @@ public class GestionUsuario extends ActionSupport {
 
         if (this.getEmail() == null || this.getEmail().trim().length() == 0) {
             addFieldError("email", "El email es obligatorio");
-        }else if(!this.getEmail().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")){
+        } else if (!this.getEmail().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
             addFieldError("email", "Formato incorrecto");
         }
 
         if (this.getFechaNacimiento() == null) {
             addFieldError("fechaNacimiento", "La de nacimiento es obligatorio");
+        }
+
+        if (!getFieldErrors().isEmpty()) {
+            GenericType<Usuario> tipoUser = new GenericType<Usuario>() {
+            };
+            usuario = userWS.find_XML(tipoUser, id);
         }
 
     }
@@ -204,7 +216,7 @@ public class GestionUsuario extends ActionSupport {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-    
+
     public File getImgPerfilUsuario() {
         return imgPerfilUsuario;
     }
@@ -220,8 +232,5 @@ public class GestionUsuario extends ActionSupport {
     public void setEditUsuario(String editUsuario) {
         this.editUsuario = editUsuario;
     }
-    
-    
+
 }
-
-

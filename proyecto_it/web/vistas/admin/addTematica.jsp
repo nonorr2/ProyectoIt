@@ -17,8 +17,8 @@
             <s:label><b>Titulo: </b></s:label>
             <s:textfield name="nombre" cssClass="form-control"/>
             <s:label><b>Imagen: </b></s:label> 
-            <s:fielderror fieldName="imagen" cssClass="alert alert-danger" />
-            <s:file name="imagen" id="fileImgTematica"/>
+            <s:fielderror fieldName="imgTematica" cssClass="alert alert-danger" />
+            <s:file name="imgTematica" id="fileImgTematica"/>
             <s:submit name="btoAddTematica" cssClass="btn btn-primary" value="Crear"/>            
         </s:div>
     </s:form>
