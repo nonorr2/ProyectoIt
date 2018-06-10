@@ -5,14 +5,13 @@
 
 <s:div cssClass="banner-gen">
     <h1 class="text-banner">MIS CHATS</h1>
-    <input type="hidden" id="id_user" value="<s:property value="id_user" />">
 </s:div>
 
 <s:div id="crearChat" cssClass="modal">
     <s:form theme="simple" cssClass="modal-content animate" action="chatsLogueado">
         <s:div cssClass="imgcontainer">
-            <h2 class="titulo-popUp">Nuevo Chat</h2>
             <span onclick="document.getElementById('crearChat').style.display = 'none'" class="close" title="Close Modal">&times;</span>
+            <h2 class="titulo-popUp">Nuevo Chat</h2>
         </s:div>
         <s:div cssClass="container-crearChat">
             <s:label>Nombre del chat</s:label>
@@ -147,7 +146,7 @@
                         $(conversacion).empty();
 
                         for (var i in mensajes) {
-                            if (mensajes[i]['idUsuario']['id'] == $("#id_user").val()) {
+                            if (mensajes[i]['idUsuario']['id'] == $.cookie("user")) {
                                 if (mensajes[i]['estado'] == false) {
                                     $(conversacion).append('<div class="msj_prop"><img src="images/iconos/ocultar.png" class="icon_hide" onclick="ocultar(' + mensajes[i]['id'] + ')"><p>' + mensajes[i]['contenido'] + '</p></div>');
                                 } else {
@@ -183,7 +182,7 @@
         var chat = xhttpChat.responseText;
 
 //COGER EL USUARIO
-        var id_usuario = $("#id_user").val();
+        var id_usuario = $.cookie('user');
         var xhttpUser = new XMLHttpRequest();
         xhttpUser.open("GET", "http://localhost:8080/webService/webresources/ws.usuario/" + id_usuario, false);
         xhttpUser.setRequestHeader("Content-Type", "application/xml");

@@ -35,7 +35,7 @@ public class MostrarPublicaciones extends ActionSupport {
     private List<Tematica> tematicas;
     private String idPublicacionRemove;
     private List<PublicacionDecoradorExterno> publicacionesDecoradas;
-    
+
     public MostrarPublicaciones() {
         publicacionesDecoradas = new ArrayList<>();
     }
@@ -89,6 +89,49 @@ public class MostrarPublicaciones extends ActionSupport {
         return SUCCESS;
     }
 
+    public String filtrarPublicacionesTemas() throws Exception {
+        GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
+        };
+        PublicacionWS usuarioClient = new PublicacionWS();
+        List<Publicacion> listadoPublicaciones;
+        if (filtroPublicacion.equals("")) {
+            listadoPublicaciones = usuarioClient.findAll_JSON(tipoPublicacion);
+        } else {
+            listadoPublicaciones = usuarioClient.getPublicacionPorTitulo_JSON(tipoPublicacion, filtroPublicacion);
+        }
+
+        VotoPublicacionWS votoPublicacionClient = new VotoPublicacionWS();
+        SuscripcionWS suscripcionClient = new SuscripcionWS();
+        ComentarioWS comentarioCliente = new ComentarioWS();
+
+        GenericType<Suscripcion> tipoSuscripcion = new GenericType<Suscripcion>() {
+        };
+        GenericType<Long> tipoVotoPublicacion = new GenericType<Long>() {
+        };
+
+        Usuario usu = (Usuario) loginLogout.session.get("user");
+
+        for (Publicacion publicacion : listadoPublicaciones) {
+            PublicacionDecoradorExterno aux = new PublicacionDecoradorExterno();
+            Suscripcion auxSuscripcion = suscripcionClient.getSuscripcion_JSON(tipoSuscripcion, String.valueOf(usu.getId()), String.valueOf(publicacion.getId()));
+
+            aux.setPublicacion(publicacion);
+            aux.setNumVotosNegativosPublicacion(votoPublicacionClient.getVotosNegativos(tipoVotoPublicacion, String.valueOf(publicacion.getId())).intValue());
+            aux.setNumVotosPositivosPublicacion(votoPublicacionClient.getVotosPositivos(tipoVotoPublicacion, String.valueOf(publicacion.getId())).intValue());
+            aux.setNumComentarios(comentarioCliente.getNumComentarios(tipoVotoPublicacion, String.valueOf(publicacion.getId())).intValue());
+
+            if (auxSuscripcion != null) {
+                aux.setSuscripcion(true);
+            } else {
+                aux.setSuscripcion(false);
+            }
+
+            publicacionesDecoradas.add(aux);
+        }
+
+        return SUCCESS;
+    }
+
     public String filtroMisPublicaciones() throws Exception {
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
@@ -102,15 +145,15 @@ public class MostrarPublicaciones extends ActionSupport {
         VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
         this.listaPublicaciones = new ArrayList<PublicacionDecorado>();
         List<Publicacion> misPublicaciones;
-        
+
         if (filtroPublicacion.equals("")) {
             misPublicaciones = (List<Publicacion>) publicacionCliente.getMisPublicaciones_XML(tipoPublicacion, String.valueOf(usuario.getId()));
-            
+
         } else {
             misPublicaciones = (List<Publicacion>) publicacionCliente.getMisPublicacionesPorTitulo_JSON(tipoPublicacion, filtroPublicacion, String.valueOf(usuario.getId()));
         }
-        
-        for(Publicacion publicacion : misPublicaciones){
+
+        for (Publicacion publicacion : misPublicaciones) {
             PublicacionDecorado publicacionDecorado = new PublicacionDecorado();
             Long numComentarios = comentarioCliente.getNumComentarios(tipoLong, String.valueOf(publicacion.getId()));
             Long numVotosPositivos = votoPublicacionCliente.getVotosPositivos(tipoLong, String.valueOf(publicacion.getId()));
@@ -121,15 +164,16 @@ public class MostrarPublicaciones extends ActionSupport {
             publicacionDecorado.setNumVotosNegativosPublicacion(numVotosNegativos.intValue());
             this.listaPublicaciones.add(publicacionDecorado);
         }
-        
+
         //Listar las temáticas para el selec de añadir piblicacion
-        GenericType<List<Tematica>> tipoTematica = new GenericType<List<Tematica>>() {};
+        GenericType<List<Tematica>> tipoTematica = new GenericType<List<Tematica>>() {
+        };
         TematicaWS tematicaClient = new TematicaWS();
         tematicas = (List<Tematica>) tematicaClient.getTematicasMasPopulares_JSON(tipoTematica);
-        
+
         return SUCCESS;
     }
-    
+
     public String filtroPublicacionesSuscrito() throws Exception {
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
@@ -143,15 +187,15 @@ public class MostrarPublicaciones extends ActionSupport {
         VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
         this.listaPublicaciones = new ArrayList<PublicacionDecorado>();
         List<Publicacion> publicacionesSuscrito;
-        
+
         if (filtroPublicacion.equals("")) {
             publicacionesSuscrito = (List<Publicacion>) publicacionCliente.getPublicacionesSuscritoOrdenadoNumComentarios_XML(tipoPublicacion, String.valueOf(usuario.getId()));
-            
+
         } else {
             publicacionesSuscrito = (List<Publicacion>) publicacionCliente.getPublicacionesSuscritoPorTitulo_XML(tipoPublicacion, String.valueOf(usuario.getId()), filtroPublicacion);
         }
-        
-        for(Publicacion publicacion : publicacionesSuscrito){
+
+        for (Publicacion publicacion : publicacionesSuscrito) {
             PublicacionDecorado publicacionDecorado = new PublicacionDecorado();
             Long numComentarios = comentarioCliente.getNumComentarios(tipoLong, String.valueOf(publicacion.getId()));
             Long numVotosPositivos = votoPublicacionCliente.getVotosPositivos(tipoLong, String.valueOf(publicacion.getId()));
@@ -162,7 +206,7 @@ public class MostrarPublicaciones extends ActionSupport {
             publicacionDecorado.setNumVotosNegativosPublicacion(numVotosNegativos.intValue());
             this.listaPublicaciones.add(publicacionDecorado);
         }
-        
+
         return SUCCESS;
     }
 

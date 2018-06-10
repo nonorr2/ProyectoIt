@@ -7,8 +7,8 @@
     <h1 class="text-banner">PUBLICACIONES</h1>
 </s:div>
 <s:div cssClass="container-fluid text-center">
-    <s:form method="post" action="filtrarPublicacion">
-        <s:textfield  cssClass="textFileFiltrar"/>
+    <s:form method="post" action="filtrarPublicacionesTemas">
+        <s:textfield  cssClass="textFileFiltrar" name="filtroPublicacion"/>
         <s:submit name="btoLogin" cssClass="btn btn-primary filtro" value="Filtrar"/>
     </s:form>
 </s:div>
@@ -31,11 +31,14 @@
                         </s:else>
                     </s:div>
                     <s:div cssClass="datos-publicacion">
-                        <h1><s:property value="getPublicacion().getTitulo()" /></h1>
+                        <s:form method="post" action="verPublicacion">
+                            <s:hidden value="%{getPublicacion().getId()}" name="id_publi" />
+                            <s:submit value="%{getPublicacion().getTitulo()}" cssClass="titulo-submit-publicacion"/>
                         <p>Número de votos positivos: <s:property value="numVotosPositivosPublicacion" /></p>
                         <p>Número de votos negativos: <s:property value="numVotosNegativosPublicacion" /></p>
                         <p>Numero de comentarios: <s:property value="numComentarios" /></p>
                         <p>Fecha de cración: <s:property value="getPublicacion().getFechaHoraModificacion()" /></p>
+                        </s:form>
                     </s:div>
                     <s:div cssClass="contenedor-flechas">
                         <s:form method="post" action="votoPositivoPublicacionAjena">

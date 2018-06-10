@@ -21,7 +21,7 @@ import javax.ws.rs.core.GenericType;
  *        client.close();
  * </pre>
  *
- * @author David
+ * @author Nono
  */
 public class UsuarioWS {
 
@@ -49,6 +49,18 @@ public class UsuarioWS {
     public <T> T getUsuariosPorNombre_JSON(GenericType<T> responseType, String nombre) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("getUsuariosPorNombre/{0}", new Object[]{nombre}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public <T> T getUsuariosChat_XML(GenericType<T> responseType, String id_user) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getUsuariosChat/{0}", new Object[]{id_user}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
+
+    public <T> T getUsuariosChat_JSON(GenericType<T> responseType, String id_user) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getUsuariosChat/{0}", new Object[]{id_user}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 

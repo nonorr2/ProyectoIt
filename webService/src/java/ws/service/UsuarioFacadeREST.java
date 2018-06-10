@@ -48,9 +48,9 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Usuario entity) {
-        if (super.find(id).getPassword().equals(entity.getPassword())){
+        if (super.find(id).getPassword().equals(entity.getPassword())) {
             entity.setPassword(super.find(id).getPassword());
-        }else{
+        } else {
             entity.setPassword(BCrypt.hashpw(entity.getPassword(), BCrypt.gensalt(12)));
         }
         super.edit(entity);
@@ -154,12 +154,23 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         List<Usuario> result = (List<Usuario>) query.getResultList();
         return result;
     }
-    
+
+    @GET
+    @Path("/getUsuariosChat/{id_user}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Usuario> getUsuariosChat(@PathParam("id_user") Integer id_user) throws Exception {
+        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.tipo = 0 AND u.id != :id_user");
+        query.setParameter("id_user", id_user);
+        List<Usuario> result = (List<Usuario>) query.getResultList();
+        return result;
+    }
+
     /**
-     * Método para comprobar si ya existe un usuario con el nickname
-     * pasado por parámetro
+     * Método para comprobar si ya existe un usuario con el nickname pasado por
+     * parámetro
+     *
      * @param nickname
-     * @return 
+     * @return
      */
     @GET
     @Path("/existeNickname/{nickname}")

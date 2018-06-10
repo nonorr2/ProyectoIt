@@ -175,7 +175,7 @@ span.psw {
 }
 
 .close {
-    position: absolute;
+    position: relative;
     right: 25px;
     top: 0;
     color: #000;
@@ -452,6 +452,56 @@ span.psw {
     cursor:pointer;
 }
 
+.titulo-submit-tema{
+    background: transparent !important;
+    border: none !important;
+    font-size: 30px !important;
+}
+
+.titulo-submit-publicacion{
+    background: transparent !important;
+    border: none !important;
+    font-size: 40px !important;
+}
+
+
+@media (max-width: 800px){
+    .modal-content {
+        width: 50%;
+    }  
+
+    .publi-no-imagen{
+        width: 30%;
+        height: 230px;
+    }
+
+    .contenedor-iconos{
+        float: left;
+        width: 4%;
+        margin-top: 150px;
+    }
+
+    .datos-publicacion{
+        width: 65%;
+    }
+} 
+
+@media (max-width: 400px){
+    .modal-content {
+        width: 90%;
+    }
+
+    .publi-no-imagen{
+        width: 30%;
+        height: 230px;
+    }
+
+    .contenedor-iconos{
+        float: left;
+        width: 4%;
+        margin-top: 150px;
+    }
+} 
 ul {
     list-style-type: none;
 }

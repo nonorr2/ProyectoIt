@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="jquery.cookie.js"></script>
         <link rel="stylesheet" href="css/estilo.css">        
     </head>
     <body>
@@ -24,7 +25,7 @@
                     <s:form action="home" method="post">
                     <a><s:submit value="HOME" cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" /></a>
                 </s:form>
-                <s:form action="temas" method="post">
+                <s:form action="temasLogado" method="post">
                     <a><s:submit value="TEMAS" cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" /></a>
                 </s:form>
                 <s:form action="misPublicaciones" method="post">
@@ -39,30 +40,26 @@
                 <s:form action="logout" method="post">
                     <a><s:submit value="LOGOUT"  cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"/></a>
                 </s:form>
-                <s:form action="getPublicacionesByTema" method="post">
-                    <input type="hidden" value="3" name="idTema">
-                    <a><s:submit value="PRUEBA DE PUBLICACIONES"  cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"/></a>
-                </s:form>
             </div>
 
             <!-- Navbar on small screens -->
             <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-                <s:form action="" method="post">
+                <s:form action="home" method="post">
                     <a><s:submit value="HOME" cssClass="w3-bar-item w3-button w3-padding-large" /></a>
                 </s:form>
-                <s:form action="temas" method="post">
+                <s:form action="temasLogado" method="post">
                     <a><s:submit value="TEMAS" cssClass="w3-bar-item w3-button w3-padding-large" /></a>
                 </s:form>
                 <s:form action="misPublicaciones" method="post">
-                    <a><s:submit value="PUBLICACIONES" cssClass="w3-bar-item w3-button w3-padding-large"/></a>
+                    <a><s:submit value="MIS PUBLICACIONES" cssClass="w3-bar-item w3-button w3-padding-large"/></a>
                 </s:form>
                 <s:form action="perfil" method="post">
                     <a><s:submit value="PERFIL"  cssClass="w3-bar-item w3-button w3-padding-large"/></a>
                 </s:form>
-                <s:form action="" method="post">
+                <s:form action="chats" method="post">
                     <a><s:submit value="CHAT"  cssClass="w3-bar-item w3-button w3-padding-large"/></a>
                 </s:form>
-                <s:form action="inicio" method="post">
+                <s:form action="logout" method="post">
                     <a><s:submit value="LOGOUT"  cssClass="w3-bar-item w3-button w3-padding-large"/></a>
                 </s:form>
             </div>

@@ -21,10 +21,7 @@ import WS.VotoPublicacionWS;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.Response;
 
 /**
  *
@@ -34,7 +31,7 @@ public class menu_top_logueado extends ActionSupport {
 
     List<Chat> chats;
     List<Usuario> usuarios;
-    Integer id_user;
+    //Integer id_user;
 
 //    private List<PublicacionDecorado> misPublicaciones;
     private List<PublicacionDecorado> listaPublicaciones;
@@ -58,8 +55,8 @@ public class menu_top_logueado extends ActionSupport {
 
         Usuario usuario = (Usuario) loginLogout.session.get("user");
         chats = chatClient.getChatsUsuario_JSON(tipoChat, String.valueOf(usuario.getId()));
-        usuarios = usuarioClient.findAll_JSON(tipoUsuario);
-        id_user = usuario.getId();
+        usuarios = usuarioClient.getUsuariosChat_JSON(tipoUsuario, String.valueOf(usuario.getId()));
+        //id_user = usuario.getId();
 
         return SUCCESS;
     }
@@ -164,13 +161,13 @@ public class menu_top_logueado extends ActionSupport {
         this.usuarios = usuarios;
     }
 
-    public Integer getId_user() {
-        return id_user;
-    }
-
-    public void setId_user(Integer id_user) {
-        this.id_user = id_user;
-    }
+//    public Integer getId_user() {
+//        return id_user;
+//    }
+//
+//    public void setId_user(Integer id_user) {
+//        this.id_user = id_user;
+//    }
 
     public List<PublicacionDecorado> getListaPublicaciones() {
         return listaPublicaciones;
