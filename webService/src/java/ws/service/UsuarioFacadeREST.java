@@ -48,9 +48,9 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Usuario entity) {
-        if (super.find(id).getPassword().equals(entity.getPassword())){
+        if (super.find(id).getPassword().equals(entity.getPassword())) {
             entity.setPassword(super.find(id).getPassword());
-        }else{
+        } else {
             entity.setPassword(BCrypt.hashpw(entity.getPassword(), BCrypt.gensalt(12)));
         }
         super.edit(entity);
@@ -106,7 +106,7 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     @Path("/getUsuariosPorNombre/{nombre}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Usuario> getUsuariosPorNombre(@PathParam("nombre") String nombre) {
-        String jpql = "SELECT u FROM Usuario u WHERE u.nombre LIKE '" + nombre + "%'";
+        String jpql = "SELECT u FROM Usuario u WHERE u.nombre LIKE '%" + nombre + "%'";
         Query query = em.createQuery(jpql);
         List<Usuario> result = query.getResultList();
         return result;
@@ -154,7 +154,7 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         List<Usuario> result = (List<Usuario>) query.getResultList();
         return result;
     }
-    
+
     @GET
     @Path("/getUsuariosChat/{id_user}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -163,5 +163,33 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         query.setParameter("id_user", id_user);
         List<Usuario> result = (List<Usuario>) query.getResultList();
         return result;
+    }
+
+    /**
+     * Método para comprobar si ya existe un usuario con el nickname pasado por
+     * parámetro
+     *
+     * @param nickname
+     * @return
+     */
+    @GET
+    @Path("/existeNickname/{nickname}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Boolean existeNickname(@PathParam("nickname") String nickname) {
+        boolean encontrado = false;
+        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.nickname = :nickname");
+        query.setParameter("nickname", nickname);
+
+        try {
+            Usuario usuario = (Usuario) query.getSingleResult();
+
+            if (usuario != null) {
+                encontrado = true;
+            }
+        } catch (Exception e) {
+            encontrado = false;
+        }
+
+        return encontrado;
     }
 }

@@ -8,7 +8,6 @@ package acciones;
 import WS.ComentarioWS;
 import WS.Publicacion;
 import WS.PublicacionDecorado;
-import WS.PublicacionWS;
 import WS.Tematica;
 import WS.TematicaWS;
 import WS.PublicacionDecoradorExterno;
@@ -30,11 +29,11 @@ import javax.ws.rs.core.GenericType;
 public class MostrarPublicaciones extends ActionSupport {
 
     private String filtroPublicacion;
-    private List<Publicacion> publicaciones;
+    private List<PublicacionDecorado> publicaciones;
     private String idTema;
     private List<PublicacionDecorado> listaPublicaciones;
     private List<Tematica> tematicas;
-
+    private String idPublicacionRemove;
     private List<PublicacionDecoradorExterno> publicacionesDecoradas;
 
     public MostrarPublicaciones() {
@@ -44,6 +43,12 @@ public class MostrarPublicaciones extends ActionSupport {
     public String execute() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    public String removePublicacion() throws Exception {
+        PublicacionWS publicacionWS = new PublicacionWS();
+        publicacionWS.remove(idPublicacionRemove);
+        return SUCCESS;
+    }
 
     /**
      * Métedo para filtrar las publicaciones por el título.
@@ -52,15 +57,35 @@ public class MostrarPublicaciones extends ActionSupport {
      * @throws Exception
      */
     public String filtroPubli() throws Exception {
-        GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
+        GenericType<List<Publicacion>> tipoPublicacionAdmin = new GenericType<List<Publicacion>>() {
         };
-        PublicacionWS usuarioClient = new PublicacionWS();
-        if (filtroPublicacion.equals("")) {
-            publicaciones = usuarioClient.findAll_JSON(tipoPublicacion);
-        } else {
-            publicaciones = usuarioClient.getPublicacionPorTitulo_JSON(tipoPublicacion, filtroPublicacion);
-        }
+        GenericType<Long> tipoLong = new GenericType<Long>() {};
 
+        PublicacionWS publicacionClient = new PublicacionWS();
+        ComentarioWS comentarioCliente = new ComentarioWS();
+        VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
+        List<Publicacion> listPublicaciones;
+        
+        if (filtroPublicacion.equals("")) {
+            listPublicaciones = publicacionClient.findAll_XML(tipoPublicacionAdmin);
+        }else{
+            listPublicaciones = publicacionClient.getPublicacionPorTitulo_XML(tipoPublicacionAdmin, filtroPublicacion);
+        }
+         
+        this.publicaciones = new ArrayList<PublicacionDecorado>();
+        
+        for (Publicacion publicacion : listPublicaciones) {
+            PublicacionDecorado publicacionDecorado = new PublicacionDecorado();
+            Long numComentarios = comentarioCliente.getNumComentarios(tipoLong, String.valueOf(publicacion.getId()));
+            Long numVotosPositivos = votoPublicacionCliente.getVotosPositivos(tipoLong, String.valueOf(publicacion.getId()));
+            Long numVotosNegativos = votoPublicacionCliente.getVotosNegativos(tipoLong, String.valueOf(publicacion.getId()));
+            publicacionDecorado.setPublicacion(publicacion);
+            publicacionDecorado.setNumComentarios(numComentarios.intValue());
+            publicacionDecorado.setNumVotosPositivosPublicacion(numVotosPositivos.intValue());
+            publicacionDecorado.setNumVotosNegativosPublicacion(numVotosNegativos.intValue());
+            this.publicaciones.add(publicacionDecorado);
+        }
+        
         return SUCCESS;
     }
 
@@ -230,11 +255,11 @@ public class MostrarPublicaciones extends ActionSupport {
         this.filtroPublicacion = filtroPublicacion;
     }
 
-    public List<Publicacion> getPublicaciones() {
+    public List<PublicacionDecorado> getPublicaciones() {
         return publicaciones;
     }
 
-    public void setPublicaciones(List<Publicacion> publicaciones) {
+    public void setPublicaciones(List<PublicacionDecorado> publicaciones) {
         this.publicaciones = publicaciones;
     }
 
@@ -270,4 +295,14 @@ public class MostrarPublicaciones extends ActionSupport {
         this.publicacionesDecoradas = publicacionesDecoradas;
     }
 
+    public String getIdPublicacionRemove() {
+        return idPublicacionRemove;
+    }
+
+    public void setIdPublicacionRemove(String idPublicacionRemove) {
+        this.idPublicacionRemove = idPublicacionRemove;
+    }
+    
+    
+    
 }

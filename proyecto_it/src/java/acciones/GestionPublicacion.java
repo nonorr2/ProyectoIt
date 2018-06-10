@@ -14,46 +14,38 @@ import WS.VotoPublicacion;
 import WS.VotoPublicacionWS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.ws.rs.core.GenericType;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
-/**
- *
- * @author David
- */
 public class GestionPublicacion extends ActionSupport {
 
-    private String idPublicacionRemove;
+    //private String idPublicacionRemove;
 
     private String tituloPubliacion;
     private File fotoPubliacion;
     private String contenidoPubliacion;
     private String rutaPubliacion;
     private String tematicaPubliacion;
-    private String fileUploadContentType;
-    private String fileUploadFileName;
     private String idPublicacion;
     private String filtroPublicacion;
 
     private List<Publicacion> publicaciones;
+    private List<Tematica> tematicas;
+    
+    Boolean error = false;
 
     public GestionPublicacion() {
     }
 
     public String execute() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public String removePublicacion() throws Exception {
-        PublicacionWS publicacionWS = new PublicacionWS();
-        publicacionWS.remove(idPublicacionRemove);
-        return SUCCESS;
     }
 
     /**
@@ -63,36 +55,64 @@ public class GestionPublicacion extends ActionSupport {
      * @throws Exception
      */
     public String addPublicacion() throws Exception {
-        ServletContext context = ServletActionContext.getServletContext();
-//        String hola = context.getRealPath("/");
-        String ruta = System.getProperty("catalina.home") + "/prueba/prueba2.png";
-        File nuevo = new File(ruta);
-        FileUtils.copyFile(fotoPubliacion, nuevo);
-        nuevo.renameTo(new File("/images/publicaciones/" + "prueba1subida.png"));
+        String rutaRelativa = null;
+        
+        if (fotoPubliacion != null) {
+            ServletContext context = ServletActionContext.getServletContext();
+            String nombreFichero = tituloPubliacion + ".png";
+            rutaRelativa = "images/publicaciones/" + nombreFichero;
+            String ruta = context.getRealPath("/") + rutaRelativa;
+            File nuevo = new File(ruta);
+            FileUtils.copyFile(fotoPubliacion, nuevo);
+        }
+
         PublicacionWS publicacionWS = new PublicacionWS();
         TematicaWS tematicaWS = new TematicaWS();
 
-        //loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
         GenericType<Tematica> tipoTematica = new GenericType<Tematica>() {
         };
         Tematica tematica = tematicaWS.find_XML(tipoTematica, tematicaPubliacion);
 
-        Publicacion publicacion = new Publicacion(null, tituloPubliacion, contenidoPubliacion, new Date(), new Date(), rutaPubliacion, ruta);
+        Publicacion publicacion = new Publicacion(null, tituloPubliacion, contenidoPubliacion, new Date(), new Date(), rutaPubliacion, rutaRelativa);
         publicacion.setIdUsuario(usuario);
         publicacion.setIdTematica(tematica);
 
         publicacionWS.create_JSON(publicacion);
+
         return SUCCESS;
     }
 
-    public String getIdPublicacionRemove() {
-        return idPublicacionRemove;
-    }
+    @Override
+    public void validate() {
+        //Listar las temáticas para el selec de añadir piblicacion
+        GenericType<List<Tematica>> tipoListTematica = new GenericType<List<Tematica>>() {
+        };
+        TematicaWS tematicaClient = new TematicaWS();
+        tematicas = (List<Tematica>) tematicaClient.findAll_XML(tipoListTematica);
 
-    public void setIdPublicacionRemove(String idPublicacionRemove) {
-        this.idPublicacionRemove = idPublicacionRemove;
+        if (this.getTituloPubliacion() == null || this.getTituloPubliacion().trim().length() == 0) {
+            addFieldError("tituloPubliacion", "El título es obligatorio");
+            error = true;
+        }else if (this.getTituloPubliacion().length() > 500) {
+            addFieldError("tituloPubliacion", "Tamaño máximo 500 carácteres");
+            error = true;
+        }
+        
+        if (this.getContenidoPubliacion() == null || this.getContenidoPubliacion().trim().length() == 0) {
+            addFieldError("contenidoPubliacion", "El contenido es obligatorio");
+            error = true;
+        }else if (this.getContenidoPubliacion().length() > 5000) {
+            addFieldError("contenidoPubliacion", "Tamaño máximo 5000 carácteres");
+            error = true;
+        }
+        
+        //NO FUNCIONA LA EXPRESION
+        if (!this.getRutaPubliacion().matches("^((http[s]?|ftp):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*\\/)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$")) {
+            addFieldError("rutaPubliacion", "Formato no correcto");
+            error = true;
+        }
     }
 
     public String getTituloPubliacion() {
@@ -135,22 +155,6 @@ public class GestionPublicacion extends ActionSupport {
         this.tematicaPubliacion = tematicaPubliacion;
     }
 
-    public String getFileUploadContentType() {
-        return fileUploadContentType;
-    }
-
-    public void setFileUploadContentType(String fileUploadContentType) {
-        this.fileUploadContentType = fileUploadContentType;
-    }
-
-    public String getFileUploadFileName() {
-        return fileUploadFileName;
-    }
-
-    public void setFileUploadFileName(String fileUploadFileName) {
-        this.fileUploadFileName = fileUploadFileName;
-    }
-
     public String getIdPublicacion() {
         return idPublicacion;
     }
@@ -174,5 +178,23 @@ public class GestionPublicacion extends ActionSupport {
     public void setPublicaciones(List<Publicacion> publicaciones) {
         this.publicaciones = publicaciones;
     }
+
+    public List<Tematica> getTematicas() {
+        return tematicas;
+    }
+
+    public void setTematicas(List<Tematica> tematicas) {
+        this.tematicas = tematicas;
+    }
+
+    public Boolean getError() {
+        return error;
+    }
+
+    public void setError(Boolean error) {
+        this.error = error;
+    }
+    
+    
 
 }

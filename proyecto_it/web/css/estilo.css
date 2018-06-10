@@ -197,7 +197,7 @@ span.psw {
 
 .publi-no-imagen{
     width: 15%;
-    height: 220px;
+    height: 190px;
     float: left;
     overflow: hidden;
     margin: 0px;
@@ -258,7 +258,7 @@ span.psw {
 .contenedor-iconos{
     float: left;
     width: 14%;
-    margin-top: 180px;
+    margin-top: 140px;
 }
 
 .contenedor-icono-add{
@@ -437,20 +437,15 @@ span.psw {
     cursor: pointer;
     z-index: 15;
 }
-
-.contenedor-iconos-pulgares{
-    overflow: hidden;
+.datos-publicacion-left{
+    float: left;
     width: 50%;
 }
 
-.divPulgarPos{
-    position: absolute;
-    right: 76%;
-}
-
-.divPulgarNeg {
-    position: absolute;
-    right: 69%;
+.datos-publicacion-right{
+    width: 50%;
+    float: left;
+    margin-top: 60px;
 }
 
 #borrarChat a h4{
@@ -507,6 +502,9 @@ span.psw {
         margin-top: 150px;
     }
 } 
+ul {
+    list-style-type: none;
+}
 
 .botonAceptarPerfil{
     float:right !important;
@@ -569,3 +567,42 @@ span.psw {
     height: 100%;
     margin: 15px 5px;
 }
+
+@media (max-width: 800px){
+    .modal-content {
+        width: 50%;
+    }  
+
+    .publi-no-imagen{
+        width: 30%;
+        height: 230px;
+    }
+
+    .contenedor-iconos{
+        overflow: hidden;
+        float: right;
+        width: 30%;
+        margin-top: 60px;
+    }
+
+    .datos-publicacion{
+        width: 65%;
+    }
+} 
+
+@media (max-width: 400px){
+    .modal-content {
+        width: 90%;
+    }
+
+    .publi-no-imagen{
+        width: 30%;
+        height: 230px;
+    }
+
+    .contenedor-iconos{
+        float: left;
+        width: 4%;
+        margin-top: 150px;
+    }
+} 

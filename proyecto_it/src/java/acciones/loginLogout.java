@@ -28,6 +28,7 @@ public class loginLogout extends ActionSupport implements ServletResponseAware, 
     String usuario;
     String password;
     static Map session;
+    Boolean error = false;
 
     protected HttpServletResponse servletResponse;
     protected HttpServletRequest servletRequest;
@@ -62,6 +63,7 @@ public class loginLogout extends ActionSupport implements ServletResponseAware, 
                 return LOGIN;
             }
         } else {
+            error = true;
             return ERROR;
         }
     }
@@ -96,6 +98,14 @@ public class loginLogout extends ActionSupport implements ServletResponseAware, 
     @Override
     public void setServletRequest(HttpServletRequest servletRequest) {
         this.servletRequest = servletRequest;
+    }
+
+    public Boolean getError() {
+        return error;
+    }
+
+    public void setError(Boolean error) {
+        this.error = error;
     }
 
 }

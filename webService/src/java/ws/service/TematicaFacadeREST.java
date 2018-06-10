@@ -100,7 +100,7 @@ public class TematicaFacadeREST extends AbstractFacade<Tematica> {
     @Path("/getTematicasPorNombre/{nombre}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Tematica> getTematicasPorNombre(@PathParam("nombre") String nombre) {
-        String jpql = "SELECT t FROM Tematica t WHERE t.nombre LIKE '" + nombre + "%'";
+        String jpql = "SELECT t FROM Tematica t WHERE t.nombre LIKE '%" + nombre + "%'";
         Query query = em.createQuery(jpql);
         List<Tematica> result = query.getResultList();
         return result;
@@ -113,5 +113,27 @@ public class TematicaFacadeREST extends AbstractFacade<Tematica> {
         Query query = em.createQuery("SELECT t FROM Publicacion p, Tematica t WHERE p.idTematica=t GROUP BY t.id").setMaxResults(8);
         List<Tematica> result = query.getResultList();
         return result;
+    }
+
+    /**
+     * Metodo para obtener las tematicas cuyo nombre corresponda con el nombre
+     * pasado como parametro
+     *
+     * @param nombre
+     * @return Lista de tematicas
+     */
+    @GET
+    @Path("/encontrarTematica/{nombre}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Boolean encontrarTematica(@PathParam("nombre") String nombre) {
+        Boolean enc = true;
+        Query query = em.createQuery("SELECT t FROM Tematica t WHERE t.nombre = :nombre").setParameter("nombre", nombre);
+        Tematica result;
+        try {
+            result = (Tematica) query.getSingleResult();
+        } catch (Exception e) {
+            enc = false;
+        }
+        return enc;
     }
 }

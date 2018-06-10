@@ -3,6 +3,18 @@
 <%@include file="../admin/cabeceraAdmin.jsp" %>
 <%@include file="addTematica.jsp" %>
 
+<s:if test="error">
+    <script>
+        document.getElementById('id03').style.display = 'block';
+    </script>
+</s:if>
+<s:if test="tematicaIguales">
+    <script>
+        document.getElementById('id03').style.display = 'block';
+    </script>
+</s:if>
+
+
 <s:div cssClass="banner-gen">
     <h1 class="text-banner">TEMATICAS</h1>
 </s:div>

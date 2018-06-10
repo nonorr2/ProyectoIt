@@ -34,6 +34,12 @@ public class UsuarioWS {
         webTarget = client.target(BASE_URI).path("ws.usuario");
     }
 
+    public <T> T existeNickname(GenericType<T> responseType, String nickname) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("existeNickname/{0}", new Object[]{nickname}));
+        return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(responseType);
+    }
+
     public <T> T getUsuariosPorNombre_XML(GenericType<T> responseType, String nombre) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("getUsuariosPorNombre/{0}", new Object[]{nombre}));

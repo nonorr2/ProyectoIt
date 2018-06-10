@@ -21,7 +21,7 @@ import javax.ws.rs.core.GenericType;
  *        client.close();
  * </pre>
  *
- * @author Nono
+ * @author David
  */
 public class TematicaWS {
 
@@ -102,6 +102,12 @@ public class TematicaWS {
 
     public void create_JSON(Object requestEntity) throws ClientErrorException {
         webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
+    public <T> T encontrarTematica(GenericType<T> responseType, String nombre) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("encontrarTematica/{0}", new Object[]{nombre}));
+        return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(responseType);
     }
 
     public <T> T findAll_XML(GenericType<T> responseType) throws ClientErrorException {

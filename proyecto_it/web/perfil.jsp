@@ -10,7 +10,7 @@
 <s:div cssClass="container-fluid text-center">
     <s:div cssClass="col-sm-2"></s:div>
     <s:div cssClass="col-sm-8 text-left" >
-        <s:form method="post" action="editUserPersistencia" validate="true"> 
+        <s:form method="post" action="editUserPersistencia" enctype="multipart/form-data"> 
             <s:div cssClass="imgcontainer">
                 <s:if test="%{usuario.foto.length() > 0}"> 
                     <img class="avatar" src="<s:url value="%{usuario.foto}"/>"/>                    
@@ -53,7 +53,7 @@
             </s:div>  
             <s:div cssClass="botonAceptarPerfil">
                 <s:hidden name="id" value="%{usuario.id}" /> 
-                <s:submit name="addUsuario" cssClass="btn btn-primary filtro" value="Editar"/>
+                <s:submit name="editUsuario" cssClass="btn btn-primary filtro" value="Editar"/>
             </s:div>                
         </s:form>
         <s:form method="post" action="removeMiCuenta">      

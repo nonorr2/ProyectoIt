@@ -8,6 +8,11 @@
         <s:div cssClass="imgcontainer">
             <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">&times;</span>
             <img src="images/imgLogin.png" alt="Avatar" class="avatar">
+            <s:if test="error">
+                <s:div cssClass="alert alert-warning noContenido">
+                    <p>Usuario o contrase&ntilde;a incorrecta</p>
+                </s:div>
+            </s:if>
         </s:div>
         <s:div cssClass="container-login">
             <s:textfield name="usuario"  placeholder="Nombre de Usuario"/>

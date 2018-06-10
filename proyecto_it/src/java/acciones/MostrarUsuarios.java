@@ -25,6 +25,7 @@ public class MostrarUsuarios extends ActionSupport {
     private String idUsuarioEdit;
     private List<Usuario> usuarios;
     private String filtroUser;
+    private String idUsuarioRemove;
 
     public MostrarUsuarios() {
     }
@@ -42,7 +43,6 @@ public class MostrarUsuarios extends ActionSupport {
     }
     
     public String perfil() throws Exception {
-        //loginLogout.session = (Map) ActionContext.getContext().get("session");
         Usuario usuarioSession = (Usuario) loginLogout.session.get("user");
 
         GenericType<Usuario> tipoUser = new GenericType<Usuario>() {
@@ -62,6 +62,26 @@ public class MostrarUsuarios extends ActionSupport {
             usuarios = usuarioClient.getUsuariosPorNombre_JSON(tipoUsuarios, filtroUser);
         }
         
+        return SUCCESS;
+    }
+    
+        public String removeUser() throws Exception {
+        UsuarioWS userWS = new UsuarioWS();
+        userWS.remove(idUsuarioRemove);
+        return SUCCESS;
+    }
+
+    /**
+     * Método para eliminar la cuenta del usuario logueado
+     *
+     * @return
+     * @throws Exception
+     */
+    public String removeMiCuenta() throws Exception {
+        //loginLogout.session = (Map) ActionContext.getContext().get("session");
+        loginLogout.session.clear();
+        UsuarioWS userWS = new UsuarioWS();
+        userWS.remove(idUsuarioRemove);
         return SUCCESS;
     }
 
@@ -97,5 +117,12 @@ public class MostrarUsuarios extends ActionSupport {
         this.filtroUser = filtroUser;
     }
 
-    
+    public String getIdUsuarioRemove() {
+        return idUsuarioRemove;
+    }
+
+    public void setIdUsuarioRemove(String idUsuarioRemove) {
+        this.idUsuarioRemove = idUsuarioRemove;
+    }
+
 }

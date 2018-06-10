@@ -14,6 +14,7 @@
 
             <s:div cssClass="imgcontainer">
                 <img class="avatar imgTematica" src="<s:url value="%{tematica.imagen}"/>"/>
+                <s:fielderror fieldName="imagen" cssClass="alert alert-danger" />
                 <s:file name="imagen" id="fileImgTema" cssClass="fileImgUser"/>
             </s:div>
             <s:div cssClass="form-group col-sm-6">

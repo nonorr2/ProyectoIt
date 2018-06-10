@@ -4,6 +4,12 @@
 <%@include file="cabeceraLogado.jsp" %>
 <%@include file="addPublicacion.jsp" %>
 
+<s:if test="error">
+    <script>
+        document.getElementById('id02').style.display = 'block';
+    </script>
+</s:if>
+
 <s:div cssClass="banner-gen">
     <h1 class="text-banner">MIS PUBLICACIONES</h1>
 </s:div>

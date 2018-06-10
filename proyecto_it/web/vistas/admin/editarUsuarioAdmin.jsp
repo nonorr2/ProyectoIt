@@ -10,10 +10,10 @@
 <s:div cssClass="container-fluid text-center">
     <s:div cssClass="col-sm-2"></s:div>
     <s:div cssClass="col-sm-8 text-left" >
-        <s:form method="post" action="editUserPersistenciaAdmin" validate="true"> 
+        <s:form method="post" action="editUserPersistenciaAdmin" enctype="multipart/form-data"> 
             <s:div cssClass="imgcontainer">
                 <img class="avatar" src="<s:url value="%{usuario.foto}"/>"/>
-                <s:file name="myFile" id="fileImgUser" cssClass="fileImgUser"/>
+                <s:file name="imgPerfilUsuario" id="fileImgUser" cssClass="fileImgUser"/>
             </s:div>
             <s:div cssClass="form-group col-sm-6">
                 <s:fielderror fieldName="nombre" cssClass="alert alert-danger" />
@@ -24,11 +24,6 @@
                 <s:fielderror fieldName="apellidos" cssClass="alert alert-danger" />
                 <s:label><b>Apellidos:</b></s:label>
                 <s:textfield name="apellidos" placeholder="Introduzaca los apellidos" cssClass="form-control" id="apellidos" value="%{usuario.apellidos}"/>
-            </s:div>
-            <s:div cssClass="form-group col-sm-6">
-                <s:fielderror fieldName="nickname" cssClass="alert alert-danger" />
-                <s:label><b>Nombre de usuario:</b></s:label>
-                <s:textfield name="nickname" placeholder="Introduzaca el nickname" cssClass="form-control" id="nickname" value="%{usuario.nickname}"/>
             </s:div>
             <s:div cssClass="form-group col-sm-6">
                 <s:fielderror fieldName="email" cssClass="alert alert-danger" />
@@ -47,7 +42,7 @@
             </s:div>  
             <s:div cssClass="botonAceptarPerfil">
                 <s:hidden name="id" value="%{usuario.id}" /> 
-                <s:submit name="addUsuario" cssClass="btn btn-primary filtro" value="Editar"/>
+                <s:submit name="editUsuario" cssClass="btn btn-primary filtro" value="Editar"/>
             </s:div>
         </s:form>
     </s:div>
