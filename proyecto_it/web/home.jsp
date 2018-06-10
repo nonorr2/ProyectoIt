@@ -26,12 +26,15 @@
                         <img src="<s:property value="publicacion.getFoto()"/>" />
                     </s:div>
                     <s:div cssClass="datos-publicacion">
-                        <h1><s:property value="publicacion.getTitulo()" /></h1>
-                        <p><s:property value="usuario.getNickname()" /></p>
-                        <p><s:property value="publicacion.getFechaHoraModificacion()" /></p>
-                        <p>Número de votos positivos: <s:property value="numVotosPositivosPublicacion" /></p>
-                        <p>Número de votos negativos: <s:property value="numVotosNegativosPublicacion" /></p>
-                        <p>Último comentario: <s:property value="ultimoComentario.getFechaHoraModificacion()" /></p>                    
+                        <s:form method="post" action="verPublicacion">
+                            <s:hidden value="%{getPublicacion().getId()}" name="id_publi" />
+                            <s:submit value="%{getPublicacion().getTitulo()}" cssClass="titulo-submit-publicacion"/>
+                            <p><s:property value="usuario.getNickname()" /></p>
+                            <p><s:property value="publicacion.getFechaHoraModificacion()" /></p>
+                            <p>Número de votos positivos: <s:property value="numVotosPositivosPublicacion" /></p>
+                            <p>Número de votos negativos: <s:property value="numVotosNegativosPublicacion" /></p>
+                            <p>Último comentario: <s:property value="ultimoComentario.getFechaHoraModificacion()" /></p>                    
+                        </s:form>
                     </s:div>
                     <s:div cssClass="contenedor-flechas">
                         <s:form method="post" action="votoPositivoPublicacion">

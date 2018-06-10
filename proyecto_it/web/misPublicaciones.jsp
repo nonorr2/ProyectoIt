@@ -35,11 +35,14 @@
                         </s:else>
                     </s:div>
                     <s:div cssClass="datos-publicacion">
-                        <h1><s:property value="publicacion.getTitulo()" /></h1>
-                        <p>Fecha de cración: <s:property value="publicacion.getFechaHoraModificacion()" /></p>
-                        <p>Número de votos positivos: <s:property value="numVotosPositivosPublicacion" /></p>
-                        <p>Número de votos negativos: <s:property value="numVotosNegativosPublicacion" /></p>
-                        <p>Numero de comentarios: <s:property value="numComentarios" /></p>                    
+                        <s:form method="post" action="verPublicacion">
+                            <s:hidden value="%{getPublicacion().getId()}" name="id_publi" />
+                            <s:submit value="%{getPublicacion().getTitulo()}" cssClass="titulo-submit-publicacion"/>
+                            <p>Fecha de cración: <s:property value="publicacion.getFechaHoraModificacion()" /></p>
+                            <p>Número de votos positivos: <s:property value="numVotosPositivosPublicacion" /></p>
+                            <p>Número de votos negativos: <s:property value="numVotosNegativosPublicacion" /></p>
+                            <p>Numero de comentarios: <s:property value="numComentarios" /></p>   
+                        </s:form>
                     </s:div>
                     <s:div cssClass="contenedor-iconos">
                         <s:form action="borrarMiPublicacion" method="post">

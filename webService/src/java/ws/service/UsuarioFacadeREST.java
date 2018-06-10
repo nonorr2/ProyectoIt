@@ -154,4 +154,14 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         List<Usuario> result = (List<Usuario>) query.getResultList();
         return result;
     }
+    
+    @GET
+    @Path("/getUsuariosChat/{id_user}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Usuario> getUsuariosChat(@PathParam("id_user") Integer id_user) throws Exception {
+        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.tipo = 0 AND u.id != :id_user");
+        query.setParameter("id_user", id_user);
+        List<Usuario> result = (List<Usuario>) query.getResultList();
+        return result;
+    }
 }

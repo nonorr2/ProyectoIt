@@ -175,7 +175,7 @@ span.psw {
 }
 
 .close {
-    position: absolute;
+    position: relative;
     right: 25px;
     top: 0;
     color: #000;
@@ -456,6 +456,19 @@ span.psw {
 #borrarChat a h4{
     cursor:pointer;
 }
+
+.titulo-submit-tema{
+    background: transparent !important;
+    border: none !important;
+    font-size: 30px !important;
+}
+
+.titulo-submit-publicacion{
+    background: transparent !important;
+    border: none !important;
+    font-size: 40px !important;
+}
+
 
 @media (max-width: 800px){
     .modal-content {

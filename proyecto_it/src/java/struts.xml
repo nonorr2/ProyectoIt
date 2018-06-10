@@ -100,11 +100,17 @@
         <action name="getPublicacionesByTema" class="acciones.MostrarPublicaciones" method="publicacionesByTema">
             <result name="success">publicaciones.jsp</result>
         </action>
+        <action name="filtrarPublicacionesTemas" class="acciones.MostrarPublicaciones" method="filtrarPublicacionesTemas">
+            <result name="success">publicaciones.jsp</result>
+        </action>
     </package>
     
     <package name="top_menu_logueado" extends="struts-default">
         <action name="chats" class="acciones.menu_top_logueado" method="chats">
             <result name="success">chats.jsp</result>
+        </action>
+        <action name="temasLogado" class="acciones.menu_top" method="temas">
+            <result name="success">temas.jsp</result>
         </action>
         <action name="misPublicaciones" class="acciones.menu_top_logueado" method="misPubicaciones">
             <result name="success">misPublicaciones.jsp</result>

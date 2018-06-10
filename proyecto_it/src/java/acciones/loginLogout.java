@@ -11,18 +11,26 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.inject.Scope;
 import java.util.Map;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
 
 /**
  *
  * @author Nono
  */
-public class loginLogout extends ActionSupport {
+public class loginLogout extends ActionSupport implements ServletResponseAware, ServletRequestAware {
 
     String usuario;
     String password;
     static Map session;
+
+    protected HttpServletResponse servletResponse;
+    protected HttpServletRequest servletRequest;
 
     public loginLogout() {
     }
@@ -43,6 +51,11 @@ public class loginLogout extends ActionSupport {
             Usuario usu = usuarioClient.getUsuarioByUsername_XML(tipoUsuario, usuario);
             session = (Map) ActionContext.getContext().get("session");
             session.put("user", usu);
+
+            Cookie cookie = new Cookie("user", String.valueOf(usu.getId()));
+            cookie.setMaxAge(604800);
+            servletResponse.addCookie(cookie);
+
             if (usu.getTipo()) {
                 return SUCCESS;
             } else {
@@ -52,10 +65,10 @@ public class loginLogout extends ActionSupport {
             return ERROR;
         }
     }
-    
+
     public String logout() throws Exception {
-        //loginLogout.session = (Map) ActionContext.getContext().get("session");
         loginLogout.session.clear();
+        Cookie cookie[] = servletRequest.getCookies();
         return SUCCESS;
     }
 
@@ -73,6 +86,16 @@ public class loginLogout extends ActionSupport {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public void setServletResponse(HttpServletResponse servletResponse) {
+        this.servletResponse = servletResponse;
+    }
+
+    @Override
+    public void setServletRequest(HttpServletRequest servletRequest) {
+        this.servletRequest = servletRequest;
     }
 
 }
