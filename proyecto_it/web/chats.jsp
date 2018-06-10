@@ -146,7 +146,7 @@
                         $(conversacion).empty();
 
                         for (var i in mensajes) {
-                            if (mensajes[i]['idUsuario']['id'] == Cookies.get('nombre')) {
+                            if (mensajes[i]['idUsuario']['id'] == $.cookie("user")) {
                                 if (mensajes[i]['estado'] == false) {
                                     $(conversacion).append('<div class="msj_prop"><img src="images/iconos/ocultar.png" class="icon_hide" onclick="ocultar(' + mensajes[i]['id'] + ')"><p>' + mensajes[i]['contenido'] + '</p></div>');
                                 } else {

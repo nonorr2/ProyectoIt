@@ -54,7 +54,7 @@ public class loginLogout extends ActionSupport implements ServletResponseAware, 
             session.put("user", usu);
 
             Cookie cookie = new Cookie("user", String.valueOf(usu.getId()));
-            cookie.setMaxAge(604800);
+            cookie.setMaxAge(999999999);
             servletResponse.addCookie(cookie);
 
             if (usu.getTipo()) {
@@ -70,7 +70,18 @@ public class loginLogout extends ActionSupport implements ServletResponseAware, 
 
     public String logout() throws Exception {
         loginLogout.session.clear();
-        Cookie cookie[] = servletRequest.getCookies();
+        Cookie cookies[] = servletRequest.getCookies();
+        int i = 0;
+        boolean enc = false;
+        while (i < cookies.length && !enc) {
+            Cookie cookie = cookies[i];
+            if (cookie.getName().equals("user")) {
+                cookie.setMaxAge(0);
+                enc = true;
+            }
+            i++;
+        }
+
         return SUCCESS;
     }
 
