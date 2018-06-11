@@ -35,6 +35,7 @@ public class GestionUsuario extends ActionSupport {
     private Date fechaNacimiento;
     private File imgPerfilUsuario;
     private String editUsuario;
+    UsuarioWS userWS = new UsuarioWS();
 
     public GestionUsuario() {
 
@@ -44,6 +45,13 @@ public class GestionUsuario extends ActionSupport {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Metodo que hace uso del web service para guardar las modificaciones de un
+     * usuario en la BD
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String editUserPersistencia() throws Exception {
         String rutaRelativa = null;
 
@@ -54,6 +62,12 @@ public class GestionUsuario extends ActionSupport {
             String ruta = context.getRealPath("/") + rutaRelativa;
             File nuevo = new File(ruta);
             FileUtils.copyFile(imgPerfilUsuario, nuevo);
+        } else {
+
+            GenericType<Usuario> tipoUser = new GenericType<Usuario>() {
+            };
+            usuario = userWS.find_XML(tipoUser, id);
+            rutaRelativa = usuario.getFoto();
         }
 
         UsuarioWS userWS = new UsuarioWS();
@@ -62,6 +76,13 @@ public class GestionUsuario extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Metodo que hace uso del web service para guardar a un nuevo usuario en la
+     * BD
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String addUsuario() throws Exception {
         String rutaRelativa = null;
 
@@ -95,6 +116,10 @@ public class GestionUsuario extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Metodo para validar los campos del formulario de registrar, perfil y
+     * editar usuario del administrador
+     */
     @Override
     public void validate() {
         if (this.getNombre() == null || this.getNombre().trim().length() == 0) {
@@ -109,7 +134,6 @@ public class GestionUsuario extends ActionSupport {
             addFieldError("apellidos", "Tamaño máximo 50 carácteres");
         }
 
-        UsuarioWS userWS = new UsuarioWS();
         GenericType<Boolean> tipoBoolean = new GenericType<Boolean>() {
         };
         if (this.getNickname() == null || this.getNickname().trim().length() == 0) {
@@ -130,13 +154,19 @@ public class GestionUsuario extends ActionSupport {
 
         if (this.getEmail() == null || this.getEmail().trim().length() == 0) {
             addFieldError("email", "El email es obligatorio");
-        }else if(!this.getEmail().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")){
+        } else if (!this.getEmail().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
             addFieldError("email", "Formato incorrecto");
         }
 
         if (this.getFechaNacimiento() == null) {
             addFieldError("fechaNacimiento", "La de nacimiento es obligatorio");
+        }
+
+        if (!getFieldErrors().isEmpty() && id != null) {
+            GenericType<Usuario> tipoUser = new GenericType<Usuario>() {
+            };
+            usuario = userWS.find_XML(tipoUser, id);
         }
 
     }
@@ -204,7 +234,7 @@ public class GestionUsuario extends ActionSupport {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-    
+
     public File getImgPerfilUsuario() {
         return imgPerfilUsuario;
     }
@@ -220,8 +250,5 @@ public class GestionUsuario extends ActionSupport {
     public void setEditUsuario(String editUsuario) {
         this.editUsuario = editUsuario;
     }
-    
-    
+
 }
-
-

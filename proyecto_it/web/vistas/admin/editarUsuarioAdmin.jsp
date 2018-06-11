@@ -12,7 +12,12 @@
     <s:div cssClass="col-sm-8 text-left" >
         <s:form method="post" action="editUserPersistenciaAdmin" enctype="multipart/form-data"> 
             <s:div cssClass="imgcontainer">
-                <img class="avatar" src="<s:url value="%{usuario.foto}"/>"/>
+                <s:if test="%{usuario.foto.length() > 0}"> 
+                    <img class="avatar" src="<s:url value="%{usuario.foto}"/>"/>                    
+                </s:if>
+                <s:else>
+                    <img class="avatar" src="images/imgLogin.png"/>
+                </s:else>   
                 <s:file name="imgPerfilUsuario" id="fileImgUser" cssClass="fileImgUser"/>
             </s:div>
             <s:div cssClass="form-group col-sm-6">
@@ -24,6 +29,11 @@
                 <s:fielderror fieldName="apellidos" cssClass="alert alert-danger" />
                 <s:label><b>Apellidos:</b></s:label>
                 <s:textfield name="apellidos" placeholder="Introduzaca los apellidos" cssClass="form-control" id="apellidos" value="%{usuario.apellidos}"/>
+            </s:div>
+            <s:div cssClass="form-group col-sm-6">
+                <s:fielderror fieldName="nickname" cssClass="alert alert-danger" />
+                <s:label><b>Nombre de usuario:</b></s:label>
+                <s:textfield readonly="true" name="nickname" placeholder="Introduzaca el nickname" cssClass="form-control" id="nickname" value="%{usuario.nickname}"/>
             </s:div>
             <s:div cssClass="form-group col-sm-6">
                 <s:fielderror fieldName="email" cssClass="alert alert-danger" />

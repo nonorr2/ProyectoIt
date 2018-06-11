@@ -10,12 +10,12 @@
 <s:div cssClass="container-fluid text-center">
     <s:div cssClass="col-sm-2 col-sm-2-new"></s:div>
     <s:div cssClass="col-sm-8 text-left borde-tematica" >
-        <s:form method="post" action="editTemaPersistencia"> 
+        <s:form method="post" action="editTemaPersistencia" enctype="multipart/form-data"> 
 
             <s:div cssClass="imgcontainer">
+                <s:fielderror fieldName="imgTematica" cssClass="alert alert-danger" />
                 <img class="avatar imgTematica" src="<s:url value="%{tematica.imagen}"/>"/>
-                <s:fielderror fieldName="imagen" cssClass="alert alert-danger" />
-                <s:file name="imagen" id="fileImgTema" cssClass="fileImgUser"/>
+                <s:file name="imgTematica" id="fileImgTema" cssClass="fileImgUser"/>
             </s:div>
             <s:div cssClass="form-group col-sm-6">
                 <s:fielderror fieldName="nombre" cssClass="alert alert-danger" />

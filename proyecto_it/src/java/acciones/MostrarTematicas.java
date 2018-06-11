@@ -35,6 +35,13 @@ public class MostrarTematicas extends ActionSupport {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Metodo que hace uso del web service para obtener una tematica con el id
+     * especificado
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String editTematica() throws Exception {
         GenericType<Tematica> tipoTema = new GenericType<Tematica>() {
         };
@@ -42,6 +49,13 @@ public class MostrarTematicas extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Metodo que hace uso del web service para obtener una lista de las
+     * tematicas qeu cumpla con la condición del filtro
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String filtrarTema() throws Exception {
         GenericType<List<Tematica>> tipoTematicaaAdmin = new GenericType<List<Tematica>>() {
         };
@@ -70,6 +84,12 @@ public class MostrarTematicas extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Metodo para eliminar una tematica de la BD
+     * @return SUCCESS
+     * @throws Exception 
+     */
+    
     public String removeTematica() throws Exception {
         tematicasWS.remove(idTematicaRemove);
         return SUCCESS;
