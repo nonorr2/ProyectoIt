@@ -20,7 +20,7 @@
             <result name="success">categorias.jsp</result>
         </action>
         <action name="publicaciones" class="acciones.menu_top" method="publicaciones">
-            <result name="success">publicaciones.jsp</result>
+            <result name="success">publicacionesNoLogeado.jsp</result>
         </action>
         <action name="registro" class="acciones.menu_top" method="registro">
             <result name="success">registro.jsp</result>
@@ -102,6 +102,9 @@
         </action>
         <action name="filtrarPublicacionesTemas" class="acciones.MostrarPublicaciones" method="filtrarPublicacionesTemas">
             <result name="success">publicaciones.jsp</result>
+        </action>
+        <action name="filtrarPublicacionesNoLogeado" class="acciones.menu_top" method="filtroPubli">
+            <result name="success">publicacionesNoLogeado.jsp</result>
         </action>
     </package>
     

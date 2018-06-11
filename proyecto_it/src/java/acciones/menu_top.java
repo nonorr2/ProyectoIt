@@ -1,17 +1,23 @@
 package acciones;
 
+import WS.ComentarioWS;
 import WS.Publicacion;
+import WS.PublicacionDecorado;
 import WS.PublicacionWS;
 import WS.Tematica;
 import WS.TematicaWS;
+import WS.VotoPublicacionWS;
+import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 
 public class menu_top extends ActionSupport {
 
     private List<Tematica> tematicas;
-    private List<Publicacion> publicaciones;
+    private List<PublicacionDecorado> publicaciones;
+    private String filtroPublicacion;
 
     public menu_top() {
     }
@@ -40,8 +46,62 @@ public class menu_top extends ActionSupport {
     public String publicaciones() throws Exception {
         GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
         };
+        GenericType<Long> tipoLong = new GenericType<Long>() {
+        };
+
         PublicacionWS publicacionClient = new PublicacionWS();
-        publicaciones = (List<Publicacion>) publicacionClient.findAll_JSON(tipoPublicacion);
+        ComentarioWS comentarioCliente = new ComentarioWS();
+        VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
+
+        List<Publicacion> listPublicaciones = publicacionClient.findAll_XML(tipoPublicacion);
+        this.publicaciones = new ArrayList<PublicacionDecorado>();
+
+        for (Publicacion publicacion : listPublicaciones) {
+            PublicacionDecorado publicacionDecorado = new PublicacionDecorado();
+            Long numComentarios = comentarioCliente.getNumComentarios(tipoLong, String.valueOf(publicacion.getId()));
+            Long numVotosPositivos = votoPublicacionCliente.getVotosPositivos(tipoLong, String.valueOf(publicacion.getId()));
+            Long numVotosNegativos = votoPublicacionCliente.getVotosNegativos(tipoLong, String.valueOf(publicacion.getId()));
+            publicacionDecorado.setPublicacion(publicacion);
+            publicacionDecorado.setNumComentarios(numComentarios.intValue());
+            publicacionDecorado.setNumVotosPositivosPublicacion(numVotosPositivos.intValue());
+            publicacionDecorado.setNumVotosNegativosPublicacion(numVotosNegativos.intValue());
+            this.publicaciones.add(publicacionDecorado);
+        }
+
+        return SUCCESS;
+    }
+
+    public String filtroPubli() throws Exception {
+        GenericType<List<Publicacion>> tipoPublicacionAdmin = new GenericType<List<Publicacion>>() {
+        };
+        GenericType<Long> tipoLong = new GenericType<Long>() {
+        };
+
+        PublicacionWS publicacionClient = new PublicacionWS();
+        ComentarioWS comentarioCliente = new ComentarioWS();
+        VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
+        List<Publicacion> listPublicaciones;
+
+        if (filtroPublicacion.equals("")) {
+            listPublicaciones = publicacionClient.findAll_XML(tipoPublicacionAdmin);
+        } else {
+            listPublicaciones = publicacionClient.getPublicacionPorTitulo_XML(tipoPublicacionAdmin, filtroPublicacion);
+        }
+
+        this.publicaciones = new ArrayList<PublicacionDecorado>();
+
+        for (Publicacion publicacion : listPublicaciones) {
+            PublicacionDecorado publicacionDecorado = new PublicacionDecorado();
+            Long numComentarios = comentarioCliente.getNumComentarios(tipoLong, String.valueOf(publicacion.getId()));
+            Long numVotosPositivos = votoPublicacionCliente.getVotosPositivos(tipoLong, String.valueOf(publicacion.getId()));
+            Long numVotosNegativos = votoPublicacionCliente.getVotosNegativos(tipoLong, String.valueOf(publicacion.getId()));
+            publicacionDecorado.setPublicacion(publicacion);
+            publicacionDecorado.setNumComentarios(numComentarios.intValue());
+            publicacionDecorado.setNumVotosPositivosPublicacion(numVotosPositivos.intValue());
+            publicacionDecorado.setNumVotosNegativosPublicacion(numVotosNegativos.intValue());
+            this.publicaciones.add(publicacionDecorado);
+        }
+
         return SUCCESS;
     }
 
@@ -61,12 +121,20 @@ public class menu_top extends ActionSupport {
         this.tematicas = tematicas;
     }
 
-    public List<Publicacion> getPublicaciones() {
+    public List<PublicacionDecorado> getPublicaciones() {
         return publicaciones;
     }
 
-    public void setPublicaciones(List<Publicacion> publicaciones) {
+    public void setPublicaciones(List<PublicacionDecorado> publicaciones) {
         this.publicaciones = publicaciones;
+    }
+
+    public String getFiltroPublicacion() {
+        return filtroPublicacion;
+    }
+
+    public void setFiltroPublicacion(String filtroPublicacion) {
+        this.filtroPublicacion = filtroPublicacion;
     }
 
 }

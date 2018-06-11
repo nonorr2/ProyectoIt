@@ -5,10 +5,14 @@
  */
 package acciones;
 
+import WS.PublicacionWS;
 import WS.Tematica;
+import WS.TematicaDecorado;
 import WS.TematicaWS;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletContext;
 import javax.ws.rs.core.GenericType;
 import org.apache.commons.io.FileUtils;
@@ -27,6 +31,7 @@ public class GestionTematica extends ActionSupport {
     Boolean tematicaIguales = false;
     private File imgTematica;
     Tematica tematica = new Tematica();
+    List<TematicaDecorado> tematicas;
 
     public GestionTematica() {
     }
@@ -143,6 +148,16 @@ public class GestionTematica extends ActionSupport {
         this.tematica = tematica;
     }
 
+    public List<TematicaDecorado> getTematicas() {
+        return tematicas;
+    }
+
+    public void setTematicas(List<TematicaDecorado> tematicas) {
+        this.tematicas = tematicas;
+    }
+    
+    
+
     /**
      * Metodo para validar los campos del formulario de nueva tematica y editar
      * tematica del administrador
@@ -168,6 +183,27 @@ public class GestionTematica extends ActionSupport {
         } else if (nombre.trim().length() > 149) {
             addFieldError("nombre", "El titulo no puede ser mayor a 150 palabras");
             error = true;
+        }
+
+        if (!getFieldErrors().isEmpty()) {
+            GenericType<List<Tematica>> tipoTematicaaAdmin = new GenericType<List<Tematica>>() {
+            };
+            GenericType<Long> tipoLong = new GenericType<Long>() {
+            };
+
+            TematicaWS tematicaClient = new TematicaWS();
+            PublicacionWS publicacionClient = new PublicacionWS();
+
+            List<Tematica> listTematica = tematicaClient.findAll_XML(tipoTematicaaAdmin);
+            this.tematicas = new ArrayList<TematicaDecorado>();
+
+            for (Tematica tema : listTematica) {
+                TematicaDecorado tematicaDecorado = new TematicaDecorado();
+                Long numPubliTema = publicacionClient.getNumPublicacionesByTematica(tipoLong, String.valueOf(tema.getId()));
+                tematicaDecorado.setTematicas(tema);
+                tematicaDecorado.setNumPublicacionesDeUnaTematica(numPubliTema.intValue());
+                this.tematicas.add(tematicaDecorado);
+            }
         }
     }
 
