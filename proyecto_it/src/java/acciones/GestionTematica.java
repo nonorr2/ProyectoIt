@@ -35,6 +35,13 @@ public class GestionTematica extends ActionSupport {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Metodo que hace uso del web service para guardar las modificaciones de la
+     * tematica en la BD
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String editTemaPersistencia() throws Exception {
         String rutaRelativa = null;
 
@@ -56,6 +63,13 @@ public class GestionTematica extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Metodo que hace uso del web service para guardar la nueva tematica en la
+     * BD
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String addTemaPersistencia() throws Exception {
         GenericType<Boolean> tipoTematica = new GenericType<Boolean>() {
         };
@@ -128,7 +142,11 @@ public class GestionTematica extends ActionSupport {
     public void setTematica(Tematica tematica) {
         this.tematica = tematica;
     }
-    
+
+    /**
+     * Metodo para validar los campos del formulario de nueva tematica y editar
+     * tematica del administrador
+     */
     public void validate() {
         GenericType<Tematica> tipoTema = new GenericType<Tematica>() {
         };

@@ -31,7 +31,6 @@ public class menu_top_admin extends ActionSupport {
     private List<Usuario> usuarios;
     private List<TematicaDecorado> tematicas;
     private List<PublicacionDecorado> publicaciones;
-    private List<Chat> chats;
 
     public menu_top_admin() {
     }
@@ -39,6 +38,12 @@ public class menu_top_admin extends ActionSupport {
     public String execute() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    /**
+     * Metodo para obtener una lista de todos los usuarios del sistema
+     * @return SUCCESS
+     * @throws Exception 
+     */
 
     public String usuarios() throws Exception {
         GenericType<List<Usuario>> tipoUsuarios = new GenericType<List<Usuario>>() {
@@ -47,6 +52,12 @@ public class menu_top_admin extends ActionSupport {
         usuarios = usuarioClient.getUsuarioTipo_JSON(tipoUsuarios);
         return SUCCESS;
     }
+    
+    /**
+     * Metodo para obtener todas las publicaciones del sistemas.
+     * @return
+     * @throws Exception 
+     */
 
     public String publicacionesAdmin() throws Exception {
         GenericType<List<Publicacion>> tipoPublicacionAdmin = new GenericType<List<Publicacion>>() {
@@ -75,6 +86,12 @@ public class menu_top_admin extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Metodo para obtener todas las tematicas del sistema
+     * @return SUCCESS
+     * @throws Exception 
+     */
+    
     public String tematicasAdmin() throws Exception {
         GenericType<List<Tematica>> tipoTematicaaAdmin = new GenericType<List<Tematica>>() {
         };
@@ -95,13 +112,6 @@ public class menu_top_admin extends ActionSupport {
         }
         return SUCCESS;
     }
-    
-    public String chatsAdmin() throws Exception {
-        GenericType<List<Chat>> tipoChat = new GenericType<List<Chat>>(){};
-        ChatWS chatClient = new ChatWS();
-        chats = chatClient.findAll_JSON(tipoChat);
-        return SUCCESS;
-    }
 
     public List<Usuario> getUsuarios() {
         return usuarios;
@@ -117,14 +127,6 @@ public class menu_top_admin extends ActionSupport {
 
     public void setTematicas(List<TematicaDecorado> tematicas) {
         this.tematicas = tematicas;
-    }
-
-    public List<Chat> getChats() {
-        return chats;
-    }
-
-    public void setChats(List<Chat> chats) {
-        this.chats = chats;
     }
 
     public List<PublicacionDecorado> getPublicaciones() {

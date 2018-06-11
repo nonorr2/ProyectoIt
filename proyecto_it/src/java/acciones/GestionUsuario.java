@@ -45,6 +45,13 @@ public class GestionUsuario extends ActionSupport {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Metodo que hace uso del web service para guardar las modificaciones de un
+     * usuario en la BD
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String editUserPersistencia() throws Exception {
         String rutaRelativa = null;
 
@@ -69,6 +76,13 @@ public class GestionUsuario extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Metodo que hace uso del web service para guardar a un nuevo usuario en la
+     * BD
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String addUsuario() throws Exception {
         String rutaRelativa = null;
 
@@ -102,6 +116,10 @@ public class GestionUsuario extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Metodo para validar los campos del formulario de registrar, perfil y
+     * editar usuario del administrador
+     */
     @Override
     public void validate() {
         if (this.getNombre() == null || this.getNombre().trim().length() == 0) {
@@ -115,7 +133,7 @@ public class GestionUsuario extends ActionSupport {
         } else if (this.getApellidos().length() > 50) {
             addFieldError("apellidos", "Tamaño máximo 50 carácteres");
         }
-        
+
         GenericType<Boolean> tipoBoolean = new GenericType<Boolean>() {
         };
         if (this.getNickname() == null || this.getNickname().trim().length() == 0) {
@@ -145,7 +163,7 @@ public class GestionUsuario extends ActionSupport {
             addFieldError("fechaNacimiento", "La de nacimiento es obligatorio");
         }
 
-        if (!getFieldErrors().isEmpty()) {
+        if (!getFieldErrors().isEmpty() && id != null) {
             GenericType<Usuario> tipoUser = new GenericType<Usuario>() {
             };
             usuario = userWS.find_XML(tipoUser, id);

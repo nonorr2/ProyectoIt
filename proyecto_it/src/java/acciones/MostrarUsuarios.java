@@ -34,6 +34,12 @@ public class MostrarUsuarios extends ActionSupport {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Metodo que hace uso del web service para obtener un usuario con el id
+     * indicado.
+     * @return
+     * @throws Exception
+     */
     public String editUser() throws Exception {
         GenericType<Usuario> tipoUser = new GenericType<Usuario>() {
         };
@@ -41,7 +47,7 @@ public class MostrarUsuarios extends ActionSupport {
         usuario = userWS.find_XML(tipoUser, idUsuarioEdit);
         return SUCCESS;
     }
-    
+
     public String perfil() throws Exception {
         Usuario usuarioSession = (Usuario) loginLogout.session.get("user");
 
@@ -51,21 +57,34 @@ public class MostrarUsuarios extends ActionSupport {
         this.usuario = usuarioWS.find_XML(tipoUser, String.valueOf(usuarioSession.getId()));
         return SUCCESS;
     }
-    
+
+    /**
+     * Metodo que hace uso del web service para obtener una lista de los
+     * usuarios qeu cumpla con la condición del filtro
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String filtrarUser() throws Exception {
         GenericType<List<Usuario>> tipoUsuarios = new GenericType<List<Usuario>>() {
         };
         UsuarioWS usuarioClient = new UsuarioWS();
-        if(filtroUser.equals("")){
+        if (filtroUser.equals("")) {
             usuarios = usuarioClient.getUsuarioTipo_XML(tipoUsuarios);
-        }else{
+        } else {
             usuarios = usuarioClient.getUsuariosPorNombre_JSON(tipoUsuarios, filtroUser);
         }
-        
+
         return SUCCESS;
     }
-    
-        public String removeUser() throws Exception {
+
+    /**
+     * Metodo para eliminar un suario de la BD
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
+    public String removeUser() throws Exception {
         UsuarioWS userWS = new UsuarioWS();
         userWS.remove(idUsuarioRemove);
         return SUCCESS;
