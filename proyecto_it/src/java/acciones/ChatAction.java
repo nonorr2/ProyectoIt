@@ -23,8 +23,11 @@ public class ChatAction extends ActionSupport {
     String usuario;
     String idChat;
     String idChatEdit;
+    boolean error = false;
 
     List<Chat> chats;
+
+    List<Usuario> usuarios;
 
     public ChatAction() {
     }
@@ -65,6 +68,23 @@ public class ChatAction extends ActionSupport {
         usuChat2.setFecha(new Date());
         usuarioChatClient.create_XML(usuChat2);
         return SUCCESS;
+    }
+
+    public void validate() {
+        if (nombreChat.trim().length() == 0) {
+            addFieldError("nombreChat", "El nombre del chat no puede estar vacio");
+            GenericType<List<Chat>> tipoChat = new GenericType<List<Chat>>() {
+            };
+            GenericType<List<Usuario>> tipoUsuario = new GenericType<List<Usuario>>() {
+            };
+            ChatWS chatClient = new ChatWS();
+            UsuarioWS usuarioClient = new UsuarioWS();
+
+            Usuario usuario = (Usuario) loginLogout.session.get("user");
+            chats = chatClient.getChatsUsuario_JSON(tipoChat, String.valueOf(usuario.getId()));
+            usuarios = usuarioClient.getUsuariosChat_JSON(tipoUsuario, String.valueOf(usuario.getId()));
+            error = true;
+        }
     }
 
     public String borrarChat() throws Exception {
@@ -122,6 +142,22 @@ public class ChatAction extends ActionSupport {
 
     public void setChats(List<Chat> chats) {
         this.chats = chats;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public boolean isError() {
+        return error;
+    }
+
+    public void setError(boolean error) {
+        this.error = error;
     }
 
 }

@@ -6,7 +6,6 @@
 <s:div cssClass="banner-gen">
     <h1 class="text-banner">MIS CHATS</h1>
 </s:div>
-
 <s:div id="crearChat" cssClass="modal">
     <s:form theme="simple" cssClass="modal-content animate" action="chatsLogueado">
         <s:div cssClass="imgcontainer">
@@ -15,6 +14,7 @@
         </s:div>
         <s:div cssClass="container-crearChat">
             <s:label>Nombre del chat</s:label>
+            <s:fielderror fieldName="nombreChat" cssClass="alert alert-danger" />
             <s:textfield name="nombreChat" cssClass="form-control"/>
             <s:label>Usuario</s:label>
             <s:select name="usuario" list="usuarios" listKey="id" listValue="nickname" cssClass="form-control"/>
@@ -99,7 +99,7 @@
         btn_envio.setAttribute("class", "btn-entrada-chat");
         contenedor_entrada.appendChild(entrada);
         contenedor_entrada.appendChild(btn_envio);
-        
+
         var datos_chat = document.createElement("div");
         datos_chat.setAttribute("id", "datos_chat");
         datos_chat.setAttribute("class", "datos-chat");
@@ -237,5 +237,11 @@
         xhttpMensaje.send(JSON.stringify(mensaje));
     }
 </script>
+
+<s:if test="error">
+    <script>
+        document.getElementById('crearChat').style.display = 'block';
+    </script>
+</s:if>
 
 <%@include file="footer.jsp" %>

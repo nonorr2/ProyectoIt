@@ -128,6 +128,7 @@
             <result name="success" type="chain">
                 <param name="actionName">chats</param>
             </result>
+            <result name="input">chats.jsp</result>
         </action>
         <action name="borrarChat" class="acciones.ChatAction" method="borrarChat">
             <result name="success" type="chain">
@@ -151,6 +152,12 @@
             <result name="success" type="chain">
                 <param name="actionName">verPublicacion</param>
             </result>
+        </action>
+        <action name="comentarPublicacion" class="acciones.ComentarioAction" method="comentarPublicacion">
+            <result name="success" type="chain">
+                <param name="actionName">verPublicacion</param>
+            </result>
+            <result name="input">publicacion.jsp</result>
         </action>
     </package>
     

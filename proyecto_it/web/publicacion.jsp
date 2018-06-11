@@ -48,5 +48,18 @@
         <s:div cssClass="col-sm-1"></s:div>
     </s:div>
 </s:iterator>
+<s:div cssClass="col-sm-12">
+    <s:div cssClass="col-sm-2"></s:div>
+    <s:div cssClass="col-sm-8 sombreado con-new-comment">
+        <s:form method="post" action="comentarPublicacion">
+            <s:hidden name="id_publi" value="%{publicacion.getId()}" />
+            <s:fielderror fieldName="textoComentario" cssClass="alert alert-danger" />
+            <s:textarea cssClass="texo-comentario" name="textoComentario" value=""/>
+            <s:submit value="Comentar" cssClass="btn btn-primary"/>
+        </s:form>
+    </s:div>
+    <s:div cssClass="col-sm-2"></s:div>
+
+</s:div>
 
 <%@include file="footer.jsp" %>
