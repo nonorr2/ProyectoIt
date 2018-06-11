@@ -15,6 +15,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="css/estilo.css">   
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
         
         <s:if test="error">
             <%@include file="login.jsp"%>
@@ -58,7 +60,7 @@
                 <s:form action="registro" method="post">
                     <a><s:submit value="REGISTRARSE"  cssClass="w3-bar-item w3-button w3-padding-large"/></a>
                 </s:form>
-                <a class="w3-bar-item w3-button w3-padding-large" onclick="document.getElementById('id01').style.display = 'block'"> Login</a>
+                <a class="w3-bar-item w3-button w3-padding-large" onclick="document.getElementById('id01').style.display = 'block'">LOGIN</a>
             </div>
         </div>
         <%@include file="login.jsp" %>

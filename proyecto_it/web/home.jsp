@@ -22,9 +22,8 @@
         <s:div cssClass="container-fluid text-center">
             <s:div cssClass="row">
                 <s:div cssClass="contenedor-publi sombreado">
-                    <s:div cssClass="publi-no-imagen">
-                        <img src="<s:property value="publicacion.getFoto()"/>" />
-                    </s:div>
+                    <div class="publi-no-imagen" style="background-image: url(<s:property value="publicacion.getFoto()"/>)">
+                    </div>
                     <s:div cssClass="datos-publicacion">
                         <s:form method="post" action="verPublicacion">
                             <s:hidden value="%{getPublicacion().getId()}" name="id_publi" />

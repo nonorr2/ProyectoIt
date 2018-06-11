@@ -27,6 +27,7 @@ public class PublicacionAction extends ActionSupport {
     }
 
     public String verPublicacion() throws Exception {
+        comentarios = new ArrayList<>();
         GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {
         };
         PublicacionWS publicacionCliente = new PublicacionWS();

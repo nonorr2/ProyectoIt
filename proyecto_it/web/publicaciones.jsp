@@ -22,22 +22,23 @@
         <s:div cssClass="container-fluid text-center">
             <s:div cssClass="row">
                 <s:div cssClass="contenedor-publi sombreado">
-                    <s:div cssClass="publi-no-imagen">
-                        <s:if test="%{getPublicacion().getFoto().length() > 0}"> 
-                            <img src="<s:property value="getFoto()"/>" />
-                        </s:if>
-                        <s:else>
-                            <img src="images/noFoto.png"/>
-                        </s:else>
-                    </s:div>
+                    <s:if test="%{getPublicacion().getFoto().length() > 0}"> 
+                        <div class="publi-no-imagen" style="background-image: url(<s:property value="getFoto()"/>)">
+                        </div>
+                    </s:if>
+                    <s:else>
+                        <div class="publi-no-imagen" style="background-image: url(images/noFoto.png)">
+                        </div>
+                    </s:else>
+
                     <s:div cssClass="datos-publicacion">
                         <s:form method="post" action="verPublicacion">
                             <s:hidden value="%{getPublicacion().getId()}" name="id_publi" />
                             <s:submit value="%{getPublicacion().getTitulo()}" cssClass="titulo-submit-publicacion"/>
-                        <p>Número de votos positivos: <s:property value="numVotosPositivosPublicacion" /></p>
-                        <p>Número de votos negativos: <s:property value="numVotosNegativosPublicacion" /></p>
-                        <p>Numero de comentarios: <s:property value="numComentarios" /></p>
-                        <p>Fecha de cración: <s:property value="getPublicacion().getFechaHoraModificacion()" /></p>
+                            <p>Número de votos positivos: <s:property value="numVotosPositivosPublicacion" /></p>
+                            <p>Número de votos negativos: <s:property value="numVotosNegativosPublicacion" /></p>
+                            <p>Numero de comentarios: <s:property value="numComentarios" /></p>
+                            <p>Fecha de cración: <s:property value="getPublicacion().getFechaHoraModificacion()" /></p>
                         </s:form>
                     </s:div>
                     <s:div cssClass="contenedor-flechas">

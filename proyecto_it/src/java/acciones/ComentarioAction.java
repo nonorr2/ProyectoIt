@@ -31,31 +31,33 @@ public class ComentarioAction extends ActionSupport {
     }
 
     public void validate() {
-        if (textoComentario.trim().length() == 0) {
-            addFieldError("textoComentario", "El comentario no puede estar vacio");
+        if (textoComentario != null) {
+            if (textoComentario.trim().length() == 0) {
+                addFieldError("textoComentario", "El comentario no puede estar vacio");
 
-            comentarios = new ArrayList<>();
+                comentarios = new ArrayList<>();
 
-            GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {
-            };
-            PublicacionWS publicacionCliente = new PublicacionWS();
-            publicacion = publicacionCliente.find_XML(tipoPublicacion, id_publi);
+                GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {
+                };
+                PublicacionWS publicacionCliente = new PublicacionWS();
+                publicacion = publicacionCliente.find_XML(tipoPublicacion, id_publi);
 
-            GenericType<List<Comentario>> tipoComentario = new GenericType<List<Comentario>>() {
-            };
-            ComentarioWS comentarioCliente = new ComentarioWS();
-            List<Comentario> listaComentarios = comentarioCliente.getComentariosPublicacion_XML(tipoComentario, id_publi);
+                GenericType<List<Comentario>> tipoComentario = new GenericType<List<Comentario>>() {
+                };
+                ComentarioWS comentarioCliente = new ComentarioWS();
+                List<Comentario> listaComentarios = comentarioCliente.getComentariosPublicacion_XML(tipoComentario, id_publi);
 
-            VotoComentarioWS votoComentarioClient = new VotoComentarioWS();
-            GenericType<Long> tipoVotoComentario = new GenericType<Long>() {
-            };
+                VotoComentarioWS votoComentarioClient = new VotoComentarioWS();
+                GenericType<Long> tipoVotoComentario = new GenericType<Long>() {
+                };
 
-            for (Comentario comentario : listaComentarios) {
-                ComentarioDecorador aux = new ComentarioDecorador();
-                aux.setComentario(comentario);
-                aux.setVotosPositivos(votoComentarioClient.getVotosPositivos(tipoVotoComentario, String.valueOf(comentario.getId())).intValue());
-                aux.setVotosNegativos(votoComentarioClient.getVotosNegativos(tipoVotoComentario, String.valueOf(comentario.getId())).intValue());
-                comentarios.add(aux);
+                for (Comentario comentario : listaComentarios) {
+                    ComentarioDecorador aux = new ComentarioDecorador();
+                    aux.setComentario(comentario);
+                    aux.setVotosPositivos(votoComentarioClient.getVotosPositivos(tipoVotoComentario, String.valueOf(comentario.getId())).intValue());
+                    aux.setVotosNegativos(votoComentarioClient.getVotosNegativos(tipoVotoComentario, String.valueOf(comentario.getId())).intValue());
+                    comentarios.add(aux);
+                }
             }
         }
     }

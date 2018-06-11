@@ -3,9 +3,9 @@
 <%@include file="cabeceraNoLogado.jsp" %>
 <body id="myPage">
     <div class="banner-index">
-        <p class="text-banner">Habla de lo que quieras</p>
+        <p class="text-banner-index">Habla de lo que quieras</p>
         <br>
-        <p class="text-banner">SIN CENSURA</p>
+        <p class="text-banner-index"><spam class="text-banner-back">SIN CENSURA</spam></p>
     </div>
     <div class="container-fluid text-center">
         <h2>TEMAS M&Aacute;S ACTIVOS</h2>

@@ -1,3 +1,7 @@
+body{
+    font-family: 'Raleway', sans-serif;
+}
+
 .navbar {
     margin-bottom: 0;
     background-color: #f4511e;
@@ -48,29 +52,44 @@ footer .glyphicon {
     width: 100%;
     height: 180px;
     margin: 50px 0px;
-    background: url(../images/cabecera_temas.png) no-repeat center top;
+    background: url(../images/cabecera_temas.png);
+    background-size: cover !important;
 }
 
 .banner-gen-publi{
     width: 100%;
     height: 180px;
     margin: 50px 0px 0px 0px;
-    background: url(../images/cabecera_temas.png) no-repeat center top;
+    background: url(../images/cabecera_temas.png);
+    background-size: cover !important;
 }
 
 .div-icono{
     width: 100%;
     margin: 0px;
     height: 150px;
-    background: no-repeat center center;
+    background-size: cover;
+}
+
+.row{
+    padding: 0px 15px;
 }
 
 .text-banner{
-    font-size: 60px;
+    font-size: 3em;
     color: white;
     text-align: center;
     position: relative;
     top: 30%;
+}
+
+.text-banner-index{
+    font-size: 3em;
+    color: white;
+    text-align: center;
+    position: relative;
+    top: 20%;
+    font-family: 'Permanent Marker', cursive;
 }
 
 input[type=text], input[type=password] {
@@ -201,6 +220,7 @@ span.psw {
     float: left;
     overflow: hidden;
     margin: 0px;
+    background-size: cover;
 }
 
 .letras-imagen{
@@ -220,8 +240,16 @@ span.psw {
 
 .sombreado{
     box-shadow:  6px 7px 5px 2px rgba(0,0,0,0.09);
-    margin: 10px 0px !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
     padding-left: 0px;
+    padding-right: 0px;
+    overflow: hidden;
+}
+
+.chat-cont{
+    background-color: #F5F5F5;
+    margin: 10px 5px 15px 5px !important;
 }
 
 .contenedor-publi{
@@ -331,6 +359,8 @@ span.psw {
 .texto_chat{
     color: white;
     text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .close_chat{
@@ -414,11 +444,14 @@ span.psw {
     width: 150px;
     margin: 0px;
     padding: 0px;
+    background-size: cover !important;
 }
 
 .contenido-mensaje{
     float: left;
     padding: 10px 30px;
+    text-align: left;
+    width: 73%;
 }
 
 .autor-comment{
@@ -468,6 +501,19 @@ span.psw {
     padding: 15px 25px;
     background-color: #f5f5f5;
     text-align: center;
+    overflow: hidden;
+    width: 70%;
+    margin: 15px auto;
+}
+
+.cont-cent{
+    text-align: center;
+}
+
+.comentario{
+    width: 80%;
+    display: inline-block;
+    overflow: hidden;
 }
 
 .con-new-comment input{
@@ -572,28 +618,66 @@ ul {
     .contenedor-iconos{
         overflow: hidden;
         float: right;
-        width: 30%;
-        margin-top: 60px;
+        margin-top: 170px;
     }
 
     .datos-publicacion{
-        width: 65%;
+        width: 50%;
     }
+
+    .contenedor-flechas{
+        float: right;
+        margin-right: 15px;
+    }
+    
+    .contenedor-nweTematica{
+        width: 85% !important;
+    }
+
 } 
+
+@media (max-width: 750px){
+    .contenido-mensaje{
+        width: 85%;
+    }
+
+    .img-comentario{
+        width: 100%;
+        height: 100px;
+        background-size: cover !important;
+    }
+
+    .contenedor-flechas{
+        float: right;
+        margin-right: 15px;
+    }
+    
+
+}
+
+@media (max-width: 700px){
+
+    .datos-publicacion{
+        width: 60%;
+    }
+    
+    .publi-no-imagen{
+        width: 100%;
+        height: 150px;
+    }
+}
 
 @media (max-width: 400px){
     .modal-content {
         width: 90%;
     }
 
-    .publi-no-imagen{
-        width: 30%;
-        height: 230px;
-    }
-
     .contenedor-iconos{
-        float: left;
-        width: 4%;
-        margin-top: 150px;
+        float: right;
+        margin-right: 15px;
+    }
+    
+    .datos-publicacion{
+        width: 55%;
     }
 }  

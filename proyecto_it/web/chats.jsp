@@ -45,8 +45,7 @@
     </s:div>
     <s:div cssClass="row">
         <s:iterator var="chat" value="chats">
-
-            <s:div cssClass="col-sm-4 sombreado">
+            <s:div cssClass="col-sm-4 sombreado chat-cont">
                 <s:form method="post" action="borrarChat">
                     <a onclick="showChat(<s:property value="id"/>)"><h4><s:property value="nombre" /></h4></a>
                     <p><s:property value="fechaHora" /></p>
