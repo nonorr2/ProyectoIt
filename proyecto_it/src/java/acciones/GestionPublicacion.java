@@ -108,8 +108,7 @@ public class GestionPublicacion extends ActionSupport {
             error = true;
         }
         
-        //NO FUNCIONA LA EXPRESION
-        if (!this.getRutaPubliacion().matches("^((http[s]?|ftp):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*\\/)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$")) {
+        if (!this.getRutaPubliacion().matches("\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]")) {
             addFieldError("rutaPubliacion", "Formato no correcto");
             error = true;
         }
