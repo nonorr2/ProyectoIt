@@ -464,57 +464,29 @@ span.psw {
     font-size: 40px !important;
 }
 
+.contenedor-footer{
+    background-color: grey;
+    width: 100%;
+    bottom: 0px;
 
-@media (max-width: 800px){
-    .modal-content {
-        width: 50%;
-    }  
+}
 
-    .publi-no-imagen{
-        width: 30%;
-        height: 230px;
-    }
-
-    .contenedor-iconos{
-        float: left;
-        width: 4%;
-        margin-top: 150px;
-    }
-
-    .datos-publicacion{
-        width: 65%;
-    }
-} 
-
-@media (max-width: 400px){
-    .modal-content {
-        width: 90%;
-    }
-
-    .publi-no-imagen{
-        width: 30%;
-        height: 230px;
-    }
-
-    .contenedor-iconos{
-        float: left;
-        width: 4%;
-        margin-top: 150px;
-    }
-} 
-ul {
-    list-style-type: none;
+.text-center-footer{
+    text-align: center;
+    color: white;
 }
 
 .botonAceptarPerfil{
     float:right !important;
     clear:both !important;
     padding-right:20px !important;
+    margin-bottom: 10px;
 }
 
 .botonEliminarPerfil{
     float:right !important;
     padding-right:20px !important;
+    margin-bottom: 10px;
 }
 
 .container-addPublicacion{
@@ -561,11 +533,16 @@ ul {
     margin: auto;
     margin-top: 15px;
     font-size: 17px;
+    margin-bottom: 10px;
 }
 .contenedor-flechas-comentarios{
     float: right;
     height: 100%;
     margin: 15px 5px;
+}
+
+ul {
+    list-style-type: none;
 }
 
 @media (max-width: 800px){
@@ -605,4 +582,4 @@ ul {
         width: 4%;
         margin-top: 150px;
     }
-} 
+}  
