@@ -133,6 +133,14 @@ public class ChatFacadeREST extends AbstractFacade<Chat> {
         return usu;
     }
 
+    /**
+     * Devuleve un chat que coincide con el nombre y tiempo pasado como
+     * parametro
+     *
+     * @param name
+     * @param time
+     * @return
+     */
     @GET
     @Path("/getChatByNameAndTime/{name}/{time}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -187,11 +195,18 @@ public class ChatFacadeREST extends AbstractFacade<Chat> {
         return c;
     }
 
+    /**
+     * Devuelve todos los chats que conincide con el nombre pasado como
+     * parametro
+     *
+     * @param nombre
+     * @return List<chat>
+     */
     @GET
     @Path("/getChatPorNombre/{nombre}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Chat> getChatPorNombre(@PathParam("nombre") String nombre) {
-        Query query = em.createQuery("SELECT c FROM Chat c WHERE c.nombre LIKE '" + nombre + "%'");
+        Query query = em.createQuery("SELECT c FROM Chat c WHERE c.nombre LIKE '%" + nombre + "%'");
         List<Chat> result = query.getResultList();
         return result;
     }

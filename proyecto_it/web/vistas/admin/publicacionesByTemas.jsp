@@ -1,23 +1,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<s:set name="theme" value="'simple'" scope="page" />
 <%@include file="../admin/cabeceraAdmin.jsp" %>
 
 <s:div cssClass="banner-gen">
     <h1 class="text-banner">PUBLICACIONES</h1>
 </s:div>
 <s:div cssClass="container-fluid text-center">
-    <s:form action="filtroPubli">
-        <s:textfield name="filtroPublicacion" cssClass="textFileFiltrar"/>
-        <s:submit name="btoFiltroPubli" cssClass="btn btn-primary filtro" value="Filtrar"/>
+    <s:form method="post" action="filtrarPublicacionesTemas">
+        <s:textfield  cssClass="textFileFiltrar" name="filtroPublicacion"/>
+        <s:submit name="btoLogin" cssClass="btn btn-primary filtro" value="Filtrar"/>
     </s:form>
 </s:div>
-<s:if test="%{publicaciones.isEmpty()}">
+<s:if test="%{publicacionesDecoradas.isEmpty()}">
     <s:div cssClass="alert alert-warning noContenido">
-        <p>No hay ninguna publicaci&oacute;n que empiece por <s:property value="filtroPublicacion"/></p>
+        <p>No hay ninguna publicaci&oacute;n</p>
     </s:div>
-</s:if>
-<s:else>
-    <s:iterator var="publicacion" value="publicaciones">
+</s:if>    
+<s:else>       
+    <s:iterator value="publicacionesDecoradas" var="publicacion">
         <s:div cssClass="container-fluid text-center">
             <s:div cssClass="row">
                 <s:div cssClass="contenedor-publi sombreado">
@@ -40,12 +41,6 @@
                             <p>Votos positivos: <s:property value="numVotosPositivosPublicacion" /></p>
                             <p>Votos negativos: <s:property value="numVotosNegativosPublicacion" /></p>
                         </s:div>
-                    </s:div>
-                    <s:div cssClass="papelera-admin">
-                        <s:form action="removePublicacion" method="post">
-                            <s:hidden name="idPublicacionRemove" value="%{id}" /> 
-                            <s:submit type="image" src="images/iconos/papelera.png" name="removePublicacion" cssClass="icono"/>
-                        </s:form>
                     </s:div>
                 </s:div>
             </s:div>

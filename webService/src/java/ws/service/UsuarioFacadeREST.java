@@ -112,6 +112,14 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         return result;
     }
 
+    /**
+     * Método para comprobar si el usuario y password proporcionada por el
+     * usuario esta registrado en el sistema.
+     *
+     * @param usuario
+     * @param password
+     * @return
+     */
     @GET
     @Path("/login/{usuario}/{password}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -129,6 +137,14 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         return resultado;
     }
 
+    /**
+     * Método que devuelve un usuario cuyo nickname corresponda con el
+     * proporcionado como parametro
+     *
+     * @param username
+     * @return Usuario
+     * @throws Exception
+     */
     @GET
     @Path("/getUsuarioByUsername/{username}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -155,6 +171,14 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         return result;
     }
 
+    /**
+     * Devuleve una lista de los usuarios que estan asociado a un chat cuyo id
+     * corresponda con uno de los usuarios del chat
+     *
+     * @param id_user
+     * @return
+     * @throws Exception
+     */
     @GET
     @Path("/getUsuariosChat/{id_user}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})

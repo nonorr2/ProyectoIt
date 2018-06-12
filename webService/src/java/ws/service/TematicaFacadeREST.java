@@ -105,6 +105,11 @@ public class TematicaFacadeREST extends AbstractFacade<Tematica> {
         List<Tematica> result = query.getResultList();
         return result;
     }
+    
+    /**
+     * Devulve las tematicas mas populares del sistema
+     * @return List<Tematica>
+     */
 
     @GET
     @Path("getTematicasMasPopulares")

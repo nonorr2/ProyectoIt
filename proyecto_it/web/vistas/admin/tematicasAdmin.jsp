@@ -42,7 +42,11 @@
                     <div class="publi-no-imagen" style="background-image: url(<s:property value="imagen"/>)">
                     </div>
                     <s:div cssClass="datos-publicacion">
-                        <h1><s:property value="nombre"/></h1>
+                        <s:form method="post" action="getPublicacionesByTemaAdmin">
+                            <s:hidden name="idTema" value="%{getId()}" />
+                            <s:submit value="%{getNombre()}" cssClass="titulo-submit-tema"/>
+                        </s:form>
+                        
                         <p>N&uacute;mero de publicaciones: <s:property value="numPublicacionesDeUnaTematica"/></p>       
                     </s:div>
                     <s:div>

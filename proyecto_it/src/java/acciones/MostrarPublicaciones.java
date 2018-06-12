@@ -279,6 +279,38 @@ public class MostrarPublicaciones extends ActionSupport {
         }
         return SUCCESS;
     }
+    /**
+     * Método para obtener todas las publicaciones de una temática. 
+     * @return
+     * @throws Exception 
+     */
+    public String publicacionesByTemaAdmin() throws Exception {
+        GenericType<List<Publicacion>> tipoPublicacionAdmin = new GenericType<List<Publicacion>>() {
+        };
+        GenericType<Long> tipoLong = new GenericType<Long>() {
+        };
+
+        PublicacionWS publicacionClient = new PublicacionWS();
+        ComentarioWS comentarioCliente = new ComentarioWS();
+        VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
+
+        List<Publicacion> listPublicaciones = publicacionClient.getPublicacionesByTema_XML(tipoPublicacionAdmin, idTema);
+
+        this.publicaciones = new ArrayList<PublicacionDecorado>();
+
+        for (Publicacion publicacion : listPublicaciones) {
+            PublicacionDecorado publicacionDecorado = new PublicacionDecorado();
+            Long numComentarios = comentarioCliente.getNumComentarios(tipoLong, String.valueOf(publicacion.getId()));
+            Long numVotosPositivos = votoPublicacionCliente.getVotosPositivos(tipoLong, String.valueOf(publicacion.getId()));
+            Long numVotosNegativos = votoPublicacionCliente.getVotosNegativos(tipoLong, String.valueOf(publicacion.getId()));
+            publicacionDecorado.setPublicacion(publicacion);
+            publicacionDecorado.setNumComentarios(numComentarios.intValue());
+            publicacionDecorado.setNumVotosPositivosPublicacion(numVotosPositivos.intValue());
+            publicacionDecorado.setNumVotosNegativosPublicacion(numVotosNegativos.intValue());
+            this.publicaciones.add(publicacionDecorado);
+        }
+        return SUCCESS;
+    }
 
     public String getFiltroPublicacion() {
         return filtroPublicacion;

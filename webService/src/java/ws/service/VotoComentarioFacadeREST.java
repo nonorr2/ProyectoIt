@@ -137,6 +137,13 @@ public class VotoComentarioFacadeREST extends AbstractFacade<VotoComentario> {
         q.setParameter("comentario", id_comentario);
         return (Comentario) q.getSingleResult();
     }
+    
+    /**
+     * Método para pobar si un usuario a votado un comentario o no.
+     * @param id_user
+     * @param id_coment
+     * @return 
+     */
 
     @GET
     @Path("/haVotado/{id_user}/{id_coment}")

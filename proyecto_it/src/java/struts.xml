@@ -100,6 +100,9 @@
         <action name="getPublicacionesByTema" class="acciones.MostrarPublicaciones" method="publicacionesByTema">
             <result name="success">publicaciones.jsp</result>
         </action>
+       <action name="getPublicacionesByTemaAdmin" class="acciones.MostrarPublicaciones" method="publicacionesByTemaAdmin">
+            <result name="success">/vistas/admin/publicacionesAdmin.jsp</result>
+        </action>
         <action name="filtrarPublicacionesTemas" class="acciones.MostrarPublicaciones" method="filtrarPublicacionesTemas">
             <result name="success">publicaciones.jsp</result>
         </action>
