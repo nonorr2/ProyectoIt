@@ -35,8 +35,9 @@ public class MostrarUsuarios extends ActionSupport {
     }
 
     /**
-     * Metodo que hace uso del web service para obtener un usuario con el id
+     * Método que hace uso del web service para obtener un usuario con el id
      * indicado.
+     *
      * @return
      * @throws Exception
      */
@@ -48,6 +49,12 @@ public class MostrarUsuarios extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Método para obtener el usuario que se ha logeado.
+     *
+     * @return
+     * @throws Exception
+     */
     public String perfil() throws Exception {
         Usuario usuarioSession = (Usuario) loginLogout.session.get("user");
 

@@ -46,7 +46,7 @@ public class GestionUsuario extends ActionSupport {
     }
 
     /**
-     * Metodo que hace uso del web service para guardar las modificaciones de un
+     * Método que hace uso del web service para guardar las modificaciones de un
      * usuario en la BD
      *
      * @return SUCCESS
@@ -77,7 +77,7 @@ public class GestionUsuario extends ActionSupport {
     }
 
     /**
-     * Metodo que hace uso del web service para guardar a un nuevo usuario en la
+     * Método que hace uso del web service para guardar a un nuevo usuario en la
      * BD
      *
      * @return SUCCESS
@@ -117,7 +117,7 @@ public class GestionUsuario extends ActionSupport {
     }
 
     /**
-     * Metodo para validar los campos del formulario de registrar, perfil y
+     * Método para validar los campos del formulario de registrar, perfil y
      * editar usuario del administrador
      */
     @Override

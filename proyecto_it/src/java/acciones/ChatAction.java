@@ -33,6 +33,13 @@ public class ChatAction extends ActionSupport {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Método que hace uso del Web Service para crear un nuevo chat entre dos
+     * personas.
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String crearChat() throws Exception {
         GenericType<Usuario> tipoUsuario = new GenericType<Usuario>() {
         };
@@ -67,6 +74,12 @@ public class ChatAction extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Método que hace uso del Web Service para borrar un chat
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String borrarChat() throws Exception {
         ChatWS chatClient = new ChatWS();
 
@@ -74,6 +87,12 @@ public class ChatAction extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Método que hace uso del Web Service para editar un chat
+     *
+     * @return
+     * @throws Exception
+     */
     public String editarChat() throws Exception {
         ChatWS chatClient = new ChatWS();
         GenericType<Chat> tipoChat = new GenericType<Chat>() {

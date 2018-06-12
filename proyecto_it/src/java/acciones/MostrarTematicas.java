@@ -36,7 +36,7 @@ public class MostrarTematicas extends ActionSupport {
     }
 
     /**
-     * Metodo que hace uso del web service para obtener una tematica con el id
+     * Método que hace uso del web service para obtener una temética con el id
      * especificado
      *
      * @return SUCCESS
@@ -50,8 +50,8 @@ public class MostrarTematicas extends ActionSupport {
     }
 
     /**
-     * Metodo que hace uso del web service para obtener una lista de las
-     * tematicas qeu cumpla con la condición del filtro
+     * Método que hace uso del web service para obtener una lista de las
+     * teméticas qeu cumpla con la condición del filtro
      *
      * @return SUCCESS
      * @throws Exception
@@ -86,10 +86,10 @@ public class MostrarTematicas extends ActionSupport {
 
     /**
      * Metodo para eliminar una tematica de la BD
+     *
      * @return SUCCESS
-     * @throws Exception 
+     * @throws Exception
      */
-    
     public String removeTematica() throws Exception {
         tematicasWS.remove(idTematicaRemove);
         return SUCCESS;

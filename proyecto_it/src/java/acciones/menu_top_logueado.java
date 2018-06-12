@@ -100,10 +100,16 @@ public class menu_top_logueado extends ActionSupport {
         };
         TematicaWS tematicaClient = new TematicaWS();
         tematicas = (List<Tematica>) tematicaClient.findAll_XML(tipoTematica);
-        
+
         return SUCCESS;
     }
 
+    /**
+     * Método para listar las publicaciones en las que un usuario esta suscrito.
+     *
+     * @return
+     * @throws Exception
+     */
     public String home() throws Exception {
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
@@ -168,7 +174,6 @@ public class menu_top_logueado extends ActionSupport {
 //    public void setId_user(Integer id_user) {
 //        this.id_user = id_user;
 //    }
-
     public List<PublicacionDecorado> getListaPublicaciones() {
         return listaPublicaciones;
     }

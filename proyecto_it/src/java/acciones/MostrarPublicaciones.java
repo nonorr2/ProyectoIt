@@ -43,7 +43,13 @@ public class MostrarPublicaciones extends ActionSupport {
     public String execute() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
+    /**
+     * Métedo para eliminar una publicación.
+     *
+     * @return
+     * @throws Exception
+     */
     public String removePublicacion() throws Exception {
         PublicacionWS publicacionWS = new PublicacionWS();
         publicacionWS.remove(idPublicacionRemove);
@@ -59,21 +65,22 @@ public class MostrarPublicaciones extends ActionSupport {
     public String filtroPubli() throws Exception {
         GenericType<List<Publicacion>> tipoPublicacionAdmin = new GenericType<List<Publicacion>>() {
         };
-        GenericType<Long> tipoLong = new GenericType<Long>() {};
+        GenericType<Long> tipoLong = new GenericType<Long>() {
+        };
 
         PublicacionWS publicacionClient = new PublicacionWS();
         ComentarioWS comentarioCliente = new ComentarioWS();
         VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
         List<Publicacion> listPublicaciones;
-        
+
         if (filtroPublicacion.equals("")) {
             listPublicaciones = publicacionClient.findAll_XML(tipoPublicacionAdmin);
-        }else{
+        } else {
             listPublicaciones = publicacionClient.getPublicacionPorTitulo_XML(tipoPublicacionAdmin, filtroPublicacion);
         }
-         
+
         this.publicaciones = new ArrayList<PublicacionDecorado>();
-        
+
         for (Publicacion publicacion : listPublicaciones) {
             PublicacionDecorado publicacionDecorado = new PublicacionDecorado();
             Long numComentarios = comentarioCliente.getNumComentarios(tipoLong, String.valueOf(publicacion.getId()));
@@ -85,10 +92,17 @@ public class MostrarPublicaciones extends ActionSupport {
             publicacionDecorado.setNumVotosNegativosPublicacion(numVotosNegativos.intValue());
             this.publicaciones.add(publicacionDecorado);
         }
-        
+
         return SUCCESS;
     }
 
+    /**
+     * Métedo para filtrar las publicaciones por el título. Este metodo se hace
+     * uso desde la parte del administrador
+     *
+     * @return
+     * @throws Exception
+     */
     public String filtrarPublicacionesTemas() throws Exception {
         GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
         };
@@ -132,6 +146,12 @@ public class MostrarPublicaciones extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Métedo para filtrar mis publicaciones por el título.
+     *
+     * @return
+     * @throws Exception
+     */
     public String filtroMisPublicaciones() throws Exception {
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
@@ -174,6 +194,13 @@ public class MostrarPublicaciones extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Métedo para filtrar las publicaciones por el título en las que esta
+     * suscrito el usuario.
+     *
+     * @return
+     * @throws Exception
+     */
     public String filtroPublicacionesSuscrito() throws Exception {
         Usuario usuario = (Usuario) loginLogout.session.get("user");
 
@@ -210,6 +237,12 @@ public class MostrarPublicaciones extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Métedo para obtener las publicaciones asociadas a un tema.
+     *
+     * @return
+     * @throws Exception
+     */
     public String publicacionesByTema() throws Exception {
         GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
         };
@@ -302,7 +335,5 @@ public class MostrarPublicaciones extends ActionSupport {
     public void setIdPublicacionRemove(String idPublicacionRemove) {
         this.idPublicacionRemove = idPublicacionRemove;
     }
-    
-    
-    
+
 }

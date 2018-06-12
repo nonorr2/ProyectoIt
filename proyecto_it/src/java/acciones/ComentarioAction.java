@@ -21,6 +21,13 @@ public class ComentarioAction extends ActionSupport {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Método que hace uso del Web Service para permite que un usuario vote
+     * positivamente un comentario
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String votoPositivo() throws Exception {
         Usuario user = (Usuario) loginLogout.session.get("user");
 
@@ -47,6 +54,13 @@ public class ComentarioAction extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Método que hace uso del Web Service para permite que un usuario vote
+     * negativamente un comentario
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String votoNegativo() throws Exception {
         Usuario user = (Usuario) loginLogout.session.get("user");
 

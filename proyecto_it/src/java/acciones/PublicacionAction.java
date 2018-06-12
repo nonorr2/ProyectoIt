@@ -26,6 +26,12 @@ public class PublicacionAction extends ActionSupport {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Método para obtener todos los comentarios de una publicación.
+     *
+     * @return
+     * @throws Exception
+     */
     public String verPublicacion() throws Exception {
         GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {
         };

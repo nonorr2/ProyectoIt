@@ -27,6 +27,12 @@ public class menu_top extends ActionSupport {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Método para obtener las temáticas mas populares
+     *
+     * @return
+     * @throws Exception
+     */
     public String inicio() throws Exception {
         GenericType<List<Tematica>> tipoTematica = new GenericType<List<Tematica>>() {
         };
@@ -35,6 +41,12 @@ public class menu_top extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Método para obtener todas las temáticas del sistema
+     *
+     * @return
+     * @throws Exception
+     */
     public String temas() throws Exception {
         GenericType<List<Tematica>> tipoTematica = new GenericType<List<Tematica>>() {
         };
@@ -43,6 +55,12 @@ public class menu_top extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Método para obtener todas las publicaciones del sistema
+     *
+     * @return
+     * @throws Exception
+     */
     public String publicaciones() throws Exception {
         GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
         };
@@ -71,6 +89,13 @@ public class menu_top extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Método para filtrar las publicaciones por su nombre (método para el
+     * usuario no logeado)
+     *
+     * @return
+     * @throws Exception
+     */
     public String filtroPubli() throws Exception {
         GenericType<List<Publicacion>> tipoPublicacionAdmin = new GenericType<List<Publicacion>>() {
         };

@@ -39,6 +39,13 @@ public class GestionVotoSuscripcion extends ActionSupport {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Metodo que hace uso del Web Service para permite que un usuario vote
+     * positivamente una publicación
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String votoPositivoPublicacion() throws Exception {
         Usuario usuario = (Usuario) loginLogout.session.get("user");
         VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
@@ -69,6 +76,13 @@ public class GestionVotoSuscripcion extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Método que hace uso del Web Service para permite que un usuario vote
+     * negativamente una publicación
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String votoNegativoPublicacion() throws Exception {
         Usuario usuario = (Usuario) loginLogout.session.get("user");
         VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
@@ -100,6 +114,13 @@ public class GestionVotoSuscripcion extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Método que hace uso del Web Service para permite que un usuario deje de
+     * seguir una publicación de la que fue subscrito
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
     public String unFollowPublicacion() throws Exception {
         Usuario usuario = (Usuario) loginLogout.session.get("user");
         GenericType<Suscripcion> tipoSuscripcion = new GenericType<Suscripcion>() {
@@ -112,15 +133,23 @@ public class GestionVotoSuscripcion extends ActionSupport {
         return SUCCESS;
     }
 
+        /**
+     * Método que hace uso del Web Service para permite que un usuario sea
+     * seguidor de una publicación
+     *
+     * @return SUCCESS
+     * @throws Exception
+     */
+    
     public String followPublicacion() throws Exception {
         Usuario usuario = (Usuario) loginLogout.session.get("user");
         GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {
         };
         SuscripcionWS suscripcionCliente = new SuscripcionWS();
         PublicacionWS publicacionCliente = new PublicacionWS();
-        
+
         Publicacion publiAux = publicacionCliente.find_JSON(tipoPublicacion, idPublicacion);
-        
+
         Suscripcion suscripcion = new Suscripcion(null, new Date());
         suscripcion.setIdPublicacion(publiAux);
         suscripcion.setIdUsuario(usuario);

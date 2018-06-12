@@ -40,6 +40,13 @@ public class loginLogout extends ActionSupport implements ServletResponseAware, 
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Método para guardar al usuario en la session y guardar el id del usuario
+     * en una cookie.
+     *
+     * @return
+     * @throws Exception
+     */
     public String login() throws Exception {
         GenericType<Boolean> tipoPassword = new GenericType<Boolean>() {
         };
@@ -68,6 +75,12 @@ public class loginLogout extends ActionSupport implements ServletResponseAware, 
         }
     }
 
+    /**
+     * Método para eliminar la session y la cookies del usuario.
+     *
+     * @return
+     * @throws Exception
+     */
     public String logout() throws Exception {
         loginLogout.session.clear();
         Cookie cookies[] = servletRequest.getCookies();

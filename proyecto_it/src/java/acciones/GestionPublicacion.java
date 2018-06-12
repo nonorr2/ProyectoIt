@@ -27,7 +27,6 @@ import org.apache.struts2.ServletActionContext;
 public class GestionPublicacion extends ActionSupport {
 
     //private String idPublicacionRemove;
-
     private String tituloPubliacion;
     private File fotoPubliacion;
     private String contenidoPubliacion;
@@ -38,7 +37,7 @@ public class GestionPublicacion extends ActionSupport {
 
     private List<Publicacion> publicaciones;
     private List<Tematica> tematicas;
-    
+
     Boolean error = false;
 
     public GestionPublicacion() {
@@ -56,7 +55,7 @@ public class GestionPublicacion extends ActionSupport {
      */
     public String addPublicacion() throws Exception {
         String rutaRelativa = null;
-        
+
         if (fotoPubliacion != null) {
             ServletContext context = ServletActionContext.getServletContext();
             String nombreFichero = tituloPubliacion + ".png";
@@ -95,19 +94,19 @@ public class GestionPublicacion extends ActionSupport {
         if (this.getTituloPubliacion() == null || this.getTituloPubliacion().trim().length() == 0) {
             addFieldError("tituloPubliacion", "El título es obligatorio");
             error = true;
-        }else if (this.getTituloPubliacion().length() > 500) {
+        } else if (this.getTituloPubliacion().length() > 500) {
             addFieldError("tituloPubliacion", "Tamaño máximo 500 carácteres");
             error = true;
         }
-        
+
         if (this.getContenidoPubliacion() == null || this.getContenidoPubliacion().trim().length() == 0) {
             addFieldError("contenidoPubliacion", "El contenido es obligatorio");
             error = true;
-        }else if (this.getContenidoPubliacion().length() > 5000) {
+        } else if (this.getContenidoPubliacion().length() > 5000) {
             addFieldError("contenidoPubliacion", "Tamaño máximo 5000 carácteres");
             error = true;
         }
-        
+
         if (!this.getRutaPubliacion().matches("\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]")) {
             addFieldError("rutaPubliacion", "Formato no correcto");
             error = true;
@@ -193,7 +192,5 @@ public class GestionPublicacion extends ActionSupport {
     public void setError(Boolean error) {
         this.error = error;
     }
-    
-    
 
 }

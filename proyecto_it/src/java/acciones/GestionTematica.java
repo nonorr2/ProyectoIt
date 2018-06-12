@@ -41,8 +41,8 @@ public class GestionTematica extends ActionSupport {
     }
 
     /**
-     * Metodo que hace uso del web service para guardar las modificaciones de la
-     * tematica en la BD
+     * Método que hace uso del web service para guardar las modificaciones de la
+     * temática en la BD
      *
      * @return SUCCESS
      * @throws Exception
@@ -69,7 +69,7 @@ public class GestionTematica extends ActionSupport {
     }
 
     /**
-     * Metodo que hace uso del web service para guardar la nueva tematica en la
+     * Método que hace uso del web service para guardar la nueva temática en la
      * BD
      *
      * @return SUCCESS
@@ -155,8 +155,6 @@ public class GestionTematica extends ActionSupport {
     public void setTematicas(List<TematicaDecorado> tematicas) {
         this.tematicas = tematicas;
     }
-    
-    
 
     /**
      * Metodo para validar los campos del formulario de nueva tematica y editar

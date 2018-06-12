@@ -38,13 +38,13 @@ public class menu_top_admin extends ActionSupport {
     public String execute() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
     /**
      * Metodo para obtener una lista de todos los usuarios del sistema
+     *
      * @return SUCCESS
-     * @throws Exception 
+     * @throws Exception
      */
-
     public String usuarios() throws Exception {
         GenericType<List<Usuario>> tipoUsuarios = new GenericType<List<Usuario>>() {
         };
@@ -52,25 +52,26 @@ public class menu_top_admin extends ActionSupport {
         usuarios = usuarioClient.getUsuarioTipo_JSON(tipoUsuarios);
         return SUCCESS;
     }
-    
+
     /**
      * Metodo para obtener todas las publicaciones del sistemas.
+     *
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
-
     public String publicacionesAdmin() throws Exception {
         GenericType<List<Publicacion>> tipoPublicacionAdmin = new GenericType<List<Publicacion>>() {
         };
-        GenericType<Long> tipoLong = new GenericType<Long>() {};
+        GenericType<Long> tipoLong = new GenericType<Long>() {
+        };
 
         PublicacionWS publicacionClient = new PublicacionWS();
         ComentarioWS comentarioCliente = new ComentarioWS();
         VotoPublicacionWS votoPublicacionCliente = new VotoPublicacionWS();
-        
+
         List<Publicacion> listPublicaciones = publicacionClient.findAll_XML(tipoPublicacionAdmin);
         this.publicaciones = new ArrayList<PublicacionDecorado>();
-        
+
         for (Publicacion publicacion : listPublicaciones) {
             PublicacionDecorado publicacionDecorado = new PublicacionDecorado();
             Long numComentarios = comentarioCliente.getNumComentarios(tipoLong, String.valueOf(publicacion.getId()));
@@ -82,27 +83,28 @@ public class menu_top_admin extends ActionSupport {
             publicacionDecorado.setNumVotosNegativosPublicacion(numVotosNegativos.intValue());
             this.publicaciones.add(publicacionDecorado);
         }
-        
+
         return SUCCESS;
     }
 
     /**
      * Metodo para obtener todas las tematicas del sistema
+     *
      * @return SUCCESS
-     * @throws Exception 
+     * @throws Exception
      */
-    
     public String tematicasAdmin() throws Exception {
         GenericType<List<Tematica>> tipoTematicaaAdmin = new GenericType<List<Tematica>>() {
         };
-        GenericType<Long> tipoLong = new GenericType<Long>(){};
-                
+        GenericType<Long> tipoLong = new GenericType<Long>() {
+        };
+
         TematicaWS tematicaClient = new TematicaWS();
         PublicacionWS publicacionClient = new PublicacionWS();
-        
+
         List<Tematica> listTematica = tematicaClient.findAll_XML(tipoTematicaaAdmin);
         this.tematicas = new ArrayList<TematicaDecorado>();
-        
+
         for (Tematica tematica : listTematica) {
             TematicaDecorado tematicaDecorado = new TematicaDecorado();
             Long numPubliTema = publicacionClient.getNumPublicacionesByTematica(tipoLong, String.valueOf(tematica.getId()));
@@ -136,5 +138,5 @@ public class menu_top_admin extends ActionSupport {
     public void setPublicaciones(List<PublicacionDecorado> publicaciones) {
         this.publicaciones = publicaciones;
     }
-    
+
 }
