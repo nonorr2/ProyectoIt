@@ -39,14 +39,13 @@
         <s:div cssClass="container-fluid text-center">
             <s:div cssClass="row">
                 <s:div cssClass="contenedor-publi sombreado">
-                    <s:div cssClass="publi-no-imagen">
-                        <img src="<s:property value="imagen"/>"/>
-                    </s:div>
+                    <div class="publi-no-imagen" style="background-image: url(<s:property value="imagen"/>)">
+                    </div>
                     <s:div cssClass="datos-publicacion">
                         <h1><s:property value="nombre"/></h1>
                         <p>N&uacute;mero de publicaciones: <s:property value="numPublicacionesDeUnaTematica"/></p>       
                     </s:div>
-                    <s:div cssClass="contenedor-iconos">
+                    <s:div>
                         <s:form action="removeTematica" method="post">
                             <s:hidden name="idTematicaRemove" value="%{id}" /> 
                             <s:submit type="image" src="images/iconos/papelera.png" name="removeTematica" cssClass="icono"/>

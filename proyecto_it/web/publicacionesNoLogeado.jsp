@@ -22,14 +22,14 @@
         <s:div cssClass="container-fluid text-center" onclick="document.getElementById('id01').style.display = 'block'">
             <s:div cssClass="row">
                 <s:div cssClass="contenedor-publi sombreado">
-                    <s:div cssClass="publi-no-imagen">
-                        <s:if test="%{getPublicacion().getFoto().length() > 0}"> 
-                            <img src="<s:property value="getFoto()"/>" />
-                        </s:if>
-                        <s:else>
-                            <img src="images/noFoto.png"/>
-                        </s:else>
-                    </s:div>
+                    <s:if test="%{getPublicacion().getFoto().length() > 0}">
+                        <div class="publi-no-imagen" style="background-image: url(<s:property value="getFoto()"/>)">
+                        </div>
+                    </s:if>
+                    <s:else>
+                        <div class="publi-no-imagen" style="background-image: url(images/noFoto.png)">
+                        </div>
+                    </s:else>
                     <s:div cssClass="datos-publicacion">
                         <h1><s:property value="titulo"/></h1>
                         <p>Número de votos positivos: <s:property value="numVotosPositivosPublicacion" /></p>

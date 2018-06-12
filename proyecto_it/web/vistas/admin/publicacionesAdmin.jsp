@@ -21,10 +21,9 @@
         <s:div cssClass="container-fluid text-center">
             <s:div cssClass="row">
                 <s:div cssClass="contenedor-publi sombreado">
-                    <s:div cssClass="publi-no-imagen">
-                        <img src="<s:property value="foto"/>"/>
-                    </s:div>
-                    <s:div cssClass="datos-publicacion">
+                    <div class="publi-no-imagen" style="background-image: url(<s:property value="foto"/>)">
+                    </div>
+                    <s:div cssClass="datos-publicacion datos-publi-admin">
                         <s:div cssClass="datos-publicacion-left">
                             <h1><s:property value="titulo" /></h1>
                             <p>Nombre de usuario: <s:property value="idUsuario.nickname"/></p>
@@ -36,7 +35,7 @@
                             <p>Votos negativos: <s:property value="numVotosNegativosPublicacion" /></p>
                         </s:div>
                     </s:div>
-                    <s:div cssClass="contenedor-iconos">
+                    <s:div cssClass="papelera-admin">
                         <s:form action="removePublicacion" method="post">
                             <s:hidden name="idPublicacionRemove" value="%{id}" /> 
                             <s:submit type="image" src="images/iconos/papelera.png" name="removePublicacion" cssClass="icono"/>

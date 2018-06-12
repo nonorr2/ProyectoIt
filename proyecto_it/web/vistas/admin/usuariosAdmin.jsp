@@ -22,20 +22,18 @@
             <s:div cssClass="container-fluid text-center">
                 <s:div cssClass="row">
                     <s:div cssClass="contenedor-publi sombreado">
-                        <s:div cssClass="publi-no-imagen">
-                            <s:if test="%{foto.length() > 0}">
-                                <img src="<s:property value="foto"/>"/>
-                            </s:if>
-                            <s:else>
-                                <img src="images/imgLogin.png"/>
-                            </s:else> 
-                        </s:div>  
+                        <s:if test="%{foto.length() > 0}">
+                            <div class="publi-no-imagen" style="background-image: url(<s:property value="foto"/>)"></div>  
+                        </s:if>
+                        <s:else>
+                            <div class="publi-no-imagen" style="background-image: url(images/imgLogin.png)"></div> 
+                        </s:else> 
                         <s:div cssClass="datos-publicacion">
                             <h1><s:property value="nombre"/> <s:property value="apellidos"/></h1>
                             <p><s:property value="nickname"/></p>
                             <p><s:property value="email"/></p>
                         </s:div>
-                        <s:div cssClass="contenedor-iconos">
+                        <s:div>
                             <s:form action="removeUser" method="post">
                                 <s:hidden name="idUsuarioRemove" value="%{id}" /> 
                                 <s:submit type="image" src="images/iconos/papelera.png" name="removeUser" cssClass="icono"/>
