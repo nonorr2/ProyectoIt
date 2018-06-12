@@ -17,14 +17,15 @@
         <script src="jquery.cookie.js"></script>
         <link rel="stylesheet" href="css/estilo.css">   
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
     </head>
     <body>
         <!-- Navbar -->
         <div class="w3-top">
             <div class="w3-bar w3-red w3-card w3-left-align w3-large">
                 <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-                    <s:form action="home" method="post">
-                    <a><s:submit value="HOME" cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" /></a>
+                <s:form action="home" method="post">
+                    <a><s:submit value="PRUEBA DE LOGO" cssClass="w3-bar-item w3-button w3-padding-large main-logo" /></a>
                 </s:form>
                 <s:form action="temasLogado" method="post">
                     <a><s:submit value="TEMAS" cssClass="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" /></a>

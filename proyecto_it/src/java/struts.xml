@@ -175,7 +175,9 @@
             <result name="error">index.jsp</result>
         </action>
         <action name="logout" class="acciones.loginLogout" method="logout">
-            <result name="success">index.jsp</result>
+            <result name="success" type="chain">
+                <param name="actionName">inicio</param>
+            </result>
         </action>
     </package>
     

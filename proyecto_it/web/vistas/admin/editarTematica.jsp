@@ -7,11 +7,9 @@
     <h1 class="text-banner">EDITAR TEMATICA</h1>
 </div>
 
-<s:div cssClass="container-fluid text-center">
-    <s:div cssClass="col-sm-2 col-sm-2-new"></s:div>
-    <s:div cssClass="col-sm-8 text-left borde-tematica" >
+<s:div cssClass="container-fluid">
+    <s:div cssClass="sombreado con-new-comment" >
         <s:form method="post" action="editTemaPersistencia" enctype="multipart/form-data"> 
-
             <s:div cssClass="imgcontainer">
                 <s:fielderror fieldName="imgTematica" cssClass="alert alert-danger" />
                 <img class="avatar imgTematica" src="<s:url value="%{tematica.imagen}"/>"/>
@@ -28,6 +26,5 @@
             </s:div>
         </s:form>
     </s:div>
-    <s:div cssClass="col-sm-2"></s:div>
 </s:div>
 <%@include file="../../footer.jsp" %> 
