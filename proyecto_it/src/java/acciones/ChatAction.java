@@ -59,7 +59,7 @@ public class ChatAction extends ActionSupport {
 
         chatClient.create_JSON(chat);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
-        chat = chatClient.getChatByNameAndTime_JSON(tipoChat, nombreChat, sdf.format(chat.getFechaHora()));
+        chat = chatClient.getChatByNameAndTime_XML(tipoChat, nombreChat, sdf.format(chat.getFechaHora()));
 
         UsuarioChat usuChat1 = new UsuarioChat(Integer.parseInt(usuario), chat.getId());
         usuChat1.setUsuario(usu);

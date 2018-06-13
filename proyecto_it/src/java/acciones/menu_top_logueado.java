@@ -54,7 +54,7 @@ public class menu_top_logueado extends ActionSupport {
         UsuarioWS usuarioClient = new UsuarioWS();
 
         Usuario usuario = (Usuario) loginLogout.session.get("user");
-        chats = chatClient.getChatsUsuario_JSON(tipoChat, String.valueOf(usuario.getId()));
+        chats = chatClient.getChatsUsuario_XML(tipoChat, String.valueOf(usuario.getId()));
         usuarios = usuarioClient.getUsuariosChat_JSON(tipoUsuario, String.valueOf(usuario.getId()));
 
         return SUCCESS;

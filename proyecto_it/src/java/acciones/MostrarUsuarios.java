@@ -79,7 +79,7 @@ public class MostrarUsuarios extends ActionSupport {
         if (filtroUser.equals("")) {
             usuarios = usuarioClient.getUsuarioTipo_XML(tipoUsuarios);
         } else {
-            usuarios = usuarioClient.getUsuariosPorNombre_JSON(tipoUsuarios, filtroUser);
+            usuarios = usuarioClient.getUsuariosPorNombre_XML(tipoUsuarios, filtroUser);
         }
 
         return SUCCESS;

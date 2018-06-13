@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<s:set name="theme" value="'simple'" scope="page" />
 <%@include file="../admin/cabeceraAdmin.jsp" %>
 <body id="myPage">
 

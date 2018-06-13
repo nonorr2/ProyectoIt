@@ -58,7 +58,7 @@ public class ComentarioAction extends ActionSupport {
             votoComentarioClient.create_XML(vt);
         } else {
             vt.setId(exist);
-            votoComentarioClient.edit_JSON(vt, String.valueOf(exist));
+            votoComentarioClient.edit_XML(vt, String.valueOf(exist));
         }
         return SUCCESS;
     }
@@ -95,7 +95,7 @@ public class ComentarioAction extends ActionSupport {
             votoComentarioClient.create_XML(vtn);
         } else {
             vtn.setId(exist);
-            votoComentarioClient.edit_JSON(vtn, String.valueOf(exist));
+            votoComentarioClient.edit_XML(vtn, String.valueOf(exist));
         }
         return SUCCESS;
     }
@@ -114,7 +114,7 @@ public class ComentarioAction extends ActionSupport {
         GenericType<Publicacion> tipoPublicacion = new GenericType<Publicacion>() {
         };
 
-        Publicacion publi = publicacionClient.find_JSON(tipoPublicacion, id_publi);
+        Publicacion publi = publicacionClient.find_XML(tipoPublicacion, id_publi);
 
         Comentario comment = new Comentario(null, new Date(), textoComentario, new Date());
         comment.setIdUsuario(user);

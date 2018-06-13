@@ -45,7 +45,7 @@ public class MostrarTematicas extends ActionSupport {
     public String editTematica() throws Exception {
         GenericType<Tematica> tipoTema = new GenericType<Tematica>() {
         };
-        tematica = tematicasWS.find_JSON(tipoTema, idTematicaEdit);
+        tematica = tematicasWS.find_XML(tipoTema, idTematicaEdit);
         return SUCCESS;
     }
 

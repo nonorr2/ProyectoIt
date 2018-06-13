@@ -49,7 +49,7 @@ public class menu_top_admin extends ActionSupport {
         GenericType<List<Usuario>> tipoUsuarios = new GenericType<List<Usuario>>() {
         };
         UsuarioWS usuarioClient = new UsuarioWS();
-        usuarios = usuarioClient.getUsuarioTipo_JSON(tipoUsuarios);
+        usuarios = usuarioClient.getUsuarioTipo_XML(tipoUsuarios);
         return SUCCESS;
     }
 
