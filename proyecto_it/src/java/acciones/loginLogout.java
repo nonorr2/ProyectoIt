@@ -29,6 +29,7 @@ public class loginLogout extends ActionSupport implements ServletResponseAware, 
     String password;
     static Map session;
     Boolean error = false;
+    Boolean errorLogin = false;
 
     protected HttpServletResponse servletResponse;
     protected HttpServletRequest servletRequest;
@@ -70,7 +71,7 @@ public class loginLogout extends ActionSupport implements ServletResponseAware, 
                 return LOGIN;
             }
         } else {
-            error = true;
+            errorLogin = true;
             return ERROR;
         }
     }
@@ -130,6 +131,29 @@ public class loginLogout extends ActionSupport implements ServletResponseAware, 
 
     public void setError(Boolean error) {
         this.error = error;
+    }
+
+    public Boolean getErrorLogin() {
+        return errorLogin;
+    }
+
+    public void setErrorLogin(Boolean errorLogin) {
+        this.errorLogin = errorLogin;
+    }
+    
+    
+
+    public void validate() {
+        if(this.getUsuario().trim().length() == 0){
+            addFieldError("usuario", "El campo usuario es obligatorio");
+            error = true;
+        }
+        
+        if(this.getPassword().trim().length() == 0){
+            addFieldError("password", "La contraseña es obligatoria");
+            error = true;
+        }
+        
     }
 
 }

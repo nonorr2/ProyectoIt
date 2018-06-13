@@ -19,6 +19,12 @@
         <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 
+        <s:if test="errorLogin">
+            <%@include file="login.jsp"%>
+            <script>
+                document.getElementById('id01').style.display = 'block';
+            </script>
+        </s:if>
         <s:if test="error">
             <%@include file="login.jsp"%>
             <script>

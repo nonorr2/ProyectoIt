@@ -8,14 +8,16 @@
         <s:div cssClass="imgcontainer">
             <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">&times;</span>
             <img src="images/imgLogin.png" alt="Avatar" class="avatar">
-            <s:if test="error">
+            <s:if test="errorLogin">
                 <s:div cssClass="alert alert-warning noContenido">
                     <p>Usuario o contrase&ntilde;a incorrecta</p>
                 </s:div>
             </s:if>
         </s:div>
         <s:div cssClass="container-login">
+            <s:fielderror fieldName="usuario" cssClass="alert alert-danger" />
             <s:textfield name="usuario"  placeholder="Nombre de Usuario"/>
+            <s:fielderror fieldName="password" cssClass="alert alert-danger" />
             <s:password name="password" placeholder="Contraseña"/>
             <s:submit name="btoLogin" cssClass="btn btn-primary" value="LOGIN"/>
         </s:div>
