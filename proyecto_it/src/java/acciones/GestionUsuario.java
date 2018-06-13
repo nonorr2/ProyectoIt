@@ -57,7 +57,8 @@ public class GestionUsuario extends ActionSupport {
 
         if (imgPerfilUsuario != null) {
             ServletContext context = ServletActionContext.getServletContext();
-            String nombreFichero = nickname + ".png";
+            String nicknameUsuario = nickname.replace(" ", "_");
+            String nombreFichero = nicknameUsuario + ".png";
             rutaRelativa = "images/fotosPerfil/" + nombreFichero;
             String ruta = context.getRealPath("/") + rutaRelativa;
             File nuevo = new File(ruta);
@@ -88,7 +89,8 @@ public class GestionUsuario extends ActionSupport {
 
         if (imgPerfilUsuario != null) {
             ServletContext context = ServletActionContext.getServletContext();
-            String nombreFichero = nickname + ".png";
+            String nicknameUsuario = nickname.replace(" ", "_");
+            String nombreFichero = nicknameUsuario + ".png";
             rutaRelativa = "images/fotosPerfil/" + nombreFichero;
             String ruta = context.getRealPath("/") + rutaRelativa;
             File nuevo = new File(ruta);

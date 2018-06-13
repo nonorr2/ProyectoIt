@@ -52,7 +52,8 @@ public class GestionTematica extends ActionSupport {
 
         if (imgTematica != null) {
             ServletContext context = ServletActionContext.getServletContext();
-            String nombreFichero = nombre + ".png";
+            String nombreTematica = nombre.replace(" ", "_");
+            String nombreFichero = nombreTematica + ".png";
             rutaRelativa = "images/tematicas/" + nombreFichero;
             String ruta = context.getRealPath("/") + rutaRelativa;
             File nuevo = new File(ruta);
@@ -83,7 +84,8 @@ public class GestionTematica extends ActionSupport {
 
         if (imgTematica != null) {
             ServletContext context = ServletActionContext.getServletContext();
-            String nombreFichero = nombre + ".png";
+            String nombreTematica = nombre.replace(" ", "_");
+            String nombreFichero = nombreTematica + ".png";
             rutaRelativa = "images/tematicas/" + nombreFichero;
             String ruta = context.getRealPath("/") + rutaRelativa;
             File nuevo = new File(ruta);

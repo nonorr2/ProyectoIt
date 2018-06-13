@@ -58,7 +58,8 @@ public class GestionPublicacion extends ActionSupport {
 
         if (fotoPubliacion != null) {
             ServletContext context = ServletActionContext.getServletContext();
-            String nombreFichero = tituloPubliacion + ".png";
+            String nombrePublicacion = tituloPubliacion.replace(" ", "_");
+            String nombreFichero = nombrePublicacion + ".png";
             rutaRelativa = "images/publicaciones/" + nombreFichero;
             String ruta = context.getRealPath("/") + rutaRelativa;
             File nuevo = new File(ruta);
