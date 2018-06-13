@@ -45,7 +45,7 @@ public class MostrarPublicaciones extends ActionSupport {
     }
 
     /**
-     * Métedo para eliminar una publicación.
+     * Método para eliminar una publicación.
      *
      * @return
      * @throws Exception
@@ -57,7 +57,7 @@ public class MostrarPublicaciones extends ActionSupport {
     }
 
     /**
-     * Métedo para filtrar las publicaciones por el título.
+     * Método para filtrar las publicaciones por el título.
      *
      * @return
      * @throws Exception
@@ -97,7 +97,7 @@ public class MostrarPublicaciones extends ActionSupport {
     }
 
     /**
-     * Métedo para filtrar las publicaciones por el título. Este metodo se hace
+     * Método para filtrar las publicaciones por el título. Este método se hace
      * uso desde la parte del administrador
      *
      * @return
@@ -147,7 +147,7 @@ public class MostrarPublicaciones extends ActionSupport {
     }
 
     /**
-     * Métedo para filtrar mis publicaciones por el título.
+     * Método para filtrar mis publicaciones por el título.
      *
      * @return
      * @throws Exception
@@ -195,7 +195,7 @@ public class MostrarPublicaciones extends ActionSupport {
     }
 
     /**
-     * Métedo para filtrar las publicaciones por el título en las que esta
+     * Método para filtrar las publicaciones por el título en las que está
      * suscrito el usuario.
      *
      * @return
@@ -238,7 +238,7 @@ public class MostrarPublicaciones extends ActionSupport {
     }
 
     /**
-     * Métedo para obtener las publicaciones asociadas a un tema.
+     * Método para obtener las publicaciones asociadas a un tema.
      *
      * @return
      * @throws Exception

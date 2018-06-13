@@ -40,7 +40,7 @@ public class GestionVotoSuscripcion extends ActionSupport {
     }
 
     /**
-     * Metodo que hace uso del Web Service para permite que un usuario vote
+     * Método que hace uso del Web Service para permite que un usuario vote
      * positivamente una publicación
      *
      * @return SUCCESS
@@ -133,7 +133,7 @@ public class GestionVotoSuscripcion extends ActionSupport {
         return SUCCESS;
     }
 
-        /**
+    /**
      * Método que hace uso del Web Service para permite que un usuario sea
      * seguidor de una publicación
      *

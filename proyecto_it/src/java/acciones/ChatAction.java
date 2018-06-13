@@ -162,6 +162,9 @@ public class ChatAction extends ActionSupport {
         this.error = error;
     }
 
+    /**
+     * Método para validar los campos a la hora de la modificación y creación de un nuevo chat
+     */
     public void validate() {
         if (nombreChat.trim().length() == 0) {
             addFieldError("nombreChat", getText("nombreChat.requerido"));

@@ -165,6 +165,9 @@ public class ComentarioAction extends ActionSupport {
         this.publicacion = publicacion;
     }
 
+    /**
+     * Método para validar los campos a la hora de crear un nuevo comentario.
+     */
     public void validate() {
         if (textoComentario != null) {
             if (textoComentario.trim().length() == 0) {

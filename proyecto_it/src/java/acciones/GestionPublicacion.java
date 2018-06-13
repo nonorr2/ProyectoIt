@@ -84,6 +84,9 @@ public class GestionPublicacion extends ActionSupport {
         return SUCCESS;
     }
 
+    /**
+     * Método para validar los campos del formulario de nueva publicación.
+     */
     @Override
     public void validate() {
         //Listar las temáticas para el selec de añadir piblicacion
