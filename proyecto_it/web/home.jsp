@@ -22,8 +22,14 @@
         <s:div cssClass="container-fluid text-center">
             <s:div cssClass="row">
                 <s:div cssClass="contenedor-publi sombreado">
-                    <div class="publi-no-imagen" style="background-image: url(<s:property value="publicacion.getFoto()"/>)">
-                    </div>
+                    <s:if test="%{publicacion.getFoto().length() > 0}">
+                        <div class="publi-no-imagen" style="background-image: url(<s:property value="publicacion.getFoto()"/>)">
+                        </div>
+                    </s:if>
+                    <s:else>
+                        <div class="publi-no-imagen" style="background-image: url(images/defaultPhoto.jpg)">
+                        </div>
+                    </s:else>
                     <s:div cssClass="datos-publicacion">
                         <s:form method="post" action="verPublicacion">
                             <s:hidden value="%{getPublicacion().getId()}" name="id_publi" />

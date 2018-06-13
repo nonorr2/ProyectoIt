@@ -65,7 +65,7 @@ public class GestionTematica extends ActionSupport {
             rutaRelativa = tematica.getImagen();
         }
         Tematica newTematica = new Tematica(Integer.valueOf(id), nombre, rutaRelativa);
-        tematicasWS.edit_JSON(newTematica, id);
+        tematicasWS.edit_XML(newTematica, id);
         return SUCCESS;
     }
 
@@ -97,7 +97,7 @@ public class GestionTematica extends ActionSupport {
             tematicaIguales = true;
             return ERROR;
         } else {
-            tematicasWS.create_JSON(newTematica);
+            tematicasWS.create_XML(newTematica);
             return SUCCESS;
         }
     }

@@ -73,7 +73,7 @@ public class GestionUsuario extends ActionSupport {
 
         UsuarioWS userWS = new UsuarioWS();
         Usuario user = new Usuario(Integer.valueOf(id), nombre, apellidos, nickname, password, email, rutaRelativa, fechaNacimiento);
-        userWS.edit_JSON(user, id);
+        userWS.edit_XML(user, id);
         return SUCCESS;
     }
 

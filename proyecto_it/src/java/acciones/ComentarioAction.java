@@ -120,7 +120,7 @@ public class ComentarioAction extends ActionSupport {
         comment.setIdUsuario(user);
         comment.setIdPublicacion(publi);
 
-        comentarioClient.create_JSON(comment);
+        comentarioClient.create_XML(comment);
 
         return SUCCESS;
     }

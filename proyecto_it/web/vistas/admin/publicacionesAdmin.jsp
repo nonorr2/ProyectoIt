@@ -26,7 +26,7 @@
                         </div>
                     </s:if>
                     <s:else>
-                        <div class="publi-no-imagen" style="background-image: url(images/noFoto.png)">
+                        <div class="publi-no-imagen" style="background-image: url(images/defaultPhoto.jpg)">
                         </div>
                     </s:else>
                     <s:div cssClass="datos-publicacion datos-publi-admin">

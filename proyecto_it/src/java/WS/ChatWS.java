@@ -20,7 +20,7 @@ import javax.ws.rs.core.GenericType;
  *        client.close();
  * </pre>
  *
- * @author David
+ * @author Lydia
  */
 public class ChatWS {
 
