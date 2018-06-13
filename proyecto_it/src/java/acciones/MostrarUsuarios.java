@@ -66,8 +66,8 @@ public class MostrarUsuarios extends ActionSupport {
     }
 
     /**
-     * Metodo que hace uso del web service para obtener una lista de los
-     * usuarios qeu cumpla con la condición del filtro
+     * Método que hace uso del web service para obtener una lista de los
+     * usuarios que cumpla con la condición del filtro
      *
      * @return SUCCESS
      * @throws Exception
@@ -86,7 +86,7 @@ public class MostrarUsuarios extends ActionSupport {
     }
 
     /**
-     * Metodo para eliminar un suario de la BD
+     * Método para eliminar un usuario de la BD
      *
      * @return SUCCESS
      * @throws Exception

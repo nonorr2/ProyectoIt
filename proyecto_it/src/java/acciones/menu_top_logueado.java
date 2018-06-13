@@ -44,7 +44,7 @@ public class menu_top_logueado extends ActionSupport {
     public String execute() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
+    
     public String chats() throws Exception {
         GenericType<List<Chat>> tipoChat = new GenericType<List<Chat>>() {
         };

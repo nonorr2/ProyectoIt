@@ -159,8 +159,8 @@ public class GestionTematica extends ActionSupport {
     }
 
     /**
-     * Metodo para validar los campos del formulario de nueva tematica y editar
-     * tematica del administrador
+     * Método para validar los campos del formulario de nueva temática y editar
+     * temática del administrador
      */
     public void validate() {
         GenericType<Tematica> tipoTema = new GenericType<Tematica>() {

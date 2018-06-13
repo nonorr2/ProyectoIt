@@ -51,7 +51,7 @@ public class MostrarTematicas extends ActionSupport {
 
     /**
      * Método que hace uso del web service para obtener una lista de las
-     * teméticas qeu cumpla con la condición del filtro
+     * temáticas que cumpla con la condición del filtro
      *
      * @return SUCCESS
      * @throws Exception
@@ -85,7 +85,7 @@ public class MostrarTematicas extends ActionSupport {
     }
 
     /**
-     * Metodo para eliminar una tematica de la BD
+     * Método para eliminar una temática de la BD
      *
      * @return SUCCESS
      * @throws Exception
