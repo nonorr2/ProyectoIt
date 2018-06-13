@@ -79,7 +79,7 @@ public class GestionPublicacion extends ActionSupport {
         publicacion.setIdUsuario(usuario);
         publicacion.setIdTematica(tematica);
 
-        publicacionWS.create_JSON(publicacion);
+        publicacionWS.create_XML(publicacion);
 
         return SUCCESS;
     }
@@ -93,23 +93,23 @@ public class GestionPublicacion extends ActionSupport {
         tematicas = (List<Tematica>) tematicaClient.findAll_XML(tipoListTematica);
 
         if (this.getTituloPubliacion() == null || this.getTituloPubliacion().trim().length() == 0) {
-            addFieldError("tituloPubliacion", "El título es obligatorio");
+            addFieldError("tituloPubliacion", getText("tituloPubliacion.requerido"));
             error = true;
         } else if (this.getTituloPubliacion().length() > 500) {
-            addFieldError("tituloPubliacion", "Tamaño máximo 500 carácteres");
+            addFieldError("tituloPubliacion", getText("tituloPubliacion.tamano"));
             error = true;
         }
 
         if (this.getContenidoPubliacion() == null || this.getContenidoPubliacion().trim().length() == 0) {
-            addFieldError("contenidoPubliacion", "El contenido es obligatorio");
+            addFieldError("contenidoPubliacion", getText("contenidoPubliacion.requerido"));
             error = true;
         } else if (this.getContenidoPubliacion().length() > 5000) {
-            addFieldError("contenidoPubliacion", "Tamaño máximo 5000 carácteres");
+            addFieldError("contenidoPubliacion", getText("contenidoPubliacion.tamano"));
             error = true;
         }
 
         if (!this.getRutaPubliacion().matches("\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]")) {
-            addFieldError("rutaPubliacion", "Formato no correcto");
+            addFieldError("rutaPubliacion", getText("rutaPubliacion.formato"));
             error = true;
         }
     }

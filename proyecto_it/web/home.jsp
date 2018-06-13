@@ -29,7 +29,7 @@
                             <s:hidden value="%{getPublicacion().getId()}" name="id_publi" />
                             <s:submit value="%{getPublicacion().getTitulo()}" cssClass="titulo-submit-publicacion"/>
                             <p><s:property value="usuario.getNickname()" /></p>
-                            <p><s:property value="publicacion.getFechaHoraModificacion()" /></p>
+                            <p>Fecha de creación: <s:property value="publicacion.getFechaHoraModificacion()" /></p>
                             <p>Número de votos positivos: <s:property value="numVotosPositivosPublicacion" /></p>
                             <p>Número de votos negativos: <s:property value="numVotosNegativosPublicacion" /></p>
                             <p>Último comentario: <s:property value="ultimoComentario.getFechaHoraModificacion()" /></p>                    

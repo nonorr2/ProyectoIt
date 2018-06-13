@@ -168,7 +168,7 @@ public class ComentarioAction extends ActionSupport {
     public void validate() {
         if (textoComentario != null) {
             if (textoComentario.trim().length() == 0) {
-                addFieldError("textoComentario", "El comentario no puede estar vacio");
+                addFieldError("textoComentario", getText("textoComentario.requerido"));
 
                 comentarios = new ArrayList<>();
 

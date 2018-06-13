@@ -164,7 +164,7 @@ public class ChatAction extends ActionSupport {
 
     public void validate() {
         if (nombreChat.trim().length() == 0) {
-            addFieldError("nombreChat", "El nombre del chat no puede estar vacio");
+            addFieldError("nombreChat", getText("nombreChat.requerido"));
             GenericType<List<Chat>> tipoChat = new GenericType<List<Chat>>() {
             };
             GenericType<List<Usuario>> tipoUsuario = new GenericType<List<Usuario>>() {

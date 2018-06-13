@@ -125,44 +125,44 @@ public class GestionUsuario extends ActionSupport {
     @Override
     public void validate() {
         if (this.getNombre() == null || this.getNombre().trim().length() == 0) {
-            addFieldError("nombre", "El nombre es obligatorio");
+            addFieldError("nombre", getText("nombre.requerido"));
         } else if (this.getNombre().length() > 50) {
-            addFieldError("nombre", "Tamaño máximo 50 carácteres");
+            addFieldError("nombre", getText("nombre.tamano"));
         }
 
         if (this.getApellidos() == null || this.getApellidos().trim().length() == 0) {
-            addFieldError("apellidos", "El apellido es obligatorio");
+            addFieldError("apellidos", getText("apellidos.requerido"));
         } else if (this.getApellidos().length() > 50) {
-            addFieldError("apellidos", "Tamaño máximo 50 carácteres");
+            addFieldError("apellidos", getText("apellidos.tamano"));
         }
 
         GenericType<Boolean> tipoBoolean = new GenericType<Boolean>() {
         };
         if (this.getNickname() == null || this.getNickname().trim().length() == 0) {
-            addFieldError("nickname", "El nombre de usuario es obligatorio");
+            addFieldError("nickname", getText("nickname.requerido"));
         } else if (this.editUsuario == null) {
             if (userWS.existeNickname(tipoBoolean, this.getNickname()) == true) {
-                addFieldError("nickname", "El nombre de usuario ya existe");
+                addFieldError("nickname", getText("nickname.existe"));
             }
         } else if (this.getNickname().length() > 50) {
-            addFieldError("nickname", "Tamaño máximo 50 carácteres");
+            addFieldError("nickname", getText("nickname.tamano"));
         }
 
         if (this.getPassword() == null || this.getPassword().trim().length() == 0) {
-            addFieldError("password", "La contraseña es obligatoria");
+            addFieldError("password", getText("password.requerido"));
         } else if (this.getPassword().length() < 6) {
-            addFieldError("password", "Tamaño mínimo 5 carácteres");
+            addFieldError("password", getText("password.tamano"));
         }
 
         if (this.getEmail() == null || this.getEmail().trim().length() == 0) {
-            addFieldError("email", "El email es obligatorio");
+            addFieldError("email", getText("email.requerido"));
         } else if (!this.getEmail().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-            addFieldError("email", "Formato incorrecto");
+            addFieldError("email", getText("email.formato"));
         }
 
         if (this.getFechaNacimiento() == null) {
-            addFieldError("fechaNacimiento", "La de nacimiento es obligatorio");
+            addFieldError("fechaNacimiento", getText("fechaNacimiento.requerido"));
         }
 
         if (!getFieldErrors().isEmpty() && id != null) {

@@ -169,19 +169,19 @@ public class GestionTematica extends ActionSupport {
         if (id != null) {
             tematica = tematicasWS.find_XML(tipoTema, id);
             if ((imgTematica == null || imgTematica.length() == 0) && tematica.getImagen() == null) {
-                addFieldError("imgTematica", "La imagen es obligatoria");
+                addFieldError("imgTematica", getText("imgTematica.requerido"));
                 error = true;
             }
         } else if (imgTematica == null || imgTematica.length() == 0) {
-            addFieldError("imgTematica", "La imagen es obligatoria");
+            addFieldError("imgTematica", getText("imgTematica.requerido"));
             error = true;
         }
 
         if (nombre.trim().length() == 0) {
-            addFieldError("nombre", "El campo titulo es obligatorio");
+            addFieldError("nombre", getText("nombre.requerido"));
             error = true;
         } else if (nombre.trim().length() > 149) {
-            addFieldError("nombre", "El titulo no puede ser mayor a 150 palabras");
+            addFieldError("nombre", getText("nombre.tamano"));
             error = true;
         }
 
