@@ -109,9 +109,9 @@ public class MostrarPublicaciones extends ActionSupport {
         PublicacionWS usuarioClient = new PublicacionWS();
         List<Publicacion> listadoPublicaciones;
         if (filtroPublicacion.equals("")) {
-            listadoPublicaciones = usuarioClient.findAll_JSON(tipoPublicacion);
+            listadoPublicaciones = usuarioClient.findAll_XML(tipoPublicacion);
         } else {
-            listadoPublicaciones = usuarioClient.getPublicacionPorTitulo_JSON(tipoPublicacion, filtroPublicacion);
+            listadoPublicaciones = usuarioClient.getPublicacionPorTitulo_XML(tipoPublicacion, filtroPublicacion);
         }
 
         VotoPublicacionWS votoPublicacionClient = new VotoPublicacionWS();
@@ -127,7 +127,7 @@ public class MostrarPublicaciones extends ActionSupport {
 
         for (Publicacion publicacion : listadoPublicaciones) {
             PublicacionDecoradorExterno aux = new PublicacionDecoradorExterno();
-            Suscripcion auxSuscripcion = suscripcionClient.getSuscripcion_JSON(tipoSuscripcion, String.valueOf(usu.getId()), String.valueOf(publicacion.getId()));
+            Suscripcion auxSuscripcion = suscripcionClient.getSuscripcion_XML(tipoSuscripcion, String.valueOf(usu.getId()), String.valueOf(publicacion.getId()));
 
             aux.setPublicacion(publicacion);
             aux.setNumVotosNegativosPublicacion(votoPublicacionClient.getVotosNegativos(tipoVotoPublicacion, String.valueOf(publicacion.getId())).intValue());
@@ -170,7 +170,7 @@ public class MostrarPublicaciones extends ActionSupport {
             misPublicaciones = (List<Publicacion>) publicacionCliente.getMisPublicaciones_XML(tipoPublicacion, String.valueOf(usuario.getId()));
 
         } else {
-            misPublicaciones = (List<Publicacion>) publicacionCliente.getMisPublicacionesPorTitulo_JSON(tipoPublicacion, filtroPublicacion, String.valueOf(usuario.getId()));
+            misPublicaciones = (List<Publicacion>) publicacionCliente.getMisPublicacionesPorTitulo_XML(tipoPublicacion, filtroPublicacion, String.valueOf(usuario.getId()));
         }
 
         for (Publicacion publicacion : misPublicaciones) {
@@ -189,7 +189,7 @@ public class MostrarPublicaciones extends ActionSupport {
         GenericType<List<Tematica>> tipoTematica = new GenericType<List<Tematica>>() {
         };
         TematicaWS tematicaClient = new TematicaWS();
-        tematicas = (List<Tematica>) tematicaClient.getTematicasMasPopulares_JSON(tipoTematica);
+        tematicas = (List<Tematica>) tematicaClient.getTematicasMasPopulares_XML(tipoTematica);
 
         return SUCCESS;
     }
@@ -247,7 +247,7 @@ public class MostrarPublicaciones extends ActionSupport {
         GenericType<List<Publicacion>> tipoPublicacion = new GenericType<List<Publicacion>>() {
         };
         PublicacionWS publicacionClient = new PublicacionWS();
-        List<Publicacion> listadoPublicaciones = publicacionClient.getPublicacionesByTema_JSON(tipoPublicacion, idTema);
+        List<Publicacion> listadoPublicaciones = publicacionClient.getPublicacionesByTema_XML(tipoPublicacion, idTema);
 
         VotoPublicacionWS votoPublicacionClient = new VotoPublicacionWS();
         SuscripcionWS suscripcionClient = new SuscripcionWS();
@@ -262,7 +262,7 @@ public class MostrarPublicaciones extends ActionSupport {
 
         for (Publicacion publicacion : listadoPublicaciones) {
             PublicacionDecoradorExterno aux = new PublicacionDecoradorExterno();
-            Suscripcion auxSuscripcion = suscripcionClient.getSuscripcion_JSON(tipoSuscripcion, String.valueOf(usu.getId()), String.valueOf(publicacion.getId()));
+            Suscripcion auxSuscripcion = suscripcionClient.getSuscripcion_XML(tipoSuscripcion, String.valueOf(usu.getId()), String.valueOf(publicacion.getId()));
 
             aux.setPublicacion(publicacion);
             aux.setNumVotosNegativosPublicacion(votoPublicacionClient.getVotosNegativos(tipoVotoPublicacion, String.valueOf(publicacion.getId())).intValue());

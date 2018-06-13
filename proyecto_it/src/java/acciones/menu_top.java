@@ -37,7 +37,7 @@ public class menu_top extends ActionSupport {
         GenericType<List<Tematica>> tipoTematica = new GenericType<List<Tematica>>() {
         };
         TematicaWS tematicaClient = new TematicaWS();
-        tematicas = (List<Tematica>) tematicaClient.getTematicasMasPopulares_JSON(tipoTematica);
+        tematicas = (List<Tematica>) tematicaClient.getTematicasMasPopulares_XML(tipoTematica);
         return SUCCESS;
     }
 
@@ -51,7 +51,7 @@ public class menu_top extends ActionSupport {
         GenericType<List<Tematica>> tipoTematica = new GenericType<List<Tematica>>() {
         };
         TematicaWS tematicaClient = new TematicaWS();
-        tematicas = (List<Tematica>) tematicaClient.findAll_JSON(tipoTematica);
+        tematicas = (List<Tematica>) tematicaClient.findAll_XML(tipoTematica);
         return SUCCESS;
     }
 

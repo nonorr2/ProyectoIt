@@ -148,7 +148,7 @@ public class GestionVotoSuscripcion extends ActionSupport {
         SuscripcionWS suscripcionCliente = new SuscripcionWS();
         PublicacionWS publicacionCliente = new PublicacionWS();
 
-        Publicacion publiAux = publicacionCliente.find_JSON(tipoPublicacion, idPublicacion);
+        Publicacion publiAux = publicacionCliente.find_XML(tipoPublicacion, idPublicacion);
 
         Suscripcion suscripcion = new Suscripcion(null, new Date());
         suscripcion.setIdPublicacion(publiAux);
