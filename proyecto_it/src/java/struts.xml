@@ -172,6 +172,7 @@
             <result name="success" type="chain">
                 <param name="actionName">usuarios</param>
             </result>
+            <result name="input">index.jsp</result>
             <result name="login" type="chain">
                 <param name="actionName">home</param>
             </result>
