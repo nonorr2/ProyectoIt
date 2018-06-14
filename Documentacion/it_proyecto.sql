@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-06-2018 a las 20:48:51
+-- Tiempo de generación: 14-06-2018 a las 15:06:30
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -37,6 +37,15 @@ CREATE TABLE `chat` (
   `fecha_hora` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `chat`
+--
+
+INSERT INTO `chat` (`id`, `nombre`, `fecha_hora`) VALUES
+(1, 'El duo :)', '2018-06-13 23:48:54'),
+(2, 'dsfdafsdfa', '2018-06-14 14:09:27'),
+(3, 'dfgddfg', '2018-06-14 14:15:06');
+
 -- --------------------------------------------------------
 
 --
@@ -53,6 +62,13 @@ CREATE TABLE `comentario` (
   `fecha_hora_creacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `comentario`
+--
+
+INSERT INTO `comentario` (`id`, `fecha_hora_modificacion`, `contenido`, `id_usuario`, `id_publicacion`, `fecha_hora_creacion`) VALUES
+(1, '2018-06-14 09:31:21', 'Que chula esta la peli', 16, 11, '2018-06-14 09:31:21');
+
 -- --------------------------------------------------------
 
 --
@@ -68,6 +84,15 @@ CREATE TABLE `mensaje` (
   `id_chat` int(11) NOT NULL,
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `mensaje`
+--
+
+INSERT INTO `mensaje` (`id`, `contenido`, `fecha_hora`, `id_usuario`, `id_chat`, `estado`) VALUES
+(1, 'Hola Macarena!!!', '2018-06-13 23:59:10', 16, 1, 0),
+(2, 'Hola!!', '2018-06-14 00:07:38', 21, 1, 0),
+(3, 'kldsjfaklsdjk', '2018-06-14 00:14:14', 16, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -117,7 +142,9 @@ CREATE TABLE `suscripcion` (
 --
 
 INSERT INTO `suscripcion` (`fecha_hora`, `id_usuario`, `id_publicacion`, `id`) VALUES
-('2018-06-13 20:24:15', 16, 11, 2);
+('2018-06-13 20:24:15', 16, 11, 2),
+('2018-06-14 09:30:49', 16, 12, 4),
+('2018-06-14 09:31:52', 21, 11, 5);
 
 -- --------------------------------------------------------
 
@@ -175,7 +202,6 @@ INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `nickname`, `password`, `ema
 (17, 'Rafael', 'Alonso Becerra', 'rafa', '$2a$12$JBW5L7sG6Ts2MzIr1Qy8du51ckudSjw5XijbDVnuyOlEiIPzz4dEK', 'rafa@gmail.com', 0, '1979-04-18', 'images/fotosPerfil/rafa.png'),
 (18, 'Alfonso', 'Galea ', 'alfonso', '$2a$12$tHffjsNmoAsWQGbZbiBCPO3oqyDYdHS.dPzvC7cbIsJiv.v0r8OJ2', 'alfonso@gmail.com', 0, '1990-03-12', 'images/fotosPerfil/alfonso.png'),
 (19, 'Pedro', 'Zambrano', 'pedro', '$2a$12$SLyVn8N5V9uXVsl3d93ZaOhXnyF3cZdr9wiB.XyRDMc5WiCJlYrw6', 'pedro@gmail.com', 0, '1983-09-17', 'images/fotosPerfil/pedro.png'),
-(20, 'Juan Antonio', 'Rodriguez', 'nono', '$2a$12$FUtwuU8wMXTuaArmvmcEZeLC9n9yoJWTrkeaPvM7HdIQn1hoZjqiK', 'nono@gmail.com', 0, '1993-01-04', 'images/fotosPerfil/nono.png'),
 (21, 'Macarena', 'Domínguez', 'macarena', '$2a$12$W4owJLlSu/9VS9u.AzZmsu6VP4TQ8Jw0BSD8SuSezdJ2USBrcvZEi', 'macarena@gmail.com', 0, '1993-06-17', 'images/fotosPerfil/macarena.png');
 
 -- --------------------------------------------------------
@@ -191,6 +217,17 @@ CREATE TABLE `usuario_chat` (
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `usuario_chat`
+--
+
+INSERT INTO `usuario_chat` (`id_usuario`, `id_chat`, `fecha`) VALUES
+(16, 1, '2018-06-13 21:48:55'),
+(16, 2, '2018-06-14 12:09:27'),
+(16, 3, '2018-06-14 12:16:00'),
+(17, 2, '2018-06-14 12:09:27'),
+(21, 1, '2018-06-13 21:48:55');
+
 -- --------------------------------------------------------
 
 --
@@ -205,6 +242,14 @@ CREATE TABLE `voto_comentario` (
   `id_comentario` int(11) NOT NULL,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `voto_comentario`
+--
+
+INSERT INTO `voto_comentario` (`tipo`, `fecha_hora`, `id_usuario`, `id_comentario`, `id`) VALUES
+(1, '2018-06-14 09:38:31', 21, 1, 1),
+(1, '2018-06-14 09:39:10', 16, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -227,7 +272,9 @@ CREATE TABLE `voto_publicacion` (
 
 INSERT INTO `voto_publicacion` (`tipo`, `fecha_hora`, `id_usuario`, `id_publicacion`, `id`) VALUES
 (1, '2018-06-13 20:24:41', 16, 11, 1),
-(1, '2018-06-13 20:24:48', 16, 13, 2);
+(1, '2018-06-13 20:24:48', 16, 13, 2),
+(1, '2018-06-14 09:30:52', 16, 12, 3),
+(1, '2018-06-14 09:31:55', 21, 11, 4);
 
 --
 -- Índices para tablas volcadas
@@ -315,19 +362,19 @@ ALTER TABLE `voto_publicacion`
 -- AUTO_INCREMENT de la tabla `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `mensaje`
 --
 ALTER TABLE `mensaje`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `publicacion`
@@ -339,7 +386,7 @@ ALTER TABLE `publicacion`
 -- AUTO_INCREMENT de la tabla `suscripcion`
 --
 ALTER TABLE `suscripcion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `tematica`
@@ -357,13 +404,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `voto_comentario`
 --
 ALTER TABLE `voto_comentario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `voto_publicacion`
 --
 ALTER TABLE `voto_publicacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
