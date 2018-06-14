@@ -140,20 +140,19 @@ public class loginLogout extends ActionSupport implements ServletResponseAware, 
     public void setErrorLogin(Boolean errorLogin) {
         this.errorLogin = errorLogin;
     }
-    
-    
 
     public void validate() {
-        if(this.getUsuario().trim().length() == 0){
-            addFieldError("usuario", "El campo usuario es obligatorio");
-            error = true;
+        if (getUsuario() != null && getPassword() != null) {
+            if (this.getUsuario().trim().length() == 0) {
+                addFieldError("usuario", "El campo usuario es obligatorio");
+                error = true;
+            }
+
+            if (this.getPassword().trim().length() == 0) {
+                addFieldError("password", "La contraseña es obligatoria");
+                error = true;
+            }
         }
-        
-        if(this.getPassword().trim().length() == 0){
-            addFieldError("password", "La contraseña es obligatoria");
-            error = true;
-        }
-        
     }
 
 }
