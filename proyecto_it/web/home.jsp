@@ -60,4 +60,5 @@
         </s:div>
     </s:iterator>
 </s:else>  
+
 <%@include file="footer.jsp" %>
